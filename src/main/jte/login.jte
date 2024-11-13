@@ -23,6 +23,7 @@
             <i class="login__icon fas fa-lock"></i>
             <input type="password" name="password" class="login__input" placeholder="Password" required>
           </div>
+          <a href="/register">Don't have an account? Register here!</a>
           <button class="button login__submit">
             <span class="button__text">Log In Now</span>
             <i class="button__icon fas fa-chevron-right"></i>
