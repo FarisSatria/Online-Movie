@@ -508,6 +508,6 @@
         <p>&#169; InfinityAnime. All rights reserved.</p>
       </footer>
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-    <script src="../resources/static/asset/js/main.js"></script>
+    <script src="/asset/js/main.js"></script>
   </body>
 </html>

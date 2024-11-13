@@ -23,15 +23,16 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/api/v1/onlinemovie/login"
-                                        , "/api/v1/onlinemovie/register"
-                                        , "/login"
-                                        , "/register"
-                                        , "/index"
-                                        , "/asset/**"
-                                        ,"/image/**"
-                                        ,"/video/**").permitAll()
-                                .anyRequest().authenticated()
+//                                .requestMatchers("/api/v1/onlinemovie/login"
+//                                        , "/api/v1/onlinemovie/register"
+//                                        , "/login"
+//                                        , "/register"
+//                                        , "/index"
+//                                        , "/asset/**"
+//                                        ,"/image/**"
+//                                        ,"/video/**").permitAll()
+//                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
 
                 )
                 .logout(logout -> logout.logoutUrl("/api/v1/onlinemovie/logout").logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()));
