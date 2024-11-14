@@ -56,7 +56,7 @@ body {
   background: #FFF;
   top: -200px;
   right: 390px;
-  border-radius: 0 72px 0 0;
+  border-radius: 72px ;
 }
 
 .screen__background__shape2 {
@@ -90,6 +90,7 @@ body {
   width: 320px;
   padding: 30px;
   padding-top: 156px;
+  animation:none;
 }
 
 .register__name {
@@ -181,10 +182,4 @@ body {
 
 .social-login__icon:hover {
   transform: scale(1.5);
-}
-
-@keyframes login_to_register {
-  0%   {top: -200px; right: 390px;}
-  50% {top: -1210px; right: -620px;}
-  100% {top: -1210px; right: -620px; display: none;}
 }

@@ -27,7 +27,6 @@
                     <i class="register__icon fas fa-lock"></i>
                     <input type="password" name="password" class="register__input" placeholder="Password" required>
                 </div>
-                <a href="#" id="animateStart">Start Animation</a>
                 <button class="button register__submit">
                     <span class="button__text">Register Now</span>
                     <i class="button__icon fas fa-chevron-right"></i>

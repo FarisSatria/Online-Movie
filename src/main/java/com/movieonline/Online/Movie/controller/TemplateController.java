@@ -17,7 +17,7 @@ public class TemplateController {
         return model;
     }
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public String indexPage(Model model) {
         pageDetails(model);
         return "index";

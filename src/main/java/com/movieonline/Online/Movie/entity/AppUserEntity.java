@@ -13,7 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class AppUserEntity {
+public class
+AppUserEntity {
 
     @Id
     @SequenceGenerator(
