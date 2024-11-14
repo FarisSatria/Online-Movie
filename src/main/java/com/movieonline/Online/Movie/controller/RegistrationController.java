@@ -23,12 +23,6 @@ public class RegistrationController {
 
     private final TemplateController templateController;
 
-    @GetMapping("/register")
-    public String loginRegister(Model model) {
-        templateController.pageDetails(model);
-        return "register";
-    }
-
     @PostMapping("/register")
     public String handleRegister(@Valid AppUserEntity appUserEntity,
                               @RequestParam String username,
