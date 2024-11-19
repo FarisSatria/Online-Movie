@@ -4,6 +4,7 @@ import com.movieonline.Online.Movie.entity.AppUserEntity;
 import com.movieonline.Online.Movie.service.LoginService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +23,15 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String handleLogin(@Valid AppUserEntity appUserEntity,
+    public String handleLogin(@Valid Authentication authentication,
                               @RequestParam String username,
-                              @RequestParam String password) {
+                              @RequestParam String password,
+                              Model model) {
         try {
-            loginService.login(appUserEntity);
-            return "redirect:/index";
+            loginService.authenticate(authentication);
+            return "redirect:/";
         } catch (Exception e) {
+            templateController.pageDetails(model);
             return "login";
         }
     }

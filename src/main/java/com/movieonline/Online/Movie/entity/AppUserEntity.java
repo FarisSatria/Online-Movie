@@ -27,14 +27,14 @@ AppUserEntity {
             generator = "student_sequence"
     )
     private Long id;
-    private String nama;
+    private String name;
     @NotBlank(message = "Username cannot be empty")
     private String username;
     @NotBlank(message = "Password cannot be empty")
     private String password;
 
-    public AppUserEntity(String nama, String username, String password) {
-        this.nama = nama;
+    public AppUserEntity(String name, String username, String password) {
+        this.name = name;
         this.username = username;
         this.password = password;
     }

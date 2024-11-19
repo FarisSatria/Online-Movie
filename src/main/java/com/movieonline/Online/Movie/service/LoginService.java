@@ -4,30 +4,44 @@ import com.movieonline.Online.Movie.entity.AppUserEntity;
 import com.movieonline.Online.Movie.repository.AppUserRepository;
 import com.movieonline.Online.Movie.exception.InvalidCredentialsExeption;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Collections;
 
 @AllArgsConstructor
 @Service
-@Slf4j
-public class LoginService {
+public class LoginService implements AuthenticationProvider {
 
     private final AppUserRepository appUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public AppUserEntity login(AppUserEntity payload) {
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        String username = authentication.getName();
+        String password = (String) authentication.getCredentials();
 
-        AppUserEntity user = appUserRepository.findByUsername(payload.getUsername()).orElseThrow(
-                () -> new UsernameNotFoundException("Username Not Found")
+        AppUserEntity user = appUserRepository.findByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException("Username not found")
         );
 
-        if (!bCryptPasswordEncoder.matches(payload.getPassword(), user.getPassword())) {
-            throw new InvalidCredentialsExeption("Username or Password is Incorrect!");
+        if (!bCryptPasswordEncoder.matches(password, user.getPassword())) {
+            throw new InvalidCredentialsExeption("Invalid credentials!");
         }
-        return user;
+
+        return new UsernamePasswordAuthenticationToken(
+                username, password, Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
+        );
+    }
+
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
     }
 }

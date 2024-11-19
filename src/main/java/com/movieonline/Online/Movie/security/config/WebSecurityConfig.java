@@ -1,14 +1,16 @@
 package com.movieonline.Online.Movie.security.config;
 
+import com.movieonline.Online.Movie.service.LoginService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 @AllArgsConstructor
 @EnableWebSecurity
@@ -16,6 +18,7 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
 public class WebSecurityConfig {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final LoginService loginService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -23,20 +26,37 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-//                                .requestMatchers("/api/v1/onlinemovie/login"
-//                                        , "/api/v1/onlinemovie/register"
-//                                        , "/login"
-//                                        , "/register"
-//                                        , "/index"
-//                                        , "/asset/**"
-//                                        ,"/image/**"
-//                                        ,"/video/**").permitAll()
-//                                .anyRequest().authenticated()
-                                .anyRequest().permitAll()
-
+                                .requestMatchers(
+                                        "/",
+                                        "/asset/**",
+                                        "/image/**",
+                                        "/video/**",
+                                        "/movies",
+                                        "/register"
+                                ).permitAll()
+                                .requestMatchers("/movie/**").authenticated()
+                                .anyRequest().authenticated()
                 )
-                .logout(logout -> logout.logoutUrl("/api/v1/onlinemovie/logout").logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()));
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll()
+                        .defaultSuccessUrl("/", true)
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .permitAll()
+                );
 
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+                .authenticationProvider(loginService)
+                .build();
     }
 }

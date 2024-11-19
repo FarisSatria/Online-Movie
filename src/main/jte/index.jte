@@ -4,143 +4,339 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>${WebName} | Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="/asset/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${WebName} | Homepage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-<body class="bg-dark">
-<nav class="navbar navbar-expand-lg navbar-dark py-3 position-fixed top-0 w-100 backdrop-blur shadow"
-     style="z-index:1050">
-    <div class="container-fluid">
-        <div class="container">
-            <div class="row">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mb-2 mb-lg-0 col">
-                        <a class="navbar-brand fs-5" href="#">${WebName}</a>
-                    </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0 col">
-                        <li class="nav-item">
-                            <a class="nav-link active fs-7" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fs-7" href="#">Movies</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fs-7" href="#">Trending</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle fs-7" href="#" id="navbarDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                Genre
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item fs-7" href="#">Action</a></li>
-                                <li><a class="dropdown-item fs-7" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item fs-7" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="navbar-nav mb-2 mb-lg-0 col ml-5">
-                        <form class="d-flex">
-                            <input class="form-control ms-5 me-2" type="search" placeholder="Search"
-                                   aria-label="Search">
-                            <button class="btn btn-outline-light" type="submit">Search</button>
-                        </form>
+<body class="bg-gray-200 font-sans min-h-screen">
+<!-- Floating Sidebar -->
+<div class="fixed top-8 bg-gray-50 left-8 bottom-8 w-16 rounded-xl shadow-md flex flex-col justify-between p-4">
+    <!-- Top Icons -->
+    <ul class="space-y-6 text-center">
+        <!-- Icon 1 -->
+        <li>
+            <a href="#"
+               class="block text-sky-400 hover:text-yellow-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-md transition duration-200">
+                <i class="fas fa-home text-2xl"></i>
+            </a>
+            <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+        </li>
+        <!-- Icon 2 -->
+        <li>
+            <a href="#"
+               class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-md transition duration-200">
+                <i class="fas fa-film text-2xl"></i>
+            </a>
+            <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+        </li>
+        <!-- Icon 3 -->
+        <li>
+            <a href="#"
+               class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-md transition duration-200">
+                <i class="fas fa-fire text-2xl"></i>
+            </a>
+            <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+        </li>
+        <!-- Icon 4 -->
+        <li>
+            <a href="#"
+               class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-md transition duration-200">
+                <i class="fas fa-search text-2xl"></i>
+            </a>
+            <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+        </li>
+    </ul>
+
+    <!-- Logout Icon -->
+    <div class="text-center mt-auto">
+        <a href="/logout"
+           class="block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 hover:drop-shadow-md transition duration-200">
+            <i class="fas fa-sign-out-alt text-2xl"></i>
+        </a>
+    </div>
+</div>
+
+<div class="flex">
+    <div class="flex-initial w-3/5 ml-32 mt-8 ">
+        <!-- Floating, Rounded, Shadow Carousel -->
+        <div class="relative h-1/4 w-full mb-5 rounded-xl overflow-hidden shadow-md" style="height:70vh;">
+            <!-- Carousel Images -->
+            <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-full">
+                <div class="relative">
+                    <img class="w-full h-full object-cover rounded-xl" src="image/background/Naruto-Uzumaki.webp"
+                         alt="Slide 1">
+                    <!-- Movie Details Section -->
+                    <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text mix-blend-difference space-y-4">
+                        <h4 class="text-2xl text-white border-sky-400 border-l-4 pl-2">#1 Most Popular!</h4>
+                        <h3 class="text-6xl text-white font-semibold">Movie Title</h3>
+                        <p class="text-md text-white w-72">A brief description of the movie goes here, summarizing the plot
+                            or theme of the film.</p>
+                        <div class="flex items-center space-x-1">
+                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                            <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                        </div>
                     </div>
                 </div>
+
+                <div class="relative">
+                    <img class="w-full h-full object-cover rounded-xl" src="image/background/Naruto-Uzumaki.webp"
+                         alt="Slide 1">
+                    <!-- Movie Details Section -->
+                    <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text mix-blend-difference space-y-4">
+                        <h4 class="text-2xl text-white border-sky-400 border-l-4 pl-2">#1 Most Popular!</h4>
+                        <h3 class="text-6xl text-white font-semibold">Movie Title</h3>
+                        <p class="text-md text-white w-72">A brief description of the movie goes here, summarizing the plot
+                            or theme of the film.</p>
+                        <div class="flex items-center space-x-1">
+                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                            <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Navigation Arrows -->
+            <div class="right-3 bottom-3 p-1 h-1/6 rounded-full shadow-inner w-3/12 absolute flex bg-gray-50">
+                <!-- Left Arrow -->
+                <button id="prev"
+                        class="mr-4 bg-sky-400 hover:bg-sky-500 shadow-md w-1/2 h-full transition duration-300 rounded-full text-white">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <!-- Right Arrow -->
+                <button id="next"
+                        class="bg-sky-400 hover:bg-sky-500 shadow-md w-1/2 h-full transition duration-300 rounded-full text-white">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Featured Movies Section (Horizontal Scroll) -->
+        <div class="w-full">
+            <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Featured Movies</h3>
+            <div class="flex space-x-4 overflow-y-hidden pt-5">
+                <!-- Movie Card 1 -->
+                <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
+                max-w-xs w-48 h-80 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
+                    <img class="w-full h-60 object-cover" src="https://via.placeholder.com/400x600"
+                         alt="Featured Movie Poster 1">
+                    <div class="p-3">
+                        <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
+                        <div class="flex items-center mb-4">
+                  <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-gray-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Movie Card 2 -->
+                <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
+                max-w-xs w-48 h-80 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
+                    <img class="w-full h-60 object-cover" src="https://via.placeholder.com/400x600"
+                         alt="Featured Movie Poster 1">
+                    <div class="p-3">
+                        <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
+                        <div class="flex items-center mb-4">
+                  <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-gray-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Movie Card 3 -->
+                <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
+                max-w-xs w-48 h-80 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
+                    <img class="w-full h-60 object-cover" src="https://via.placeholder.com/400x600"
+                         alt="Featured Movie Poster 1">
+                    <div class="p-3">
+                        <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
+                        <div class="flex items-center mb-4">
+                  <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-gray-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Movie Card 4 -->
+                <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
+                max-w-xs w-48 h-80 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
+                    <img class="w-full h-60 object-cover" src="https://via.placeholder.com/400x600"
+                         alt="Featured Movie Poster 1">
+                    <div class="p-3">
+                        <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
+                        <div class="flex items-center mb-4">
+                  <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-gray-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Movie Card 5 -->
+                <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
+                max-w-xs w-48 h-80 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
+                    <img class="w-full h-60 object-cover" src="https://via.placeholder.com/400x600"
+                         alt="Featured Movie Poster 1">
+                    <div class="p-3">
+                        <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
+                        <div class="flex items-center mb-4">
+                  <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-gray-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Movie Card 6 -->
+                <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
+                max-w-xs w-48 h-80 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
+                    <img class="w-full h-60 object-cover" src="https://via.placeholder.com/400x600"
+                         alt="Featured Movie Poster 1">
+                    <div class="p-3">
+                        <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
+                        <div class="flex items-center mb-4">
+                  <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-yellow-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                            <span class="text-gray-400">
+                    <i class="fas fa-star"></i>
+                  </span>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
-</nav>
-<div class="d-flex">
-    <div id="carouselExampleCaptions" class="carousel slide rounded ms-4 overflow-hidden" data-bs-ride="carousel"
-         style="z-index:1; height: 75vh; width: 70vw; margin-top:10vh; border-radius:50px;">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner h-100">
-            <div class="carousel-item active h-100">
-                <img src="/image/background/l-lawliet-5120x2880-23817.jpg" class="d-block w-100 h-100"
-                     alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>Some representative placeholder content for the first slide.</p>
-                </div>
-            </div>
-            <div class="carousel-item h-100">
-                <img src="/image/background/Kakegurui.jpg" class="d-block w-100 h-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Second slide label</h5>
-                    <p>Some representative placeholder content for the second slide.</p>
-                </div>
-            </div>
-            <div class="carousel-item h-100">
-                <img src="/image/background/opm.jpeg" class="d-block w-100 h-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Third slide label</h5>
-                    <p>Some representative placeholder content for the third slide.</p>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-    <div class="" style="width:30vw; margin-top:10vh;">
-        <div class="ms-5 w-75">
-            <h3 class=" text-white ">Top Trending!</h3>
-            <div class="card mb-2">
-                <img class="rounded shadow card-img-top" src="/image/background/kiki.jpg">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                </div>
-            </div>
-            <div class="card mb-2">
-                <img class="rounded shadow card-img-top" src="/image/background/kiki.jpg">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                </div>
-            </div>
-            <div class="card mb-2">
-                <img class="rounded shadow card-img-top" src="/image/background/kiki.jpg">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                </div>
-            </div>
-            <div class="card mb-2">
-                <img class="rounded shadow card-img-top" src="/image/background/kiki.jpg">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
+    <div class="flex-initial">
+        <div class="w-3/12 mt-8 mr-4">
+            <div class="w-96 ml-5">
+                <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold mb-4">Top Trending
+                    Movies</h3>
+                <div class="flex flex-col space-y-6">
+                    <!-- Movie Card 1 -->
+                    <a class="bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40
+                    flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
+                        <img class="w-full h-full object-cover" src="https://via.placeholder.com/400x600"
+                             alt="Featured Movie Poster 1">
+                        <div class="p-6">
+                            <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
+                            <p class="text-sm text-zinc-400 mb-4">A high-paced action movie that keeps you at the edge
+                                of your seat.</p>
+                        </div>
+                    </a>
+                    <!-- Movie Card 2 -->
+                    <a class="bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40
+                    flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
+                        <img class="w-full h-full object-cover" src="https://via.placeholder.com/400x600"
+                             alt="Featured Movie Poster 1">
+                        <div class="p-6">
+                            <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
+                            <p class="text-sm text-zinc-400 mb-4">A high-paced action movie that keeps you at the edge
+                                of your seat.</p>
+                        </div>
+                    </a>
+                    <!-- Movie Card 3 -->
+                    <a class="bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40
+                    flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
+                        <img class="w-full h-full object-cover" src="https://via.placeholder.com/400x600"
+                             alt="Featured Movie Poster 1">
+                        <div class="p-6 ">
+                            <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
+                            <p class="text-sm text-zinc-400 mb-4">A high-paced action movie that keeps you at the edge
+                                of your seat.</p>
+                        </div>
+                    </a>
+                    <!-- Movie Card 4 -->
+                    <a class="bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40
+                    flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
+                        <img class="w-full h-full object-cover" src="https://via.placeholder.com/400x600"
+                             alt="Featured Movie Poster 1">
+                        <div class="p-6 ">
+                            <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
+                            <p class="text-sm text-zinc-400 mb-4">A high-paced action movie that keeps you at the edge
+                                of your seat.</p>
+                        </div>
+                    </a>
                 </div>
             </div>
 
         </div>
+
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+<script src="/asset/js/main.js"></script>
 </body>
 </html>

@@ -22,4 +22,10 @@ public class TemplateController {
         pageDetails(model);
         return "index";
     }
+
+    @GetMapping("/movie/**")
+    public String moviePage(Model model){
+        pageDetails(model);
+        return "movie-page";
+    }
 }

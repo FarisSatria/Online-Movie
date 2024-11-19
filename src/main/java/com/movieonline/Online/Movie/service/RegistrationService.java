@@ -16,13 +16,14 @@ public class RegistrationService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional(rollbackOn = UserAlreadyExistException.class)
-    public AppUserEntity registerUser(AppUserEntity appUserEntity, String username, String password) {
+    public AppUserEntity registerUser(AppUserEntity appUserEntity, String name, String username, String password) {
         appUserRepository
                 .findByUsername(appUserEntity.getUsername())
                 .ifPresent(ignored -> {
                     throw new UserAlreadyExistException("Username is taken");
                 });
 
+        appUserEntity.setName(name);
         appUserEntity.setUsername(username);
         appUserEntity.setPassword(bCryptPasswordEncoder.encode(password));
 
