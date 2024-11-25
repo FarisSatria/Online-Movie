@@ -1,4 +1,10 @@
+@import java.util.List
+@import com.movieonline.Online.Movie.entity.dto.MovieDTO
+
 @param String WebName
+@param List<MovieDTO> popularMovies
+@param List<MovieDTO> topRatedMovies
+@param List<MovieDTO> upcomingMovies
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,44 +69,25 @@
         <div class="relative h-1/4 w-full mb-5 rounded-xl overflow-hidden shadow-md" style="height:70vh;">
             <!-- Carousel Images -->
             <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-full">
-                <div class="relative">
-                    <img class="w-full h-full object-cover rounded-xl" src="image/background/Naruto-Uzumaki.webp"
-                         alt="Slide 1">
-                    <!-- Movie Details Section -->
-                    <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text mix-blend-difference space-y-4">
-                        <h4 class="text-2xl text-white border-sky-400 border-l-4 pl-2">#1 Most Popular!</h4>
-                        <h3 class="text-6xl text-white font-semibold">Movie Title</h3>
-                        <p class="text-md text-white w-72">A brief description of the movie goes here, summarizing the plot
-                            or theme of the film.</p>
-                        <div class="flex items-center space-x-1">
-                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
-                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
-                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
-                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
-                            <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                @for (MovieDTO movie : popularMovies)
+                    <div class="relative">
+                        <img class="w-screen h-full object-fill" src="https://image.tmdb.org/t/p/w780${movie.getPoster_path()}" alt="${movie.getTitle()}">
+                        <div class="absolute left-4 top-1/2 transform rounded-lg bg-white/20 shadow-2xl py-3 px-2 -translate-y-1/2 w-60 text space-y-4">
+                            <h4 class="text-xl font-medium text-white border-sky-400 border-l-4 pl-2 ">#Popular Movies!</h4>
+                            <h3 class="text-4xl text-white font-semibold">${movie.getTitle()}</h3>
+                            <p class="text-sm text-white h-24 overflow-hidden text-ellipsis">${movie.getOverview()}</p>
+                            <div class="flex items-center space-x-1 ">
+                                @for (int i = 1; i <= 5; i++)
+                                    @if (i <= movie.getVote_average() / 1.5)
+                                        <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                                    @else
+                                        <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                    @endif
+                                @endfor
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="relative">
-                    <img class="w-full h-full object-cover rounded-xl" src="image/background/Naruto-Uzumaki.webp"
-                         alt="Slide 1">
-                    <!-- Movie Details Section -->
-                    <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text mix-blend-difference space-y-4">
-                        <h4 class="text-2xl text-white border-sky-400 border-l-4 pl-2">#1 Most Popular!</h4>
-                        <h3 class="text-6xl text-white font-semibold">Movie Title</h3>
-                        <p class="text-md text-white w-72">A brief description of the movie goes here, summarizing the plot
-                            or theme of the film.</p>
-                        <div class="flex items-center space-x-1">
-                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
-                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
-                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
-                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
-                            <span class="text-gray-400"><i class="fas fa-star"></i></span>
-                        </div>
-                    </div>
-                </div>
-
+                @endfor
             </div>
 
             <!-- Navigation Arrows -->
@@ -117,219 +104,74 @@
                 </button>
             </div>
         </div>
-        <!-- Featured Movies Section (Horizontal Scroll) -->
-        <div class="w-full">
-            <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Featured Movies</h3>
-            <div class="flex space-x-4 overflow-y-hidden pt-5">
-                <!-- Movie Card 1 -->
-                <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
-                max-w-xs w-48 h-80 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
-                    <img class="w-full h-60 object-cover" src="https://via.placeholder.com/400x600"
-                         alt="Featured Movie Poster 1">
-                    <div class="p-3">
-                        <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
-                        <div class="flex items-center mb-4">
-                  <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-gray-400">
-                    <i class="fas fa-star"></i>
-                  </span>
+        <!-- Popular Movies Section (Horizontal Scroll) -->
+        <div class="w-full mb-5">
+            <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Popular Movies</h3>
+            <div class="flex space-x-4 overflow-y-hidden pb-4 pt-5">
+                <!-- Movie Card -->
+                @for (MovieDTO movie : popularMovies)
+                    <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
+                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
+                        <img class="w-full object-cover" src="https://image.tmdb.org/t/p/w300${movie.getPoster_path()}" alt="${movie.getTitle()}">
+                        <div class="p-4">
+                            <h3 class="text-xl text-black font-semibold overflow-hidden text-ellipsis h-6 mb-2">${movie.getTitle()}</h3>
+                            <div class="flex items-center mb-4">
+                                @for (int i = 1; i <= 5; i++)
+                                    @if (i <= movie.getVote_average() / 2)
+                                        <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                                    @else
+                                        <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                    @endif
+                                @endfor
+                            </div>
                         </div>
-                    </div>
-                </a>
-                <!-- Movie Card 2 -->
-                <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
-                max-w-xs w-48 h-80 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
-                    <img class="w-full h-60 object-cover" src="https://via.placeholder.com/400x600"
-                         alt="Featured Movie Poster 1">
-                    <div class="p-3">
-                        <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
-                        <div class="flex items-center mb-4">
-                  <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-gray-400">
-                    <i class="fas fa-star"></i>
-                  </span>
+                    </a>
+                @endfor
+            </div>
+        </div>
+        <!-- Top Rated Movies Section (Horizontal Scroll) -->
+        <div class="w-full mb-5">
+            <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Top Rated Movies</h3>
+            <div class="flex space-x-4 overflow-y-hidden pb-4 pt-5">
+                <!-- Movie Card -->
+                @for (MovieDTO movie : topRatedMovies)
+                    <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
+                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
+                        <img class="w-full object-cover" src="https://image.tmdb.org/t/p/w300${movie.getPoster_path()}" alt="${movie.getTitle()}">
+                        <div class="p-4">
+                            <h3 class="text-xl text-black font-semibold overflow-hidden text-ellipsis h-6 mb-2">${movie.getTitle()}</h3>
+                            <div class="flex items-center mb-4">
+                                @for (int i = 1; i <= 5; i++)
+                                    @if (i <= movie.getVote_average() / 2)
+                                        <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                                    @else
+                                        <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                    @endif
+                                @endfor
+                            </div>
                         </div>
-                    </div>
-                </a>
-                <!-- Movie Card 3 -->
-                <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
-                max-w-xs w-48 h-80 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
-                    <img class="w-full h-60 object-cover" src="https://via.placeholder.com/400x600"
-                         alt="Featured Movie Poster 1">
-                    <div class="p-3">
-                        <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
-                        <div class="flex items-center mb-4">
-                  <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-gray-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                        </div>
-                    </div>
-                </a>
-                <!-- Movie Card 4 -->
-                <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
-                max-w-xs w-48 h-80 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
-                    <img class="w-full h-60 object-cover" src="https://via.placeholder.com/400x600"
-                         alt="Featured Movie Poster 1">
-                    <div class="p-3">
-                        <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
-                        <div class="flex items-center mb-4">
-                  <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-gray-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                        </div>
-                    </div>
-                </a>
-                <!-- Movie Card 5 -->
-                <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
-                max-w-xs w-48 h-80 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
-                    <img class="w-full h-60 object-cover" src="https://via.placeholder.com/400x600"
-                         alt="Featured Movie Poster 1">
-                    <div class="p-3">
-                        <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
-                        <div class="flex items-center mb-4">
-                  <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-gray-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                        </div>
-                    </div>
-                </a>
-                <!-- Movie Card 6 -->
-                <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
-                max-w-xs w-48 h-80 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
-                    <img class="w-full h-60 object-cover" src="https://via.placeholder.com/400x600"
-                         alt="Featured Movie Poster 1">
-                    <div class="p-3">
-                        <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
-                        <div class="flex items-center mb-4">
-                  <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-yellow-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                            <span class="text-gray-400">
-                    <i class="fas fa-star"></i>
-                  </span>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                @endfor
             </div>
         </div>
     </div>
     <div class="flex-initial">
-        <div class="w-3/12 mt-8 mr-4">
-            <div class="w-96 ml-5">
-                <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold mb-4">Top Trending
-                    Movies</h3>
-                <div class="flex flex-col space-y-6">
-                    <!-- Movie Card 1 -->
-                    <a class="bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40
+        <div class="w-3/12 ml-5 mt-8">
+            <div class="w-96">
+                <h3 class="ml-3 text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold mb-4">Upcoming Movies</h3>
+                <div class="overflow-auto p-3 h-screen">
+                    <div class="flex flex-col space-y-6">
+                        @for (MovieDTO movie : topRatedMovies)
+                            <a class="bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40
                     flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
-                        <img class="w-full h-full object-cover" src="https://via.placeholder.com/400x600"
-                             alt="Featured Movie Poster 1">
-                        <div class="p-6">
-                            <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
-                            <p class="text-sm text-zinc-400 mb-4">A high-paced action movie that keeps you at the edge
-                                of your seat.</p>
-                        </div>
-                    </a>
-                    <!-- Movie Card 2 -->
-                    <a class="bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40
-                    flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
-                        <img class="w-full h-full object-cover" src="https://via.placeholder.com/400x600"
-                             alt="Featured Movie Poster 1">
-                        <div class="p-6">
-                            <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
-                            <p class="text-sm text-zinc-400 mb-4">A high-paced action movie that keeps you at the edge
-                                of your seat.</p>
-                        </div>
-                    </a>
-                    <!-- Movie Card 3 -->
-                    <a class="bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40
-                    flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
-                        <img class="w-full h-full object-cover" src="https://via.placeholder.com/400x600"
-                             alt="Featured Movie Poster 1">
-                        <div class="p-6 ">
-                            <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
-                            <p class="text-sm text-zinc-400 mb-4">A high-paced action movie that keeps you at the edge
-                                of your seat.</p>
-                        </div>
-                    </a>
-                    <!-- Movie Card 4 -->
-                    <a class="bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40
-                    flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
-                        <img class="w-full h-full object-cover" src="https://via.placeholder.com/400x600"
-                             alt="Featured Movie Poster 1">
-                        <div class="p-6 ">
-                            <h3 class="text-xl text-black font-semibold mb-2">Featured Movie 1</h3>
-                            <p class="text-sm text-zinc-400 mb-4">A high-paced action movie that keeps you at the edge
-                                of your seat.</p>
-                        </div>
-                    </a>
+                                <img class="w-28 object-cover" src="https://image.tmdb.org/t/p/w500${movie.getPoster_path()}" alt="${movie.getTitle()}">
+                                <div class="p-4 h-5/6 overflow-hidden">
+                                    <h3 class="text-xl text-black font-semibold mb-2">${movie.getTitle()}</h3>
+                                    <p class="text-sm text-zinc-400 mb-4">${movie.getOverview()}</p>
+                                </div>
+                            </a>
+                        @endfor
+                    </div>
                 </div>
             </div>
 

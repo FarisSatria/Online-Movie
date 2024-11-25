@@ -1,6 +1,6 @@
 package com.movieonline.Online.Movie.service;
 
-import com.movieonline.Online.Movie.entity.AppUserEntity;
+import com.movieonline.Online.Movie.entity.model.AppUserEntity;
 import com.movieonline.Online.Movie.repository.AppUserRepository;
 import com.movieonline.Online.Movie.exception.UserAlreadyExistException;
 import jakarta.transaction.Transactional;

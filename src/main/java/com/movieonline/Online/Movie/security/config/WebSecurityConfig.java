@@ -32,7 +32,8 @@ public class WebSecurityConfig {
                                         "/image/**",
                                         "/video/**",
                                         "/movies",
-                                        "/register"
+                                        "/register",
+                                        "/movies/popular"
                                 ).permitAll()
                                 .requestMatchers("/movie/**").authenticated()
                                 .anyRequest().authenticated()

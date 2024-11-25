@@ -1,6 +1,6 @@
 package com.movieonline.Online.Movie.controller;
 
-import com.movieonline.Online.Movie.entity.AppUserEntity;
+import com.movieonline.Online.Movie.entity.model.AppUserEntity;
 import com.movieonline.Online.Movie.service.RegistrationService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

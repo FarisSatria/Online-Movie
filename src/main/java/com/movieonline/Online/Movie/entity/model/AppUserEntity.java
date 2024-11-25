@@ -1,4 +1,4 @@
-package com.movieonline.Online.Movie.entity;
+package com.movieonline.Online.Movie.entity.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
