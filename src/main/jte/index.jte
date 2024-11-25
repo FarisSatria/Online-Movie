@@ -14,8 +14,9 @@
     <title>${WebName} | Homepage</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/asset/css/style.css">
 </head>
-<body class="bg-gray-200 font-sans min-h-screen">
+<body class="bg-gray-200 font-sans min-h-screen shadow-inner-xl">
 <!-- Floating Sidebar -->
 <div class="fixed top-8 bg-gray-50 left-8 bottom-8 w-16 rounded-xl shadow-md flex flex-col justify-between p-4">
     <!-- Top Icons -->
@@ -72,10 +73,10 @@
                 @for (MovieDTO movie : popularMovies)
                     <div class="relative">
                         <img class="w-screen h-full object-fill" src="https://image.tmdb.org/t/p/w780${movie.getPoster_path()}" alt="${movie.getTitle()}">
-                        <div class="absolute left-4 top-1/2 transform -translate-y-1/2 w-72 h-97 text space-y-4 p-4 rounded-lg shadow-xl backdrop-blur bg-black/30">
-                            <h4 class="text-xl font-medium text-white border-sky-400 border-l-4 pl-2 ">#Popular Movies!</h4>
-                            <h3 class="text-4xl text-white font-semibold ">${movie.getTitle()}</h3>
-                            <p class="text-sm text-white h-24 overflow-hidden">${movie.getOverview()}</p>
+                        <div class="absolute left-4 top-1/2 transform -translate-y-1/2 w-72 h-97 text space-y-4 p-4 rounded-lg shadow-inner-lg bg-white">
+                            <h4 class="text-xl font-medium text-black border-sky-400 border-l-4 pl-2 ">#Popular Movies!</h4>
+                            <h3 class="text-4xl text-black font-semibold ">${movie.getTitle()}</h3>
+                            <p class="text-sm text-zinc-400 h-24 overflow-hidden">${movie.getOverview()}</p>
                             <div class="flex items-center space-x-1 ">
                                 @for (int i = 1; i <= 5; i++)
                                     @if (i <= movie.getVote_average() / 1.5)
@@ -91,7 +92,7 @@
             </div>
 
             <!-- Navigation Arrows -->
-            <div class="right-3 bottom-3 p-1 h-1/6 rounded-full shadow-inner w-3/12 absolute flex bg-gray-50">
+            <div class="right-3 bottom-3 p-1 h-1/6 rounded-full shadow-inner-lg w-3/12 absolute flex bg-gray-50">
                 <!-- Left Arrow -->
                 <button id="prev"
                         class="mr-4 bg-sky-400 hover:bg-sky-500 shadow-md w-1/2 h-full transition duration-300 rounded-full text-white">

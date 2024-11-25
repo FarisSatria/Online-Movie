@@ -15,10 +15,11 @@
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="/asset/css/login.css">
+    <link rel="stylesheet" href="/asset/css/style.css">
 </head>
-<body class="bg-gray-200 font-mono min-h-screen flex items-center justify-center">
+<body class="bg-gray-200 font-mono min-h-screen flex items-center justify-center shadow-inner-xl">
 
-<div class="w-10/12 max-w-4xl bg-gray-50 rounded-lg shadow-lg flex flex-col md:flex-row">
+<div class="w-10/12 max-w-4xl bg-gray-50 rounded-lg shadow-big flex flex-col md:flex-row">
     <!-- Login Form Section -->
     <div id="loginForm" class="p-8 w-full md:w-1/2 text-gray-900">
         <h2 class="text-4xl text-black font-bold text-center mb-6">${WebName}</h2>
