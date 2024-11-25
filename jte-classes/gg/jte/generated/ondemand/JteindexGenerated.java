@@ -32,10 +32,10 @@ public final class JteindexGenerated {
 				jteOutput.setContext("img", null);
 				jteOutput.writeContent("\"");
 			}
-			jteOutput.writeContent(">\n                        <div class=\"absolute left-4 top-1/2 transform rounded-lg bg-white/20 shadow-2xl py-3 px-2 -translate-y-1/2 w-60 text space-y-4\">\n                            <h4 class=\"text-xl font-medium text-white border-sky-400 border-l-4 pl-2 \">#Popular Movies!</h4>\n                            <h3 class=\"text-4xl text-white font-semibold\">");
+			jteOutput.writeContent(">\n                        <div class=\"absolute left-4 top-1/2 transform -translate-y-1/2 w-72 h-97 text space-y-4 p-4 rounded-lg shadow-xl backdrop-blur bg-black/30\">\n                            <h4 class=\"text-xl font-medium text-white border-sky-400 border-l-4 pl-2 \">#Popular Movies!</h4>\n                            <h3 class=\"text-4xl text-white font-semibold \">");
 			jteOutput.setContext("h3", null);
 			jteOutput.writeUserContent(movie.getTitle());
-			jteOutput.writeContent("</h3>\n                            <p class=\"text-sm text-white h-24 overflow-hidden text-ellipsis\">");
+			jteOutput.writeContent("</h3>\n                            <p class=\"text-sm text-white h-24 overflow-hidden\">");
 			jteOutput.setContext("p", null);
 			jteOutput.writeUserContent(movie.getOverview());
 			jteOutput.writeContent("</p>\n                            <div class=\"flex items-center space-x-1 \">\n                                ");
@@ -132,7 +132,7 @@ public final class JteindexGenerated {
 				jteOutput.setContext("img", null);
 				jteOutput.writeContent("\"");
 			}
-			jteOutput.writeContent(">\n                                <div class=\"p-4 h-5/6 overflow-hidden\">\n                                    <h3 class=\"text-xl text-black font-semibold mb-2\">");
+			jteOutput.writeContent(">\n                                <div class=\"p-4 overflow-hidden\" style=\"height:90%;\">\n                                    <h3 class=\"text-xl text-black font-semibold mb-2\">");
 			jteOutput.setContext("h3", null);
 			jteOutput.writeUserContent(movie.getTitle());
 			jteOutput.writeContent("</h3>\n                                    <p class=\"text-sm text-zinc-400 mb-4\">");

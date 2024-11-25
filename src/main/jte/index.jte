@@ -72,10 +72,10 @@
                 @for (MovieDTO movie : popularMovies)
                     <div class="relative">
                         <img class="w-screen h-full object-fill" src="https://image.tmdb.org/t/p/w780${movie.getPoster_path()}" alt="${movie.getTitle()}">
-                        <div class="absolute left-4 top-1/2 transform rounded-lg bg-white/20 shadow-2xl py-3 px-2 -translate-y-1/2 w-60 text space-y-4">
+                        <div class="absolute left-4 top-1/2 transform -translate-y-1/2 w-72 h-97 text space-y-4 p-4 rounded-lg shadow-xl backdrop-blur bg-black/30">
                             <h4 class="text-xl font-medium text-white border-sky-400 border-l-4 pl-2 ">#Popular Movies!</h4>
-                            <h3 class="text-4xl text-white font-semibold">${movie.getTitle()}</h3>
-                            <p class="text-sm text-white h-24 overflow-hidden text-ellipsis">${movie.getOverview()}</p>
+                            <h3 class="text-4xl text-white font-semibold ">${movie.getTitle()}</h3>
+                            <p class="text-sm text-white h-24 overflow-hidden">${movie.getOverview()}</p>
                             <div class="flex items-center space-x-1 ">
                                 @for (int i = 1; i <= 5; i++)
                                     @if (i <= movie.getVote_average() / 1.5)
@@ -165,7 +165,7 @@
                             <a class="bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40
                     flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
                                 <img class="w-28 object-cover" src="https://image.tmdb.org/t/p/w500${movie.getPoster_path()}" alt="${movie.getTitle()}">
-                                <div class="p-4 h-5/6 overflow-hidden">
+                                <div class="p-4 overflow-hidden" style="height:90%;">
                                     <h3 class="text-xl text-black font-semibold mb-2">${movie.getTitle()}</h3>
                                     <p class="text-sm text-zinc-400 mb-4">${movie.getOverview()}</p>
                                 </div>
