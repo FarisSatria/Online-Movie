@@ -1,15 +1,15 @@
 package gg.jte.generated.ondemand;
 public final class JteloginGenerated {
 	public static final String JTE_NAME = "login.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,0,0,7,7,7,7,9,12,15,22,24,24,24,26,31,36,43,54,56,56,56,58,63,68,73,81,84,84,84,90,90,90,95,99,99,99,0,0,0,0};
+	public static final int[] JTE_LINE_INFO = {0,0,0,0,6,6,6,6,9,12,15,22,24,24,24,26,31,36,43,54,56,56,56,58,63,68,73,81,84,84,84,90,90,90,95,99,99,99,0,0,0,0};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName) {
-		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
+		jteOutput.writeContent("<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
 		jteOutput.writeUserContent(WebName);
-		jteOutput.writeContent(" | Login</title>\n\n    ");
+		jteOutput.writeContent(" | Login</title>\n    <link rel=\"icon\" href=\"/image/favicon/eudaemonia.png\">\n\n    ");
 		jteOutput.writeContent("\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n\n    ");
 		jteOutput.writeContent("\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css\">\n\n    ");
-		jteOutput.writeContent("\n    <link rel=\"stylesheet\" href=\"/asset/css/login.css\">\n    <link rel=\"stylesheet\" href=\"/asset/css/style.css\">\n</head>\n<body class=\"bg-gray-200 font-mono min-h-screen flex items-center justify-center shadow-inner-xl\">\n\n<div class=\"w-10/12 max-w-4xl bg-gray-50 rounded-lg shadow-big flex flex-col md:flex-row\">\n    ");
+		jteOutput.writeContent("\n    <link rel=\"stylesheet\" href=\"/asset/css/login.css\">\n    <link rel=\"stylesheet\" href=\"/asset/css/style.css\">\n</head>\n<body class=\"bg-gray-200 font-avenir min-h-screen flex items-center justify-center shadow-inner-xl\">\n\n<div class=\"w-10/12 max-w-4xl bg-gray-50 rounded-lg shadow-lg flex flex-col md:flex-row\">\n    ");
 		jteOutput.writeContent("\n    <div id=\"loginForm\" class=\"p-8 w-full md:w-1/2 text-gray-900\">\n        <h2 class=\"text-4xl text-black font-bold text-center mb-6\">");
 		jteOutput.setContext("h2", null);
 		jteOutput.writeUserContent(WebName);

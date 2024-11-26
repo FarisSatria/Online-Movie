@@ -15,7 +15,7 @@ import java.util.List;
 public class TemplateController {
 
     private final LoginService loginService;
-    private final TMDBService tmdbService;
+    private final TMDBController tmdbController;
 
     public Model pageDetails(Model model){
         model.addAttribute("WebName", "Cinema Eudamonia");
@@ -24,26 +24,15 @@ public class TemplateController {
 
     @GetMapping("/")
     public String showHomePage(Model model) {
-        //Popular Movie
-        List<MovieDTO> popularMovies = tmdbService.getPopularMovies();
-        model.addAttribute("popularMovies", popularMovies);
-
-        //Top Rated Movie
-        List<MovieDTO> topRatedMovies = tmdbService.getTopRatedMovies();
-        model.addAttribute("topRatedMovies", topRatedMovies);
-
-        //Upcoming Movie
-        List<MovieDTO> upcomingMovies = tmdbService.getUpcomingMovies();
-        model.addAttribute("upcomingMovies", upcomingMovies);
-
+        tmdbController.movieDetails(model);
         pageDetails(model);
         return "index";
     }
 
     @GetMapping("/movie/**")
     public String moviePage(Model model){
+        tmdbController.movieDetails(model);
         pageDetails(model);
         return "movie-page";
     }
-
 }

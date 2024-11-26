@@ -1,6 +1,8 @@
 package com.movieonline.Online.Movie.controller;
 
 import com.movieonline.Online.Movie.entity.model.AppUserEntity;
+import com.movieonline.Online.Movie.exception.GlobalExceptionHandler;
+import com.movieonline.Online.Movie.exception.UserAlreadyExistException;
 import com.movieonline.Online.Movie.service.RegistrationService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -14,12 +16,7 @@ public class RegistrationController {
 
     private final RegistrationService registrationService;
     private final TemplateController templateController;
-
-//    @PostMapping("/register")
-//    public ResponseEntity<?> register(@RequestBody @Valid AppUserEntity appUserEntity) {
-//        registrationService.registerUser(appUserEntity, appUserEntity.getName(), appUserEntity.getUsername(), appUserEntity.getPassword());
-//        return ResponseEntity.ok("User registered successfully");
-//    }
+    private final GlobalExceptionHandler globalExceptionHandler;
 
     @GetMapping("/register")
     public String registerPage(Model model) {

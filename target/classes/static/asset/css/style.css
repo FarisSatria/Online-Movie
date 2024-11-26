@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap");
+.font-avenir{
+ font-family: Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
+}
 .shadow-big{
 box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }

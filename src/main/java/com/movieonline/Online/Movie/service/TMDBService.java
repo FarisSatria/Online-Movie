@@ -1,6 +1,5 @@
 package com.movieonline.Online.Movie.service;
 
-import com.movieonline.Online.Movie.controller.TMDBController;
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
 import com.movieonline.Online.Movie.entity.res.TMDBResponse;
 import org.springframework.beans.factory.annotation.Value;
