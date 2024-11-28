@@ -3,7 +3,7 @@ import java.util.List;
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
 public final class JteindexGenerated {
 	public static final String JTE_NAME = "index.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,13,13,13,13,22,24,26,34,42,50,60,70,72,74,74,77,77,77,77,77,77,77,77,77,77,77,77,77,81,81,81,82,82,82,84,84,85,85,87,87,89,89,90,90,94,94,97,99,104,111,115,116,116,119,119,119,119,120,120,120,120,120,120,120,120,120,122,122,122,124,124,125,125,127,127,129,129,130,130,134,134,137,141,142,142,145,145,145,145,146,146,146,146,146,146,146,146,146,148,148,148,150,150,151,151,153,153,155,155,156,156,160,160,171,171,175,175,175,175,176,176,176,176,176,176,176,176,176,178,178,178,179,179,179,182,182,197,197,197,3,4,5,6,6,6,6};
+	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,13,13,13,13,22,24,26,34,42,50,60,70,72,74,74,77,77,77,77,77,77,77,77,77,77,77,77,77,81,81,81,82,82,82,84,84,85,85,87,87,89,89,90,90,94,94,97,99,104,111,115,116,116,117,117,117,117,119,119,119,119,120,120,120,120,120,120,120,120,120,122,122,122,124,124,125,125,127,127,129,129,130,130,134,134,137,141,142,142,143,143,143,143,145,145,145,145,146,146,146,146,146,146,146,146,146,148,148,148,150,150,151,151,153,153,155,155,156,156,160,160,171,171,172,172,172,172,175,175,175,175,176,176,176,176,176,176,176,176,176,178,178,178,179,179,179,182,182,197,197,197,3,4,5,6,6,6,6};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, List<MovieDTO> popularMovies, List<MovieDTO> topRatedMovies, List<MovieDTO> upcomingMovies) {
 		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
@@ -57,7 +57,11 @@ public final class JteindexGenerated {
 		jteOutput.writeContent("\n        <div class=\"w-full mb-5\">\n            <h3 class=\"text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold\">Popular Movies</h3>\n            <div class=\"flex space-x-4 overflow-y-hidden pb-4 pt-5\">\n                ");
 		jteOutput.writeContent("\n                ");
 		for (MovieDTO movie : popularMovies) {
-			jteOutput.writeContent("\n                    <a href=\"/movie/1\" class=\"rounded-lg bg-gray-50 shadow-md overflow-hidden\n                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md\">\n                        <img class=\"w-full object-cover\" src=\"https://image.tmdb.org/t/p/w300");
+			jteOutput.writeContent("\n                    <a href=\"/movie/");
+			jteOutput.setContext("a", "href");
+			jteOutput.writeUserContent(movie.getId());
+			jteOutput.setContext("a", null);
+			jteOutput.writeContent("\" class=\"rounded-lg bg-gray-50 shadow-md overflow-hidden\n                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md\">\n                        <img class=\"w-full object-cover\" src=\"https://image.tmdb.org/t/p/w300");
 			jteOutput.setContext("img", "src");
 			jteOutput.writeUserContent(movie.getPoster_path());
 			jteOutput.setContext("img", null);
@@ -89,7 +93,11 @@ public final class JteindexGenerated {
 		jteOutput.writeContent("\n        <div class=\"w-full mb-5\">\n            <h3 class=\"text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold\">Top Rated Movies</h3>\n            <div class=\"flex space-x-4 overflow-y-hidden pb-4 pt-5\">\n                ");
 		jteOutput.writeContent("\n                ");
 		for (MovieDTO movie : topRatedMovies) {
-			jteOutput.writeContent("\n                    <a href=\"/movie/1\" class=\"rounded-lg bg-gray-50 shadow-md overflow-hidden\n                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md\">\n                        <img class=\"w-full object-cover\" src=\"https://image.tmdb.org/t/p/w300");
+			jteOutput.writeContent("\n                    <a href=\"/movie/");
+			jteOutput.setContext("a", "href");
+			jteOutput.writeUserContent(movie.getId());
+			jteOutput.setContext("a", null);
+			jteOutput.writeContent("\" class=\"rounded-lg bg-gray-50 shadow-md overflow-hidden\n                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md\">\n                        <img class=\"w-full object-cover\" src=\"https://image.tmdb.org/t/p/w300");
 			jteOutput.setContext("img", "src");
 			jteOutput.writeUserContent(movie.getPoster_path());
 			jteOutput.setContext("img", null);
@@ -119,7 +127,11 @@ public final class JteindexGenerated {
 		}
 		jteOutput.writeContent("\n            </div>\n        </div>\n    </div>\n    <div class=\"flex-initial\" style=\"width:30vw;\">\n        <div class=\"w-3/12 ml-5 mt-8\">\n            <div class=\"w-96\">\n                <h3 class=\"ml-3 text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold mb-4\">Upcoming\n                    Movies</h3>\n                <div class=\"overflow-auto p-3 h-screen\">\n                    <div class=\"flex flex-col space-y-6\">\n                        ");
 		for (MovieDTO movie : topRatedMovies) {
-			jteOutput.writeContent("\n                            <a class=\"bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40\n                    flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2\">\n                                <img class=\"w-28 object-cover\"\n                                     src=\"https://image.tmdb.org/t/p/w500");
+			jteOutput.writeContent("\n                            <a href=\"/movie/");
+			jteOutput.setContext("a", "href");
+			jteOutput.writeUserContent(movie.getId());
+			jteOutput.setContext("a", null);
+			jteOutput.writeContent("\" class=\"bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40\n                    flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2\">\n                                <img class=\"w-28 object-cover\"\n                                     src=\"https://image.tmdb.org/t/p/w500");
 			jteOutput.setContext("img", "src");
 			jteOutput.writeUserContent(movie.getPoster_path());
 			jteOutput.setContext("img", null);

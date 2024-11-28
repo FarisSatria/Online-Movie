@@ -115,7 +115,7 @@
             <div class="flex space-x-4 overflow-y-hidden pb-4 pt-5">
                 <!-- Movie Card -->
                 @for (MovieDTO movie : popularMovies)
-                    <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
+                    <a href="/movie/${movie.getId()}" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
                 max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
                         <img class="w-full object-cover" src="https://image.tmdb.org/t/p/w300${movie.getPoster_path()}"
                              alt="${movie.getTitle()}">
@@ -141,7 +141,7 @@
             <div class="flex space-x-4 overflow-y-hidden pb-4 pt-5">
                 <!-- Movie Card -->
                 @for (MovieDTO movie : topRatedMovies)
-                    <a href="/movie/1" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
+                    <a href="/movie/${movie.getId()}" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
                 max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
                         <img class="w-full object-cover" src="https://image.tmdb.org/t/p/w300${movie.getPoster_path()}"
                              alt="${movie.getTitle()}">
@@ -170,7 +170,7 @@
                 <div class="overflow-auto p-3 h-screen">
                     <div class="flex flex-col space-y-6">
                         @for (MovieDTO movie : topRatedMovies)
-                            <a class="bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40
+                            <a href="/movie/${movie.getId()}" class="bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40
                     flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
                                 <img class="w-28 object-cover"
                                      src="https://image.tmdb.org/t/p/w500${movie.getPoster_path()}"

@@ -1,11 +1,7 @@
 package com.movieonline.Online.Movie.entity.dto;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Data
 public class MovieDTO {
     private long id;

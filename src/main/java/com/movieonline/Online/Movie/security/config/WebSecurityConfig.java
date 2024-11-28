@@ -33,9 +33,10 @@ public class WebSecurityConfig {
                                         "/video/**",
                                         "/movies",
                                         "/register",
-                                        "/movies/popular"
+                                        "/movies/popular",
+                                        "/movie/{id}"
                                 ).permitAll()
-                                .requestMatchers("/movie/**").authenticated()
+//                                .requestMatchers("/movie/**").authenticated()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
