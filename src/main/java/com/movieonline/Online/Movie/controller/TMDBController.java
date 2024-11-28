@@ -2,6 +2,7 @@ package com.movieonline.Online.Movie.controller;
 
 import com.movieonline.Online.Movie.entity.dto.MovieCastDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
+import com.movieonline.Online.Movie.entity.dto.MovieKeywordsDTO;
 import com.movieonline.Online.Movie.service.TMDBService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,13 @@ public class TMDBController {
         List<MovieCastDTO> movieCast = tmdbService.getMovieCast(id);
         model.addAttribute("movieCast", movieCast);
 
-        System.out.println("Movie Cast :" + movieCast);
+        List<MovieDTO> movieRecommendation = tmdbService.getMovieRecommendation(id);
+        model.addAttribute("movieRecommendation", movieRecommendation);
+
+        List<MovieKeywordsDTO> movieKeywords = tmdbService.getMovieKeywords(id);
+        model.addAttribute("movieKeywords", movieKeywords);
+
+
         return model;
     }
 

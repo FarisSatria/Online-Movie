@@ -1,4 +1,6 @@
 @param String WebName
+@param String errorMessage
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,6 +94,15 @@
         <button onclick="toggleView()" class="px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white font-semibold rounded-lg transition">Log In</button>
     </div>
 </div>
+
+@if(errorMessage != null)
+    <div class="drop-shadow-md absolute top-5">
+        <div class="bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center">Warning!</div>
+        <div class="bg-white p-5 rounded-br-lg rounded-bl-lg">
+            <p>${errorMessage}</p>
+        </div>
+    </div>
+@endif
 
 <!-- Custom JavaScript -->
 <script src="/asset/js/main.js"></script>

@@ -36,7 +36,7 @@ public class WebSecurityConfig {
                                         "/movies/popular",
                                         "/movie/{id}"
                                 ).permitAll()
-//                                .requestMatchers("/movie/**").authenticated()
+                                .requestMatchers("/movie/{id}/book").authenticated()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

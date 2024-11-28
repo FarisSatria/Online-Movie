@@ -1,5 +1,6 @@
 package com.movieonline.Online.Movie.exception;
 
+import com.movieonline.Online.Movie.controller.TemplateController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -13,17 +14,23 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    private final TemplateController templateController;
+
+    public GlobalExceptionHandler(TemplateController templateController) {
+        this.templateController = templateController;
+    }
+
     @ExceptionHandler({InvalidCredentialsExeption.class})
-    public ResponseEntity<Object> handleInvalidCredentialsException(InvalidCredentialsExeption exception, Model model) {
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(exception.getMessage());
+    public String handleInvalidCredentialsException(InvalidCredentialsExeption exception, Model model) {
+        model.addAttribute("errorMessage", exception.getMessage());
+        templateController.pageDetails(model);
+        return "login";
     }
     @ExceptionHandler({UserAlreadyExistException.class})
-    public ResponseEntity<Object> handleUserAlreadyExistException(UserAlreadyExistException exception, Model model) {
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(exception.getMessage());
+    public String handleUserAlreadyExistException(UserAlreadyExistException exception, Model model) {
+        model.addAttribute("errorMessage", exception.getMessage());
+        templateController.pageDetails(model);
+        return "login";
     }
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<Map<String, String>> handleRuntimeException(MethodArgumentNotValidException exception) {

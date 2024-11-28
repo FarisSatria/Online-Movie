@@ -73,14 +73,16 @@
             <!-- Carousel Images -->
             <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-full">
                 @for (MovieDTO movie : popularMovies)
-                    <div class="relative">
-                        <img class="w-screen h-full object-fill"
-                             src="https://image.tmdb.org/t/p/w1280${movie.getBackdrop_path()}" alt="${movie.getTitle()}">
-                        <div class="absolute left-4 top-1/2 transform -translate-y-1/2 w-72 h-97 space-y-4 p-4 rounded-lg shadow-inner-lg bg-white">
-                            <h4 class="text-xl font-medium text-black border-sky-400 border-l-4 pl-2 ">#Popular
+                <div class="size-full flex "
+                     style="background-image:url(https://image.tmdb.org/t/p/w1280${movie.getBackdrop_path()});">
+                    <div class="flex bg-black/40">
+                        <img class="my-auto mx-10 rounded-lg h-5/6"
+                             src="https://image.tmdb.org/t/p/w1280${movie.getPoster_path()}" alt="${movie.getTitle()}">
+                        <div class="space-y-4 p-4 h-5/6 my-auto">
+                            <h4 class="text-xl font-medium text-white border-sky-400 border-l-4 pl-2 ">#Popular
                                 Movies!</h4>
-                            <h3 class="text-4xl text-black font-semibold ">${movie.getTitle()}</h3>
-                            <p class="text-sm text-zinc-400 h-24 overflow-hidden">${movie.getOverview()}</p>
+                            <h3 class="text-4xl text-white font-semibold ">${movie.getTitle()}</h3>
+                            <p class="text-sm text-zinc-300">${movie.getOverview()}</p>
                             <div class="flex items-center space-x-1 ">
                                 @for (int i = 1; i <= 5; i++)
                                     @if (i <= movie.getVote_average() / 1.5)
@@ -90,8 +92,14 @@
                                     @endif
                                 @endfor
                             </div>
+                            <br>
+                            <div class="space-x-2">
+                                <a href="/movie/${movie.getId()}" class="p-4 bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 ">View Now!</a>
+                                <a href="/movie/{id}/book" class="p-4 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg transition duration-300 ">Book Now!</a>
+                            </div>
                         </div>
                     </div>
+                </div>
                 @endfor
             </div>
 

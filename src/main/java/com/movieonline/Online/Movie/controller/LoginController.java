@@ -1,5 +1,6 @@
 package com.movieonline.Online.Movie.controller;
 
+import com.movieonline.Online.Movie.exception.GlobalExceptionHandler;
 import com.movieonline.Online.Movie.service.LoginService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

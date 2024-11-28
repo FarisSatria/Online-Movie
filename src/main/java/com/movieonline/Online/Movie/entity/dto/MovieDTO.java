@@ -10,5 +10,9 @@ public class MovieDTO {
     private String poster_path;
     private String backdrop_path;
     private String release_date;
+    private String status;
+    private String original_language;
+    private String budget;
+    private String revenue;
     private double vote_average;
 }

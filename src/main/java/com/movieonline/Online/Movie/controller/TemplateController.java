@@ -1,6 +1,7 @@
 package com.movieonline.Online.Movie.controller;
 
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
+import com.movieonline.Online.Movie.exception.GlobalExceptionHandler;
 import com.movieonline.Online.Movie.service.LoginService;
 import com.movieonline.Online.Movie.service.TMDBService;
 import lombok.AllArgsConstructor;

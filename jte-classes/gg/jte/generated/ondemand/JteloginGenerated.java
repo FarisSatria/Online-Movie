@@ -1,9 +1,9 @@
 package gg.jte.generated.ondemand;
 public final class JteloginGenerated {
 	public static final String JTE_NAME = "login.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,0,0,6,6,6,6,9,12,15,22,24,24,24,26,31,36,43,54,56,56,56,58,63,68,73,81,84,84,84,90,90,90,95,99,99,99,0,0,0,0};
-	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName) {
-		jteOutput.writeContent("<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
+	public static final int[] JTE_LINE_INFO = {0,0,0,0,8,8,8,8,11,14,17,24,26,26,26,28,33,38,45,56,58,58,58,60,65,70,75,83,86,86,86,92,92,92,97,97,101,101,101,104,104,106,110,110,110,0,1,1,1,1};
+	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, String errorMessage) {
+		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
 		jteOutput.writeUserContent(WebName);
 		jteOutput.writeContent(" | Login</title>\n    <link rel=\"icon\" href=\"/image/favicon/eudaemonia.png\">\n\n    ");
@@ -33,10 +33,18 @@ public final class JteloginGenerated {
 		jteOutput.setContext("p", null);
 		jteOutput.writeUserContent(WebName);
 		jteOutput.writeContent("!</p>\n        <button onclick=\"toggleView()\" class=\"px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white font-semibold rounded-lg transition\">Log In</button>\n    </div>\n</div>\n\n");
+		if (errorMessage != null) {
+			jteOutput.writeContent("\n    <div class=\"drop-shadow-md absolute top-5\">\n        <div class=\"bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center\">Warning!</div>\n        <div class=\"bg-white p-5 rounded-br-lg rounded-bl-lg\">\n            <p>");
+			jteOutput.setContext("p", null);
+			jteOutput.writeUserContent(errorMessage);
+			jteOutput.writeContent("</p>\n        </div>\n    </div>\n");
+		}
+		jteOutput.writeContent("\n\n");
 		jteOutput.writeContent("\n<script src=\"/asset/js/main.js\"></script>\n</body>\n</html>\n");
 	}
 	public static void renderMap(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, java.util.Map<String, Object> params) {
 		String WebName = (String)params.get("WebName");
-		render(jteOutput, jteHtmlInterceptor, WebName);
+		String errorMessage = (String)params.get("errorMessage");
+		render(jteOutput, jteHtmlInterceptor, WebName, errorMessage);
 	}
 }
