@@ -3,10 +3,11 @@ import java.util.List;
 import com.movieonline.Online.Movie.entity.dto.MovieCastDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieKeywordsDTO;
+import com.movieonline.Online.Movie.entity.dto.MovieReviewsDTO;
 public final class JtemoviepageGenerated {
 	public static final String JTE_NAME = "movie-page.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,2,3,5,5,5,19,19,19,19,28,29,29,32,34,36,36,36,36,39,39,39,39,39,39,39,39,39,39,39,39,39,43,43,43,44,44,44,46,46,47,47,49,49,51,51,52,52,61,65,66,66,69,69,69,69,70,70,70,70,70,70,70,70,70,72,72,72,73,73,73,76,76,79,83,84,84,85,85,85,85,87,87,87,87,88,88,88,88,88,88,88,88,88,90,90,90,92,92,93,93,95,95,97,97,98,98,102,102,107,115,115,115,119,119,119,123,123,123,127,127,127,133,133,135,135,135,137,137,146,147,147,148,149,149,153,153,153,5,6,7,8,9,10,11,12,12,12,12};
-	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, MovieDTO movieDetail, List<MovieCastDTO> movieCast, List<MovieKeywordsDTO> movieKeywords, List<MovieDTO> movieRecommendation, List<MovieDTO> popularMovies, List<MovieDTO> topRatedMovies, List<MovieDTO> upcomingMovies) {
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,3,4,6,6,6,21,21,21,21,30,31,31,34,36,38,38,38,38,41,41,41,41,41,41,41,41,41,41,41,41,41,45,45,45,46,46,46,48,48,49,49,51,51,53,53,54,54,63,67,68,68,71,71,71,71,72,72,72,72,72,72,72,72,72,74,74,74,75,75,75,78,78,81,83,83,85,85,85,87,87,87,90,90,91,95,96,96,97,97,97,97,99,99,99,99,100,100,100,100,100,100,100,100,100,102,102,102,104,104,105,105,107,107,109,109,110,110,114,114,118,128,128,128,132,132,132,136,136,136,140,140,140,146,146,148,148,148,150,150,159,160,160,161,162,162,166,166,166,6,7,8,9,10,11,12,13,14,14,14,14};
+	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, MovieDTO movieDetail, List<MovieCastDTO> movieCast, List<MovieKeywordsDTO> movieKeywords, List<MovieReviewsDTO> movieReviews, List<MovieDTO> movieRecommendation, List<MovieDTO> popularMovies, List<MovieDTO> topRatedMovies, List<MovieDTO> upcomingMovies) {
 		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
 		jteOutput.writeUserContent(WebName);
@@ -48,8 +49,8 @@ public final class JtemoviepageGenerated {
 			}
 			jteOutput.writeContent("\n                                ");
 		}
-		jteOutput.writeContent("\n                            </div>\n                            <button class=\"book-button p-3 bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 \">Book Now!</button>\n                        </div>\n                    </div>\n            </div>\n        </div>\n        <div class=\"w-full flex\">\n            <div class=\"flex-initial\" style=\"width:65.1vw;\">\n                ");
-		jteOutput.writeContent("\n                <div class=\"overflow-x-scroll mb-5\">\n                    <h3 class=\"text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold\">Top Billed Cast</h3>\n                    <div class=\"flex space-x-4 overflow-y-hidden pb-4 pt-5\">\n                        ");
+		jteOutput.writeContent("\n                            </div>\n                            <button class=\"book-button p-3 bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 \">Book Now!</button>\n                        </div>\n                    </div>\n            </div>\n        </div>\n        <div class=\"w-full flex space-x-5\">\n            <div class=\"flex-initial space-y-5\" style=\"width:65.1vw;\">\n                ");
+		jteOutput.writeContent("\n                <div class=\"overflow-x-scroll\">\n                    <h3 class=\"text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold\">Top Billed Cast</h3>\n                    <div class=\"flex space-x-4 overflow-y-hidden pb-4 pt-4\">\n                        ");
 		jteOutput.writeContent("\n                        ");
 		for (MovieCastDTO movie : movieCast) {
 			jteOutput.writeContent("\n                            <a class=\"rounded-lg bg-gray-50 shadow-md overflow-hidden\n                    max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md\">\n                                <img class=\"w-full object-cover\" src=\"https://image.tmdb.org/t/p/w300");
@@ -74,7 +75,18 @@ public final class JtemoviepageGenerated {
 			jteOutput.writeContent("</p>\n                                </div>\n                            </a>\n                        ");
 		}
 		jteOutput.writeContent("\n                    </div>\n                </div>\n                ");
-		jteOutput.writeContent("\n                <div id=\"recommendation\" class=\"overflow-x-scroll mb-5 \">\n                    <h3 class=\"text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold\">Recommended For You</h3>\n                    <div class=\"flex space-x-4 overflow-y-hidden pb-4 pt-5\">\n                        ");
+		jteOutput.writeContent("\n                <h3 class=\"text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold\">Movie Reviews</h3>\n                ");
+		for (MovieReviewsDTO movie : movieReviews) {
+			jteOutput.writeContent("\n                <div class=\"p-2 w-full h-60 text-black bg-white rounded-lg shadow-md\">\n                    <p class=\"text-xl font-bold\">");
+			jteOutput.setContext("p", null);
+			jteOutput.writeUserContent(movie.getAuthor());
+			jteOutput.writeContent("</p>\n                    <div class=\"overflow-y-scroll h-fit\">\n                        <p class=\"text-md text-zinc-600\">");
+			jteOutput.setContext("p", null);
+			jteOutput.writeUserContent(movie.getContent());
+			jteOutput.writeContent("</p>\n                    </div>\n                </div>\n                ");
+		}
+		jteOutput.writeContent("\n                ");
+		jteOutput.writeContent("\n                <div id=\"recommendation\" class=\"overflow-x-scroll\">\n                    <h3 class=\"text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold\">Recommended For You</h3>\n                    <div class=\"flex space-x-4 overflow-y-hidden pb-4 pt-5\">\n                        ");
 		jteOutput.writeContent("\n                        ");
 		for (MovieDTO movie : movieRecommendation) {
 			jteOutput.writeContent("\n                            <a href=\"/movie/");
@@ -109,27 +121,27 @@ public final class JtemoviepageGenerated {
 			}
 			jteOutput.writeContent("\n                                    </div>\n                                </div>\n                            </a>\n                        ");
 		}
-		jteOutput.writeContent("\n                    </div>\n                </div>\n            </div>\n\n            ");
-		jteOutput.writeContent("\n            <div class=\"flex-initial\" style=\"width:39;\">\n                <div class=\"ml-6 p-1 w-72\">\n                        <h3 class=\" text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold mb-4\">Extra Details</h3>\n                        <div class=\"p-3 h-screen mt-4 mx-auto bg-white rounded-lg shadow-md\">\n                            <div style=\"height:35%;\" class=\"space-y-4\">\n                                <div>\n                                    <p class=\"text-black font-bold\">Status</p>\n                                    <p class=\"text-zinc-700\"> ");
+		jteOutput.writeContent("\n                    </div>\n                </div>\n            </div>\n            ");
+		jteOutput.writeContent("\n            <div class=\"flex-initial\" style=\"width:39;\">\n                <div class=\"w-full\">\n                    <h3 class=\"text-xl sm:text-2xl lg:text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold mb-4\">\n                        Extra Details\n                    </h3>\n                    <div class=\"p-4 mt-4 mx-auto bg-white rounded-lg shadow-md\">\n                        <div class=\"space-y-4\">\n                            <div>\n                                <p class=\"text-black text-lg font-bold\">Status</p>\n                                <p class=\"text-zinc-700\">");
 		jteOutput.setContext("p", null);
 		jteOutput.writeUserContent(movieDetail.getStatus());
-		jteOutput.writeContent("</p>\n                                </div>\n                                <div>\n                                    <p class=\"text-black font-bold\">Original Language</p>\n                                    <p class=\"text-zinc-700\"> ");
+		jteOutput.writeContent("</p>\n                            </div>\n                            <div>\n                                <p class=\"text-black text-lg font-bold\">Original Language</p>\n                                <p class=\"text-zinc-700\">");
 		jteOutput.setContext("p", null);
-		jteOutput.writeUserContent(movieDetail.getOriginal_language());
-		jteOutput.writeContent("</p>\n                                </div>\n                                <div>\n                                    <p class=\"text-black font-bold\">Budget</p>\n                                    <p class=\"text-zinc-700\">$");
+		jteOutput.writeUserContent(movieDetail.getEnglish_name());
+		jteOutput.writeContent("</p>\n                            </div>\n                            <div>\n                                <p class=\"text-black text-lg font-bold\">Budget</p>\n                                <p class=\"text-zinc-700\">$");
 		jteOutput.setContext("p", null);
 		jteOutput.writeUserContent(movieDetail.getBudget());
-		jteOutput.writeContent("</p>\n                                </div>\n                                <div>\n                                    <p class=\"text-black font-bold\">Revenue</p>\n                                    <p class=\"text-zinc-700\">$");
+		jteOutput.writeContent("</p>\n                            </div>\n                            <div>\n                                <p class=\"text-black text-lg font-bold\">Revenue</p>\n                                <p class=\"text-zinc-700\">$");
 		jteOutput.setContext("p", null);
 		jteOutput.writeUserContent(movieDetail.getRevenue());
-		jteOutput.writeContent("</p>\n                                </div>\n                            </div>\n                            <p class=\"text-black font-bold\">Keywords</p>\n                            <div class=\" overflow-scroll\" style=\"height:61%;\">\n                                <div class=\"flex flex-wrap items-start h-auto w-auto\">\n                                    ");
+		jteOutput.writeContent("</p>\n                            </div>\n                        </div>\n                        <p class=\"text-black text-lg font-bold mt-4\">Keywords</p>\n                        <div class=\"overflow-auto max-h-full\">\n                            <div class=\"flex flex-wrap items-start\">\n                                ");
 		for (MovieKeywordsDTO movie : movieKeywords) {
-			jteOutput.writeContent("\n                                        <div class=\"mr-2 mt-2 p-1 rounded-lg border border-gray-200 bg-gray-100\">\n                                            <p class=\"text-zinc-700\">");
+			jteOutput.writeContent("\n                                    <div class=\"mr-2 mt-2 p-1 rounded-lg border border-gray-200 bg-gray-100\">\n                                        <p class=\"text-zinc-700\">");
 			jteOutput.setContext("p", null);
 			jteOutput.writeUserContent(movie.getName());
-			jteOutput.writeContent("</p>\n                                        </div>\n                                    ");
+			jteOutput.writeContent("</p>\n                                    </div>\n                                ");
 		}
-		jteOutput.writeContent("\n                                </div>\n                            </div>\n                        </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n");
+		jteOutput.writeContent("\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n");
 		jteOutput.writeContent("\n");
 		gg.jte.generated.ondemand.include.footer.JtefooterGenerated.render(jteOutput, jteHtmlInterceptor);
 		jteOutput.writeContent("\n");
@@ -142,10 +154,11 @@ public final class JtemoviepageGenerated {
 		MovieDTO movieDetail = (MovieDTO)params.get("movieDetail");
 		List<MovieCastDTO> movieCast = (List<MovieCastDTO>)params.get("movieCast");
 		List<MovieKeywordsDTO> movieKeywords = (List<MovieKeywordsDTO>)params.get("movieKeywords");
+		List<MovieReviewsDTO> movieReviews = (List<MovieReviewsDTO>)params.get("movieReviews");
 		List<MovieDTO> movieRecommendation = (List<MovieDTO>)params.get("movieRecommendation");
 		List<MovieDTO> popularMovies = (List<MovieDTO>)params.get("popularMovies");
 		List<MovieDTO> topRatedMovies = (List<MovieDTO>)params.get("topRatedMovies");
 		List<MovieDTO> upcomingMovies = (List<MovieDTO>)params.get("upcomingMovies");
-		render(jteOutput, jteHtmlInterceptor, WebName, movieDetail, movieCast, movieKeywords, movieRecommendation, popularMovies, topRatedMovies, upcomingMovies);
+		render(jteOutput, jteHtmlInterceptor, WebName, movieDetail, movieCast, movieKeywords, movieReviews, movieRecommendation, popularMovies, topRatedMovies, upcomingMovies);
 	}
 }

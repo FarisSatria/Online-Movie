@@ -39,7 +39,7 @@
                                 Movies!</h4>
                             <h3 class="text-4xl text-white font-semibold ">${movie.getTitle()}</h3>
                             <p class="text-sm text-zinc-300">${movie.getOverview()}</p>
-                            <div class="flex items-center space-x-1 ">
+                            <div class="flex items-center space-x-1">
                                 @for (int i = 1; i <= 5; i++)
                                     @if (i <= movie.getVote_average() / 1.5)
                                         <span class="text-yellow-400"><i class="fas fa-star"></i></span>
@@ -48,7 +48,7 @@
                                     @endif
                                 @endfor
                             </div>
-                            <div class="space-x-2">
+                            <div class="space-x-1 py-3">
                                 <a href="/movie/${movie.getId()}" class="p-4 bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 ">View Now!</a>
                                 <a class="book-button p-4 bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg transition cursor-pointer duration-300 ">Book Now!</a>
                             </div>
@@ -138,9 +138,9 @@
                                 <img class="w-28 object-cover"
                                      src="https://image.tmdb.org/t/p/w500${movie.getPoster_path()}"
                                      alt="${movie.getTitle()}">
-                                <div class="p-4 overflow-hidden space-y-2" style="height:90%;">
+                                <div class="p-4 space-y-2" style="height:90%;">
                                     <h3 class="text-xl text-black font-semibold">${movie.getTitle()}</h3>
-                                    <p class="text-sm text-zinc-400">${movie.getOverview()}</p>
+                                    <div class="text-sm text-zinc-400 relative overflow-hidden max-h-24 text-ellipsis">${movie.getOverview()}</div>
                                 </div>
                             </a>
                         @endfor

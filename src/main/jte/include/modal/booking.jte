@@ -5,7 +5,7 @@
 
     <!-- Modal content -->
     <div class="bg-gray-100 rounded-xl shadow-lg mx-auto my-12 w-full max-w-4xl">
-        <div class="h-14 rounded-t-xl bg-gradient-to-r from-sky-400 to-sky-600">
+        <div class="h-14 rounded-t-xl bg-sky-500">
             <span class="text-red-500 hover:text-red-600 hover:rotate-12 hover:scale-125 hover:drop-shadow-lg transition duration-200 p-3 mr-4 text-3xl font-bold float-right cursor-pointer close drop-shadow-md">&times;</span>
         </div>
         <div class="main flex flex-col md:flex-row p-6 w-full">
@@ -37,14 +37,14 @@
                         <span><span class="count">0</span> Tickets</span>
                         <div>Rp. <span class="amount">0</span></div>
                     </div>
-                    <button type="button" class="bg-yellow-400 hover:bg-yellow-500 text-white text-sm py-2 px-6 rounded-md transition duration-300 cursor-pointer">Book</button>
+                    <button type="button" class="bg-green-500 hover:bg-green-400 text-white text-sm py-2 px-6 rounded-md transition duration-300 cursor-pointer">Book</button>
                 </div>
             </div>
             <div class="timings flex flex-col items-center w-full md:w-2/4 mt-6 md:mt-0 md:ml-4 drop-shadow-md">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Select Date and Time</h3>
 
                 <!-- Date Selection -->
-                <div class="dates w-full flex flex-wrap justify-center gap-4 mb-6">
+                <div class="dates w-full flex justify-center gap-4 mb-6 ">
                     <input type="radio" name="date" id="d1" checked class="hidden">
                     <label for="d1" class="dates-item w-16 h-16 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-sky-500 hover:text-white transition duration-200">
                         <div class="day text-xs font-semibold">Fri</div>

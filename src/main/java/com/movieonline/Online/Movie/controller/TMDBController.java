@@ -3,12 +3,14 @@ package com.movieonline.Online.Movie.controller;
 import com.movieonline.Online.Movie.entity.dto.MovieCastDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieKeywordsDTO;
+import com.movieonline.Online.Movie.entity.dto.MovieReviewsDTO;
 import com.movieonline.Online.Movie.service.TMDBService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 @AllArgsConstructor
@@ -28,6 +30,9 @@ public class TMDBController {
 
         List<MovieDTO> movieRecommendation = tmdbService.getMovieRecommendation(id);
         model.addAttribute("movieRecommendation", movieRecommendation);
+
+        List<MovieReviewsDTO> movieReviews = tmdbService.getMovieReviews(id);
+        model.addAttribute("movieReviews", movieReviews);
 
         List<MovieKeywordsDTO> movieKeywords = tmdbService.getMovieKeywords(id);
         model.addAttribute("movieKeywords", movieKeywords);

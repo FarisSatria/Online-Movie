@@ -3,7 +3,11 @@ package com.movieonline.Online.Movie.service;
 import com.movieonline.Online.Movie.entity.dto.MovieCastDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieKeywordsDTO;
-import com.movieonline.Online.Movie.entity.res.TMDBMovieResponseMultiple;
+import com.movieonline.Online.Movie.entity.dto.MovieReviewsDTO;
+import com.movieonline.Online.Movie.entity.res.TMDBMovieCastResponse;
+import com.movieonline.Online.Movie.entity.res.TMDBMovieKeywordsResponse;
+import com.movieonline.Online.Movie.entity.res.TMDBMovieResponse;
+import com.movieonline.Online.Movie.entity.res.TMDBMovieReviewRespones;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -36,38 +40,44 @@ public class TMDBService {
 
     public List<MovieDTO> getPopularMovies() {
         String url = String.format("%s/movie/popular?api_key=%s", baseUrl, apiKey);
-        TMDBMovieResponseMultiple response = restTemplate.getForObject(url, TMDBMovieResponseMultiple.class);
+        TMDBMovieResponse response = restTemplate.getForObject(url, TMDBMovieResponse.class);
         return response.getResults();
     }
 
     public List<MovieDTO> getTopRatedMovies() {
         String url = String.format("%s/movie/top_rated?api_key=%s", baseUrl, apiKey);
-        TMDBMovieResponseMultiple response = restTemplate.getForObject(url, TMDBMovieResponseMultiple.class);
+        TMDBMovieResponse response = restTemplate.getForObject(url, TMDBMovieResponse.class);
         return response.getResults();
     }
 
     public List<MovieDTO> getUpcomingMovies() {
         String url = String.format("%s/movie/upcoming?api_key=%s", baseUrl, apiKey);
-        TMDBMovieResponseMultiple response = restTemplate.getForObject(url, TMDBMovieResponseMultiple.class);
+        TMDBMovieResponse response = restTemplate.getForObject(url, TMDBMovieResponse.class);
         return response.getResults();
     }
 
     // Fetch Movies Miscellaneous
     public List<MovieCastDTO> getMovieCast(Long id){
         String url = String.format("%s/movie/%d/credits?api_key=%s", baseUrl, id, apiKey);
-        TMDBMovieResponseMultiple response = restTemplate.getForObject(url, TMDBMovieResponseMultiple.class);
+        TMDBMovieCastResponse response = restTemplate.getForObject(url, TMDBMovieCastResponse.class);
         return response.getCast();
     }
 
     public List<MovieDTO> getMovieRecommendation(Long id){
         String url = String.format("%s/movie/%d/recommendations?api_key=%s", baseUrl, id, apiKey);
-        TMDBMovieResponseMultiple response = restTemplate.getForObject(url, TMDBMovieResponseMultiple.class);
+        TMDBMovieResponse response = restTemplate.getForObject(url, TMDBMovieResponse.class);
         return response.getResults();
     }
 
     public List<MovieKeywordsDTO> getMovieKeywords(Long id){
         String url = String.format("%s/movie/%d/keywords?api_key=%s", baseUrl, id, apiKey);
-        TMDBMovieResponseMultiple response = restTemplate.getForObject(url, TMDBMovieResponseMultiple.class);
+        TMDBMovieKeywordsResponse response = restTemplate.getForObject(url, TMDBMovieKeywordsResponse.class);
         return response.getKeywords();
+    }
+
+    public List<MovieReviewsDTO> getMovieReviews(Long id){
+        String url = String.format("%s/movie/%d/reviews?api_key=%s", baseUrl, id, apiKey);
+        TMDBMovieReviewRespones response = restTemplate.getForObject(url, TMDBMovieReviewRespones.class);
+        return response.getResults();
     }
 }

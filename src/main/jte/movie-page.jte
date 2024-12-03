@@ -2,11 +2,13 @@
 @import com.movieonline.Online.Movie.entity.dto.MovieCastDTO
 @import com.movieonline.Online.Movie.entity.dto.MovieDTO
 @import com.movieonline.Online.Movie.entity.dto.MovieKeywordsDTO
+@import com.movieonline.Online.Movie.entity.dto.MovieReviewsDTO
 
 @param String WebName
 @param MovieDTO movieDetail
 @param List<MovieCastDTO> movieCast
 @param List<MovieKeywordsDTO> movieKeywords
+@param List<MovieReviewsDTO> movieReviews
 @param List<MovieDTO> movieRecommendation
 @param List<MovieDTO> popularMovies
 @param List<MovieDTO> topRatedMovies
@@ -57,12 +59,12 @@
                     </div>
             </div>
         </div>
-        <div class="w-full flex">
-            <div class="flex-initial" style="width:65.1vw;">
+        <div class="w-full flex space-x-5">
+            <div class="flex-initial space-y-5" style="width:65.1vw;">
                 <!-- Movie Cast Section (Horizontal Scroll) -->
-                <div class="overflow-x-scroll mb-5">
+                <div class="overflow-x-scroll">
                     <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Top Billed Cast</h3>
-                    <div class="flex space-x-4 overflow-y-hidden pb-4 pt-5">
+                    <div class="flex space-x-4 overflow-y-hidden pb-4 pt-4">
                         <!-- Movie Card -->
                         @for (MovieCastDTO movie : movieCast)
                             <a class="rounded-lg bg-gray-50 shadow-md overflow-hidden
@@ -77,8 +79,18 @@
                         @endfor
                     </div>
                 </div>
+                <!-- Movie Reviews Section (Horizontal Scroll) -->
+                <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Movie Reviews</h3>
+                @for(MovieReviewsDTO movie : movieReviews)
+                <div class="p-2 w-full h-60 text-black bg-white rounded-lg shadow-md">
+                    <p class="text-xl font-bold">${movie.getAuthor()}</p>
+                    <div class="overflow-y-scroll h-fit">
+                        <p class="text-md text-zinc-600">${movie.getContent()}</p>
+                    </div>
+                </div>
+                @endfor
                 <!-- Movie Recommendation Section (Horizontal Scroll) -->
-                <div id="recommendation" class="overflow-x-scroll mb-5 ">
+                <div id="recommendation" class="overflow-x-scroll">
                     <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Recommended For You</h3>
                     <div class="flex space-x-4 overflow-y-hidden pb-4 pt-5">
                         <!-- Movie Card -->
@@ -104,41 +116,42 @@
                     </div>
                 </div>
             </div>
-
             <!-- Extra Detail Sections-->
             <div class="flex-initial" style="width:39;">
-                <div class="ml-6 p-1 w-72">
-                        <h3 class=" text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold mb-4">Extra Details</h3>
-                        <div class="p-3 h-screen mt-4 mx-auto bg-white rounded-lg shadow-md">
-                            <div style="height:35%;" class="space-y-4">
-                                <div>
-                                    <p class="text-black font-bold">Status</p>
-                                    <p class="text-zinc-700"> ${movieDetail.getStatus()}</p>
-                                </div>
-                                <div>
-                                    <p class="text-black font-bold">Original Language</p>
-                                    <p class="text-zinc-700"> ${movieDetail.getOriginal_language()}</p>
-                                </div>
-                                <div>
-                                    <p class="text-black font-bold">Budget</p>
-                                    <p class="text-zinc-700">$${movieDetail.getBudget()}</p>
-                                </div>
-                                <div>
-                                    <p class="text-black font-bold">Revenue</p>
-                                    <p class="text-zinc-700">$${movieDetail.getRevenue()}</p>
-                                </div>
+                <div class="w-full">
+                    <h3 class="text-xl sm:text-2xl lg:text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold mb-4">
+                        Extra Details
+                    </h3>
+                    <div class="p-4 mt-4 mx-auto bg-white rounded-lg shadow-md">
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-black text-lg font-bold">Status</p>
+                                <p class="text-zinc-700">${movieDetail.getStatus()}</p>
                             </div>
-                            <p class="text-black font-bold">Keywords</p>
-                            <div class=" overflow-scroll" style="height:61%;">
-                                <div class="flex flex-wrap items-start h-auto w-auto">
-                                    @for(MovieKeywordsDTO movie : movieKeywords)
-                                        <div class="mr-2 mt-2 p-1 rounded-lg border border-gray-200 bg-gray-100">
-                                            <p class="text-zinc-700">${movie.getName()}</p>
-                                        </div>
-                                    @endfor
-                                </div>
+                            <div>
+                                <p class="text-black text-lg font-bold">Original Language</p>
+                                <p class="text-zinc-700">${movieDetail.getEnglish_name()}</p>
+                            </div>
+                            <div>
+                                <p class="text-black text-lg font-bold">Budget</p>
+                                <p class="text-zinc-700">$${movieDetail.getBudget()}</p>
+                            </div>
+                            <div>
+                                <p class="text-black text-lg font-bold">Revenue</p>
+                                <p class="text-zinc-700">$${movieDetail.getRevenue()}</p>
                             </div>
                         </div>
+                        <p class="text-black text-lg font-bold mt-4">Keywords</p>
+                        <div class="overflow-auto max-h-full">
+                            <div class="flex flex-wrap items-start">
+                                @for(MovieKeywordsDTO movie : movieKeywords)
+                                    <div class="mr-2 mt-2 p-1 rounded-lg border border-gray-200 bg-gray-100">
+                                        <p class="text-zinc-700">${movie.getName()}</p>
+                                    </div>
+                                @endfor
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
