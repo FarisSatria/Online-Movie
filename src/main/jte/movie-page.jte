@@ -27,51 +27,7 @@
 <div class="flex">
     <div class="flex-initial" style="width:9.5vw;">
         <!-- Floating Sidebar -->
-        <div class="fixed top-8 bg-gray-50 left-8 bottom-8 w-16 rounded-xl shadow-md flex flex-col justify-between p-4">
-            <!-- Top Icons -->
-            <ul class="space-y-6 text-center">
-                <!-- Icon 1 -->
-                <li>
-                    <a href="/"
-                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-md transition duration-200">
-                        <i class="fas fa-home text-2xl"></i>
-                    </a>
-                    <div class="w-full h-px bg-black opacity-20 mt-1"></div>
-                </li>
-                <!-- Icon 2 -->
-                <li>
-                    <a href="#"
-                       class="block text-black hover:text-sky-400 text-sky-400 hover:text-yellow-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-md transition duration-200">
-                        <i class="fas fa-film text-2xl"></i>
-                    </a>
-                    <div class="w-full h-px bg-black opacity-20 mt-1"></div>
-                </li>
-                <!-- Icon 3 -->
-                <li>
-                    <a href="#"
-                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-md transition duration-200">
-                        <i class="fas fa-fire text-2xl"></i>
-                    </a>
-                    <div class="w-full h-px bg-black opacity-20 mt-1"></div>
-                </li>
-                <!-- Icon 4 -->
-                <li>
-                    <a href="#"
-                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-md transition duration-200">
-                        <i class="fas fa-search text-2xl"></i>
-                    </a>
-                    <div class="w-full h-px bg-black opacity-20 mt-1"></div>
-                </li>
-            </ul>
-
-            <!-- Logout Icon -->
-            <div class="text-center mt-auto">
-                <a href="/logout"
-                   class="block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 hover:drop-shadow-md transition duration-200">
-                    <i class="fas fa-sign-out-alt text-2xl"></i>
-                </a>
-            </div>
-        </div>
+        @template.include.header.navbar()
     </div>
     <div class="flex-initial mt-8" style="width:87.5vw;">
         <!-- Floating, Rounded, Shadow Carousel -->
@@ -96,8 +52,7 @@
                                     @endif
                                 @endfor
                             </div>
-                            <br>
-                            <a href="/movie/{id}/book" class="p-4 bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 ">Book Now!</a>
+                            <button class="book-button p-3 bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 ">Book Now!</button>
                         </div>
                     </div>
             </div>
@@ -123,7 +78,7 @@
                     </div>
                 </div>
                 <!-- Movie Recommendation Section (Horizontal Scroll) -->
-                <div class="overflow-x-scroll mb-5">
+                <div id="recommendation" class="overflow-x-scroll mb-5 ">
                     <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Recommended For You</h3>
                     <div class="flex space-x-4 overflow-y-hidden pb-4 pt-5">
                         <!-- Movie Card -->
@@ -189,12 +144,11 @@
         </div>
     </div>
 </div>
-<div class="p-5 text-center text-lg">
-    <ul>
-        <li><p class="font-avenir">That's the end of the show!</p></li>
-        <li><i class="fas fa-film"></i></li>
-    </ul>
-</div>
+<!-- Footer -->
+@template.include.footer.footer()
+<!-- The Modal -->
+@template.include.modal.booking()
+<script src="/asset/js/modal.js"></script>
 <script src="/asset/js/main.js"></script>
 </body>
 </html>
