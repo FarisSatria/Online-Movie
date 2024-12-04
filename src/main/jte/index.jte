@@ -2,6 +2,7 @@
 @import com.movieonline.Online.Movie.entity.dto.MovieDTO
 
 @param String WebName
+@param List<MovieDTO> nowPlayingMovies
 @param List<MovieDTO> popularMovies
 @param List<MovieDTO> topRatedMovies
 @param List<MovieDTO> upcomingMovies
@@ -17,26 +18,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/asset/css/style.css">
 </head>
-<body class="bg-gray-200 font-avenir min-h-screen shadow-inner-xl">
+<body class="bg-gray-100 font-avenir min-h-screen">
 <div class="flex">
     <div class="flex-initial" style="width:9.5vw;">
         <!-- Floating Sidebar -->
         @template.include.header.navbar()
     </div>
-    <div class="flex-initial mt-8" style="width:60vw;">
+    <div class="flex-initial mt-8 space-y-5" style="width:60vw;">
         <!-- Floating, Rounded, Shadow Carousel -->
-        <div class="relative h-1/4 w-full mb-5 rounded-xl overflow-hidden shadow-md" style="height:70vh;">
+        <div class="relative h-1/4 w-full rounded-xl overflow-hidden shadow-card" style="height:70vh;">
             <!-- Carousel Images -->
             <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-full">
-                @for (MovieDTO movie : popularMovies)
+                @for (MovieDTO movie : nowPlayingMovies)
                 <div class="size-full flex "
                      style="background-image:url(https://image.tmdb.org/t/p/w1280${movie.getBackdrop_path()});">
-                    <div class="flex bg-black/40">
+                    <div class="flex bg-black/60">
                         <img class="my-auto mx-10 rounded-lg h-5/6"
-                             src="https://image.tmdb.org/t/p/w1280${movie.getPoster_path()}" alt="${movie.getTitle()}">
+                             src="https://image.tmdb.org/t/p/w500${movie.getPoster_path()}" alt="${movie.getTitle()}">
                         <div class="space-y-4 p-4 h-5/6 my-auto">
-                            <h4 class="text-xl font-medium text-white border-sky-400 border-l-4 pl-2 ">#Popular
-                                Movies!</h4>
+                            <h4 class="text-xl font-medium text-white border-sky-400 border-l-4 pl-2 ">Now Playing!</h4>
                             <h3 class="text-4xl text-white font-semibold ">${movie.getTitle()}</h3>
                             <p class="text-sm text-zinc-300">${movie.getOverview()}</p>
                             <div class="flex items-center space-x-1">
@@ -62,28 +62,29 @@
             <div class="right-3 bottom-3 p-1 h-24 rounded-full shadow-inner-lg w-52 absolute flex bg-gray-50">
                 <!-- Left Arrow -->
                 <button id="prev"
-                        class="mr-4 bg-sky-400 hover:bg-sky-500 shadow-md w-1/2 h-full transition duration-300 rounded-full text-white">
+                        class="mr-4 bg-sky-400 hover:bg-sky-500 shadow-card w-1/2 h-full transition duration-300 rounded-full text-white">
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 <!-- Right Arrow -->
                 <button id="next"
-                        class="bg-sky-400 hover:bg-sky-500 shadow-md w-1/2 h-full transition duration-300 rounded-full text-white">
+                        class="bg-sky-400 hover:bg-sky-500 shadow-card w-1/2 h-full transition duration-300 rounded-full text-white">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
         </div>
         <!-- Popular Movies Section (Horizontal Scroll) -->
-        <div class="w-full mb-5">
+        <div class="w-full">
             <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Popular Movies</h3>
             <div class="flex space-x-4 overflow-y-hidden pb-4 pt-5">
                 <!-- Movie Card -->
                 @for (MovieDTO movie : popularMovies)
-                    <a href="/movie/${movie.getId()}" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
-                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
+                    <a href="/movie/${movie.getId()}" class="rounded-lg bg-gray-50 shadow-card overflow-hidden
+                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-card">
                         <img class="w-full object-cover" src="https://image.tmdb.org/t/p/w300${movie.getPoster_path()}"
                              alt="${movie.getTitle()}">
                         <div class="p-4 space-y-2">
-                            <h3 class="text-xl text-black font-semibold overflow-hidden text-ellipsis h-6">${movie.getTitle()}</h3>
+                            <h3 class="text-xl text-black font-semibold" style=" display: -webkit-box;
+                            -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">${movie.getTitle()}</h3>
                             <div class="flex items-center">
                                 @for (int i = 1; i <= 5; i++)
                                     @if (i <= movie.getVote_average() / 1.5)
@@ -99,17 +100,18 @@
             </div>
         </div>
         <!-- Top Rated Movies Section (Horizontal Scroll) -->
-        <div id="top-rated" class="w-full mb-5">
+        <div id="top-rated" class="w-full">
             <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Top Rated Movies</h3>
             <div class="flex space-x-4 overflow-y-hidden pb-4 pt-5">
                 <!-- Movie Card -->
                 @for (MovieDTO movie : topRatedMovies)
-                    <a href="/movie/${movie.getId()}" class="rounded-lg bg-gray-50 shadow-md overflow-hidden
-                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-md">
+                    <a href="/movie/${movie.getId()}" class="rounded-lg bg-gray-50 shadow-card overflow-hidden
+                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-card">
                         <img class="w-full object-cover" src="https://image.tmdb.org/t/p/w300${movie.getPoster_path()}"
                              alt="${movie.getTitle()}">
                         <div class="p-4  space-y-2">
-                            <h3 class="text-xl text-black font-semibold overflow-hidden text-ellipsis h-6">${movie.getTitle()}</h3>
+                            <h3 class="text-xl text-black font-semibold" style=" display: -webkit-box;
+                            -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">${movie.getTitle()}</h3>
                             <div class="flex items-center">
                                 @for (int i = 1; i <= 5; i++)
                                     @if (i <= movie.getVote_average() / 2)
@@ -133,16 +135,16 @@
                 <div class="overflow-auto p-3 h-screen">
                     <div class="flex flex-col space-y-6">
                         @for (MovieDTO movie : topRatedMovies)
-                            <a href="/movie/${movie.getId()}" class="bg-gray-50 rounded-xl flex shadow-md overflow-hidden max-w-sm w-full h-40
-                    flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
-                                <img class="w-28 object-cover"
-                                     src="https://image.tmdb.org/t/p/w500${movie.getPoster_path()}"
-                                     alt="${movie.getTitle()}">
-                                <div class="p-4 space-y-2" style="height:90%;">
-                                    <h3 class="text-xl text-black font-semibold">${movie.getTitle()}</h3>
-                                    <div class="text-sm text-zinc-400 relative overflow-hidden max-h-24 text-ellipsis">${movie.getOverview()}</div>
-                                </div>
-                            </a>
+                                <a href="/movie/${movie.getId()}" class="relative bg-gray-50 rounded-xl flex shadow-card overflow-hidden max-w-sm w-full h-40
+                                flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
+                                    <img class="w-28 object-cover"
+                                         src="https://image.tmdb.org/t/p/w185${movie.getPoster_path()}"
+                                         alt="${movie.getTitle()}">
+                                    <div class="p-4 space-y-2" style="height:90%;">
+                                        <h3 class="text-xl text-black font-semibold">${movie.getTitle()}</h3>
+                                        <div class="text-sm text-zinc-400 relative overflow-hidden max-h-24 text-ellipsis">${movie.getOverview()}</div>
+                                    </div>
+                                </a>
                         @endfor
                     </div>
                 </div>

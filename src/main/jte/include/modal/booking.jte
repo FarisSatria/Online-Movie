@@ -4,9 +4,9 @@
 <div id="bookingModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-40 overflow-auto">
 
     <!-- Modal content -->
-    <div class="bg-gray-100 rounded-xl shadow-lg mx-auto my-12 w-full max-w-4xl">
+    <div class="bg-gray-100 rounded-xl shadow-card mx-auto my-12 w-full max-w-4xl">
         <div class="h-14 rounded-t-xl bg-sky-500">
-            <span class="text-red-500 hover:text-red-600 hover:rotate-12 hover:scale-125 hover:drop-shadow-lg transition duration-200 p-3 mr-4 text-3xl font-bold float-right cursor-pointer close drop-shadow-md">&times;</span>
+            <span class="text-red-500 hover:text-red-600 hover:rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200 p-3 mr-4 text-3xl font-bold float-right cursor-pointer close drop-shadow-md">&times;</span>
         </div>
         <div class="main flex flex-col md:flex-row p-6 w-full">
             <div class="tickets w-full md:w-2/4 drop-shadow-md">
@@ -37,7 +37,7 @@
                         <span><span class="count">0</span> Tickets</span>
                         <div>Rp. <span class="amount">0</span></div>
                     </div>
-                    <button type="button" class="bg-green-500 hover:bg-green-400 text-white text-sm py-2 px-6 rounded-md transition duration-300 cursor-pointer">Book</button>
+                    <a href="/movie/{id}/booking" type="button" class="bg-green-500 hover:bg-green-400 text-white text-sm py-2 px-6 rounded-md transition duration-300 cursor-pointer">Book</a>
                 </div>
             </div>
             <div class="timings flex flex-col items-center w-full md:w-2/4 mt-6 md:mt-0 md:ml-4 drop-shadow-md">

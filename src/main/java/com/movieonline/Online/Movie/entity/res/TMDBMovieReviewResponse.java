@@ -6,6 +6,6 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class TMDBMovieReviewRespones {
+public class TMDBMovieReviewResponse {
     private List<MovieReviewsDTO> results;
 }

@@ -37,7 +37,6 @@ public class TMDBController {
         List<MovieKeywordsDTO> movieKeywords = tmdbService.getMovieKeywords(id);
         model.addAttribute("movieKeywords", movieKeywords);
 
-
         return model;
     }
 
@@ -53,6 +52,10 @@ public class TMDBController {
         //Upcoming Movie
         List<MovieDTO> upcomingMovies = tmdbService.getUpcomingMovies();
         model.addAttribute("upcomingMovies", upcomingMovies);
+
+        //Now Playing Movies
+        List<MovieDTO> nowPlayingMovies = tmdbService.getNowPlayingMovies();
+        model.addAttribute("nowPlayingMovies", nowPlayingMovies);
 
         return model;
     }

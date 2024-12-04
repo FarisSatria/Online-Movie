@@ -4,10 +4,7 @@ import com.movieonline.Online.Movie.entity.dto.MovieCastDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieKeywordsDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieReviewsDTO;
-import com.movieonline.Online.Movie.entity.res.TMDBMovieCastResponse;
-import com.movieonline.Online.Movie.entity.res.TMDBMovieKeywordsResponse;
-import com.movieonline.Online.Movie.entity.res.TMDBMovieResponse;
-import com.movieonline.Online.Movie.entity.res.TMDBMovieReviewRespones;
+import com.movieonline.Online.Movie.entity.res.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -36,6 +33,12 @@ public class TMDBService {
         String url = String.format("%s/movie/%d?api_key=%s", baseUrl, id, apiKey);
         MovieDTO movie = restTemplate.getForObject(url, MovieDTO.class);
         return movie;
+    }
+
+    public List<MovieDTO> getNowPlayingMovies() {
+        String url = String.format("%s/movie/popular?api_key=%s", baseUrl, apiKey);
+        TMDBMovieResponse response = restTemplate.getForObject(url, TMDBMovieResponse.class);
+        return response.getResults();
     }
 
     public List<MovieDTO> getPopularMovies() {
@@ -77,7 +80,7 @@ public class TMDBService {
 
     public List<MovieReviewsDTO> getMovieReviews(Long id){
         String url = String.format("%s/movie/%d/reviews?api_key=%s", baseUrl, id, apiKey);
-        TMDBMovieReviewRespones response = restTemplate.getForObject(url, TMDBMovieReviewRespones.class);
+        TMDBMovieReviewResponse response = restTemplate.getForObject(url, TMDBMovieReviewResponse.class);
         return response.getResults();
     }
 }

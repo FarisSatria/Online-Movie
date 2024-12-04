@@ -13,31 +13,36 @@
         }
 
 
-        // JavaScript for carousel sliding functionality
-        const prevButton = document.getElementById('prev');
-        const nextButton = document.getElementById('next');
-        const carousel = document.getElementById('carousel');
-        const slides = carousel.children;
-        let currentSlide = 0;
+       const prevButton = document.getElementById('prev');
+       const nextButton = document.getElementById('next');
+       const carousel = document.getElementById('carousel');
+       const slides = carousel.children;
+       let currentSlide = 0;
 
-        // Set the carousel width based on the number of slides
-        carousel.style.width = `${slides.length * 100}%`;
+       // Only run if there are slides
+       if (slides.length > 0) {
+           // Set the carousel width based on the number of slides
+           carousel.style.width = `${slides.length * 100}%`;
 
+           const nextSlide = () => {
+               currentSlide = (currentSlide + 1) % slides.length;
+               updateCarousel();
+           };
 
-        const nextSlide = () => {
-        	currentSlide = (currentSlide + 1) % slides.length;
-        	updateCarousel();
-        };
+           const prevSlide = () => {
+               currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+               updateCarousel();
+           };
 
-        const prevSlide = () => {
-        	currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        	updateCarousel();
-        };
+           const updateCarousel = () => {
+               const slideWidth = 100 / slides.length; // Calculate the width of each slide
+               carousel.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+           };
 
-        const updateCarousel = () => {
-        	const slideWidth = 100 / slides.length; // Calculate the width of each slide
-        	carousel.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
-        };
-
-        nextButton.addEventListener('click', nextSlide);
-        prevButton.addEventListener('click', prevSlide);
+           nextButton.addEventListener('click', nextSlide);
+           prevButton.addEventListener('click', prevSlide);
+       } else {
+           // Hide buttons if no slides
+           prevButton.style.display = 'none';
+           nextButton.style.display = 'none';
+       }
