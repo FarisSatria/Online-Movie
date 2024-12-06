@@ -36,7 +36,7 @@
     </div>
     <div class="flex-initial mt-8" style="width:87.5vw;">
         <!-- Floating, Rounded, Shadow Carousel -->
-        <div class="relative h-1/4 w-full mb-5 rounded-xl overflow-hidden shadow-card" style="height:70vh;">
+        <div class="relative h-1/4 w-full mb-5 rounded-xl overflow-hidden shadow-gradient" style="height:70vh;">
             <!-- Carousel Images -->
             <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-full"
                  style="background-image:url(https://image.tmdb.org/t/p/w1280${movieDetail.getBackdrop_path()});">
@@ -49,7 +49,7 @@
                                 <p class="text-md text-zinc-300 py-1">${movieDetail.getAdultFormatted()}</p>
                                 <p class="text-md text-zinc-300 p-1">• ${movieDetail.getRelease_date()}</p>
                                 @for (MovieGenresDTO genre : movieDetail.getGenres())
-                                    <div class="p-1 rounded-full shadow-inner-lg bg-gray-100">
+                                    <div class="p-1 rounded-full shadow-inner-lg border border-gray-200 bg-gray-100">
                                         <p class="text-zinc-700">${genre.getName()}</p>
                                     </div>
                                 @endfor
@@ -65,7 +65,7 @@
                                     @endif
                                 @endfor
                             </div>
-                            <button class="book-button p-3 bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 ">Book Now!</button>
+                            <button class="book-button shadow-card p-3 bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 ">Book Now!</button>
                         </div>
                     </div>
             </div>
@@ -79,7 +79,7 @@
                         <!-- Movie Card -->
                         @for (MovieCastDTO movie : movieCast)
                             <a class="rounded-lg bg-gray-50 shadow-card overflow-hidden
-                    max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-card">
+                    max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 ">
                                 <img class="w-full object-cover" src="https://image.tmdb.org/t/p/w300${movie.getProfile_path()}"
                                      alt="${movie.getName()}">
                                 <div class="p-4 space-y-2">
@@ -115,6 +115,7 @@
                                     <p class="text-md text-zinc-600 " style=" display: -webkit-box; -webkit-box-orient: vertical;
                                     -webkit-line-clamp: 5; overflow: hidden;">${movie.getContent()}</p>
                                 </div>
+                                <button class="bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 shadow-card text-white ">View More!</button>
                             </div>
                         @endfor
                     </div>
@@ -126,7 +127,7 @@
                         <!-- Movie Card -->
                         @for (MovieDTO movie : movieRecommendation)
                             <a href="/movie/${movie.getId()}"  class="rounded-lg bg-gray-50 shadow-card overflow-hidden
-                    max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-card">
+                    max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 ">
                                 <img class="w-full object-cover" src="https://image.tmdb.org/t/p/w300${movie.getPoster_path()}"
                                      alt="${movie.getTitle()}">
                                 <div class="p-4 space-y-2">
@@ -177,7 +178,7 @@
                         <div class="overflow-auto max-h-full">
                             <div class="ml-3 flex flex-wrap items-start">
                                 @for(MovieKeywordsDTO movie : movieKeywords)
-                                    <div class="mr-2 mt-2 p-1 rounded-lg border border-gray-200 bg-gray-100">
+                                    <div class="mr-2 mt-2 p-1 shadow-inner-lg rounded-lg border border-gray-200 bg-gray-100">
                                         <p class="text-zinc-700">${movie.getName()}</p>
                                     </div>
                                 @endfor

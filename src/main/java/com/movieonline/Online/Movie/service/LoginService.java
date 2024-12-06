@@ -1,6 +1,6 @@
 package com.movieonline.Online.Movie.service;
 
-import com.movieonline.Online.Movie.entity.model.AppUserEntity;
+import com.movieonline.Online.Movie.entity.model.UserEntity;
 import com.movieonline.Online.Movie.repository.AppUserRepository;
 import com.movieonline.Online.Movie.exception.InvalidCredentialsExeption;
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ public class LoginService implements AuthenticationProvider {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
 
-        AppUserEntity user = appUserRepository.findByUsername(username).orElseThrow(
+        UserEntity user = appUserRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("Username not found")
         );
 

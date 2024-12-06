@@ -13,8 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class
-AppUserEntity {
+public class UserEntity {
 
     @Id
     @SequenceGenerator(
@@ -26,14 +25,18 @@ AppUserEntity {
             strategy = GenerationType.SEQUENCE,
             generator = "student_sequence"
     )
+    @Column(length = 11)
     private Long id;
+    @Column(length = 255)
     private String name;
+    @Column(length = 255)
     @NotBlank(message = "Username cannot be empty")
     private String username;
+    @Column(length = 255)
     @NotBlank(message = "Password cannot be empty")
     private String password;
 
-    public AppUserEntity(String name, String username, String password) {
+    public UserEntity(String name, String username, String password) {
         this.name = name;
         this.username = username;
         this.password = password;

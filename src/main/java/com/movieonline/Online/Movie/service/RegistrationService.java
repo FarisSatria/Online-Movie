@@ -1,6 +1,6 @@
 package com.movieonline.Online.Movie.service;
 
-import com.movieonline.Online.Movie.entity.model.AppUserEntity;
+import com.movieonline.Online.Movie.entity.model.UserEntity;
 import com.movieonline.Online.Movie.repository.AppUserRepository;
 import com.movieonline.Online.Movie.exception.UserAlreadyExistException;
 import jakarta.transaction.Transactional;
@@ -16,18 +16,18 @@ public class RegistrationService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional(rollbackOn = UserAlreadyExistException.class)
-    public AppUserEntity registerUser(AppUserEntity appUserEntity, String name, String username, String password) {
+    public UserEntity registerUser(UserEntity userEntity, String name, String username, String password) {
         appUserRepository
-                .findByUsername(appUserEntity.getUsername())
+                .findByUsername(userEntity.getUsername())
                 .ifPresent(ignored -> {
                     throw new UserAlreadyExistException("Username is taken");
                 });
 
-        appUserEntity.setName(name);
-        appUserEntity.setUsername(username);
-        appUserEntity.setPassword(bCryptPasswordEncoder.encode(password));
+        userEntity.setName(name);
+        userEntity.setUsername(username);
+        userEntity.setPassword(bCryptPasswordEncoder.encode(password));
 
-        return appUserRepository.save(appUserEntity);
+        return appUserRepository.save(userEntity);
     }
 
 }

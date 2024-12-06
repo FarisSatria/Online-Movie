@@ -12,7 +12,7 @@ public final class JteindexGenerated {
 		jteOutput.writeContent("\n        ");
 		gg.jte.generated.ondemand.include.header.JtenavbarGenerated.render(jteOutput, jteHtmlInterceptor);
 		jteOutput.writeContent("\n    </div>\n    <div class=\"flex-initial mt-8 space-y-5\" style=\"width:60vw;\">\n        ");
-		jteOutput.writeContent("\n        <div class=\"relative h-1/4 w-full rounded-xl overflow-hidden shadow-card\" style=\"height:70vh;\">\n            ");
+		jteOutput.writeContent("\n        <div class=\"relative h-1/4 w-full rounded-xl overflow-hidden shadow-gradient\" style=\"height:70vh;\">\n            ");
 		jteOutput.writeContent("\n            <div id=\"carousel\" class=\"flex transition-transform duration-500 ease-in-out h-full\">\n                ");
 		for (MovieDTO movie : nowPlayingMovies) {
 			jteOutput.writeContent("\n                <div class=\"size-full flex \"\n                     style=\"background-image:url(https://image.tmdb.org/t/p/w1280");
@@ -52,20 +52,20 @@ public final class JteindexGenerated {
 			jteOutput.setContext("a", "href");
 			jteOutput.writeUserContent(movie.getId());
 			jteOutput.setContext("a", null);
-			jteOutput.writeContent("\" class=\"p-4 bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 \">View Now!</a>\n                                <a class=\"book-button p-4 bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg transition cursor-pointer duration-300 \">Book Now!</a>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                ");
+			jteOutput.writeContent("\" class=\"p-4 shadow-card bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 \">View Now!</a>\n                                <a class=\"book-button p-4 shadow-card bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg transition cursor-pointer duration-300 \">Book Now!</a>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                ");
 		}
 		jteOutput.writeContent("\n            </div>\n\n            ");
 		jteOutput.writeContent("\n            <div class=\"right-3 bottom-3 p-1 h-24 rounded-full shadow-inner-lg w-52 absolute flex bg-gray-50\">\n                ");
 		jteOutput.writeContent("\n                <button id=\"prev\"\n                        class=\"mr-4 bg-sky-400 hover:bg-sky-500 shadow-card w-1/2 h-full transition duration-300 rounded-full text-white\">\n                    <i class=\"fas fa-chevron-left\"></i>\n                </button>\n                ");
 		jteOutput.writeContent("\n                <button id=\"next\"\n                        class=\"bg-sky-400 hover:bg-sky-500 shadow-card w-1/2 h-full transition duration-300 rounded-full text-white\">\n                    <i class=\"fas fa-chevron-right\"></i>\n                </button>\n            </div>\n        </div>\n        ");
-		jteOutput.writeContent("\n        <div class=\"w-full\">\n            <h3 class=\"text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold\">Popular Movies</h3>\n            <div class=\"flex space-x-4 overflow-y-hidden pb-4 pt-5\">\n                ");
+		jteOutput.writeContent("\n        <div class=\"w-full\">\n            <h3 class=\"text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold\">Popular Movies</h3>\n            <div class=\"flex space-x-4 pb-4 overflow-x-hidden pt-5\">\n                ");
 		jteOutput.writeContent("\n                ");
 		for (MovieDTO movie : popularMovies) {
 			jteOutput.writeContent("\n                    <a href=\"/movie/");
 			jteOutput.setContext("a", "href");
 			jteOutput.writeUserContent(movie.getId());
 			jteOutput.setContext("a", null);
-			jteOutput.writeContent("\" class=\"rounded-lg bg-gray-50 shadow-card overflow-hidden\n                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-card\">\n                        <img class=\"w-full object-cover\" src=\"https://image.tmdb.org/t/p/w300");
+			jteOutput.writeContent("\" class=\"rounded-lg bg-gray-50 shadow-card overflow-hidden\n                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2\">\n                        <img class=\"w-full object-cover\" src=\"https://image.tmdb.org/t/p/w300");
 			jteOutput.setContext("img", "src");
 			jteOutput.writeUserContent(movie.getPoster_path());
 			jteOutput.setContext("img", null);
@@ -101,7 +101,7 @@ public final class JteindexGenerated {
 			jteOutput.setContext("a", "href");
 			jteOutput.writeUserContent(movie.getId());
 			jteOutput.setContext("a", null);
-			jteOutput.writeContent("\" class=\"rounded-lg bg-gray-50 shadow-card overflow-hidden\n                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-card\">\n                        <img class=\"w-full object-cover\" src=\"https://image.tmdb.org/t/p/w300");
+			jteOutput.writeContent("\" class=\"rounded-lg bg-gray-50 shadow-card overflow-hidden\n                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2\">\n                        <img class=\"w-full object-cover\" src=\"https://image.tmdb.org/t/p/w300");
 			jteOutput.setContext("img", "src");
 			jteOutput.writeUserContent(movie.getPoster_path());
 			jteOutput.setContext("img", null);
@@ -148,7 +148,7 @@ public final class JteindexGenerated {
 				jteOutput.setContext("img", null);
 				jteOutput.writeContent("\"");
 			}
-			jteOutput.writeContent(">\n                                    <div class=\"p-4 space-y-2\" style=\"height:90%;\">\n                                        <h3 class=\"text-xl text-black font-semibold\">");
+			jteOutput.writeContent(">\n                                    <div class=\"p-4 space-y-1\" style=\"height:90%;\">\n                                        <h3 class=\"text-xl text-black font-semibold\">");
 			jteOutput.setContext("h3", null);
 			jteOutput.writeUserContent(movie.getTitle());
 			jteOutput.writeContent("</h3>\n                                        <div class=\"text-sm text-zinc-400 relative overflow-hidden max-h-24 text-ellipsis\">");

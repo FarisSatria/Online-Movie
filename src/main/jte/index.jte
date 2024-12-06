@@ -26,7 +26,7 @@
     </div>
     <div class="flex-initial mt-8 space-y-5" style="width:60vw;">
         <!-- Floating, Rounded, Shadow Carousel -->
-        <div class="relative h-1/4 w-full rounded-xl overflow-hidden shadow-card" style="height:70vh;">
+        <div class="relative h-1/4 w-full rounded-xl overflow-hidden shadow-gradient" style="height:70vh;">
             <!-- Carousel Images -->
             <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-full">
                 @for (MovieDTO movie : nowPlayingMovies)
@@ -49,8 +49,8 @@
                                 @endfor
                             </div>
                             <div class="space-x-1 py-3">
-                                <a href="/movie/${movie.getId()}" class="p-4 bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 ">View Now!</a>
-                                <a class="book-button p-4 bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg transition cursor-pointer duration-300 ">Book Now!</a>
+                                <a href="/movie/${movie.getId()}" class="p-4 shadow-card bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 ">View Now!</a>
+                                <a class="book-button p-4 shadow-card bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg transition cursor-pointer duration-300 ">Book Now!</a>
                             </div>
                         </div>
                     </div>
@@ -75,11 +75,11 @@
         <!-- Popular Movies Section (Horizontal Scroll) -->
         <div class="w-full">
             <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Popular Movies</h3>
-            <div class="flex space-x-4 overflow-y-hidden pb-4 pt-5">
+            <div class="flex space-x-4 pb-4 overflow-x-hidden pt-5">
                 <!-- Movie Card -->
                 @for (MovieDTO movie : popularMovies)
                     <a href="/movie/${movie.getId()}" class="rounded-lg bg-gray-50 shadow-card overflow-hidden
-                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-card">
+                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2">
                         <img class="w-full object-cover" src="https://image.tmdb.org/t/p/w300${movie.getPoster_path()}"
                              alt="${movie.getTitle()}">
                         <div class="p-4 space-y-2">
@@ -106,7 +106,7 @@
                 <!-- Movie Card -->
                 @for (MovieDTO movie : topRatedMovies)
                     <a href="/movie/${movie.getId()}" class="rounded-lg bg-gray-50 shadow-card overflow-hidden
-                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2 hover:shadow-card">
+                max-w-xs w-48 h-96 flex-shrink-0 transition-transform transform hover:scale-105 hover:rotate-2">
                         <img class="w-full object-cover" src="https://image.tmdb.org/t/p/w300${movie.getPoster_path()}"
                              alt="${movie.getTitle()}">
                         <div class="p-4  space-y-2">
@@ -140,7 +140,7 @@
                                     <img class="w-28 object-cover"
                                          src="https://image.tmdb.org/t/p/w185${movie.getPoster_path()}"
                                          alt="${movie.getTitle()}">
-                                    <div class="p-4 space-y-2" style="height:90%;">
+                                    <div class="p-4 space-y-1" style="height:90%;">
                                         <h3 class="text-xl text-black font-semibold">${movie.getTitle()}</h3>
                                         <div class="text-sm text-zinc-400 relative overflow-hidden max-h-24 text-ellipsis">${movie.getOverview()}</div>
                                     </div>
