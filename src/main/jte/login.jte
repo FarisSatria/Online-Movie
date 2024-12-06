@@ -37,7 +37,7 @@
                 <input type="password" name="password" class="w-full bg-transparent placeholder-gray-400 text-gray-900 focus:outline-none" placeholder="Password" required>
             </div>
             <!-- Submit Button -->
-            <button class="w-full mt-6 py-3 bg-sky-500 hover:bg-sky-400 text-white font-semibold rounded-lg flex items-center justify-center space-x-2 transition">
+            <button class="w-full mt-6 py-3 bg-sky-500 shadow-card hover:bg-sky-400 text-white font-semibold rounded-lg flex items-center justify-center space-x-2 transition">
                 <span>Log In Now</span>
                 <i class="fas fa-chevron-right"></i>
             </button>
@@ -74,7 +74,7 @@
                 <input type="password" name="password" class="w-full bg-transparent placeholder-gray-400 text-gray-900 focus:outline-none" placeholder="Password" required>
             </div>
             <!-- Register Button -->
-            <button class="w-full mt-6 py-3 bg-green-600 hover:bg-green-500 text-white font-semibold rounded-lg flex items-center justify-center space-x-2 transition">
+            <button class="w-full mt-6 py-3 bg-green-600 shadow-card hover:bg-green-500 text-white font-semibold rounded-lg flex items-center justify-center space-x-2 transition">
                 <span>Register Now</span>
                 <i class="fas fa-user-plus"></i>
             </button>
@@ -85,24 +85,26 @@
     <div id="registerPrompt" class="p-8 w-full md:w-1/2 flex flex-col justify-center items-center text-gray-900 border-t md:border-t-0 md:border-l border-gray-400">
         <h2 class="text-2xl text-black font-semibold mb-4">Don’t have an account?</h2>
         <p class="text-gray-400 mb-8 text-center">Register now to join ${WebName} and enjoy exclusive content!</p>
-        <button onclick="toggleView()" class="px-6 py-3 bg-green-500 hover:bg-green-400 text-white font-semibold rounded-lg transition">Register Now</button>
+        <button onclick="toggleView()" class="px-6 py-3 bg-green-500 hover:bg-green-400 text-white font-semibold rounded-lg transition shadow-card">Register Now</button>
     </div>
 
     <div id="loginPrompt" class="p-8 w-full md:w-1/2 flex flex-col justify-center items-center text-gray-900 border-t md:border-t-0 md:border-l border-gray-400 hidden">
         <h2 class="text-2xl text-black font-semibold mb-4">Already have an account?</h2>
         <p class="text-gray-400 mb-8 text-center">Log in to access your account and continue exploring ${WebName}!</p>
-        <button onclick="toggleView()" class="px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white font-semibold rounded-lg transition">Log In</button>
+        <button onclick="toggleView()" class="px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white font-semibold rounded-lg transition shadow-card">Log In</button>
     </div>
 </div>
 
 @if(errorMessage != null)
-    <div class="drop-shadow-md absolute top-5">
+<%--    opacity-@for(int i = 70; i >= 0; i -= 5)${i}@endfor--%>
+    <div id="error-message" class="drop-shadow-md absolute top-5">
         <div class="bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center">Warning!</div>
         <div class="bg-white p-5 rounded-br-lg rounded-bl-lg">
             <p>${errorMessage}</p>
         </div>
     </div>
 @endif
+
 
 <!-- Custom JavaScript -->
 <script src="/asset/js/main.js"></script>

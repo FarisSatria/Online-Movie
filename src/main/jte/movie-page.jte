@@ -112,10 +112,10 @@
                                     @endfor
                                 </div>
                                 <div class="overflow-y-auto max-h-full">
-                                    <p class="text-md text-zinc-600 " style=" display: -webkit-box; -webkit-box-orient: vertical;
+                                    <p class="reviews text-md text-zinc-600" style="display: -webkit-box; -webkit-box-orient: vertical;
                                     -webkit-line-clamp: 5; overflow: hidden;">${movie.getContent()}</p>
                                 </div>
-                                <button class="bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 shadow-card text-white ">View More!</button>
+                                <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 shadow-card text-white ">Show More!</button>
                             </div>
                         @endfor
                     </div>
@@ -149,12 +149,12 @@
                 </div>
             </div>
             <!-- Extra Detail Sections-->
-            <div class="flex-initial" style="width:39;">
+            <div class="flex-initial" style="width:39%;">
                 <div class="w-full">
                     <h3 class="text-xl sm:text-2xl lg:text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold mb-4">
                         Extra Details
                     </h3>
-                    <div class="p-4 mt-4 mx-auto bg-white rounded-lg shadow-card relative overflow-hidden">
+                    <div class="p-4 mt-4 w-full bg-white rounded-lg shadow-card relative overflow-hidden">
                         <div class="bg-gradient-to-r from-sky-400 to-blue-500 p-4 px-24 absolute top-0 left-0" style="border-radius: 0 0 30px 0;"></div>
                         <div class="space-y-4 mt-8">
                             <div>
