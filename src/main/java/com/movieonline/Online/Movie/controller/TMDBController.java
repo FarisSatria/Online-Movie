@@ -9,8 +9,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.NumberFormat;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,6 +19,12 @@ import java.util.List;
 public class TMDBController {
 
     private final TMDBService tmdbService;
+    private final GuestSessionController guestSessionController;
+
+    public Model pageDetails(Model model){
+        model.addAttribute("WebName", "Cinema Eudamonia");
+        return model;
+    }
 
     public Model getMovieDetails(@PathVariable Long id, Model model){
         // All Specific Movie Details
@@ -59,4 +66,31 @@ public class TMDBController {
 
         return model;
     }
+
+    @PostMapping("/movie/{id}/feedback")
+    public String provideFeedback(@PathVariable long id,
+                                  @RequestParam(required = false) Double rating,
+                                  @RequestParam(required = false) String review,
+                                  String guestSessionId,
+                                  Model model) {
+        if (rating != null && (rating < 0.5 || rating > 5.0)) {
+            throw new IllegalArgumentException("Rating must be between 0.5 and 5.0.");
+        }
+
+        if (guestSessionId == null || guestSessionId.isEmpty()) {
+            guestSessionId = guestSessionController.getGuestSessionId();
+        }
+
+        System.out.println("Received rating: " + rating);
+        System.out.println("Received review: " + review);
+        System.out.println("Received guestSessionId: " + guestSessionId);
+
+
+        tmdbService.provideFeedback(id, rating, review, guestSessionId);
+        getMovieDetails(id, model);
+        getMoviesDetails(model);
+        pageDetails(model);
+        return "movie-page";
+    }
+
 }

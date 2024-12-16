@@ -20,14 +20,6 @@
         </li>
         <!-- Icon 3 -->
         <li>
-            <a href="#top-rated"
-               class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
-                <i class="fas fa-fire text-2xl"></i>
-            </a>
-            <div class="w-full h-px bg-black opacity-20 mt-1"></div>
-        </li>
-        <!-- Icon 4 -->
-        <li>
             <a href="#"
                class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
                 <i class="fas fa-search text-2xl"></i>

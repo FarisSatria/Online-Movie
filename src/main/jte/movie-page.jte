@@ -4,6 +4,7 @@
 @import com.movieonline.Online.Movie.entity.dto.MovieKeywordsDTO
 @import com.movieonline.Online.Movie.entity.dto.MovieReviewsDTO
 @import com.movieonline.Online.Movie.entity.dto.MovieGenresDTO
+@import com.movieonline.Online.Movie.entity.model.UserEntity
 
 @param String WebName
 @param MovieDTO movieDetail
@@ -32,11 +33,47 @@
 <div class="flex">
     <div class="flex-initial" style="width:9.5vw;">
         <!-- Floating Sidebar -->
-        @template.include.header.navbar()
+        <div class="fixed top-8 bg-gray-50 left-8 bottom-8 w-16 rounded-xl shadow-card flex flex-col justify-between p-4">
+            <!-- Top Icons -->
+            <ul class="space-y-6 text-center">
+                <!-- Icon 1 -->
+                <li>
+                    <a href="/"
+                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
+                        <i class="fas fa-home text-2xl"></i>
+                    </a>
+                    <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+                </li>
+                <!-- Icon 2 -->
+                <li>
+                    <a href="#"
+                       class="block text-sky-400 hover:text-yellow-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
+                        <i class="fas fa-film text-2xl"></i>
+                    </a>
+                    <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+                </li>
+                <!-- Icon 3 -->
+                <li>
+                    <a href="#"
+                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
+                        <i class="fas fa-search text-2xl"></i>
+                    </a>
+                    <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+                </li>
+            </ul>
+
+            <!-- Logout Icon -->
+            <div class="text-center mt-auto">
+                <a href="/logout"
+                   class="block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
+                    <i class="fas fa-sign-out-alt text-2xl"></i>
+                </a>
+            </div>
+        </div>
     </div>
     <div class="flex-initial mt-8" style="width:87.5vw;">
         <!-- Floating, Rounded, Shadow Carousel -->
-        <div class="relative h-1/4 w-full mb-5 rounded-xl overflow-hidden shadow-gradient" style="height:70vh;">
+        <div class="relative h-1/4 w-full mb-5 rounded-xl overflow-hidden shadow-card" style="height:70vh;">
             <!-- Carousel Images -->
             <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-full"
                  style="background-image:url(https://image.tmdb.org/t/p/w1280${movieDetail.getBackdrop_path()});">
@@ -58,7 +95,7 @@
                             <p class="text-sm text-zinc-300">${movieDetail.getOverview()}</p>
                             <div class="flex items-center space-x-1">
                                 @for (int i = 1; i <= 5; i++)
-                                    @if (i <= movieDetail.getVote_average() / 1.5)
+                                    @if (i <= movieDetail.getVote_average() / 2)
                                         <span class="text-yellow-400"><i class="fas fa-star"></i></span>
                                     @else
                                         <span class="text-gray-400"><i class="fas fa-star"></i></span>
@@ -93,18 +130,50 @@
                 </div>
                 <div class="space-y-5">
                     <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Movie Reviews</h3>
+                    <div class="p-5 flex w-full">
+                        <div class="border-sky-400 border-l-4 pl-2 h-8"></div>
+                        <img class="size-8 rounded-full bg-gray-500 mr-2">
+                        <form class="w-full" action="/movie/${movieDetail.getId()}/feedback" method="post">
+                            <input class="bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" type="text" id="review" name="review" placeholder="Add Review">
+                            <div class="flex flex-row-reverse mt-2">
+                                <button type="submit"
+                                        class="bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right ml-auto">
+                                    Comment
+                                </button>
+                                <input type="radio" id="star5" name="rating" value="5" class="hidden peer">
+                                <label for="star5"
+                                       class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 my-auto text-lg"><i class="fas fa-star"></i></label>
+
+                                <input type="radio" id="star4" name="rating" value="4" class="hidden peer">
+                                <label for="star4"
+                                       class=" cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 my-auto text-lg"><i class="fas fa-star"></i></label>
+
+                                <input type="radio" id="star3" name="rating" value="3" class="hidden peer">
+                                <label for="star3"
+                                       class=" cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 my-auto text-lg"><i class="fas fa-star"></i></label>
+
+                                <input type="radio" id="star2" name="rating" value="2" class="hidden peer">
+                                <label for="star2"
+                                       class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 my-auto text-lg"><i class="fas fa-star"></i></label>
+
+                                <input type="radio" id="star1" name="rating" value="1" class="hidden peer">
+                                <label for="star1"
+                                       class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 my-auto text-lg"><i class="fas fa-star"></i></label>
+                            </div>
+                        </form>
+                    </div>
                     <div class="transition-transform duration-500 ease-in-out max-h-96 overflow-y-scroll
                                 p-5 space-y-12">
                         @for (MovieReviewsDTO movie : movieReviews)
                             <div class="w-full space-y-2">
                                 <div class="flex">
-                                    <div class="border-sky-400 border-l-4 pl-2 h-6"></div>
-                                    <img class="h-6 w-6 rounded-full bg-gray-500 mr-2" src="https://image.tmdb.org/t/p/w92${movie.getAuthor_details().getAvatar_path()}">
-                                    <h3 class="text-xl font-bold">${movie.getAuthor()}</h3>
+                                    <div class="border-sky-400 border-l-4 pl-2 h-8"></div>
+                                    <img class="size-8 rounded-full bg-gray-500 mr-2" src="https://image.tmdb.org/t/p/w92${movie.getAuthor_details().getAvatar_path()}">
+                                    <h3 class="text-xl font-bold my-auto">${movie.getAuthor()}</h3>
                                 </div>
                                 <div class="flex items-center">
                                     @for (int i = 1; i <= 5; i++)
-                                        @if (i <= movie.getAuthor_details().getRating() / 1.5)
+                                        @if (i <= movie.getAuthor_details().getRating() / 2)
                                             <span class="text-yellow-400"><i class="fas fa-star"></i></span>
                                         @else
                                             <span class="text-gray-400"><i class="fas fa-star"></i></span>
@@ -115,7 +184,7 @@
                                     <p class="reviews text-md text-zinc-600" style="display: -webkit-box; -webkit-box-orient: vertical;
                                     -webkit-line-clamp: 5; overflow: hidden;">${movie.getContent()}</p>
                                 </div>
-                                <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 shadow-card text-white ">Show More!</button>
+                                <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white ">Show More!</button>
                             </div>
                         @endfor
                     </div>
@@ -135,7 +204,7 @@
                             -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">${movie.getTitle()}</h3>
                                     <div class="flex items-center">
                                         @for (int i = 1; i <= 5; i++)
-                                            @if (i <= movie.getVote_average() / 1.5)
+                                            @if (i <= movie.getVote_average() / 2)
                                                 <span class="text-yellow-400"><i class="fas fa-star"></i></span>
                                             @else
                                                 <span class="text-gray-400"><i class="fas fa-star"></i></span>

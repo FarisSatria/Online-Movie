@@ -1,7 +1,7 @@
 package com.movieonline.Online.Movie.service;
 
 import com.movieonline.Online.Movie.entity.model.UserEntity;
-import com.movieonline.Online.Movie.repository.AppUserRepository;
+import com.movieonline.Online.Movie.repository.UserRepository;
 import com.movieonline.Online.Movie.exception.InvalidCredentialsExeption;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -19,7 +19,7 @@ import java.util.Collections;
 @Service
 public class LoginService implements AuthenticationProvider {
 
-    private final AppUserRepository appUserRepository;
+    private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -27,7 +27,7 @@ public class LoginService implements AuthenticationProvider {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
 
-        UserEntity user = appUserRepository.findByUsername(username).orElseThrow(
+        UserEntity user = userRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("Username not found")
         );
 

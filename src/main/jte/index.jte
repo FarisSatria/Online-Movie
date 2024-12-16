@@ -26,7 +26,7 @@
     </div>
     <div class="flex-initial mt-8 space-y-5" style="width:60vw;">
         <!-- Floating, Rounded, Shadow Carousel -->
-        <div class="relative h-1/4 w-full rounded-xl overflow-hidden shadow-gradient" style="height:70vh;">
+        <div class="relative h-1/4 w-full rounded-xl overflow-hidden shadow-card" style="height:70vh;">
             <!-- Carousel Images -->
             <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-full">
                 @for (MovieDTO movie : nowPlayingMovies)
@@ -41,7 +41,7 @@
                             <p class="text-sm text-zinc-300">${movie.getOverview()}</p>
                             <div class="flex items-center space-x-1">
                                 @for (int i = 1; i <= 5; i++)
-                                    @if (i <= movie.getVote_average() / 1.5)
+                                    @if (i <= movie.getVote_average() / 2)
                                         <span class="text-yellow-400"><i class="fas fa-star"></i></span>
                                     @else
                                         <span class="text-gray-400"><i class="fas fa-star"></i></span>
@@ -87,7 +87,7 @@
                             -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">${movie.getTitle()}</h3>
                             <div class="flex items-center">
                                 @for (int i = 1; i <= 5; i++)
-                                    @if (i <= movie.getVote_average() / 1.5)
+                                    @if (i <= movie.getVote_average() / 2)
                                         <span class="text-yellow-400"><i class="fas fa-star"></i></span>
                                     @else
                                         <span class="text-gray-400"><i class="fas fa-star"></i></span>
@@ -137,7 +137,7 @@
                         @for (MovieDTO movie : topRatedMovies)
                                 <a href="/movie/${movie.getId()}" class="relative bg-gray-50 rounded-xl flex shadow-card overflow-hidden max-w-sm w-full h-40
                                 flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
-                                    <img class="w-28 object-cover"
+                                    <img class="w-28 h-full object-cover"
                                          src="https://image.tmdb.org/t/p/w185${movie.getPoster_path()}"
                                          alt="${movie.getTitle()}">
                                     <div class="p-4 space-y-1" style="height:90%;">
