@@ -3,15 +3,54 @@ import java.util.List;
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
 public final class JteindexGenerated {
 	public static final String JTE_NAME = "index.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,14,14,14,14,23,24,24,27,29,31,31,33,33,33,33,36,36,36,36,36,36,36,36,36,36,36,36,36,39,39,39,40,40,40,42,42,43,43,45,45,47,47,48,48,51,51,51,51,57,57,60,62,67,74,78,79,79,80,80,80,80,82,82,82,82,83,83,83,83,83,83,83,83,83,86,86,86,88,88,89,89,91,91,93,93,94,94,98,98,101,105,106,106,107,107,107,107,109,109,109,109,110,110,110,110,110,110,110,110,110,113,113,113,115,115,116,116,118,118,120,120,121,121,125,125,136,136,137,137,137,137,140,140,140,140,141,141,141,141,141,141,141,141,141,143,143,143,144,144,144,147,147,154,155,155,156,157,157,161,161,161,3,4,5,6,7,7,7,7};
-	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, List<MovieDTO> nowPlayingMovies, List<MovieDTO> popularMovies, List<MovieDTO> topRatedMovies, List<MovieDTO> upcomingMovies) {
+	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,16,16,16,16,25,26,28,30,38,46,54,68,68,69,69,69,69,72,72,72,72,73,73,73,73,73,73,73,73,73,75,75,75,76,76,76,79,79,88,88,89,96,96,97,104,104,108,110,112,112,114,114,114,114,117,117,117,117,117,117,117,117,117,117,117,117,117,120,120,120,121,121,121,123,123,124,124,126,126,128,128,129,129,132,132,132,132,138,138,141,143,148,155,159,160,160,161,161,161,161,163,163,163,163,164,164,164,164,164,164,164,164,164,167,167,167,169,169,170,170,172,172,174,174,175,175,179,179,182,186,187,187,188,188,188,188,190,190,190,190,191,191,191,191,191,191,191,191,191,194,194,194,196,196,197,197,199,199,201,201,202,202,206,206,217,217,218,218,218,218,221,221,221,221,222,222,222,222,222,222,222,222,222,224,224,224,225,225,225,228,228,235,236,236,237,238,238,243,243,243,3,4,5,6,7,8,9,9,9,9};
+	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, Boolean isLoggedIn, List<MovieDTO> searchMovies, List<MovieDTO> nowPlayingMovies, List<MovieDTO> popularMovies, List<MovieDTO> topRatedMovies, List<MovieDTO> upcomingMovies) {
 		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
 		jteOutput.writeUserContent(WebName);
-		jteOutput.writeContent(" | Homepage</title>\n    <link rel=\"icon\" href=\"/image/favicon/eudaemonia.png\">\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css\">\n    <link rel=\"stylesheet\" href=\"/asset/css/style.css\">\n</head>\n<body class=\"bg-gray-100 font-avenir min-h-screen\">\n<div class=\"flex\">\n    <div class=\"flex-initial\" style=\"width:9.5vw;\">\n        ");
+		jteOutput.writeContent(" | Homepage</title>\n    <link rel=\"icon\" href=\"/image/favsicon/eudaemonia.png\">\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css\">\n    <link rel=\"stylesheet\" href=\"/asset/css/style.css\">\n</head>\n<body class=\"bg-gray-100 font-avenir min-h-screen\">\n<div class=\"flex\">\n    <div class=\"flex-initial\" style=\"width:9.5vw;\">\n");
 		jteOutput.writeContent("\n        ");
-		gg.jte.generated.ondemand.include.header.JtenavbarGenerated.render(jteOutput, jteHtmlInterceptor);
-		jteOutput.writeContent("\n    </div>\n    <div class=\"flex-initial mt-8 space-y-5\" style=\"width:60vw;\">\n        ");
+		jteOutput.writeContent("\n        <div class=\"fixed top-8 bg-gray-50 left-8 bottom-8 w-16 rounded-xl shadow-card flex flex-col justify-between p-4 z-20\">\n            ");
+		jteOutput.writeContent("\n            <ul class=\"space-y-6 text-center\">\n                ");
+		jteOutput.writeContent("\n                <li>\n                    <a href=\"/\"\n                       class=\"block text-sky-400 hover:text-yellow-400 drop-shadow-md hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200\">\n                        <i class=\"fas fa-home text-2xl\"></i>\n                    </a>\n                    <div class=\"w-full h-px bg-black opacity-20 mt-1\"></div>\n                </li>\n                ");
+		jteOutput.writeContent("\n                <li>\n                    <a href=\"#\"\n                       class=\"block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200\">\n                        <i class=\"fas fa-film text-2xl\"></i>\n                    </a>\n                    <div class=\"w-full h-px bg-black opacity-20 mt-1\"></div>\n                </li>\n                ");
+		jteOutput.writeContent("\n                <li class=\"relative\">\n                    <a href=\"#\" id=\"searchIcon\"\n                       class=\"block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 transition duration-200\">\n                        <i id=\"searchIconSymbol\" class=\"fas fa-search text-2xl\"></i>\n                    </a>\n                    <div class=\"w-full h-px bg-black opacity-20 mt-1\"></div>\n\n                    ");
+		jteOutput.writeContent("\n                    <div id=\"searchBar\" class=\"absolute top-0 -right-4 transform -translate-y-5 transition-all duration-500 hidden\">\n                        <form class=\"flex p-3 border-b-4 border-r border-r-gray-400/50 border-b-gray-400/60 bg-gray-50 rounded-r-lg\" action=\"/search\" method=\"get\">\n                            <input type=\"text\" id=\"name\" name=\"name\" placeholder=\"Search...\" class=\"p-2 border border-gray-300 rounded-md w-72 focus:outline-none\"/>\n                            <div class=\"ml-3 mt-1\">\n                                <a href=\"#\"\n                                   class=\"block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 transition duration-200\">\n                                    <i id=\"searchIconSymbol\" class=\"fas fa-search text-yellow-500 text-2xl\"></i>\n                                </a>\n                                <div class=\"w-full h-px bg-black opacity-20 mt-1\"></div>\n                            </div>\n                        </form>\n                        <div class=\"overflow-auto p-3 h-screen\">\n                            <div class=\"flex flex-col space-y-6\">\n                                ");
+		for (MovieDTO movie : searchMovies) {
+			jteOutput.writeContent("\n                                    <a href=\"/movie/");
+			jteOutput.setContext("a", "href");
+			jteOutput.writeUserContent(movie.getId());
+			jteOutput.setContext("a", null);
+			jteOutput.writeContent("\" class=\"relative bg-gray-50 rounded-xl flex shadow-card overflow-hidden max-w-sm w-full h-40\n                            flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2\">\n                                        <img class=\"w-28 h-full object-cover\"\n                                             src=\"https://image.tmdb.org/t/p/w185");
+			jteOutput.setContext("img", "src");
+			jteOutput.writeUserContent(movie.getPoster_path());
+			jteOutput.setContext("img", null);
+			jteOutput.writeContent("\"\n                                            ");
+			var __jte_html_attribute_0 = movie.getTitle();
+			if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_0)) {
+				jteOutput.writeContent(" alt=\"");
+				jteOutput.setContext("img", "alt");
+				jteOutput.writeUserContent(__jte_html_attribute_0);
+				jteOutput.setContext("img", null);
+				jteOutput.writeContent("\"");
+			}
+			jteOutput.writeContent(">\n                                        <div class=\"p-4 space-y-1\" style=\"height:90%;\">\n                                            <h3 class=\"text-xl text-black font-semibold\">");
+			jteOutput.setContext("h3", null);
+			jteOutput.writeUserContent(movie.getTitle());
+			jteOutput.writeContent("</h3>\n                                            <div class=\"text-sm text-zinc-400 relative overflow-hidden max-h-24 text-ellipsis\">");
+			jteOutput.setContext("div", null);
+			jteOutput.writeUserContent(movie.getOverview());
+			jteOutput.writeContent("</div>\n                                        </div>\n                                    </a>\n                                ");
+		}
+		jteOutput.writeContent("\n                            </div>\n                        </div>\n                    </div>\n                </li>\n\n\n            </ul>\n\n            ");
+		if (isLoggedIn) {
+			jteOutput.writeContent("\n                ");
+			jteOutput.writeContent("\n                <div class=\"text-center mt-auto\">\n                    <a href=\"/logout\"\n                       class=\"block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200\">\n                        <i class=\"fas fa-sign-out-alt text-2xl\"></i>\n                    </a>\n                </div>\n            ");
+		} else {
+			jteOutput.writeContent("\n                ");
+			jteOutput.writeContent("\n                <div class=\"text-center mt-auto\">\n                    <a href=\"/login\"\n                       class=\"block text-green-500  hover:text-green-400 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200\">\n                        <i class=\"fas fa-sign-in-alt text-2xl\"></i>\n                    </a>\n                </div>\n            ");
+		}
+		jteOutput.writeContent("\n        </div>\n    </div>\n    <div class=\"flex-initial mt-8 space-y-5\" style=\"width:60vw;\">\n        ");
 		jteOutput.writeContent("\n        <div class=\"relative h-1/4 w-full rounded-xl overflow-hidden shadow-card\" style=\"height:70vh;\">\n            ");
 		jteOutput.writeContent("\n            <div id=\"carousel\" class=\"flex transition-transform duration-500 ease-in-out h-full\">\n                ");
 		for (MovieDTO movie : nowPlayingMovies) {
@@ -24,11 +63,11 @@ public final class JteindexGenerated {
 			jteOutput.writeUserContent(movie.getPoster_path());
 			jteOutput.setContext("img", null);
 			jteOutput.writeContent("\"");
-			var __jte_html_attribute_0 = movie.getTitle();
-			if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_0)) {
+			var __jte_html_attribute_1 = movie.getTitle();
+			if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_1)) {
 				jteOutput.writeContent(" alt=\"");
 				jteOutput.setContext("img", "alt");
-				jteOutput.writeUserContent(__jte_html_attribute_0);
+				jteOutput.writeUserContent(__jte_html_attribute_1);
 				jteOutput.setContext("img", null);
 				jteOutput.writeContent("\"");
 			}
@@ -42,9 +81,9 @@ public final class JteindexGenerated {
 			for (int i = 1; i <= 5; i++) {
 				jteOutput.writeContent("\n                                    ");
 				if (i <= movie.getVote_average() / 2) {
-					jteOutput.writeContent("\n                                        <span class=\"text-yellow-400\"><i class=\"fas fa-star\"></i></span>\n                                    ");
+					jteOutput.writeContent("\n                                        <span class=\"text-yellow-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></span>\n                                    ");
 				} else {
-					jteOutput.writeContent("\n                                        <span class=\"text-gray-400\"><i class=\"fas fa-star\"></i></span>\n                                    ");
+					jteOutput.writeContent("\n                                        <span class=\"text-gray-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></span>\n                                    ");
 				}
 				jteOutput.writeContent("\n                                ");
 			}
@@ -70,11 +109,11 @@ public final class JteindexGenerated {
 			jteOutput.writeUserContent(movie.getPoster_path());
 			jteOutput.setContext("img", null);
 			jteOutput.writeContent("\"\n                            ");
-			var __jte_html_attribute_1 = movie.getTitle();
-			if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_1)) {
+			var __jte_html_attribute_2 = movie.getTitle();
+			if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_2)) {
 				jteOutput.writeContent(" alt=\"");
 				jteOutput.setContext("img", "alt");
-				jteOutput.writeUserContent(__jte_html_attribute_1);
+				jteOutput.writeUserContent(__jte_html_attribute_2);
 				jteOutput.setContext("img", null);
 				jteOutput.writeContent("\"");
 			}
@@ -85,9 +124,9 @@ public final class JteindexGenerated {
 			for (int i = 1; i <= 5; i++) {
 				jteOutput.writeContent("\n                                    ");
 				if (i <= movie.getVote_average() / 2) {
-					jteOutput.writeContent("\n                                        <span class=\"text-yellow-400\"><i class=\"fas fa-star\"></i></span>\n                                    ");
+					jteOutput.writeContent("\n                                        <span class=\"text-yellow-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></span>\n                                    ");
 				} else {
-					jteOutput.writeContent("\n                                        <span class=\"text-gray-400\"><i class=\"fas fa-star\"></i></span>\n                                    ");
+					jteOutput.writeContent("\n                                        <span class=\"text-gray-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></span>\n                                    ");
 				}
 				jteOutput.writeContent("\n                                ");
 			}
@@ -106,11 +145,11 @@ public final class JteindexGenerated {
 			jteOutput.writeUserContent(movie.getPoster_path());
 			jteOutput.setContext("img", null);
 			jteOutput.writeContent("\"\n                            ");
-			var __jte_html_attribute_2 = movie.getTitle();
-			if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_2)) {
+			var __jte_html_attribute_3 = movie.getTitle();
+			if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_3)) {
 				jteOutput.writeContent(" alt=\"");
 				jteOutput.setContext("img", "alt");
-				jteOutput.writeUserContent(__jte_html_attribute_2);
+				jteOutput.writeUserContent(__jte_html_attribute_3);
 				jteOutput.setContext("img", null);
 				jteOutput.writeContent("\"");
 			}
@@ -121,9 +160,9 @@ public final class JteindexGenerated {
 			for (int i = 1; i <= 5; i++) {
 				jteOutput.writeContent("\n                                    ");
 				if (i <= movie.getVote_average() / 2) {
-					jteOutput.writeContent("\n                                        <span class=\"text-yellow-400\"><i class=\"fas fa-star\"></i></span>\n                                    ");
+					jteOutput.writeContent("\n                                        <span class=\"text-yellow-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></span>\n                                    ");
 				} else {
-					jteOutput.writeContent("\n                                        <span class=\"text-gray-400\"><i class=\"fas fa-star\"></i></span>\n                                    ");
+					jteOutput.writeContent("\n                                        <span class=\"text-gray-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></span>\n                                    ");
 				}
 				jteOutput.writeContent("\n                                ");
 			}
@@ -140,11 +179,11 @@ public final class JteindexGenerated {
 			jteOutput.writeUserContent(movie.getPoster_path());
 			jteOutput.setContext("img", null);
 			jteOutput.writeContent("\"\n                                        ");
-			var __jte_html_attribute_3 = movie.getTitle();
-			if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_3)) {
+			var __jte_html_attribute_4 = movie.getTitle();
+			if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_4)) {
 				jteOutput.writeContent(" alt=\"");
 				jteOutput.setContext("img", "alt");
-				jteOutput.writeUserContent(__jte_html_attribute_3);
+				jteOutput.writeUserContent(__jte_html_attribute_4);
 				jteOutput.setContext("img", null);
 				jteOutput.writeContent("\"");
 			}
@@ -162,14 +201,16 @@ public final class JteindexGenerated {
 		jteOutput.writeContent("\n");
 		jteOutput.writeContent("\n");
 		gg.jte.generated.ondemand.include.modal.JtebookingGenerated.render(jteOutput, jteHtmlInterceptor);
-		jteOutput.writeContent("\n<script src=\"/asset/js/modal.js\"></script>\n<script src=\"/asset/js/main.js\"></script>\n</body>\n</html>");
+		jteOutput.writeContent("\n<script src=\"/asset/js/navbar.js\"></script>\n<script src=\"/asset/js/modal.js\"></script>\n<script src=\"/asset/js/main.js\"></script>\n</body>\n</html>");
 	}
 	public static void renderMap(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, java.util.Map<String, Object> params) {
 		String WebName = (String)params.get("WebName");
+		Boolean isLoggedIn = (Boolean)params.get("isLoggedIn");
+		List<MovieDTO> searchMovies = (List<MovieDTO>)params.get("searchMovies");
 		List<MovieDTO> nowPlayingMovies = (List<MovieDTO>)params.get("nowPlayingMovies");
 		List<MovieDTO> popularMovies = (List<MovieDTO>)params.get("popularMovies");
 		List<MovieDTO> topRatedMovies = (List<MovieDTO>)params.get("topRatedMovies");
 		List<MovieDTO> upcomingMovies = (List<MovieDTO>)params.get("upcomingMovies");
-		render(jteOutput, jteHtmlInterceptor, WebName, nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies);
+		render(jteOutput, jteHtmlInterceptor, WebName, isLoggedIn, searchMovies, nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies);
 	}
 }

@@ -28,11 +28,25 @@
         </li>
     </ul>
 
-    <!-- Logout Icon -->
+
+    @if(isLoggedIn)
+
+    @else
+
+    @endif
+<!-- Logout Icon -->
     <div class="text-center mt-auto">
         <a href="/logout"
            class="block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
             <i class="fas fa-sign-out-alt text-2xl"></i>
+        </a>
+    </div>
+
+    <!-- Login Icon -->
+    <div class="text-center mt-auto">
+        <a href="/login"
+           class="block text-sky-400 hover:text-sky-700 hover:-rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
+            <i class="fas fa-sign-in-alt text-2xl"></i>
         </a>
     </div>
 </div>

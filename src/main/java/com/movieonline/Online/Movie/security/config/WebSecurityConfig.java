@@ -32,6 +32,7 @@ public class WebSecurityConfig {
                                         "/image/**",
                                         "/video/**",
                                         "/movies",
+                                        "/search",
                                         "/guest-session",
                                         "/register",
                                         "/movies/popular",
@@ -43,8 +44,8 @@ public class WebSecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .permitAll()
                         .defaultSuccessUrl("/", true)
+                        .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")

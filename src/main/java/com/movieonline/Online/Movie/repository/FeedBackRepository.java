@@ -4,6 +4,10 @@ import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface FeedBackRepository extends JpaRepository<FeedBackEntity, Long> {
+
+    Optional<FeedBackEntity> findById(Long id);
 }

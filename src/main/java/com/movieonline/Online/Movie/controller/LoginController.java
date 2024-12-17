@@ -2,6 +2,7 @@ package com.movieonline.Online.Movie.controller;
 
 import com.movieonline.Online.Movie.exception.GlobalExceptionHandler;
 import com.movieonline.Online.Movie.service.LoginService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;

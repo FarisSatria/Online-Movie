@@ -3,6 +3,7 @@ package com.movieonline.Online.Movie.service;
 import com.movieonline.Online.Movie.entity.model.UserEntity;
 import com.movieonline.Online.Movie.repository.UserRepository;
 import com.movieonline.Online.Movie.exception.InvalidCredentialsExeption;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

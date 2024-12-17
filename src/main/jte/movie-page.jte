@@ -7,6 +7,7 @@
 @import com.movieonline.Online.Movie.entity.model.UserEntity
 
 @param String WebName
+@param Boolean isLoggedIn
 @param MovieDTO movieDetail
 @param MovieGenresDTO movieGenres
 @param MovieAuthorDetailsReviewDTO movieAuthorDetailsReview
@@ -62,13 +63,23 @@
                 </li>
             </ul>
 
-            <!-- Logout Icon -->
-            <div class="text-center mt-auto">
-                <a href="/logout"
-                   class="block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
-                    <i class="fas fa-sign-out-alt text-2xl"></i>
-                </a>
-            </div>
+            @if(isLoggedIn)
+                <!-- Logout Icon -->
+                <div class="text-center mt-auto">
+                    <a href="/logout"
+                       class="block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
+                        <i class="fas fa-sign-out-alt text-2xl"></i>
+                    </a>
+                </div>
+            @else
+                <!-- Login Icon -->
+                <div class="text-center mt-auto">
+                    <a href="/login"
+                       class="block text-green-500  hover:text-green-400 hover:-rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
+                        <i class="fas fa-sign-in-alt text-2xl"></i>
+                    </a>
+                </div>
+            @endif
         </div>
     </div>
     <div class="flex-initial mt-8" style="width:87.5vw;">
@@ -96,9 +107,9 @@
                             <div class="flex items-center space-x-1">
                                 @for (int i = 1; i <= 5; i++)
                                     @if (i <= movieDetail.getVote_average() / 2)
-                                        <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                                        <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
                                     @else
-                                        <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                        <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
                                     @endif
                                 @endfor
                             </div>
@@ -129,64 +140,73 @@
                     </div>
                 </div>
                 <div class="space-y-5">
-                    <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Movie Reviews</h3>
-                    <div class="p-5 flex w-full">
-                        <div class="border-sky-400 border-l-4 pl-2 h-8"></div>
-                        <img class="size-8 rounded-full bg-gray-500 mr-2">
-                        <form class="w-full" action="/movie/${movieDetail.getId()}/feedback" method="post">
-                            <input class="bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" type="text" id="review" name="review" placeholder="Add Review">
-                            <div class="flex flex-row-reverse mt-2">
-                                <button type="submit"
-                                        class="bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right ml-auto">
-                                    Comment
-                                </button>
-                                <input type="radio" id="star5" name="rating" value="5" class="hidden peer">
-                                <label for="star5"
-                                       class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 my-auto text-lg"><i class="fas fa-star"></i></label>
-
-                                <input type="radio" id="star4" name="rating" value="4" class="hidden peer">
-                                <label for="star4"
-                                       class=" cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 my-auto text-lg"><i class="fas fa-star"></i></label>
-
-                                <input type="radio" id="star3" name="rating" value="3" class="hidden peer">
-                                <label for="star3"
-                                       class=" cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 my-auto text-lg"><i class="fas fa-star"></i></label>
-
-                                <input type="radio" id="star2" name="rating" value="2" class="hidden peer">
-                                <label for="star2"
-                                       class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 my-auto text-lg"><i class="fas fa-star"></i></label>
-
-                                <input type="radio" id="star1" name="rating" value="1" class="hidden peer">
-                                <label for="star1"
-                                       class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 my-auto text-lg"><i class="fas fa-star"></i></label>
+                    <div class="relative space-y-5 overflow-hidden">
+                        <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Movie Reviews</h3>
+                        @if(isLoggedIn)
+                        @else
+                            <div class="absolute p-2 w-full h-28  bg-gradient-to-b from-gray-400/30 to-gray-400/70
+                              shadow-md rounded-lg">
+                                <p class="text-center font-bold text-white text-3xl mt-7">Log In To Submit a Review!</p>
                             </div>
-                        </form>
-                    </div>
-                    <div class="transition-transform duration-500 ease-in-out max-h-96 overflow-y-scroll
+                        @endif
+                        <div class="p-5 flex rounded-lg">
+                            <div class="border-sky-400 border-l-4 pl-2 h-8"></div>
+                            <img class="size-8 rounded-full bg-gray-500 mr-2">
+                            <form class="w-full" action="/movie/${movieDetail.getId()}/feedback" method="post">
+                                <input class="bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" type="text" id="reviews" name="reviews" placeholder="Add Review">
+                                <div class="flex flex-row-reverse mt-2">
+                                    <button type="submit"
+                                            class="bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right ml-auto">
+                                        Comment
+                                    </button>
+                                    <input type="radio" id="star5" name="rating" value="5" class="hidden peer">
+                                    <label for="star5"
+                                           class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md my-auto text-lg"><i class="fas fa-star"></i></label>
+
+                                    <input type="radio" id="star4" name="rating" value="4" class="hidden peer">
+                                    <label for="star4"
+                                           class=" cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md my-auto text-lg"><i class="fas fa-star"></i></label>
+
+                                    <input type="radio" id="star3" name="rating" value="3" class="hidden peer">
+                                    <label for="star3"
+                                           class=" cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md my-auto text-lg"><i class="fas fa-star"></i></label>
+
+                                    <input type="radio" id="star2" name="rating" value="2" class="hidden peer">
+                                    <label for="star2"
+                                           class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md my-auto text-lg"><i class="fas fa-star"></i></label>
+
+                                    <input type="radio" id="star1" name="rating" value="1" class="hidden peer">
+                                    <label for="star1"
+                                           class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md my-auto text-lg"><i class="fas fa-star"></i></label>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="transition-transform duration-500 ease-in-out max-h-96 overflow-y-scroll
                                 p-5 space-y-12">
-                        @for (MovieReviewsDTO movie : movieReviews)
-                            <div class="w-full space-y-2">
-                                <div class="flex">
-                                    <div class="border-sky-400 border-l-4 pl-2 h-8"></div>
-                                    <img class="size-8 rounded-full bg-gray-500 mr-2" src="https://image.tmdb.org/t/p/w92${movie.getAuthor_details().getAvatar_path()}">
-                                    <h3 class="text-xl font-bold my-auto">${movie.getAuthor()}</h3>
-                                </div>
-                                <div class="flex items-center">
-                                    @for (int i = 1; i <= 5; i++)
-                                        @if (i <= movie.getAuthor_details().getRating() / 2)
-                                            <span class="text-yellow-400"><i class="fas fa-star"></i></span>
-                                        @else
-                                            <span class="text-gray-400"><i class="fas fa-star"></i></span>
-                                        @endif
-                                    @endfor
-                                </div>
-                                <div class="overflow-y-auto max-h-full">
-                                    <p class="reviews text-md text-zinc-600" style="display: -webkit-box; -webkit-box-orient: vertical;
+                            @for (MovieReviewsDTO movie : movieReviews)
+                                <div class="w-full space-y-2">
+                                    <div class="flex">
+                                        <div class="border-sky-400 border-l-4 pl-2 h-8"></div>
+                                        <img class="size-8 rounded-full bg-gray-500 mr-2" src="https://image.tmdb.org/t/p/w92${movie.getAuthor_details().getAvatar_path()}">
+                                        <h3 class="text-xl font-bold my-auto">${movie.getAuthor()}</h3>
+                                    </div>
+                                    <div class="flex items-center">
+                                        @for (int i = 1; i <= 5; i++)
+                                            @if (i <= movie.getAuthor_details().getRating() / 2)
+                                                <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                            @else
+                                                <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                            @endif
+                                        @endfor
+                                    </div>
+                                    <div class="overflow-y-auto max-h-full">
+                                        <p class="reviews text-md text-zinc-600" style="display: -webkit-box; -webkit-box-orient: vertical;
                                     -webkit-line-clamp: 5; overflow: hidden;">${movie.getContent()}</p>
+                                    </div>
+                                    <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white ">Show More!</button>
                                 </div>
-                                <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white ">Show More!</button>
-                            </div>
-                        @endfor
+                            @endfor
+                        </div>
                     </div>
                 </div>
                 <!-- Movie Recommendation Section (Horizontal Scroll) -->
@@ -205,9 +225,9 @@
                                     <div class="flex items-center">
                                         @for (int i = 1; i <= 5; i++)
                                             @if (i <= movie.getVote_average() / 2)
-                                                <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                                                <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
                                             @else
-                                                <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                                <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
                                             @endif
                                         @endfor
                                     </div>

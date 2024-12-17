@@ -26,9 +26,9 @@ public class FeedBackEntity {
     )
     @Column(length = 11)
     private Long id;
-    @NotBlank(message = "Username cannot be empty")
+    @NotBlank(message = "Reviews cannot be empty")
     private String reviews;
-    @NotBlank(message = "Password cannot be empty")
+    @NotBlank(message = "Rating cannot be empty")
     private Double rating;
 
     public FeedBackEntity(String reviews, Double rating) {

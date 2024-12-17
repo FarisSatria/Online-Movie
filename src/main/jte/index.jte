@@ -2,6 +2,8 @@
 @import com.movieonline.Online.Movie.entity.dto.MovieDTO
 
 @param String WebName
+@param Boolean isLoggedIn
+@param List<MovieDTO> searchMovies
 @param List<MovieDTO> nowPlayingMovies
 @param List<MovieDTO> popularMovies
 @param List<MovieDTO> topRatedMovies
@@ -13,7 +15,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${WebName} | Homepage</title>
-    <link rel="icon" href="/image/favicon/eudaemonia.png">
+    <link rel="icon" href="/image/favsicon/eudaemonia.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/asset/css/style.css">
@@ -21,8 +23,87 @@
 <body class="bg-gray-100 font-avenir min-h-screen">
 <div class="flex">
     <div class="flex-initial" style="width:9.5vw;">
+<%--        @template.include.header.navbar()--%>
         <!-- Floating Sidebar -->
-        @template.include.header.navbar()
+        <div class="fixed top-8 bg-gray-50 left-8 bottom-8 w-16 rounded-xl shadow-card flex flex-col justify-between p-4 z-20">
+            <!-- Top Icons -->
+            <ul class="space-y-6 text-center">
+                <!-- Icon 1 -->
+                <li>
+                    <a href="/"
+                       class="block text-sky-400 hover:text-yellow-400 drop-shadow-md hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
+                        <i class="fas fa-home text-2xl"></i>
+                    </a>
+                    <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+                </li>
+                <!-- Icon 2 -->
+                <li>
+                    <a href="#"
+                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
+                        <i class="fas fa-film text-2xl"></i>
+                    </a>
+                    <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+                </li>
+                <!-- Icon 3 with Search Bar Dropdown -->
+                <li class="relative">
+                    <a href="#" id="searchIcon"
+                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 transition duration-200">
+                        <i id="searchIconSymbol" class="fas fa-search text-2xl"></i>
+                    </a>
+                    <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+
+                    <!-- Search bar dropdown -->
+                    <div id="searchBar" class="absolute top-0 -right-4 transform -translate-y-5 transition-all duration-500 hidden">
+                        <form class="flex p-3 border-b-4 border-r border-r-gray-400/50 border-b-gray-400/60 bg-gray-50 rounded-r-lg" action="/search" method="get">
+                            <input type="text" id="name" name="name" placeholder="Search..." class="p-2 border border-gray-300 rounded-md w-72 focus:outline-none"/>
+                            <div class="ml-3 mt-1">
+                                <a href="#"
+                                   class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 transition duration-200">
+                                    <i id="searchIconSymbol" class="fas fa-search text-yellow-500 text-2xl"></i>
+                                </a>
+                                <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+                            </div>
+                        </form>
+                        <div class="overflow-auto p-3 h-screen">
+                            <div class="flex flex-col space-y-6">
+                                @for (MovieDTO movie : searchMovies)
+                                    <a href="/movie/${movie.getId()}" class="relative bg-gray-50 rounded-xl flex shadow-card overflow-hidden max-w-sm w-full h-40
+                            flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
+                                        <img class="w-28 h-full object-cover"
+                                             src="https://image.tmdb.org/t/p/w185${movie.getPoster_path()}"
+                                             alt="${movie.getTitle()}">
+                                        <div class="p-4 space-y-1" style="height:90%;">
+                                            <h3 class="text-xl text-black font-semibold">${movie.getTitle()}</h3>
+                                            <div class="text-sm text-zinc-400 relative overflow-hidden max-h-24 text-ellipsis">${movie.getOverview()}</div>
+                                        </div>
+                                    </a>
+                                @endfor
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+
+            </ul>
+
+            @if(isLoggedIn)
+                <!-- Logout Icon -->
+                <div class="text-center mt-auto">
+                    <a href="/logout"
+                       class="block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
+                        <i class="fas fa-sign-out-alt text-2xl"></i>
+                    </a>
+                </div>
+            @else
+                <!-- Login Icon -->
+                <div class="text-center mt-auto">
+                    <a href="/login"
+                       class="block text-green-500  hover:text-green-400 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
+                        <i class="fas fa-sign-in-alt text-2xl"></i>
+                    </a>
+                </div>
+            @endif
+        </div>
     </div>
     <div class="flex-initial mt-8 space-y-5" style="width:60vw;">
         <!-- Floating, Rounded, Shadow Carousel -->
@@ -42,9 +123,9 @@
                             <div class="flex items-center space-x-1">
                                 @for (int i = 1; i <= 5; i++)
                                     @if (i <= movie.getVote_average() / 2)
-                                        <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                                        <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
                                     @else
-                                        <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                        <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
                                     @endif
                                 @endfor
                             </div>
@@ -88,9 +169,9 @@
                             <div class="flex items-center">
                                 @for (int i = 1; i <= 5; i++)
                                     @if (i <= movie.getVote_average() / 2)
-                                        <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                                        <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
                                     @else
-                                        <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                        <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
                                     @endif
                                 @endfor
                             </div>
@@ -115,9 +196,9 @@
                             <div class="flex items-center">
                                 @for (int i = 1; i <= 5; i++)
                                     @if (i <= movie.getVote_average() / 2)
-                                        <span class="text-yellow-400"><i class="fas fa-star"></i></span>
+                                        <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
                                     @else
-                                        <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                        <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
                                     @endif
                                 @endfor
                             </div>
@@ -156,6 +237,7 @@
 @template.include.footer.footer()
 <!-- The Modal -->
 @template.include.modal.booking()
+<script src="/asset/js/navbar.js"></script>
 <script src="/asset/js/modal.js"></script>
 <script src="/asset/js/main.js"></script>
 </body>

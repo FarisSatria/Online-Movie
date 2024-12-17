@@ -1,18 +1,18 @@
 package com.movieonline.Online.Movie.service;
 
-import com.movieonline.Online.Movie.controller.GuestSessionController;
 import com.movieonline.Online.Movie.entity.dto.MovieCastDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieKeywordsDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieReviewsDTO;
+import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
 import com.movieonline.Online.Movie.entity.res.*;
+import com.movieonline.Online.Movie.exception.UserAlreadyExistException;
+import com.movieonline.Online.Movie.repository.FeedBackRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpEntity;
-
 
 import java.util.List;
 
@@ -22,18 +22,19 @@ public class TMDBService {
     private final RestTemplate restTemplate;
     private final String apiKey;
     private final String baseUrl;
-    private final GuestSessionController guestSessionController;
+    @Autowired
+    private final FeedBackRepository feedBackRepository;
 
     public TMDBService(
             @Value("${tmdb.api.key}") String apiKey,
             @Value("${tmdb.base.url}") String baseUrl,
             RestTemplate restTemplate,
-            GuestSessionController guestSessionController
+            FeedBackRepository feedBackRepository
     ) {
         this.apiKey = apiKey;
         this.baseUrl = baseUrl;
         this.restTemplate = restTemplate;
-        this.guestSessionController = guestSessionController;
+        this.feedBackRepository = feedBackRepository;
     }
 
     // Fetch Movies
@@ -92,49 +93,23 @@ public class TMDBService {
         return response.getResults();
     }
 
+    public List<MovieDTO> searchMovies(String name){
+        String url = String.format("%s/search/movie?api_key=%s&query=%s", baseUrl, apiKey, name);
+        TMDBMovieResponse response = restTemplate.getForObject(url, TMDBMovieResponse.class);
+        System.out.println(response + url);
+        return response.getResults();
+    }
+
     //Add Movies Miscellaneous
-    public String provideFeedback(long id, Double rating, String review, String guestSessionId) {
-        String responseMessage = "";
+    @Transactional(rollbackOn = UserAlreadyExistException.class)
+    public void provideFeedback(FeedBackEntity feedBackEntity,
+                                String reviews,
+                                Double rating) {
+        feedBackEntity.setReviews(reviews);
+        feedBackEntity.setRating(rating);
 
-        if (rating != null) {
-            String ratingUrl = String.format("%s/movie/%d/rating?api_key=%s&guest_session_id=%s",
-                    baseUrl, id, apiKey, guestSessionId);
-            String ratingBody = String.format("{\"value\": %.1f}", rating);
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Content-Type", "application/json");
-
-            HttpEntity<String> ratingRequest = new HttpEntity<>(ratingBody, headers);
-
-            try {
-                ResponseEntity<String> ratingResponse = restTemplate.postForEntity(ratingUrl, ratingRequest, String.class);
-                System.out.println("Rating API response: " + ratingResponse.getBody());
-                responseMessage += "Rating submitted. ";
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to submit rating: " + e.getMessage(), e);
-            }
-        }
-
-        if (review != null && !review.isEmpty()) {
-            String reviewUrl = String.format("%s/movie/%d/reviews?api_key=%s&guest_session_id=%s",
-                    baseUrl, id, apiKey, guestSessionId);
-            String reviewBody = String.format("{\"review\": \"%s\"}", review);
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Content-Type", "application/json");
-
-            HttpEntity<String> reviewRequest = new HttpEntity<>(reviewBody, headers);
-
-            try {
-                ResponseEntity<String> reviewResponse = restTemplate.postForEntity(reviewUrl, reviewRequest, String.class);
-                System.out.println("Review API response: " + reviewResponse.getBody());
-                responseMessage += "Review submitted.";
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to submit review: " + e.getMessage(), e);
-            }
-        }
-
-        return responseMessage;
+        System.out.println("results:" + reviews + rating);
+        feedBackRepository.save(feedBackEntity);
     }
 
 }

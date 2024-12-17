@@ -4,10 +4,12 @@ import com.movieonline.Online.Movie.entity.dto.MovieCastDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieKeywordsDTO;
 import com.movieonline.Online.Movie.entity.dto.MovieReviewsDTO;
+import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
 import com.movieonline.Online.Movie.service.TMDBService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +21,6 @@ import java.util.List;
 public class TMDBController {
 
     private final TMDBService tmdbService;
-    private final GuestSessionController guestSessionController;
 
     public Model pageDetails(Model model){
         model.addAttribute("WebName", "Cinema Eudamonia");
@@ -67,26 +68,26 @@ public class TMDBController {
         return model;
     }
 
-    @PostMapping("/movie/{id}/feedback")
-    public String provideFeedback(@PathVariable long id,
-                                  @RequestParam(required = false) Double rating,
-                                  @RequestParam(required = false) String review,
-                                  String guestSessionId,
-                                  Model model) {
-        if (rating != null && (rating < 0.5 || rating > 5.0)) {
-            throw new IllegalArgumentException("Rating must be between 0.5 and 5.0.");
-        }
+    @GetMapping("/search")
+    public Model searchMovies(@RequestParam String name, Model model) {
+        List<MovieDTO> searchMovies = tmdbService.searchMovies(name);
+        model.addAttribute("searchMovies", searchMovies);
+        System.out.println(name + model);
+        return model;
+    }
 
-        if (guestSessionId == null || guestSessionId.isEmpty()) {
-            guestSessionId = guestSessionController.getGuestSessionId();
-        }
+    @PostMapping("/movie/{id}/feedback")
+    public String provideFeedback(Long id,
+                                  @RequestParam String reviews,
+                                  @RequestParam Double rating,
+                                  FeedBackEntity feedBackEntity,
+                                  Model model) {
 
         System.out.println("Received rating: " + rating);
-        System.out.println("Received review: " + review);
-        System.out.println("Received guestSessionId: " + guestSessionId);
+        System.out.println("Received review: " + reviews);
 
 
-        tmdbService.provideFeedback(id, rating, review, guestSessionId);
+        tmdbService.provideFeedback(feedBackEntity, feedBackEntity.getReviews(), feedBackEntity.getRating());
         getMovieDetails(id, model);
         getMoviesDetails(model);
         pageDetails(model);
