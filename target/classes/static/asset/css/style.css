@@ -2,6 +2,13 @@
 .font-avenir{
  font-family: Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
 }
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
 .shadow-big{
 box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -36,7 +37,7 @@ public class TemplateController {
     }
 
     @GetMapping("/")
-    public String showHomePage(Principal principal, String name , Model model) {
+    public String showHomePage(Principal principal, @RequestParam(required = false) String name , Model model) {
         tmdbController.getMoviesDetails(model);
         tmdbController.searchMovies(name, model);
         isLoggedIn(principal, model);

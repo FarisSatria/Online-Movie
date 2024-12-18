@@ -68,7 +68,6 @@ public class TMDBController {
         return model;
     }
 
-    @GetMapping("/search")
     public Model searchMovies(@RequestParam String name, Model model) {
         List<MovieDTO> searchMovies = tmdbService.searchMovies(name);
         model.addAttribute("searchMovies", searchMovies);

@@ -54,17 +54,17 @@
 
                     <!-- Search bar dropdown -->
                     <div id="searchBar" class="absolute top-0 -right-4 transform -translate-y-5 transition-all duration-500 hidden">
-                        <form class="flex p-3 border-b-4 border-r border-r-gray-400/50 border-b-gray-400/60 bg-gray-50 rounded-r-lg" action="/search" method="get">
+                        <form class="flex p-3 border-b-4 border-r border-r-gray-400/50 border-b-gray-400/60 bg-gray-50 rounded-r-lg" action="/" method="get">
                             <input type="text" id="name" name="name" placeholder="Search..." class="p-2 border border-gray-300 rounded-md w-72 focus:outline-none"/>
                             <div class="ml-3 mt-1">
                                 <a href="#"
-                                   class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 transition duration-200">
+                                   class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 transition duration-200 w-full">
                                     <i id="searchIconSymbol" class="fas fa-search text-yellow-500 text-2xl"></i>
                                 </a>
                                 <div class="w-full h-px bg-black opacity-20 mt-1"></div>
                             </div>
                         </form>
-                        <div class="overflow-auto p-3 h-screen">
+                        <div class="overflow-auto p-3 h-screen scrollbar-hidden">
                             <div class="flex flex-col space-y-6">
                                 @for (MovieDTO movie : searchMovies)
                                     <a href="/movie/${movie.getId()}" class="relative bg-gray-50 rounded-xl flex shadow-card overflow-hidden max-w-sm w-full h-40
@@ -82,8 +82,6 @@
                         </div>
                     </div>
                 </li>
-
-
             </ul>
 
             @if(isLoggedIn)

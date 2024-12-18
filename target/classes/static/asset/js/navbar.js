@@ -16,5 +16,7 @@ document.getElementById('searchIcon').addEventListener('click', function (event)
     } else {
         searchIconSymbol.classList.remove('fa-question');
         searchIconSymbol.classList.add('fa-search');
+        searchIconSymbol.classList.remove('fa-question');
+        searchIconSymbol.classList.remove('text-sky-400');
     }
 });
