@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -25,16 +27,15 @@ public class UserEntity {
             strategy = GenerationType.SEQUENCE,
             generator = "student_sequence"
     )
-    @Column(length = 11)
     private Long id;
-    @Column(length = 255)
     private String name;
-    @Column(length = 255)
     @NotBlank(message = "Username cannot be empty")
     private String username;
-    @Column(length = 255)
     @NotBlank(message = "Password cannot be empty")
     private String password;
+
+    @OneToMany(mappedBy = "username", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FeedBackEntity> feedbacks;
 
     public UserEntity(String name, String username, String password) {
         this.name = name;

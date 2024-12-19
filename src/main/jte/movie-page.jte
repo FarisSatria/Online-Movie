@@ -4,13 +4,14 @@
 @import com.movieonline.Online.Movie.entity.dto.MovieKeywordsDTO
 @import com.movieonline.Online.Movie.entity.dto.MovieReviewsDTO
 @import com.movieonline.Online.Movie.entity.dto.MovieGenresDTO
-@import com.movieonline.Online.Movie.entity.model.UserEntity
+@import com.movieonline.Online.Movie.entity.model.FeedBackEntity
 
 @param String WebName
 @param Boolean isLoggedIn
 @param MovieDTO movieDetail
 @param MovieGenresDTO movieGenres
 @param MovieAuthorDetailsReviewDTO movieAuthorDetailsReview
+@param List<FeedBackEntity> feedBack
 @param List<MovieCastDTO> movieCast
 @param List<MovieKeywordsDTO> movieKeywords
 @param List<MovieReviewsDTO> movieReviews
@@ -34,7 +35,7 @@
 <div class="flex">
     <div class="flex-initial" style="width:9.5vw;">
         <!-- Floating Sidebar -->
-        <div class="fixed top-8 bg-gray-50 left-8 bottom-8 w-16 rounded-xl shadow-card flex flex-col justify-between p-4">
+        <div class="fixed top-8 bg-gray-50 left-8 bottom-8 w-16 rounded-xl shadow-card flex flex-col justify-between p-4 z-20">
             <!-- Top Icons -->
             <ul class="space-y-6 text-center">
                 <!-- Icon 1 -->
@@ -53,13 +54,31 @@
                     </a>
                     <div class="w-full h-px bg-black opacity-20 mt-1"></div>
                 </li>
-                <!-- Icon 3 -->
-                <li>
-                    <a href="#"
-                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
-                        <i class="fas fa-search text-2xl"></i>
+                <!-- Icon 3 with Search Bar Dropdown -->
+                <li class="relative">
+                    <a href="#" id="searchIcon"
+                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 transition duration-200">
+                        <i id="searchIconSymbol" class="fas fa-search text-2xl"></i>
                     </a>
                     <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+
+                    <!-- Search bar dropdown -->
+                    <div id="searchBar" class="absolute top-1 -right-4 transform -translate-y-5 transition-all duration-500 hidden">
+                        <form  id="searchForm" class="flex p-3 border-b-4 border-r border-r-gray-400/50 border-b-gray-400/60 bg-gray-50 rounded-r-lg" method="get">
+                            <input type="text" id="name" name="name" placeholder="Search..." class="p-2 border border-gray-300 rounded-md w-72 focus:outline-none"/>
+                            <div class="ml-3 mt-1 w-8">
+                                <button type="button" id="searchButton" class="hover:rotate-12 hover:scale-125 transition duration-200">
+                                    <i id="searchIconSymbol" class="fas fa-search text-sky-400 hover:text-yellow-400 text-2xl"></i>
+                                </button>
+                                <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+                            </div>
+                        </form>
+                        <div class="overflow-auto p-3 h-screen scrollbar-hidden">
+                            <div  id="movieResults"  class="flex flex-col space-y-6">
+                                <!-- Movies Results will appear in here -->
+                            </div>
+                        </div>
+                    </div>
                 </li>
             </ul>
 
@@ -67,7 +86,7 @@
                 <!-- Logout Icon -->
                 <div class="text-center mt-auto">
                     <a href="/logout"
-                       class="block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
+                       class="block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
                         <i class="fas fa-sign-out-alt text-2xl"></i>
                     </a>
                 </div>
@@ -75,7 +94,7 @@
                 <!-- Login Icon -->
                 <div class="text-center mt-auto">
                     <a href="/login"
-                       class="block text-green-500  hover:text-green-400 hover:-rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
+                       class="block text-green-500  hover:text-green-400 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
                         <i class="fas fa-sign-in-alt text-2xl"></i>
                     </a>
                 </div>
@@ -146,7 +165,7 @@
                         @else
                             <div class="absolute p-2 w-full h-28  bg-gradient-to-b from-gray-400/30 to-gray-400/70
                               shadow-md rounded-lg">
-                                <p class="text-center font-bold text-white text-3xl mt-7">Log In To Submit a Review!</p>
+                                <p class="text-center font-bold text-white text-3xl mt-7"><a href="/login" class="text-green-600 hover:text-green-700 drop-shadow-md transition duration-300">Login</a> To Submit a Review!</p>
                             </div>
                         @endif
                         <div class="p-5 flex rounded-lg">
@@ -183,6 +202,29 @@
                         </div>
                         <div class="transition-transform duration-500 ease-in-out max-h-96 overflow-y-scroll
                                 p-5 space-y-12">
+                            @for (MovieDTO movie : feedBack)
+                                <div class="w-full space-y-2">
+                                    <div class="flex">
+                                        <div class="border-sky-400 border-l-4 pl-2 h-8"></div>
+                                        <img class="size-8 rounded-full bg-gray-500 mr-2">
+                                        <h3 class="text-xl font-bold my-auto">${movie.getUsername()}</h3>
+                                    </div>
+                                    <div class="flex items-center">
+                                        @for (int i = 1; i <= 5; i++)
+                                            @if (i <= movie.getRating() / 2)
+                                                <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                            @else
+                                                <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                            @endif
+                                        @endfor
+                                    </div>
+                                    <div class="overflow-y-auto max-h-full">
+                                        <p class="reviews text-md text-zinc-600" style="display: -webkit-box; -webkit-box-orient: vertical;
+                                    -webkit-line-clamp: 5; overflow: hidden;">${movie.getReviews()}</p>
+                                    </div>
+                                    <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white ">Show More!</button>
+                                </div>
+                            @endfor
                             @for (MovieReviewsDTO movie : movieReviews)
                                 <div class="w-full space-y-2">
                                     <div class="flex">
@@ -283,6 +325,8 @@
 @template.include.footer.footer()
 <!-- The Modal -->
 @template.include.modal.booking()
+<script src="/asset/js/AJAX-handler.js"></script>
+<script src="/asset/js/navbar.js"></script>
 <script src="/asset/js/modal.js"></script>
 <script src="/asset/js/main.js"></script>
 </body>

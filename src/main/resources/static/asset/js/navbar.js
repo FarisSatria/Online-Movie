@@ -12,11 +12,13 @@ document.getElementById('searchIcon').addEventListener('click', function (event)
         searchIconSymbol.classList.remove('fa-search');
         searchIconSymbol.classList.remove('text-black');
         searchIconSymbol.classList.add('fa-question');
-        searchIconSymbol.classList.add('text-sky-400');
+        searchIconSymbol.classList.add('text-yellow-400');
+        searchIconSymbol.classList.add('hover:text-sky-400');
     } else {
         searchIconSymbol.classList.remove('fa-question');
         searchIconSymbol.classList.add('fa-search');
         searchIconSymbol.classList.remove('fa-question');
-        searchIconSymbol.classList.remove('text-sky-400');
+        searchIconSymbol.classList.remove('text-yellow-400');
+        searchIconSymbol.classList.remove('hover:text-sky-400');
     }
 });

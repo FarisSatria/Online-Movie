@@ -9,5 +9,4 @@ import java.util.Optional;
 @Repository
 public interface FeedBackRepository extends JpaRepository<FeedBackEntity, Long> {
 
-    Optional<FeedBackEntity> findById(Long id);
 }

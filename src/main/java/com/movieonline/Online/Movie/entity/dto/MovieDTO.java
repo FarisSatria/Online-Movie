@@ -1,6 +1,9 @@
 package com.movieonline.Online.Movie.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 import java.text.DecimalFormat;
@@ -17,6 +20,8 @@ public class MovieDTO {
     private String release_date;
     private String status;
     private List<MovieGenresDTO> genres;
+    @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FeedBackEntity> feedbacks;
     private int runtime;
     private String runtimeFormatted;
     private String adult;

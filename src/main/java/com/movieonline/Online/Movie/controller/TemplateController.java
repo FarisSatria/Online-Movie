@@ -37,9 +37,8 @@ public class TemplateController {
     }
 
     @GetMapping("/")
-    public String showHomePage(Principal principal, @RequestParam(required = false) String name , Model model) {
+    public String showHomePage(Principal principal, Model model) {
         tmdbController.getMoviesDetails(model);
-        tmdbController.searchMovies(name, model);
         isLoggedIn(principal, model);
         pageDetails(model);
         return "index";

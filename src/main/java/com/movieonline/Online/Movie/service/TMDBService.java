@@ -1,9 +1,6 @@
 package com.movieonline.Online.Movie.service;
 
-import com.movieonline.Online.Movie.entity.dto.MovieCastDTO;
-import com.movieonline.Online.Movie.entity.dto.MovieDTO;
-import com.movieonline.Online.Movie.entity.dto.MovieKeywordsDTO;
-import com.movieonline.Online.Movie.entity.dto.MovieReviewsDTO;
+import com.movieonline.Online.Movie.entity.dto.*;
 import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
 import com.movieonline.Online.Movie.entity.res.*;
 import com.movieonline.Online.Movie.exception.UserAlreadyExistException;
@@ -96,15 +93,18 @@ public class TMDBService {
     public List<MovieDTO> searchMovies(String name){
         String url = String.format("%s/search/movie?api_key=%s&query=%s", baseUrl, apiKey, name);
         TMDBMovieResponse response = restTemplate.getForObject(url, TMDBMovieResponse.class);
-        System.out.println(response + url);
         return response.getResults();
     }
 
     //Add Movies Miscellaneous
     @Transactional(rollbackOn = UserAlreadyExistException.class)
     public void provideFeedback(FeedBackEntity feedBackEntity,
+                                String username,
+                                Long movieId,
                                 String reviews,
                                 Double rating) {
+        feedBackEntity.setUsername(username);
+        feedBackEntity.setMovieId(movieId);
         feedBackEntity.setReviews(reviews);
         feedBackEntity.setRating(rating);
 

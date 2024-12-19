@@ -1,19 +1,19 @@
 package com.movieonline.Online.Movie.controller;
 
-import com.movieonline.Online.Movie.entity.dto.MovieCastDTO;
-import com.movieonline.Online.Movie.entity.dto.MovieDTO;
-import com.movieonline.Online.Movie.entity.dto.MovieKeywordsDTO;
-import com.movieonline.Online.Movie.entity.dto.MovieReviewsDTO;
+import com.movieonline.Online.Movie.entity.dto.*;
 import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
+import com.movieonline.Online.Movie.repository.UserRepository;
 import com.movieonline.Online.Movie.service.TMDBService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @AllArgsConstructor
@@ -21,6 +21,7 @@ import java.util.List;
 public class TMDBController {
 
     private final TMDBService tmdbService;
+    private final UserRepository userRepository;
 
     public Model pageDetails(Model model){
         model.addAttribute("WebName", "Cinema Eudamonia");
@@ -68,29 +69,33 @@ public class TMDBController {
         return model;
     }
 
-    public Model searchMovies(@RequestParam String name, Model model) {
-        List<MovieDTO> searchMovies = tmdbService.searchMovies(name);
-        model.addAttribute("searchMovies", searchMovies);
-        System.out.println(name + model);
-        return model;
+    @GetMapping("/api/search")
+    @ResponseBody
+    public List<MovieDTO> searchMovies(@RequestParam String name) {
+        return tmdbService.searchMovies(name);
     }
+
 
     @PostMapping("/movie/{id}/feedback")
-    public String provideFeedback(Long id,
+    public String provideFeedback(@PathVariable Long id,
                                   @RequestParam String reviews,
                                   @RequestParam Double rating,
-                                  FeedBackEntity feedBackEntity,
-                                  Model model) {
+                                  FeedBackEntity feedBackEntity) {
 
-        System.out.println("Received rating: " + rating);
-        System.out.println("Received review: " + reviews);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+        Object principal = authentication.getPrincipal();
+        String username = null;
 
-        tmdbService.provideFeedback(feedBackEntity, feedBackEntity.getReviews(), feedBackEntity.getRating());
-        getMovieDetails(id, model);
-        getMoviesDetails(model);
-        pageDetails(model);
-        return "movie-page";
+        if (principal instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) principal;
+            username = userDetails.getUsername();
+        } else if (principal instanceof String) {
+            username = (String) principal;
+        }
+
+        tmdbService.provideFeedback(feedBackEntity, username, id, reviews, rating);
+
+        return "redirect:/movie/" + id;
     }
-
 }

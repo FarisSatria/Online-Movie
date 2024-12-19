@@ -15,7 +15,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${WebName} | Homepage</title>
-    <link rel="icon" href="/image/favsicon/eudaemonia.png">
+    <link rel="icon" href="/image/favicon/eudaemonia.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/asset/css/style.css">
@@ -23,14 +23,13 @@
 <body class="bg-gray-100 font-avenir min-h-screen">
 <div class="flex">
     <div class="flex-initial" style="width:9.5vw;">
-<%--        @template.include.header.navbar()--%>
         <!-- Floating Sidebar -->
         <div class="fixed top-8 bg-gray-50 left-8 bottom-8 w-16 rounded-xl shadow-card flex flex-col justify-between p-4 z-20">
             <!-- Top Icons -->
             <ul class="space-y-6 text-center">
                 <!-- Icon 1 -->
                 <li>
-                    <a href="/"
+                    <a href="#"
                        class="block text-sky-400 hover:text-yellow-400 drop-shadow-md hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
                         <i class="fas fa-home text-2xl"></i>
                     </a>
@@ -38,7 +37,7 @@
                 </li>
                 <!-- Icon 2 -->
                 <li>
-                    <a href="#"
+                    <a href="#popularMovies"
                        class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
                         <i class="fas fa-film text-2xl"></i>
                     </a>
@@ -53,31 +52,19 @@
                     <div class="w-full h-px bg-black opacity-20 mt-1"></div>
 
                     <!-- Search bar dropdown -->
-                    <div id="searchBar" class="absolute top-0 -right-4 transform -translate-y-5 transition-all duration-500 hidden">
-                        <form class="flex p-3 border-b-4 border-r border-r-gray-400/50 border-b-gray-400/60 bg-gray-50 rounded-r-lg" action="/" method="get">
+                    <div id="searchBar" class="absolute top-1 -right-4 transform -translate-y-5 transition-all duration-500 hidden">
+                        <form  id="searchForm" class="flex p-3 border-b-4 border-r border-r-gray-400/50 border-b-gray-400/60 bg-gray-50 rounded-r-lg" method="get">
                             <input type="text" id="name" name="name" placeholder="Search..." class="p-2 border border-gray-300 rounded-md w-72 focus:outline-none"/>
-                            <div class="ml-3 mt-1">
-                                <a href="#"
-                                   class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 transition duration-200 w-full">
-                                    <i id="searchIconSymbol" class="fas fa-search text-yellow-500 text-2xl"></i>
-                                </a>
+                            <div class="ml-3 mt-1 w-8">
+                                <button type="button" id="searchButton" class="hover:rotate-12 hover:scale-125 transition duration-200">
+                                    <i id="searchIconSymbol" class="fas fa-search text-sky-400 hover:text-yellow-400 text-2xl"></i>
+                                </button>
                                 <div class="w-full h-px bg-black opacity-20 mt-1"></div>
                             </div>
                         </form>
                         <div class="overflow-auto p-3 h-screen scrollbar-hidden">
-                            <div class="flex flex-col space-y-6">
-                                @for (MovieDTO movie : searchMovies)
-                                    <a href="/movie/${movie.getId()}" class="relative bg-gray-50 rounded-xl flex shadow-card overflow-hidden max-w-sm w-full h-40
-                            flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
-                                        <img class="w-28 h-full object-cover"
-                                             src="https://image.tmdb.org/t/p/w185${movie.getPoster_path()}"
-                                             alt="${movie.getTitle()}">
-                                        <div class="p-4 space-y-1" style="height:90%;">
-                                            <h3 class="text-xl text-black font-semibold">${movie.getTitle()}</h3>
-                                            <div class="text-sm text-zinc-400 relative overflow-hidden max-h-24 text-ellipsis">${movie.getOverview()}</div>
-                                        </div>
-                                    </a>
-                                @endfor
+                            <div  id="movieResults"  class="flex flex-col space-y-6">
+                                <!-- Movies Results will appear in here -->
                             </div>
                         </div>
                     </div>
@@ -153,7 +140,7 @@
         </div>
         <!-- Popular Movies Section (Horizontal Scroll) -->
         <div class="w-full">
-            <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Popular Movies</h3>
+            <h3 id="popularMovies" class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Popular Movies</h3>
             <div class="flex space-x-4 pb-4 overflow-x-hidden pt-5">
                 <!-- Movie Card -->
                 @for (MovieDTO movie : popularMovies)
@@ -236,6 +223,7 @@
 <!-- The Modal -->
 @template.include.modal.booking()
 <script src="/asset/js/navbar.js"></script>
+<script src="/asset/js/AJAX-handler.js"></script>
 <script src="/asset/js/modal.js"></script>
 <script src="/asset/js/main.js"></script>
 </body>

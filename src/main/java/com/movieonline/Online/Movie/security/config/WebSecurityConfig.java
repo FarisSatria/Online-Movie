@@ -32,7 +32,7 @@ public class WebSecurityConfig {
                                         "/image/**",
                                         "/video/**",
                                         "/movies",
-                                        "/search",
+                                        "/api/search",
                                         "/guest-session",
                                         "/register",
                                         "/movies/popular",
