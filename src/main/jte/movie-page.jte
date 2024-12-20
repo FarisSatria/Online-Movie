@@ -11,7 +11,7 @@
 @param MovieDTO movieDetail
 @param MovieGenresDTO movieGenres
 @param MovieAuthorDetailsReviewDTO movieAuthorDetailsReview
-@param List<FeedBackEntity> feedBack
+@param List<FeedBackEntity> movieFeedbacks
 @param List<MovieCastDTO> movieCast
 @param List<MovieKeywordsDTO> movieKeywords
 @param List<MovieReviewsDTO> movieReviews
@@ -41,7 +41,7 @@
                 <!-- Icon 1 -->
                 <li>
                     <a href="/"
-                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
+                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-lg transition duration-200">
                         <i class="fas fa-home text-2xl"></i>
                     </a>
                     <div class="w-full h-px bg-black opacity-20 mt-1"></div>
@@ -49,37 +49,12 @@
                 <!-- Icon 2 -->
                 <li>
                     <a href="#"
-                       class="block text-sky-400 hover:text-yellow-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-card transition duration-200">
+                       class="block text-sky-400 hover:text-yellow-400 hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-lg transition duration-200">
                         <i class="fas fa-film text-2xl"></i>
                     </a>
                     <div class="w-full h-px bg-black opacity-20 mt-1"></div>
                 </li>
-                <!-- Icon 3 with Search Bar Dropdown -->
-                <li class="relative">
-                    <a href="#" id="searchIcon"
-                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 transition duration-200">
-                        <i id="searchIconSymbol" class="fas fa-search text-2xl"></i>
-                    </a>
-                    <div class="w-full h-px bg-black opacity-20 mt-1"></div>
-
-                    <!-- Search bar dropdown -->
-                    <div id="searchBar" class="absolute top-1 -right-4 transform -translate-y-5 transition-all duration-500 hidden">
-                        <form  id="searchForm" class="flex p-3 border-b-4 border-r border-r-gray-400/50 border-b-gray-400/60 bg-gray-50 rounded-r-lg" method="get">
-                            <input type="text" id="name" name="name" placeholder="Search..." class="p-2 border border-gray-300 rounded-md w-72 focus:outline-none"/>
-                            <div class="ml-3 mt-1 w-8">
-                                <button type="button" id="searchButton" class="hover:rotate-12 hover:scale-125 transition duration-200">
-                                    <i id="searchIconSymbol" class="fas fa-search text-sky-400 hover:text-yellow-400 text-2xl"></i>
-                                </button>
-                                <div class="w-full h-px bg-black opacity-20 mt-1"></div>
-                            </div>
-                        </form>
-                        <div class="overflow-auto p-3 h-screen scrollbar-hidden">
-                            <div  id="movieResults"  class="flex flex-col space-y-6">
-                                <!-- Movies Results will appear in here -->
-                            </div>
-                        </div>
-                    </div>
-                </li>
+                @template.include.header.sidebar-searchbar()
             </ul>
 
             @if(isLoggedIn)
@@ -172,29 +147,29 @@
                             <div class="border-sky-400 border-l-4 pl-2 h-8"></div>
                             <img class="size-8 rounded-full bg-gray-500 mr-2">
                             <form class="w-full" action="/movie/${movieDetail.getId()}/feedback" method="post">
-                                <input class="bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" type="text" id="reviews" name="reviews" placeholder="Add Review">
+                                <input class="bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" type="text" id="reviews" name="reviews" placeholder="Add Review" required="required">
                                 <div class="flex flex-row-reverse mt-2">
                                     <button type="submit"
                                             class="bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right ml-auto">
                                         Comment
                                     </button>
-                                    <input type="radio" id="star5" name="rating" value="5" class="hidden peer">
+                                    <input type="radio" id="star5" name="rating" value="10.0" class="hidden peer">
                                     <label for="star5"
                                            class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md my-auto text-lg"><i class="fas fa-star"></i></label>
 
-                                    <input type="radio" id="star4" name="rating" value="4" class="hidden peer">
+                                    <input type="radio" id="star4" name="rating" value="8.0" class="hidden peer">
                                     <label for="star4"
                                            class=" cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md my-auto text-lg"><i class="fas fa-star"></i></label>
 
-                                    <input type="radio" id="star3" name="rating" value="3" class="hidden peer">
+                                    <input type="radio" id="star3" name="rating" value="6.0" class="hidden peer">
                                     <label for="star3"
                                            class=" cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md my-auto text-lg"><i class="fas fa-star"></i></label>
 
-                                    <input type="radio" id="star2" name="rating" value="2" class="hidden peer">
+                                    <input type="radio" id="star2" name="rating" value="4.0" class="hidden peer">
                                     <label for="star2"
                                            class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md my-auto text-lg"><i class="fas fa-star"></i></label>
 
-                                    <input type="radio" id="star1" name="rating" value="1" class="hidden peer">
+                                    <input type="radio" id="star1" name="rating" value="2.0" class="hidden peer">
                                     <label for="star1"
                                            class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md my-auto text-lg"><i class="fas fa-star"></i></label>
                                 </div>
@@ -202,29 +177,33 @@
                         </div>
                         <div class="transition-transform duration-500 ease-in-out max-h-96 overflow-y-scroll
                                 p-5 space-y-12">
-                            @for (MovieDTO movie : feedBack)
-                                <div class="w-full space-y-2">
-                                    <div class="flex">
-                                        <div class="border-sky-400 border-l-4 pl-2 h-8"></div>
-                                        <img class="size-8 rounded-full bg-gray-500 mr-2">
-                                        <h3 class="text-xl font-bold my-auto">${movie.getUsername()}</h3>
-                                    </div>
-                                    <div class="flex items-center">
-                                        @for (int i = 1; i <= 5; i++)
-                                            @if (i <= movie.getRating() / 2)
-                                                <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
-                                            @else
-                                                <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
-                                            @endif
-                                        @endfor
-                                    </div>
-                                    <div class="overflow-y-auto max-h-full">
-                                        <p class="reviews text-md text-zinc-600" style="display: -webkit-box; -webkit-box-orient: vertical;
-                                    -webkit-line-clamp: 5; overflow: hidden;">${movie.getReviews()}</p>
-                                    </div>
-                                    <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white ">Show More!</button>
-                                </div>
-                            @endfor
+                            @if(movieFeedbacks != null)
+                                @for(FeedBackEntity feedbacks : movieFeedbacks)
+                                    @if(feedbacks.getMovieId() == movieDetail.getId())
+                                        <div class="w-full space-y-2">
+                                            <div class="flex">
+                                                <div class="border-sky-400 border-l-4 pl-2 h-8"></div>
+                                                <img class="size-8 rounded-full bg-gray-500 mr-2">
+                                                <h3 class="text-xl font-bold my-auto">${feedbacks.getUsername()}</h3>
+                                            </div>
+                                            <div class="flex items-center">
+                                                @for (int i = 1; i <= 5; i++)
+                                                    @if (i <= feedbacks.getRating() / 2)
+                                                        <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                                    @else
+                                                        <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                                    @endif
+                                                @endfor
+                                            </div>
+                                            <div class="overflow-y-auto max-h-full">
+                                                <p class="reviews text-md text-zinc-600" style="display: -webkit-box; -webkit-box-orient: vertical;
+                                        -webkit-line-clamp: 5; overflow: hidden;">${feedbacks.getReviews()}</p>
+                                            </div>
+                                            <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white ">Show More!</button>
+                                        </div>
+                                    @endif
+                                @endfor
+                            @endif
                             @for (MovieReviewsDTO movie : movieReviews)
                                 <div class="w-full space-y-2">
                                     <div class="flex">

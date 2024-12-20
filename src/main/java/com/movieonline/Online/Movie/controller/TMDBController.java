@@ -46,6 +46,9 @@ public class TMDBController {
         List<MovieKeywordsDTO> movieKeywords = tmdbService.getMovieKeywords(id);
         model.addAttribute("movieKeywords", movieKeywords);
 
+        List<FeedBackEntity> movieFeedbacks = tmdbService.getFeedback();
+        model.addAttribute("movieFeedbacks", movieFeedbacks);
+
         return model;
     }
 

@@ -30,7 +30,7 @@
                 <!-- Icon 1 -->
                 <li>
                     <a href="#"
-                       class="block text-sky-400 hover:text-yellow-400 drop-shadow-md hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
+                       class="block text-sky-400 hover:text-yellow-400 drop-shadow-md hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-lg transition duration-200">
                         <i class="fas fa-home text-2xl"></i>
                     </a>
                     <div class="w-full h-px bg-black opacity-20 mt-1"></div>
@@ -38,44 +38,19 @@
                 <!-- Icon 2 -->
                 <li>
                     <a href="#popularMovies"
-                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
+                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-lg transition duration-200">
                         <i class="fas fa-film text-2xl"></i>
                     </a>
                     <div class="w-full h-px bg-black opacity-20 mt-1"></div>
                 </li>
-                <!-- Icon 3 with Search Bar Dropdown -->
-                <li class="relative">
-                    <a href="#" id="searchIcon"
-                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 transition duration-200">
-                        <i id="searchIconSymbol" class="fas fa-search text-2xl"></i>
-                    </a>
-                    <div class="w-full h-px bg-black opacity-20 mt-1"></div>
-
-                    <!-- Search bar dropdown -->
-                    <div id="searchBar" class="absolute top-1 -right-4 transform -translate-y-5 transition-all duration-500 hidden">
-                        <form  id="searchForm" class="flex p-3 border-b-4 border-r border-r-gray-400/50 border-b-gray-400/60 bg-gray-50 rounded-r-lg" method="get">
-                            <input type="text" id="name" name="name" placeholder="Search..." class="p-2 border border-gray-300 rounded-md w-72 focus:outline-none"/>
-                            <div class="ml-3 mt-1 w-8">
-                                <button type="button" id="searchButton" class="hover:rotate-12 hover:scale-125 transition duration-200">
-                                    <i id="searchIconSymbol" class="fas fa-search text-sky-400 hover:text-yellow-400 text-2xl"></i>
-                                </button>
-                                <div class="w-full h-px bg-black opacity-20 mt-1"></div>
-                            </div>
-                        </form>
-                        <div class="overflow-auto p-3 h-screen scrollbar-hidden">
-                            <div  id="movieResults"  class="flex flex-col space-y-6">
-                                <!-- Movies Results will appear in here -->
-                            </div>
-                        </div>
-                    </div>
-                </li>
+                @template.include.header.sidebar-searchbar()
             </ul>
 
             @if(isLoggedIn)
                 <!-- Logout Icon -->
                 <div class="text-center mt-auto">
                     <a href="/logout"
-                       class="block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
+                       class="block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-lg transition duration-200">
                         <i class="fas fa-sign-out-alt text-2xl"></i>
                     </a>
                 </div>
@@ -83,7 +58,7 @@
                 <!-- Login Icon -->
                 <div class="text-center mt-auto">
                     <a href="/login"
-                       class="block text-green-500  hover:text-green-400 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
+                       class="block text-green-500  hover:text-green-400 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-lg transition duration-200">
                         <i class="fas fa-sign-in-alt text-2xl"></i>
                     </a>
                 </div>
@@ -195,7 +170,7 @@
     </div>
     <div class="flex-initial" style="width:30vw;">
         <div class="w-3/12 ml-5 mt-8">
-            <div class="w-96">
+            <div style="width:26.9vw;">
                 <h3 class="ml-3 text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold mb-4">Upcoming
                     Movies</h3>
                 <div class="overflow-auto p-3 h-screen">

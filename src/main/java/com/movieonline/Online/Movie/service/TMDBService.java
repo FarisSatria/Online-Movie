@@ -96,6 +96,11 @@ public class TMDBService {
         return response.getResults();
     }
 
+    public List<FeedBackEntity> getFeedback(){
+        System.out.println(feedBackRepository.findAll());
+        return feedBackRepository.findAll();
+    }
+
     //Add Movies Miscellaneous
     @Transactional(rollbackOn = UserAlreadyExistException.class)
     public void provideFeedback(FeedBackEntity feedBackEntity,
