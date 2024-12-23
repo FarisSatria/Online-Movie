@@ -89,9 +89,12 @@
                                     @endif
                                 @endfor
                             </div>
-                            <div class="space-x-1 py-3">
-                                <a href="/movie/${movie.getId()}" class="p-4 shadow-card bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 ">View Now!</a>
-                                <a class="book-button p-4 shadow-card bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg transition cursor-pointer duration-300 ">Book Now!</a>
+                            <div class="space-x-1 flex">
+                                <a href="/movie/${movie.getId()}" class="p-3 shadow-card bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 ">View Now!</a>
+                                <div class="p-3 rounded-lg shadow-inner-lg border border-gray-200 bg-gray-100 flex">
+                                    <p class="text-zinc-700 font-semibold">Quota Left: 5</p>
+                                    <p class="text-zinc-700 font-medium">/50</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -195,11 +198,8 @@
 </div>
 <!-- Footer -->
 @template.include.footer.footer()
-<!-- The Modal -->
-@template.include.modal.booking()
 <script src="/asset/js/navbar.js"></script>
 <script src="/asset/js/AJAX-handler.js"></script>
-<script src="/asset/js/modal.js"></script>
-<script src="/asset/js/main.js"></script>
+<script src="/asset/js/carousel.js"></script>
 </body>
 </html>

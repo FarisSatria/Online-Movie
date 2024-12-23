@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -15,16 +16,9 @@ import java.util.Objects;
 @Entity
 public class FeedBackEntity {
 
+
     @Id
-    @SequenceGenerator(
-            name="student_sequence",
-            sequenceName = "student_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private Long movieId;
@@ -32,7 +26,7 @@ public class FeedBackEntity {
     private String reviews;
     private Double rating;
 
-    public FeedBackEntity(String username, Long movieId, String reviews, Double rating) {
+    public FeedBackEntity(Long movieId, String username,String reviews, Double rating) {
         this.username = username;
         this.movieId = movieId;
         this.reviews = reviews;

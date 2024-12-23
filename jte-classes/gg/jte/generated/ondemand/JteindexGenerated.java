@@ -3,7 +3,7 @@ import java.util.List;
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
 public final class JteindexGenerated {
 	public static final String JTE_NAME = "index.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,16,16,16,16,25,27,29,37,45,45,48,48,49,56,56,57,64,64,68,70,72,72,74,74,74,74,77,77,77,77,77,77,77,77,77,77,77,77,77,80,80,80,81,81,81,83,83,84,84,86,86,88,88,89,89,92,92,92,92,98,98,101,103,108,115,119,120,120,121,121,121,121,123,123,123,123,124,124,124,124,124,124,124,124,124,127,127,127,129,129,130,130,132,132,134,134,135,135,139,139,142,146,147,147,148,148,148,148,150,150,150,150,151,151,151,151,151,151,151,151,151,154,154,154,156,156,157,157,159,159,161,161,162,162,166,166,177,177,178,178,178,178,181,181,181,181,182,182,182,182,182,182,182,182,182,184,184,184,185,185,185,188,188,195,196,196,197,198,198,204,204,204,3,4,5,6,7,8,9,9,9,9};
+	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,16,16,16,16,25,27,29,37,45,45,48,48,49,56,56,57,64,64,68,70,72,72,74,74,74,74,77,77,77,77,77,77,77,77,77,77,77,77,77,80,80,80,81,81,81,83,83,84,84,86,86,88,88,89,89,92,92,92,92,101,101,104,106,111,118,122,123,123,124,124,124,124,126,126,126,126,127,127,127,127,127,127,127,127,127,130,130,130,132,132,133,133,135,135,137,137,138,138,142,142,145,149,150,150,151,151,151,151,153,153,153,153,154,154,154,154,154,154,154,154,154,157,157,157,159,159,160,160,162,162,164,164,165,165,169,169,180,180,181,181,181,181,184,184,184,184,185,185,185,185,185,185,185,185,185,187,187,187,188,188,188,191,191,198,199,199,204,204,204,3,4,5,6,7,8,9,9,9,9};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, Boolean isLoggedIn, List<MovieDTO> searchMovies, List<MovieDTO> nowPlayingMovies, List<MovieDTO> popularMovies, List<MovieDTO> topRatedMovies, List<MovieDTO> upcomingMovies) {
 		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
@@ -59,11 +59,11 @@ public final class JteindexGenerated {
 				}
 				jteOutput.writeContent("\n                                ");
 			}
-			jteOutput.writeContent("\n                            </div>\n                            <div class=\"space-x-1 py-3\">\n                                <a href=\"/movie/");
+			jteOutput.writeContent("\n                            </div>\n                            <div class=\"space-x-1 flex\">\n                                <a href=\"/movie/");
 			jteOutput.setContext("a", "href");
 			jteOutput.writeUserContent(movie.getId());
 			jteOutput.setContext("a", null);
-			jteOutput.writeContent("\" class=\"p-4 shadow-card bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 \">View Now!</a>\n                                <a class=\"book-button p-4 shadow-card bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg transition cursor-pointer duration-300 \">Book Now!</a>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                ");
+			jteOutput.writeContent("\" class=\"p-3 shadow-card bg-sky-400 hover:bg-sky-500 text-white rounded-lg transition duration-300 \">View Now!</a>\n                                <div class=\"p-3 rounded-lg shadow-inner-lg border border-gray-200 bg-gray-100 flex\">\n                                    <p class=\"text-zinc-700 font-semibold\">Quota Left: 5</p>\n                                    <p class=\"text-zinc-700 font-medium\">/50</p>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                ");
 		}
 		jteOutput.writeContent("\n            </div>\n\n            ");
 		jteOutput.writeContent("\n            <div class=\"right-3 bottom-3 p-1 h-24 rounded-full shadow-inner-lg w-52 absolute flex bg-gray-50\">\n                ");
@@ -170,10 +170,7 @@ public final class JteindexGenerated {
 		jteOutput.writeContent("\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n");
 		jteOutput.writeContent("\n");
 		gg.jte.generated.ondemand.include.footer.JtefooterGenerated.render(jteOutput, jteHtmlInterceptor);
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		gg.jte.generated.ondemand.include.modal.JtebookingGenerated.render(jteOutput, jteHtmlInterceptor);
-		jteOutput.writeContent("\n<script src=\"/asset/js/navbar.js\"></script>\n<script src=\"/asset/js/AJAX-handler.js\"></script>\n<script src=\"/asset/js/modal.js\"></script>\n<script src=\"/asset/js/main.js\"></script>\n</body>\n</html>");
+		jteOutput.writeContent("\n<script src=\"/asset/js/navbar.js\"></script>\n<script src=\"/asset/js/AJAX-handler.js\"></script>\n<script src=\"/asset/js/carousel.js\"></script>\n</body>\n</html>");
 	}
 	public static void renderMap(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, java.util.Map<String, Object> params) {
 		String WebName = (String)params.get("WebName");

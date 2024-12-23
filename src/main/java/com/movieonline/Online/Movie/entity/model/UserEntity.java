@@ -17,25 +17,15 @@ import java.util.List;
 @Entity
 public class UserEntity {
 
+
     @Id
-    @SequenceGenerator(
-            name="student_sequence",
-            sequenceName = "student_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @NotBlank(message = "Username cannot be empty")
     private String username;
     @NotBlank(message = "Password cannot be empty")
     private String password;
-
-    @OneToMany(mappedBy = "username", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FeedBackEntity> feedbacks;
 
     public UserEntity(String name, String username, String password) {
         this.name = name;

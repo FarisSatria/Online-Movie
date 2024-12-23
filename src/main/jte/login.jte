@@ -107,6 +107,6 @@
 
 
 <!-- Custom JavaScript -->
-<script src="/asset/js/main.js"></script>
+<script src="/asset/js/login.js"></script>
 </body>
 </html>
