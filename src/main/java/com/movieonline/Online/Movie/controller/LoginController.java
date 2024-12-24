@@ -18,7 +18,10 @@ public class LoginController {
     private final TemplateController templateController;
 
     @GetMapping("/login")
-    public String loginPage(Model model) {
+    public String loginPage(@RequestParam(value = "error", required = false) String error, Model model) {
+        if (error != null) {
+            model.addAttribute("invalidCredentials", "Invalid username or password");
+        }
         templateController.pageDetails(model);
         return "login";
     }

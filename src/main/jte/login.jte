@@ -1,5 +1,6 @@
 @param String WebName
-@param String errorMessage
+@param String userAlreadyExist
+@param String invalidCredentials
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +22,7 @@
 </head>
 <body class="bg-gray-100 font-avenir min-h-screen flex items-center justify-center">
 
-<div class="w-10/12 h-96 max-w-4xl bg-gray-50 rounded-lg shadow-card flex flex-col md:flex-row">
+<div class="w-10/12 h-96 max-w-4xl bg-gray-50 rounded-lg shadow-card flex flex-row">
     <!-- Login Form Section -->
     <div id="loginForm" class="p-8 w-full md:w-1/2 text-gray-900">
         <h2 class="text-4xl text-black font-bold text-center mb-6">${WebName}</h2>
@@ -95,12 +96,18 @@
     </div>
 </div>
 
-@if(errorMessage != null)
-<%--    opacity-@for(int i = 70; i >= 0; i -= 5)${i}@endfor--%>
+@if(invalidCredentials != null)
     <div id="error-message" class="drop-shadow-md absolute top-5">
         <div class="bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center">Warning!</div>
         <div class="bg-white p-5 rounded-br-lg rounded-bl-lg">
-            <p>${errorMessage}</p>
+            <p>${invalidCredentials}</p>
+        </div>
+    </div>
+@elseif(userAlreadyExist != null)
+    <div id="error-message" class="drop-shadow-md absolute top-5">
+        <div class="bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center">Warning!</div>
+        <div class="bg-white p-5 rounded-br-lg rounded-bl-lg">
+            <p>${userAlreadyExist}</p>
         </div>
     </div>
 @endif

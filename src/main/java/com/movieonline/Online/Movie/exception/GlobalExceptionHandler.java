@@ -3,6 +3,7 @@ package com.movieonline.Online.Movie.exception;
 import com.movieonline.Online.Movie.controller.TemplateController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.ui.Model;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -20,15 +21,9 @@ public class GlobalExceptionHandler {
         this.templateController = templateController;
     }
 
-    @ExceptionHandler({InvalidCredentialsExeption.class})
-    public String handleInvalidCredentialsException(InvalidCredentialsExeption exception, Model model) {
-        model.addAttribute("errorMessage", exception.getMessage());
-        templateController.pageDetails(model);
-        return "login";
-    }
-    @ExceptionHandler({UserAlreadyExistException.class})
-    public String handleUserAlreadyExistException(UserAlreadyExistException exception, Model model) {
-        model.addAttribute("errorMessage", exception.getMessage());
+    @ExceptionHandler({UserRegistrationConflictException.class})
+    public String handleUserRegistrationConflictException(UserRegistrationConflictException exception, Model model) {
+        model.addAttribute("userAlreadyExist", exception.getMessage());
         templateController.pageDetails(model);
         return "login";
     }

@@ -108,7 +108,7 @@
                                 @endfor
                             </div>
                             <div class="flex space-x-2">
-                                <a id="bookNow" href="#bookingSection" class="book-button shadow-card p-3 bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg transition duration-300 ">Book Now!</a>
+                                <a id="bookNow" href="#bookingSection" class="book-button shadow-card p-3 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg transition duration-300 ">Book Now!</a>
                                 <div class="p-3 rounded-lg shadow-inner-lg border border-gray-200 bg-gray-100 flex">
                                     <p class="text-zinc-700 font-semibold">Quota Left: 5</p>
                                     <p class="text-zinc-700 font-medium">/50</p>
@@ -123,59 +123,61 @@
                 <!-- Movie Booking Section -->
                 <div id="bookingSection" class="w-full hidden mb-5">
                     <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Booking Section</h3>
-                    <div class="main p-6 w-full space-y-4">
-                        <div class="timings flex flex-col items-center w-full space-y-4">
+                    <div class="main w-full">
+                        <div class="timings flex flex-col px-5 space-y-4 w-full mt-4">
                             <!-- Date Selection -->
-                            <div class="dates w-full flex justify-center gap-4">
+                            <h3 class="text-black text-2xl font-semibold border-sky-400 border-l-4 pl-2">Select Date</h3>
+                            <div class="dates w-full flex gap-4">
                                 <input type="radio" name="date" id="d1" checked class="hidden">
-                                <label for="d1" class="dates-item shadow-card shadow-card w-20 h-24 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-sky-500 hover:text-white transition duration-200">
+                                <label for="d1" class="dates-item shadow-card shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
                                     <div class="day text-xs font-semibold">Friday</div>
                                     <div class="date text-lg font-bold">12</div>
                                 </label>
                                 <input type="radio" name="date" id="d2" class="hidden">
-                                <label for="d2" class="dates-item shadow-card shadow-card w-20 h-24 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-sky-500 hover:text-white transition duration-200">
+                                <label for="d2" class="dates-item shadow-card shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
                                     <div class="day text-xs font-semibold">Saturday</div>
                                     <div class="date text-lg font-bold">13</div>
                                 </label>
                                 <input type="radio" name="date" id="d3" class="hidden">
-                                <label for="d3" class="dates-item shadow-card shadow-card w-20 h-24 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-sky-500 hover:text-white transition duration-200">
+                                <label for="d3" class="dates-item shadow-card shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
                                     <div class="day text-xs font-semibold">Sunday</div>
                                     <div class="date text-lg font-bold">14</div>
                                 </label>
                                 <input type="radio" name="date" id="d4" class="hidden">
-                                <label for="d4" class="dates-item shadow-card w-20 h-24 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-sky-500 hover:text-white transition duration-200">
+                                <label for="d4" class="dates-item shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
                                     <div class="day text-xs font-semibold">Monday</div>
                                     <div class="date text-lg font-bold">15</div>
                                 </label>
                                 <input type="radio" name="date" id="d5" class="hidden">
-                                <label for="d5" class="dates-item shadow-card w-20 h-24 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-sky-500 hover:text-white transition duration-200">
+                                <label for="d5" class="dates-item shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
                                     <div class="day text-xs font-semibold">Tuesday</div>
                                     <div class="date text-lg font-bold">16</div>
                                 </label>
                                 <input type="radio" name="date" id="d6" class="hidden">
-                                <label for="d6" class="dates-item shadow-card w-20 h-24 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-sky-500 hover:text-white transition duration-200">
+                                <label for="d6" class="dates-item shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
                                     <div class="day text-xs font-semibold">Wednesday</div>
                                     <div class="date text-lg font-bold">17</div>
                                 </label>
                                 <input type="radio" name="date" id="d7" class="hidden">
-                                <label for="d7" class="dates-item shadow-card w-20 h-24 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-sky-500 hover:text-white transition duration-200">
+                                <label for="d7" class="dates-item shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
                                     <div class="day text-xs font-semibold">Thursday</div>
                                     <div class="date text-lg font-bold">18</div>
                                 </label>
-                            </div>
+                            </div><br>
 
                             <!-- Time Selection -->
-                            <div class="times w-full flex justify-center gap-4">
+                            <h3 class="text-black text-2xl font-semibold border-sky-400 border-l-4 pl-2">Select Time</h3>
+                            <div class="times w-full flex gap-4">
                                 <input type="radio" name="time" id="t1" checked class="hidden">
-                                <label for="t1" class="time text-sm shadow-card w-fit px-4 py-2 bg-white rounded-md cursor-pointer hover:bg-sky-500 hover:text-white transition duration-200">11:00</label>
+                                <label for="t1" class="time text-sm shadow-card w-fit px-4 py-2 bg-white rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">11:00</label>
                                 <input type="radio" name="time" id="t2" class="hidden">
-                                <label for="t2" class="time text-sm shadow-card w-fit px-4 py-2 bg-white rounded-md cursor-pointer hover:bg-sky-500 hover:text-white transition duration-200">14:30</label>
+                                <label for="t2" class="time text-sm shadow-card w-fit px-4 py-2 bg-white rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">14:30</label>
                                 <input type="radio" name="time" id="t3" class="hidden">
-                                <label for="t3" class="time text-sm shadow-card w-fit px-4 py-2 bg-white rounded-md cursor-pointer hover:bg-sky-500 hover:text-white transition duration-200">18:00</label>
+                                <label for="t3" class="time text-sm shadow-card w-fit px-4 py-2 bg-white rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">18:00</label>
                                 <input type="radio" name="time" id="t4" class="hidden">
-                                <label for="t4" class="time text-sm shadow-card w-fit px-4 py-2 bg-white rounded-md cursor-pointer hover:bg-sky-500 hover:text-white transition duration-200">21:30</label>
-                            </div>
-                            <a href="/movie/{id}/booking" type="button" class="bg-green-500 shadow-card hover:bg-green-400 text-white text-sm py-2 px-6 rounded-md transition duration-300 cursor-pointer shadow-card float-right">Book</a>
+                                <label for="t4" class="time text-sm shadow-card w-fit px-4 py-2 bg-white rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">21:30</label>
+                            </div><br>
+                            <a href="/movie/{id}/booking" type="button" class="bg-green-500 hover:bg-green-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right ml-auto">Book Now!</a>
                         </div>
                     </div>
                 </div>

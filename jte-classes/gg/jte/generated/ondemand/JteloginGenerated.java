@@ -1,15 +1,15 @@
 package gg.jte.generated.ondemand;
 public final class JteloginGenerated {
 	public static final String JTE_NAME = "login.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,0,0,8,8,8,8,11,14,17,24,26,26,26,28,33,38,45,56,58,58,58,60,65,70,75,83,86,86,86,92,92,92,97,97,98,102,102,102,105,105,108,112,112,112,0,1,1,1,1};
-	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, String errorMessage) {
+	public static final int[] JTE_LINE_INFO = {0,0,0,0,9,9,9,9,12,15,18,25,27,27,27,29,34,39,46,57,59,59,59,61,66,71,76,84,87,87,87,93,93,93,98,98,102,102,102,105,105,109,109,109,112,112,115,119,119,119,0,1,2,2,2,2};
+	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, String userAlreadyExist, String invalidCredentials) {
 		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
 		jteOutput.writeUserContent(WebName);
 		jteOutput.writeContent(" | Login</title>\n    <link rel=\"icon\" href=\"/image/favicon/eudaemonia.png\">\n\n    ");
 		jteOutput.writeContent("\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n\n    ");
 		jteOutput.writeContent("\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css\">\n\n    ");
-		jteOutput.writeContent("\n    <link rel=\"stylesheet\" href=\"/asset/css/login.css\">\n    <link rel=\"stylesheet\" href=\"/asset/css/style.css\">\n</head>\n<body class=\"bg-gray-100 font-avenir min-h-screen flex items-center justify-center\">\n\n<div class=\"w-10/12 h-96 max-w-4xl bg-gray-50 rounded-lg shadow-card flex flex-col md:flex-row\">\n    ");
+		jteOutput.writeContent("\n    <link rel=\"stylesheet\" href=\"/asset/css/login.css\">\n    <link rel=\"stylesheet\" href=\"/asset/css/style.css\">\n</head>\n<body class=\"bg-gray-100 font-avenir min-h-screen flex items-center justify-center\">\n\n<div class=\"w-10/12 h-96 max-w-4xl bg-gray-50 rounded-lg shadow-card flex flex-row\">\n    ");
 		jteOutput.writeContent("\n    <div id=\"loginForm\" class=\"p-8 w-full md:w-1/2 text-gray-900\">\n        <h2 class=\"text-4xl text-black font-bold text-center mb-6\">");
 		jteOutput.setContext("h2", null);
 		jteOutput.writeUserContent(WebName);
@@ -33,11 +33,15 @@ public final class JteloginGenerated {
 		jteOutput.setContext("p", null);
 		jteOutput.writeUserContent(WebName);
 		jteOutput.writeContent("!</p>\n        <button onclick=\"toggleView()\" class=\"px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white font-semibold rounded-lg transition shadow-card\">Log In</button>\n    </div>\n</div>\n\n");
-		if (errorMessage != null) {
-			jteOutput.writeContent("\n");
+		if (invalidCredentials != null) {
 			jteOutput.writeContent("\n    <div id=\"error-message\" class=\"drop-shadow-md absolute top-5\">\n        <div class=\"bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center\">Warning!</div>\n        <div class=\"bg-white p-5 rounded-br-lg rounded-bl-lg\">\n            <p>");
 			jteOutput.setContext("p", null);
-			jteOutput.writeUserContent(errorMessage);
+			jteOutput.writeUserContent(invalidCredentials);
+			jteOutput.writeContent("</p>\n        </div>\n    </div>\n");
+		} else if (userAlreadyExist != null) {
+			jteOutput.writeContent("\n    <div id=\"error-message\" class=\"drop-shadow-md absolute top-5\">\n        <div class=\"bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center\">Warning!</div>\n        <div class=\"bg-white p-5 rounded-br-lg rounded-bl-lg\">\n            <p>");
+			jteOutput.setContext("p", null);
+			jteOutput.writeUserContent(userAlreadyExist);
 			jteOutput.writeContent("</p>\n        </div>\n    </div>\n");
 		}
 		jteOutput.writeContent("\n\n\n");
@@ -45,7 +49,8 @@ public final class JteloginGenerated {
 	}
 	public static void renderMap(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, java.util.Map<String, Object> params) {
 		String WebName = (String)params.get("WebName");
-		String errorMessage = (String)params.get("errorMessage");
-		render(jteOutput, jteHtmlInterceptor, WebName, errorMessage);
+		String userAlreadyExist = (String)params.get("userAlreadyExist");
+		String invalidCredentials = (String)params.get("invalidCredentials");
+		render(jteOutput, jteHtmlInterceptor, WebName, userAlreadyExist, invalidCredentials);
 	}
 }

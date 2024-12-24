@@ -3,10 +3,9 @@ package com.movieonline.Online.Movie.service;
 import com.movieonline.Online.Movie.entity.dto.*;
 import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
 import com.movieonline.Online.Movie.entity.res.*;
-import com.movieonline.Online.Movie.exception.UserAlreadyExistException;
+import com.movieonline.Online.Movie.exception.UserRegistrationConflictException;
 import com.movieonline.Online.Movie.repository.FeedBackRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,7 +18,6 @@ public class TMDBService {
     private final RestTemplate restTemplate;
     private final String apiKey;
     private final String baseUrl;
-    @Autowired
     private final FeedBackRepository feedBackRepository;
 
     public TMDBService(
@@ -102,7 +100,7 @@ public class TMDBService {
     }
 
     //Add Movies Miscellaneous
-    @Transactional(rollbackOn = UserAlreadyExistException.class)
+    @Transactional(rollbackOn = UserRegistrationConflictException.class)
     public void provideFeedback(FeedBackEntity feedBackEntity,
                                 String username,
                                 Long movieId,
