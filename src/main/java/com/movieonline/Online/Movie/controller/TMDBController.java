@@ -2,6 +2,7 @@ package com.movieonline.Online.Movie.controller;
 
 import com.movieonline.Online.Movie.entity.dto.*;
 import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
+import com.movieonline.Online.Movie.entity.model.UserEntity;
 import com.movieonline.Online.Movie.repository.UserRepository;
 import com.movieonline.Online.Movie.service.TMDBService;
 import lombok.AllArgsConstructor;
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
 
-@AllArgsConstructor
 @Controller
 public class TMDBController {
 
     private final TMDBService tmdbService;
-    private final UserRepository userRepository;
+
+    public TMDBController(TMDBService tmdbService) {
+        this.tmdbService = tmdbService;
+    }
 
     public Model pageDetails(Model model){
         model.addAttribute("WebName", "Cinema Eudamonia");
@@ -48,6 +51,10 @@ public class TMDBController {
 
         List<FeedBackEntity> movieFeedbacks = tmdbService.getFeedback();
         model.addAttribute("movieFeedbacks", movieFeedbacks);
+
+
+        List<UserEntity> userList = tmdbService.getUser();
+        model.addAttribute("userList", userList);
 
         return model;
     }

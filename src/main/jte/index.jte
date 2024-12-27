@@ -10,14 +10,20 @@
 @param List<MovieDTO> upcomingMovies
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${WebName} | Homepage</title>
     <link rel="icon" href="/image/favicon/eudaemonia.png">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="/asset/css/style.css">
 </head>
 <body class="bg-gray-100 font-avenir min-h-screen">
@@ -37,7 +43,7 @@
                 </li>
                 <!-- Icon 2 -->
                 <li>
-                    <a href="#popularMovies"
+                    <a href="#scrollToBehaviour"
                        class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-lg transition duration-200">
                         <i class="fas fa-film text-2xl"></i>
                     </a>
@@ -47,12 +53,17 @@
             </ul>
 
             @if(isLoggedIn)
-                <!-- Logout Icon -->
-                <div class="text-center mt-auto">
-                    <a href="/logout"
-                       class="block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-lg transition duration-200">
-                        <i class="fas fa-sign-out-alt text-2xl"></i>
-                    </a>
+                <!-- User Icon -->
+                <div class="text-center mt-auto relative group">
+                    <button id="userButton" class="block size-8 drop-shadow-lg hover:drop-shadow-xl transition duration-200 rounded-full focus:outline-none">
+                        <img rel="icon" class="rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                    </button>
+
+                    <div id="userPanel" class="absolute overflow-hidden -left-4 w-48 bg-white rounded-r-md bg-gray-50 shadow-md border-t border-r border-b border-gray-300 hidden" style="top:-7.8rem;">
+                        <a href="" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300">Settings</a>
+                        <a href="" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300">Account</a>
+                        <a id="openModal" class="block px-4 py-2 text-zinc-700 hover:bg-gradient-to-r from-red-500 to-red-700 hover:text-white border-t border-t-gray-300 cursor-pointer  transition duration-300">Logout</a>
+                    </div>
                 </div>
             @else
                 <!-- Login Icon -->
@@ -118,7 +129,7 @@
         </div>
         <!-- Popular Movies Section (Horizontal Scroll) -->
         <div class="w-full">
-            <h3 id="popularMovies" class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Popular Movies</h3>
+            <h3 id="scrollToBehaviour" class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Popular Movies</h3>
             <div class="flex space-x-4 pb-4 overflow-x-hidden pt-5">
                 <!-- Movie Card -->
                 @for (MovieDTO movie : popularMovies)
@@ -198,8 +209,13 @@
 </div>
 <!-- Footer -->
 @template.include.footer.footer()
-<script src="/asset/js/navbar.js"></script>
+<!-- Modal -->
+@template.include.modal.logout-modal()
+<!-- Custom JavaScript -->
 <script src="/asset/js/AJAX-handler.js"></script>
+<script src="/asset/js/navbar.js"></script>
+<script src="/asset/js/modal.js"></script>
 <script src="/asset/js/carousel.js"></script>
+<script src="/asset/js/booking.js"></script>
 </body>
 </html>

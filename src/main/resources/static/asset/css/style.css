@@ -9,6 +9,12 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+#scrollToBehaviour{
+scroll-margin-top: 50px
+}
+.transition-opacity {
+    transition: opacity 0.5s ease-in-out;
+}
 .shadow-big{
 box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }

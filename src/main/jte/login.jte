@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="/asset/css/login.css">
     <link rel="stylesheet" href="/asset/css/style.css">
 </head>
 <body class="bg-gray-100 font-avenir min-h-screen flex items-center justify-center">

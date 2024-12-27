@@ -2,9 +2,11 @@ package com.movieonline.Online.Movie.service;
 
 import com.movieonline.Online.Movie.entity.dto.*;
 import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
+import com.movieonline.Online.Movie.entity.model.UserEntity;
 import com.movieonline.Online.Movie.entity.res.*;
 import com.movieonline.Online.Movie.exception.UserRegistrationConflictException;
 import com.movieonline.Online.Movie.repository.FeedBackRepository;
+import com.movieonline.Online.Movie.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,17 +21,20 @@ public class TMDBService {
     private final String apiKey;
     private final String baseUrl;
     private final FeedBackRepository feedBackRepository;
+    private final UserRepository userRepository;
 
     public TMDBService(
             @Value("${tmdb.api.key}") String apiKey,
             @Value("${tmdb.base.url}") String baseUrl,
             RestTemplate restTemplate,
-            FeedBackRepository feedBackRepository
+            FeedBackRepository feedBackRepository,
+            UserRepository userRepository
     ) {
         this.apiKey = apiKey;
         this.baseUrl = baseUrl;
         this.restTemplate = restTemplate;
         this.feedBackRepository = feedBackRepository;
+        this.userRepository = userRepository;
     }
 
     // Fetch Movies
@@ -94,8 +99,11 @@ public class TMDBService {
         return response.getResults();
     }
 
+    public List<UserEntity> getUser(){
+        return userRepository.findAll();
+    }
+
     public List<FeedBackEntity> getFeedback(){
-        System.out.println(feedBackRepository.findAll());
         return feedBackRepository.findAll();
     }
 
@@ -111,7 +119,6 @@ public class TMDBService {
         feedBackEntity.setReviews(reviews);
         feedBackEntity.setRating(rating);
 
-        System.out.println("results:" + reviews + rating);
         feedBackRepository.save(feedBackEntity);
     }
 

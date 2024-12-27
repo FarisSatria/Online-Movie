@@ -22,3 +22,15 @@ document.getElementById('searchIcon').addEventListener('click', function (event)
         searchIconSymbol.classList.remove('hover:text-sky-400');
     }
 });
+
+document.getElementById('userButton').addEventListener('click', function (event) {
+    event.preventDefault();
+    const userPanel = document.getElementById('userPanel');
+
+    userPanel.classList.toggle('hidden');
+
+    userPanel.addEventListener('click', () => {
+        userPanel.classList.toggle('hidden');
+    });
+});
+

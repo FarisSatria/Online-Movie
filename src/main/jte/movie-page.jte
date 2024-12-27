@@ -5,12 +5,15 @@
 @import com.movieonline.Online.Movie.entity.dto.MovieReviewsDTO
 @import com.movieonline.Online.Movie.entity.dto.MovieGenresDTO
 @import com.movieonline.Online.Movie.entity.model.FeedBackEntity
+@import com.movieonline.Online.Movie.entity.model.UserEntity
 
 @param String WebName
+@param String getUsername
 @param Boolean isLoggedIn
 @param MovieDTO movieDetail
 @param MovieGenresDTO movieGenres
 @param MovieAuthorDetailsReviewDTO movieAuthorDetailsReview
+@param List<UserEntity> userList
 @param List<FeedBackEntity> movieFeedbacks
 @param List<MovieCastDTO> movieCast
 @param List<MovieKeywordsDTO> movieKeywords
@@ -21,14 +24,20 @@
 @param List<MovieDTO> upcomingMovies
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${WebName} | Homepage</title>
     <link rel="icon" href="/image/favicon/eudaemonia.png">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="/asset/css/style.css">
 </head>
 <body class="bg-gray-100 font-avenir min-h-screen">
@@ -58,12 +67,17 @@
             </ul>
 
             @if(isLoggedIn)
-                <!-- Logout Icon -->
-                <div class="text-center mt-auto">
-                    <a href="/logout"
-                       class="block text-red-500 hover:text-red-700 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
-                        <i class="fas fa-sign-out-alt text-2xl"></i>
-                    </a>
+                <!-- User Icon -->
+                <div class="text-center mt-auto relative group">
+                    <button id="userButton" class="block size-8 drop-shadow-lg hover:drop-shadow-xl transition duration-200 rounded-full focus:outline-none">
+                        <img rel="icon" class="rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                    </button>
+
+                    <div id="userPanel" class="absolute overflow-hidden -left-4 w-48 bg-white rounded-r-md bg-gray-50 shadow-md border-t border-r border-b border-gray-300 hidden" style="top:-7.8rem;">
+                        <a href="" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300">Settings</a>
+                        <a href="" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300">Account</a>
+                        <a id="openModal" class="block px-4 py-2 text-zinc-700 hover:bg-gradient-to-r from-red-500 to-red-700 hover:text-white border-t border-t-gray-300 cursor-pointer  transition duration-300">Logout</a>
+                    </div>
                 </div>
             @else
                 <!-- Login Icon -->
@@ -108,7 +122,7 @@
                                 @endfor
                             </div>
                             <div class="flex space-x-2">
-                                <a id="bookNow" href="#bookingSection" class="book-button shadow-card p-3 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg transition duration-300 ">Book Now!</a>
+                                <a id="bookNow" href="#scrollToBehaviour" class="book-button shadow-card p-3 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg transition duration-300 ">Book Now!</a>
                                 <div class="p-3 rounded-lg shadow-inner-lg border border-gray-200 bg-gray-100 flex">
                                     <p class="text-zinc-700 font-semibold">Quota Left: 5</p>
                                     <p class="text-zinc-700 font-medium">/50</p>
@@ -121,63 +135,83 @@
         <div class="w-full flex space-x-5">
             <div class="flex-initial" style="width:65.1vw;">
                 <!-- Movie Booking Section -->
-                <div id="bookingSection" class="w-full hidden mb-5">
-                    <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Booking Section</h3>
-                    <div class="main w-full">
-                        <div class="timings flex flex-col px-5 space-y-4 w-full mt-4">
-                            <!-- Date Selection -->
-                            <h3 class="text-black text-2xl font-semibold border-sky-400 border-l-4 pl-2">Select Date</h3>
-                            <div class="dates w-full flex gap-4">
-                                <input type="radio" name="date" id="d1" checked class="hidden">
-                                <label for="d1" class="dates-item shadow-card shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
-                                    <div class="day text-xs font-semibold">Friday</div>
-                                    <div class="date text-lg font-bold">12</div>
-                                </label>
-                                <input type="radio" name="date" id="d2" class="hidden">
-                                <label for="d2" class="dates-item shadow-card shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
-                                    <div class="day text-xs font-semibold">Saturday</div>
-                                    <div class="date text-lg font-bold">13</div>
-                                </label>
-                                <input type="radio" name="date" id="d3" class="hidden">
-                                <label for="d3" class="dates-item shadow-card shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
-                                    <div class="day text-xs font-semibold">Sunday</div>
-                                    <div class="date text-lg font-bold">14</div>
-                                </label>
-                                <input type="radio" name="date" id="d4" class="hidden">
-                                <label for="d4" class="dates-item shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
-                                    <div class="day text-xs font-semibold">Monday</div>
-                                    <div class="date text-lg font-bold">15</div>
-                                </label>
-                                <input type="radio" name="date" id="d5" class="hidden">
-                                <label for="d5" class="dates-item shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
-                                    <div class="day text-xs font-semibold">Tuesday</div>
-                                    <div class="date text-lg font-bold">16</div>
-                                </label>
-                                <input type="radio" name="date" id="d6" class="hidden">
-                                <label for="d6" class="dates-item shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
-                                    <div class="day text-xs font-semibold">Wednesday</div>
-                                    <div class="date text-lg font-bold">17</div>
-                                </label>
-                                <input type="radio" name="date" id="d7" class="hidden">
-                                <label for="d7" class="dates-item shadow-card w-16 h-20 bg-white flex flex-col items-center justify-center p-2 rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">
-                                    <div class="day text-xs font-semibold">Thursday</div>
-                                    <div class="date text-lg font-bold">18</div>
-                                </label>
-                            </div><br>
+                <div id="scrollToBehaviour" class="w-full hidden mb-5">
+                    <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Booking ${movieDetail.getTitle()}!</h3>
+                    <div class="main w-full relative p-8">
+                        @if(isLoggedIn)
+                        @else
+                            <div class="absolute p-2 top-4 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/30 to-gray-400/70
+                              shadow-md rounded-lg">
+                                <p class="text-center font-bold text-white text-3xl mt-48"><a href="/login" class="text-green-600 hover:text-green-700 drop-shadow-md transition duration-300">Login</a> To Book a Movie!</p>
+                            </div>
+                        @endif
+                        <div class="timing w-full">
+                            <!-- Date Picker Section -->
+                            <div class="date-picker w-full overflow-x-auto">
+                                <h3 class="text-2xl font-semibold text-gray-800 mb-6">Select Date Time</h3>
+                                <div class="flex space-x-6 mx-2 mb-8">
+                                    <div class="date-card bg-white shadow-xl rounded-lg w-32 h-40 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-blue-500 hover:text-white">
+                                        <div class="day text-xl font-semibold">Mon</div>
+                                        <div class="date text-3xl font-bold">12</div>
+                                    </div>
 
-                            <!-- Time Selection -->
-                            <h3 class="text-black text-2xl font-semibold border-sky-400 border-l-4 pl-2">Select Time</h3>
-                            <div class="times w-full flex gap-4">
-                                <input type="radio" name="time" id="t1" checked class="hidden">
-                                <label for="t1" class="time text-sm shadow-card w-fit px-4 py-2 bg-white rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">11:00</label>
-                                <input type="radio" name="time" id="t2" class="hidden">
-                                <label for="t2" class="time text-sm shadow-card w-fit px-4 py-2 bg-white rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">14:30</label>
-                                <input type="radio" name="time" id="t3" class="hidden">
-                                <label for="t3" class="time text-sm shadow-card w-fit px-4 py-2 bg-white rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">18:00</label>
-                                <input type="radio" name="time" id="t4" class="hidden">
-                                <label for="t4" class="time text-sm shadow-card w-fit px-4 py-2 bg-white rounded-md cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-200">21:30</label>
-                            </div><br>
-                            <a href="/movie/{id}/booking" type="button" class="bg-green-500 hover:bg-green-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right ml-auto">Book Now!</a>
+                                    <div class="date-card bg-white shadow-xl rounded-lg w-32 h-40 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-blue-500 hover:text-white">
+                                        <div class="day text-xl font-semibold">Tue</div>
+                                        <div class="date text-3xl font-bold">13</div>
+                                    </div>
+
+                                    <div class="date-card bg-white shadow-xl rounded-lg w-32 h-40 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-blue-500 hover:text-white">
+                                        <div class="day text-xl font-semibold">Wed</div>
+                                        <div class="date text-3xl font-bold">14</div>
+                                    </div>
+
+                                    <div class="date-card bg-white shadow-xl rounded-lg w-32 h-40 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-blue-500 hover:text-white">
+                                        <div class="day text-xl font-semibold">Thu</div>
+                                        <div class="date text-3xl font-bold">15</div>
+                                    </div>
+
+                                    <div class="date-card bg-white shadow-xl rounded-lg w-32 h-40 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-blue-500 hover:text-white">
+                                        <div class="day text-xl font-semibold">Fri</div>
+                                        <div class="date text-3xl font-bold">16</div>
+                                    </div>
+
+                                    <div class="date-card bg-white shadow-xl rounded-lg w-32 h-40 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-blue-500 hover:text-white">
+                                        <div class="day text-xl font-semibold">Sat</div>
+                                        <div class="date text-3xl font-bold">17</div>
+                                    </div>
+
+                                    <div class="date-card bg-white shadow-xl rounded-lg w-32 h-40 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-blue-500 hover:text-white">
+                                        <div class="day text-xl font-semibold">Sun</div>
+                                        <div class="date text-3xl font-bold">18</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Time Slot Picker -->
+                            <div class="time-picker flex flex-col space-y-6 mb-8">
+                                <h3 class="text-2xl font-semibold text-gray-800">Select Show Time</h3>
+                                <div class="time-slot grid gap-6 grid-cols-4 mx-2">
+                                    <div class="time-card bg-white shadow-lg rounded-lg p-6 text-center cursor-pointer transition duration-300 hover:bg-yellow-500 hover:text-white">
+                                        <div class="time text-xl font-semibold">11:00 AM</div>
+                                    </div>
+
+                                    <div class="time-card bg-white shadow-lg rounded-lg p-6 text-center cursor-pointer transition duration-300 hover:bg-yellow-500 hover:text-white">
+                                        <div class="time text-xl font-semibold">02:30 PM</div>
+                                    </div>
+
+                                    <div class="time-card bg-white shadow-lg rounded-lg p-6 text-center cursor-pointer transition duration-300 hover:bg-yellow-500 hover:text-white">
+                                        <div class="time text-xl font-semibold">06:00 PM</div>
+                                    </div>
+
+                                    <div class="time-card bg-white shadow-lg rounded-lg p-6 text-center cursor-pointer transition duration-300 hover:bg-yellow-500 hover:text-white">
+                                        <div class="time text-xl font-semibold">09:30 PM</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Book Now Button -->
+                            <a href="/movie/{id}/booking" class="bg-green-500  hover:bg-green-400 transition duration-300 text-white rounded-full py-4 px-8 shadow-card flex mx-auto justify-center items-center">
+                                <span class="text-xl font-semibold">Book Now</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -201,18 +235,28 @@
                     </div>
                 </div>
                 <div class="space-y-5 mb-5">
-                    <div class="relative space-y-5 overflow-hidden">
+                    <div class="space-y-5 overflow-hidden">
                         <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Movie Reviews</h3>
-                        @if(isLoggedIn)
-                        @else
-                            <div class="absolute p-2 w-full h-28  bg-gradient-to-b from-gray-400/30 to-gray-400/70
+                        <div class="p-5 relative flex rounded-lg">
+                            @if(isLoggedIn)
+                            @else
+                                <div class="absolute p-2 top-0 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/30 to-gray-400/70
                               shadow-md rounded-lg">
-                                <p class="text-center font-bold text-white text-3xl mt-7"><a href="/login" class="text-green-600 hover:text-green-700 drop-shadow-md transition duration-300">Login</a> To Submit a Review!</p>
-                            </div>
-                        @endif
-                        <div class="p-5 flex rounded-lg">
-                            <div class="border-sky-400 border-l-4 pl-2 h-8"></div>
-                            <img class="size-8 rounded-full bg-gray-500 mr-2">
+                                    <p class="text-center font-bold text-white text-3xl mt-7"><a href="/login" class="text-green-600 hover:text-green-700 drop-shadow-md transition duration-300">Login</a> To Submit a Review!</p>
+                                </div>
+                            @endif
+                            <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
+                            @if(isLoggedIn)
+                                @for(UserEntity user : userList)
+                                    @if(user.getUsername().equals(getUsername) && user.getProfile_picture_path() != null)
+                                        <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
+                                             src="/image/icon/${user.getProfile_picture_path()}.png">
+                                    @endif
+                                @endfor
+                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                            @else
+                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                            @endif
                             <form class="w-full" action="/movie/${movieDetail.getId()}/feedback" method="post">
                                 <input class="bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" type="text" id="reviews" name="reviews" placeholder="Add Review" required="required">
                                 <div class="flex flex-row-reverse mt-2">
@@ -249,8 +293,8 @@
                                     @if(feedbacks.getMovieId() == movieDetail.getId())
                                         <div class="w-full space-y-2">
                                             <div class="flex">
-                                                <div class="border-sky-400 border-l-4 pl-2 h-8"></div>
-                                                <img class="size-8 rounded-full bg-gray-500 mr-2">
+                                                <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
+                                                <img class="size-10 rounded-full bg-gray-500 mr-2">
                                                 <h3 class="text-xl font-bold my-auto">${feedbacks.getUsername()}</h3>
                                             </div>
                                             <div class="flex items-center">
@@ -274,8 +318,8 @@
                             @for (MovieReviewsDTO movie : movieReviews)
                                 <div class="w-full space-y-2">
                                     <div class="flex">
-                                        <div class="border-sky-400 border-l-4 pl-2 h-8"></div>
-                                        <img class="size-8 rounded-full bg-gray-500 mr-2" src="https://image.tmdb.org/t/p/w92${movie.getAuthor_details().getAvatar_path()}">
+                                        <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
+                                        <img class="size-10 rounded-full bg-gray-500 mr-2" src="https://image.tmdb.org/t/p/w92${movie.getAuthor_details().getAvatar_path()}">
                                         <h3 class="text-xl font-bold my-auto">${movie.getAuthor()}</h3>
                                     </div>
                                     <div class="flex items-center">
@@ -369,8 +413,12 @@
 </div>
 <!-- Footer -->
 @template.include.footer.footer()
+<!-- Modal -->
+@template.include.modal.logout-modal()
+<!-- Custom JavaScript -->
 <script src="/asset/js/AJAX-handler.js"></script>
 <script src="/asset/js/navbar.js"></script>
+<script src="/asset/js/modal.js"></script>
 <script src="/asset/js/carousel.js"></script>
 <script src="/asset/js/booking.js"></script>
 </body>
