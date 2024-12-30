@@ -14,7 +14,7 @@
       <input type="text" id="name" name="name" placeholder="Search..." class="p-2 border border-gray-300 w-full rounded-md focus:outline-none"/>
       <div class="ml-3 mt-1 w-8">
         <button type="button" id="searchButton" class="hover:rotate-12 hover:scale-125 transition duration-200 drop-shadow-md hover:drop-shadow-lg">
-          <i class="fas fa-search text-sky-400 hover:text-yellow-400 text-2xl"></i>
+          <i class="fas fa-search text-sky-400 hover:text-yellow-500 text-2xl"></i>
         </button>
         <div class="w-full h-px bg-black opacity-20 mt-1"></div>
       </div>

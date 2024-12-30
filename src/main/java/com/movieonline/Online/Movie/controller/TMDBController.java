@@ -88,8 +88,8 @@ public class TMDBController {
 
     @PostMapping("/movie/{id}/feedback")
     public String provideFeedback(@PathVariable Long id,
-                                  @RequestParam String reviews,
-                                  @RequestParam Double rating,
+                                  @RequestParam(required = false) String reviews,
+                                  @RequestParam(required = false) Double rating,
                                   FeedBackEntity feedBackEntity) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

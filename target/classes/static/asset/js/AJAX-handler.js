@@ -1,14 +1,12 @@
-// Get the submit button and form
 const searchButton = document.getElementById('searchButton');
 const searchForm = document.getElementById('searchForm');
 const resultsContainer = document.getElementById('movieResults');
 
-// Function to perform the search (already in your previous code)
 function performSearch() {
     const formData = new FormData(searchForm);
     const name = formData.get('name');
 
-    resultsContainer.innerHTML = '';  // Clear previous results
+    resultsContainer.innerHTML = '';
 
     fetch(`/api/search?name=${encodeURIComponent(name)}`, {
         method: "GET"
