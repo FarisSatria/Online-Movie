@@ -1,8 +1,11 @@
 @import java.util.List
 @import com.movieonline.Online.Movie.entity.dto.MovieDTO
+@import com.movieonline.Online.Movie.entity.model.UserEntity
 
 @param String WebName
+@param String getUsername
 @param Boolean isLoggedIn
+@param List<UserEntity> userList
 @param List<MovieDTO> searchMovies
 @param List<MovieDTO> nowPlayingMovies
 @param List<MovieDTO> popularMovies
@@ -57,7 +60,16 @@
                 <div class="text-center w-full mt-auto relative">
                     <div class="w-full h-px bg-black opacity-20 mb-1"></div>
                     <button id="userButton" class="block size-8 drop-shadow-lg rounded-full focus:outline-none">
-                        <img rel="icon" class="rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200" src="/image/icon/user-icon.png">
+                        @for(UserEntity user : userList)
+                            @if(user.getUsername().equals(getUsername))
+                                @if(user.getProfile_picture_path() != null)
+                                    <img rel="icon" class="rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200"
+                                         src="/image/icon/${user.getProfile_picture_path()}.png">
+                                @else
+                                    <img rel="icon" class="rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200" src="/image/icon/user-icon.png">
+                                @endif
+                            @endif
+                        @endfor
                     </button>
 
                     <div id="userPanel" class="absolute w-40 -left-1 -top-36 text-left bg-gray-50 rounded-lg shadow-md border border-gray-300 hidden">
@@ -73,7 +85,7 @@
                 <!-- Login Icon -->
                 <div class="text-center mt-auto">
                     <a href="/login"
-                       class="block text-green-500  hover:text-green-400 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-lg transition duration-200">
+                       class="block text-green-500  hover:text-green-400 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200">
                         <i class="fas fa-sign-in-alt text-2xl"></i>
                     </a>
                 </div>

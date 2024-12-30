@@ -52,10 +52,6 @@ public class TMDBController {
         List<FeedBackEntity> movieFeedbacks = tmdbService.getFeedback();
         model.addAttribute("movieFeedbacks", movieFeedbacks);
 
-
-        List<UserEntity> userList = tmdbService.getUser();
-        model.addAttribute("userList", userList);
-
         return model;
     }
 
@@ -75,6 +71,9 @@ public class TMDBController {
         //Now Playing Movies
         List<MovieDTO> nowPlayingMovies = tmdbService.getNowPlayingMovies();
         model.addAttribute("nowPlayingMovies", nowPlayingMovies);
+
+        List<UserEntity> userList = tmdbService.getUser();
+        model.addAttribute("userList", userList);
 
         return model;
     }

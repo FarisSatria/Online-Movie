@@ -9,7 +9,7 @@ import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
 import com.movieonline.Online.Movie.entity.model.UserEntity;
 public final class JtemoviepageGenerated {
 	public static final String JTE_NAME = "movie-page.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,2,3,4,5,6,7,9,9,9,30,30,30,30,33,36,39,45,47,49,57,65,65,68,68,69,85,85,86,93,93,97,99,101,101,101,101,104,104,104,104,104,104,104,104,104,104,104,104,104,106,106,106,108,108,108,109,109,109,110,110,112,112,112,114,114,115,115,115,117,117,117,119,119,120,120,122,122,124,124,125,125,140,142,142,142,144,144,145,145,150,150,156,160,164,168,173,178,182,183,183,186,186,186,186,187,187,187,187,187,187,187,187,187,190,190,190,191,191,191,194,194,201,201,202,202,207,207,209,209,210,210,211,211,213,213,213,213,214,214,215,215,217,217,219,219,220,220,220,220,223,223,224,224,225,225,226,226,227,227,228,228,229,229,230,230,231,231,233,233,235,235,236,236,237,237,238,238,239,239,240,240,241,241,242,242,243,243,253,253,254,254,255,255,256,256,261,261,261,264,264,265,265,267,267,269,269,270,270,274,274,274,278,278,279,279,280,280,281,281,285,285,285,285,286,286,286,289,289,290,290,292,292,294,294,295,295,299,299,299,303,303,307,311,312,312,313,313,313,313,315,315,315,315,316,316,316,316,316,316,316,316,316,319,319,319,321,321,322,322,324,324,326,326,327,327,331,331,335,346,346,346,350,350,350,354,354,354,358,358,358,364,364,366,366,366,368,368,377,378,378,379,380,380,381,388,388,388,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,23,23,23};
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,3,4,5,6,7,9,9,9,30,30,30,30,33,36,39,45,47,49,57,65,65,68,68,69,73,73,74,74,75,75,77,77,77,77,78,78,80,80,81,81,82,82,94,94,95,102,102,106,108,110,110,110,110,113,113,113,113,113,113,113,113,113,113,113,113,113,115,115,115,117,117,117,118,118,118,119,119,121,121,121,123,123,124,124,124,126,126,126,128,128,129,129,131,131,133,133,134,134,149,151,151,151,153,153,154,154,159,159,165,169,173,177,182,187,191,192,192,195,195,195,195,196,196,196,196,196,196,196,196,196,199,199,199,200,200,200,203,203,210,210,211,211,216,216,218,218,219,219,220,220,221,221,223,223,223,223,224,224,226,226,227,227,228,228,229,229,231,231,232,232,232,232,235,235,236,236,237,237,238,238,239,239,240,240,241,241,242,242,243,243,245,245,247,247,248,248,249,249,250,250,251,251,252,252,253,253,254,254,255,255,265,265,266,266,267,267,268,268,272,272,273,273,274,274,276,276,276,276,277,277,279,279,280,280,281,281,282,282,282,285,285,286,286,288,288,290,290,291,291,295,295,295,299,299,300,300,301,301,302,302,306,306,306,306,307,307,307,310,310,311,311,313,313,315,315,316,316,320,320,320,324,324,328,332,333,333,334,334,334,334,336,336,336,336,337,337,337,337,337,337,337,337,337,340,340,340,342,342,343,343,345,345,347,347,348,348,352,352,356,367,367,367,371,371,371,375,375,375,379,379,379,385,385,387,387,387,389,389,398,399,399,400,401,401,402,409,409,409,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,23,23,23};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, String getUsername, Boolean isLoggedIn, MovieDTO movieDetail, MovieGenresDTO movieGenres, MovieAuthorDetailsReviewDTO movieAuthorDetailsReview, List<UserEntity> userList, List<FeedBackEntity> movieFeedbacks, List<MovieCastDTO> movieCast, List<MovieKeywordsDTO> movieKeywords, List<MovieReviewsDTO> movieReviews, List<MovieDTO> movieRecommendation, List<MovieDTO> popularMovies, List<MovieDTO> topRatedMovies, List<MovieDTO> upcomingMovies) {
 		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\" class=\"scroll-smooth\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
@@ -26,7 +26,25 @@ public final class JtemoviepageGenerated {
 		jteOutput.writeContent("\n            </ul>\n\n            ");
 		if (isLoggedIn) {
 			jteOutput.writeContent("\n                ");
-			jteOutput.writeContent("\n                <div class=\"text-center w-full mt-auto relative\">\n                    <div class=\"w-full h-px bg-black opacity-20 mb-1\"></div>\n                    <button id=\"userButton\" class=\"block size-8 drop-shadow-lg rounded-full focus:outline-none\">\n                        <img rel=\"icon\" class=\"rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200\" src=\"/image/icon/user-icon.png\">\n                    </button>\n\n                    <div id=\"userPanel\" class=\"absolute w-40 -left-1 -top-36 text-left bg-gray-50 rounded-lg shadow-md border border-gray-300 hidden\">\n                        <a href=\"\" class=\"block px-4 py-2 text-zinc-700 hover:bg-gray-200 rounded-t-lg cursor-pointer transition duration-300\">Settings</a>\n                        <a href=\"\" class=\"block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300\">Account</a>\n                        <div class=\"group\">\n                            <a id=\"openModal\" class=\"block px-4 py-2 text-zinc-700 group-hover:bg-red-600 group-hover:text-white border-t border-t-gray-300 cursor-pointer rounded-b-lg transition duration-300\">Logout</a>\n                            <div class=\"absolute group-hover:border-t-red-600 left-2 -bottom-4 w-0 h-0 border-l-[13px] border-r-[13px] border-l-transparent border-r-transparent border-t-[16px] border-t-gray-50 drop-shadow-md transition duration-300\"></div>\n                        </div>\n                    </div>\n                </div>\n            ");
+			jteOutput.writeContent("\n                <div class=\"text-center w-full mt-auto relative\">\n                    <div class=\"w-full h-px bg-black opacity-20 mb-1\"></div>\n                    <button id=\"userButton\" class=\"block size-8 drop-shadow-lg rounded-full focus:outline-none\">\n                        ");
+			for (UserEntity user : userList) {
+				jteOutput.writeContent("\n                            ");
+				if (user.getUsername().equals(getUsername)) {
+					jteOutput.writeContent("\n                                ");
+					if (user.getProfile_picture_path() != null) {
+						jteOutput.writeContent("\n                                    <img rel=\"icon\" class=\"rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200\"\n                                         src=\"/image/icon/");
+						jteOutput.setContext("img", "src");
+						jteOutput.writeUserContent(user.getProfile_picture_path());
+						jteOutput.setContext("img", null);
+						jteOutput.writeContent(".png\">\n                                ");
+					} else {
+						jteOutput.writeContent("\n                                    <img rel=\"icon\" class=\"rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200\" src=\"/image/icon/user-icon.png\">\n                                ");
+					}
+					jteOutput.writeContent("\n                            ");
+				}
+				jteOutput.writeContent("\n                        ");
+			}
+			jteOutput.writeContent("\n                    </button>\n\n                    <div id=\"userPanel\" class=\"absolute w-40 -left-1 -top-36 text-left bg-gray-50 rounded-lg shadow-md border border-gray-300 hidden\">\n                        <a href=\"\" class=\"block px-4 py-2 text-zinc-700 hover:bg-gray-200 rounded-t-lg cursor-pointer transition duration-300\">Settings</a>\n                        <a href=\"\" class=\"block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300\">Account</a>\n                        <div class=\"group\">\n                            <a id=\"openModal\" class=\"block px-4 py-2 text-zinc-700 group-hover:bg-red-600 group-hover:text-white border-t border-t-gray-300 cursor-pointer rounded-b-lg transition duration-300\">Logout</a>\n                            <div class=\"absolute group-hover:border-t-red-600 left-2 -bottom-4 w-0 h-0 border-l-[13px] border-r-[13px] border-l-transparent border-r-transparent border-t-[16px] border-t-gray-50 drop-shadow-md transition duration-300\"></div>\n                        </div>\n                    </div>\n                </div>\n            ");
 		} else {
 			jteOutput.writeContent("\n                ");
 			jteOutput.writeContent("\n                <div class=\"text-center mt-auto\">\n                    <a href=\"/login\"\n                       class=\"block text-green-500  hover:text-green-400 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200\">\n                        <i class=\"fas fa-sign-in-alt text-2xl\"></i>\n                    </a>\n                </div>\n            ");
@@ -37,7 +55,7 @@ public final class JtemoviepageGenerated {
 		jteOutput.setContext("div", "style");
 		jteOutput.writeUserContent(movieDetail.getBackdrop_path());
 		jteOutput.setContext("div", null);
-		jteOutput.writeContent(");\">\n                    <div class=\"relative flex bg-black/60\">\n                        <img class=\"my-auto mx-10 rounded-lg h-5/6\"\n                             src=\"https://image.tmdb.org/t/p/w500");
+		jteOutput.writeContent(");\">\n                <div class=\"relative flex bg-black/60\">\n                    <img class=\"my-auto mx-10 rounded-lg h-5/6\"\n                         src=\"https://image.tmdb.org/t/p/w500");
 		jteOutput.setContext("img", "src");
 		jteOutput.writeUserContent(movieDetail.getPoster_path());
 		jteOutput.setContext("img", null);
@@ -50,39 +68,39 @@ public final class JtemoviepageGenerated {
 			jteOutput.setContext("img", null);
 			jteOutput.writeContent("\"");
 		}
-		jteOutput.writeContent(">\n                        <div class=\"transform space-y-4 p-4 h-5/6 my-auto\">\n                            <h3 class=\"text-4xl text-white font-semibold \">");
+		jteOutput.writeContent(">\n                    <div class=\"transform space-y-4 p-4 h-5/6 my-auto\">\n                        <h3 class=\"text-4xl text-white font-semibold \">");
 		jteOutput.setContext("h3", null);
 		jteOutput.writeUserContent(movieDetail.getTitle());
-		jteOutput.writeContent("</h3>\n                            <div class=\"flex space-x-1 flex-warp\">\n                                <p class=\"text-md text-zinc-300 py-1\">");
+		jteOutput.writeContent("</h3>\n                        <div class=\"flex space-x-1 flex-warp\">\n                            <p class=\"text-md text-zinc-300 py-1\">");
 		jteOutput.setContext("p", null);
 		jteOutput.writeUserContent(movieDetail.getAdultFormatted());
-		jteOutput.writeContent("</p>\n                                <p class=\"text-md text-zinc-300 p-1\">• ");
+		jteOutput.writeContent("</p>\n                            <p class=\"text-md text-zinc-300 p-1\">• ");
 		jteOutput.setContext("p", null);
 		jteOutput.writeUserContent(movieDetail.getRelease_date());
-		jteOutput.writeContent("</p>\n                                ");
+		jteOutput.writeContent("</p>\n                            ");
 		for (MovieGenresDTO genre : movieDetail.getGenres()) {
-			jteOutput.writeContent("\n                                    <div class=\"p-1 rounded-full shadow-inner-lg border border-gray-200 bg-gray-100\">\n                                        <p class=\"text-zinc-700\">");
+			jteOutput.writeContent("\n                                <div class=\"p-1 rounded-full shadow-inner-lg border border-gray-200 bg-gray-100\">\n                                    <p class=\"text-zinc-700\">");
 			jteOutput.setContext("p", null);
 			jteOutput.writeUserContent(genre.getName());
-			jteOutput.writeContent("</p>\n                                    </div>\n                                ");
+			jteOutput.writeContent("</p>\n                                </div>\n                            ");
 		}
-		jteOutput.writeContent("\n                                <p class=\"text-md text-zinc-300 p-1\">• ");
+		jteOutput.writeContent("\n                            <p class=\"text-md text-zinc-300 p-1\">• ");
 		jteOutput.setContext("p", null);
 		jteOutput.writeUserContent(movieDetail.getRuntimeFormatted());
-		jteOutput.writeContent("</p>\n                            </div>\n                            <p class=\"text-sm text-zinc-300\">");
+		jteOutput.writeContent("</p>\n                        </div>\n                        <p class=\"text-sm text-zinc-300\">");
 		jteOutput.setContext("p", null);
 		jteOutput.writeUserContent(movieDetail.getOverview());
-		jteOutput.writeContent("</p>\n                            <div class=\"flex items-center space-x-1\">\n                                ");
+		jteOutput.writeContent("</p>\n                        <div class=\"flex items-center space-x-1\">\n                            ");
 		for (int i = 1; i <= 5; i++) {
-			jteOutput.writeContent("\n                                    ");
-			if (i <= movieDetail.getVote_average() / 2) {
-				jteOutput.writeContent("\n                                        <span class=\"text-yellow-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></span>\n                                    ");
-			} else {
-				jteOutput.writeContent("\n                                        <span class=\"text-gray-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></span>\n                                    ");
-			}
 			jteOutput.writeContent("\n                                ");
+			if (i <= movieDetail.getVote_average() / 2) {
+				jteOutput.writeContent("\n                                    <span class=\"text-yellow-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></span>\n                                ");
+			} else {
+				jteOutput.writeContent("\n                                    <span class=\"text-gray-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></span>\n                                ");
+			}
+			jteOutput.writeContent("\n                            ");
 		}
-		jteOutput.writeContent("\n                            </div>\n                            <div class=\"flex space-x-2\">\n                                <a id=\"bookNow\" href=\"#scrollToBehaviour\" class=\"book-button shadow-card p-3 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg transition duration-300 \">Book Now!</a>\n                                <div class=\"p-3 rounded-lg shadow-inner-lg border border-gray-200 bg-gray-100 flex\">\n                                    <p class=\"text-zinc-700 font-semibold\">Quota Left: 5</p>\n                                    <p class=\"text-zinc-700 font-medium\">/50</p>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n            </div>\n        </div>\n        <div class=\"w-full flex space-x-5\">\n            <div class=\"flex-initial\" style=\"width:65.1vw;\">\n                ");
+		jteOutput.writeContent("\n                        </div>\n                        <div class=\"flex space-x-2\">\n                            <a id=\"bookNow\" href=\"#scrollToBehaviour\" class=\"book-button shadow-card p-3 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg transition duration-300 \">Book Now!</a>\n                            <div class=\"p-3 rounded-lg shadow-inner-lg border border-gray-200 bg-gray-100 flex\">\n                                <p class=\"text-zinc-700 font-semibold\">Quota Left: 5</p>\n                                <p class=\"text-zinc-700 font-medium\">/50</p>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"w-full flex space-x-5\">\n            <div class=\"flex-initial\" style=\"width:65.1vw;\">\n                ");
 		jteOutput.writeContent("\n                <div id=\"scrollToBehaviour\" class=\"w-full hidden mb-5\">\n                    <h3 class=\"text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold\">Booking ");
 		jteOutput.setContext("h3", null);
 		jteOutput.writeUserContent(movieDetail.getTitle());
@@ -133,16 +151,22 @@ public final class JtemoviepageGenerated {
 			jteOutput.writeContent("\n                                ");
 			for (UserEntity user : userList) {
 				jteOutput.writeContent("\n                                    ");
-				if (user.getUsername().equals(getUsername) && user.getProfile_picture_path() != null) {
-					jteOutput.writeContent("\n                                        <img rel=\"icon\" class=\"block size-10 rounded-full mr-2 bg-gray-500\"\n                                             src=\"/image/icon/");
-					jteOutput.setContext("img", "src");
-					jteOutput.writeUserContent(user.getProfile_picture_path());
-					jteOutput.setContext("img", null);
-					jteOutput.writeContent(".png\">\n                                    ");
+				if (user.getUsername().equals(getUsername)) {
+					jteOutput.writeContent("\n                                        ");
+					if (user.getProfile_picture_path() != null) {
+						jteOutput.writeContent("\n                                            <img rel=\"icon\" class=\"block size-10 rounded-full mr-2 bg-gray-500\"\n                                                 src=\"/image/icon/");
+						jteOutput.setContext("img", "src");
+						jteOutput.writeUserContent(user.getProfile_picture_path());
+						jteOutput.setContext("img", null);
+						jteOutput.writeContent(".png\">\n                                        ");
+					} else {
+						jteOutput.writeContent("\n                                            <img rel=\"icon\" class=\"block size-10 rounded-full mr-2 bg-gray-500\" src=\"/image/icon/user-icon.png\">\n                                        ");
+					}
+					jteOutput.writeContent("\n                                    ");
 				}
 				jteOutput.writeContent("\n                                ");
 			}
-			jteOutput.writeContent("\n                                <img rel=\"icon\" class=\"block size-10 rounded-full mr-2 bg-gray-500\" src=\"/image/icon/user-icon.png\">\n                            ");
+			jteOutput.writeContent("\n                            ");
 		} else {
 			jteOutput.writeContent("\n                                <img rel=\"icon\" class=\"block size-10 rounded-full mr-2 bg-gray-500\" src=\"/image/icon/user-icon.png\">\n                            ");
 		}
@@ -188,7 +212,7 @@ public final class JtemoviepageGenerated {
 			gg.jte.generated.ondemand.include.miscellaneous.JteratingradioinputGenerated.render(jteOutput, jteHtmlInterceptor);
 			jteOutput.writeContent("\n                                    ");
 		}
-		jteOutput.writeContent("\n                                    <button type=\"submit\"\n                                            class=\"bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right ml-auto\">\n                                        Comment\n                                    </button>\n                                </div>\n                            </form>\n                        </div>\n                        <div class=\"transition-transform duration-500 ease-in-out max-h-96 overflow-y-scroll\n                                p-5 space-y-12\">\n                            ");
+		jteOutput.writeContent("\n                                    <button type=\"submit\"\n                                            class=\"bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right ml-auto\">\n                                        Comment\n                                    </button>\n                                </div>\n                            </form>\n                        </div>\n                        <div class=\"transition-transform duration-500 ease-in-out max-h-96 overflow-y-scroll\n                                px-5 space-y-12\">\n                            ");
 		if (movieFeedbacks != null) {
 			jteOutput.writeContent("\n                                ");
 			for (FeedBackEntity feedbacks : movieFeedbacks) {
@@ -196,7 +220,25 @@ public final class JtemoviepageGenerated {
 				if (feedbacks.getReviews().isEmpty()) {
 					jteOutput.writeContent("\n                                    ");
 				} else if (feedbacks.getMovieId() == movieDetail.getId()) {
-					jteOutput.writeContent("\n                                        <div class=\"w-full space-y-2\">\n                                            <div class=\"flex\">\n                                                <div class=\"border-sky-400 border-l-4 pl-2 h-10\"></div>\n                                                <img class=\"size-10 rounded-full bg-gray-500 mr-2\">\n                                                <h3 class=\"text-xl font-bold my-auto\">");
+					jteOutput.writeContent("\n                                        <div class=\"w-full space-y-2\">\n                                            <div class=\"flex\">\n                                                <div class=\"border-sky-400 border-l-4 pl-2 h-10\"></div>\n                                                ");
+					for (UserEntity user : userList) {
+						jteOutput.writeContent("\n                                                    ");
+						if (user.getUsername().equals(getUsername)) {
+							jteOutput.writeContent("\n                                                        ");
+							if (user.getProfile_picture_path() != null) {
+								jteOutput.writeContent("\n                                                            <img rel=\"icon\" class=\"block size-10 rounded-full mr-2 bg-gray-500\"\n                                                                 src=\"/image/icon/");
+								jteOutput.setContext("img", "src");
+								jteOutput.writeUserContent(user.getProfile_picture_path());
+								jteOutput.setContext("img", null);
+								jteOutput.writeContent(".png\">\n                                                        ");
+							} else {
+								jteOutput.writeContent("\n                                                            <img rel=\"icon\" class=\"block size-10 rounded-full mr-2 bg-gray-500\" src=\"/image/icon/user-icon.png\">\n                                                        ");
+							}
+							jteOutput.writeContent("\n                                                    ");
+						}
+						jteOutput.writeContent("\n                                                ");
+					}
+					jteOutput.writeContent("\n                                                <h3 class=\"text-xl font-bold my-auto\">");
 					jteOutput.setContext("h3", null);
 					jteOutput.writeUserContent(feedbacks.getUsername());
 					jteOutput.writeContent("</h3>\n                                            </div>\n                                            <div class=\"flex items-center\">\n                                                ");

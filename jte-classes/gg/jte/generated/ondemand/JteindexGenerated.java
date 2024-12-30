@@ -1,10 +1,11 @@
 package gg.jte.generated.ondemand;
 import java.util.List;
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
+import com.movieonline.Online.Movie.entity.model.UserEntity;
 public final class JteindexGenerated {
 	public static final String JTE_NAME = "index.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,16,16,16,16,19,22,25,31,33,35,43,51,51,54,54,55,71,71,72,79,79,83,85,87,87,89,89,89,89,92,92,92,92,92,92,92,92,92,92,92,92,92,95,95,95,96,96,96,98,98,99,99,101,101,103,103,104,104,107,107,107,107,116,116,119,121,126,133,137,138,138,139,139,139,139,141,141,141,141,142,142,142,142,142,142,142,142,142,145,145,145,147,147,148,148,150,150,152,152,153,153,157,157,160,164,165,165,166,166,166,166,168,168,168,168,169,169,169,169,169,169,169,169,169,172,172,172,174,174,175,175,177,177,179,179,180,180,184,184,195,195,196,196,196,196,199,199,199,199,200,200,200,200,200,200,200,200,200,202,202,202,203,203,203,206,206,213,214,214,215,216,216,217,224,224,224,3,4,5,6,7,8,9,9,9,9};
-	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, Boolean isLoggedIn, List<MovieDTO> searchMovies, List<MovieDTO> nowPlayingMovies, List<MovieDTO> popularMovies, List<MovieDTO> topRatedMovies, List<MovieDTO> upcomingMovies) {
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,19,19,19,19,22,25,28,34,36,38,46,54,54,57,57,58,62,62,63,63,64,64,66,66,66,66,67,67,69,69,70,70,71,71,83,83,84,91,91,95,97,99,99,101,101,101,101,104,104,104,104,104,104,104,104,104,104,104,104,104,107,107,107,108,108,108,110,110,111,111,113,113,115,115,116,116,119,119,119,119,128,128,131,133,138,145,149,150,150,151,151,151,151,153,153,153,153,154,154,154,154,154,154,154,154,154,157,157,157,159,159,160,160,162,162,164,164,165,165,169,169,172,176,177,177,178,178,178,178,180,180,180,180,181,181,181,181,181,181,181,181,181,184,184,184,186,186,187,187,189,189,191,191,192,192,196,196,207,207,208,208,208,208,211,211,211,211,212,212,212,212,212,212,212,212,212,214,214,214,215,215,215,218,218,225,226,226,227,228,228,229,236,236,236,4,5,6,7,8,9,10,11,12,12,12,12};
+	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, String getUsername, Boolean isLoggedIn, List<UserEntity> userList, List<MovieDTO> searchMovies, List<MovieDTO> nowPlayingMovies, List<MovieDTO> popularMovies, List<MovieDTO> topRatedMovies, List<MovieDTO> upcomingMovies) {
 		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\" class=\"scroll-smooth\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
 		jteOutput.writeUserContent(WebName);
@@ -20,10 +21,28 @@ public final class JteindexGenerated {
 		jteOutput.writeContent("\n            </ul>\n\n            ");
 		if (isLoggedIn) {
 			jteOutput.writeContent("\n                ");
-			jteOutput.writeContent("\n                <div class=\"text-center w-full mt-auto relative\">\n                    <div class=\"w-full h-px bg-black opacity-20 mb-1\"></div>\n                    <button id=\"userButton\" class=\"block size-8 drop-shadow-lg rounded-full focus:outline-none\">\n                        <img rel=\"icon\" class=\"rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200\" src=\"/image/icon/user-icon.png\">\n                    </button>\n\n                    <div id=\"userPanel\" class=\"absolute w-40 -left-1 -top-36 text-left bg-gray-50 rounded-lg shadow-md border border-gray-300 hidden\">\n                        <a href=\"\" class=\"block px-4 py-2 text-zinc-700 hover:bg-gray-200 rounded-t-lg cursor-pointer transition duration-300\">Settings</a>\n                        <a href=\"\" class=\"block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300\">Account</a>\n                        <div class=\"group\">\n                            <a id=\"openModal\" class=\"block px-4 py-2 text-zinc-700 group-hover:bg-red-600 group-hover:text-white border-t border-t-gray-300 cursor-pointer rounded-b-lg transition duration-300\">Logout</a>\n                            <div class=\"absolute group-hover:border-t-red-600 left-2 -bottom-4 w-0 h-0 border-l-[13px] border-r-[13px] border-l-transparent border-r-transparent border-t-[16px] border-t-gray-50 drop-shadow-md transition duration-300\"></div>\n                        </div>\n                    </div>\n                </div>\n            ");
+			jteOutput.writeContent("\n                <div class=\"text-center w-full mt-auto relative\">\n                    <div class=\"w-full h-px bg-black opacity-20 mb-1\"></div>\n                    <button id=\"userButton\" class=\"block size-8 drop-shadow-lg rounded-full focus:outline-none\">\n                        ");
+			for (UserEntity user : userList) {
+				jteOutput.writeContent("\n                            ");
+				if (user.getUsername().equals(getUsername)) {
+					jteOutput.writeContent("\n                                ");
+					if (user.getProfile_picture_path() != null) {
+						jteOutput.writeContent("\n                                    <img rel=\"icon\" class=\"rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200\"\n                                         src=\"/image/icon/");
+						jteOutput.setContext("img", "src");
+						jteOutput.writeUserContent(user.getProfile_picture_path());
+						jteOutput.setContext("img", null);
+						jteOutput.writeContent(".png\">\n                                ");
+					} else {
+						jteOutput.writeContent("\n                                    <img rel=\"icon\" class=\"rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200\" src=\"/image/icon/user-icon.png\">\n                                ");
+					}
+					jteOutput.writeContent("\n                            ");
+				}
+				jteOutput.writeContent("\n                        ");
+			}
+			jteOutput.writeContent("\n                    </button>\n\n                    <div id=\"userPanel\" class=\"absolute w-40 -left-1 -top-36 text-left bg-gray-50 rounded-lg shadow-md border border-gray-300 hidden\">\n                        <a href=\"\" class=\"block px-4 py-2 text-zinc-700 hover:bg-gray-200 rounded-t-lg cursor-pointer transition duration-300\">Settings</a>\n                        <a href=\"\" class=\"block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300\">Account</a>\n                        <div class=\"group\">\n                            <a id=\"openModal\" class=\"block px-4 py-2 text-zinc-700 group-hover:bg-red-600 group-hover:text-white border-t border-t-gray-300 cursor-pointer rounded-b-lg transition duration-300\">Logout</a>\n                            <div class=\"absolute group-hover:border-t-red-600 left-2 -bottom-4 w-0 h-0 border-l-[13px] border-r-[13px] border-l-transparent border-r-transparent border-t-[16px] border-t-gray-50 drop-shadow-md transition duration-300\"></div>\n                        </div>\n                    </div>\n                </div>\n            ");
 		} else {
 			jteOutput.writeContent("\n                ");
-			jteOutput.writeContent("\n                <div class=\"text-center mt-auto\">\n                    <a href=\"/login\"\n                       class=\"block text-green-500  hover:text-green-400 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-lg transition duration-200\">\n                        <i class=\"fas fa-sign-in-alt text-2xl\"></i>\n                    </a>\n                </div>\n            ");
+			jteOutput.writeContent("\n                <div class=\"text-center mt-auto\">\n                    <a href=\"/login\"\n                       class=\"block text-green-500  hover:text-green-400 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200\">\n                        <i class=\"fas fa-sign-in-alt text-2xl\"></i>\n                    </a>\n                </div>\n            ");
 		}
 		jteOutput.writeContent("\n        </div>\n    </div>\n    <div class=\"flex-initial mt-8 space-y-5\" style=\"width:60vw;\">\n        ");
 		jteOutput.writeContent("\n        <div class=\"relative h-1/4 w-full rounded-xl overflow-hidden shadow-card\" style=\"height:70vh;\">\n            ");
@@ -181,12 +200,14 @@ public final class JteindexGenerated {
 	}
 	public static void renderMap(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, java.util.Map<String, Object> params) {
 		String WebName = (String)params.get("WebName");
+		String getUsername = (String)params.get("getUsername");
 		Boolean isLoggedIn = (Boolean)params.get("isLoggedIn");
+		List<UserEntity> userList = (List<UserEntity>)params.get("userList");
 		List<MovieDTO> searchMovies = (List<MovieDTO>)params.get("searchMovies");
 		List<MovieDTO> nowPlayingMovies = (List<MovieDTO>)params.get("nowPlayingMovies");
 		List<MovieDTO> popularMovies = (List<MovieDTO>)params.get("popularMovies");
 		List<MovieDTO> topRatedMovies = (List<MovieDTO>)params.get("topRatedMovies");
 		List<MovieDTO> upcomingMovies = (List<MovieDTO>)params.get("upcomingMovies");
-		render(jteOutput, jteHtmlInterceptor, WebName, isLoggedIn, searchMovies, nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies);
+		render(jteOutput, jteHtmlInterceptor, WebName, getUsername, isLoggedIn, userList, searchMovies, nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies);
 	}
 }

@@ -71,7 +71,16 @@
                 <div class="text-center w-full mt-auto relative">
                     <div class="w-full h-px bg-black opacity-20 mb-1"></div>
                     <button id="userButton" class="block size-8 drop-shadow-lg rounded-full focus:outline-none">
-                        <img rel="icon" class="rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200" src="/image/icon/user-icon.png">
+                        @for(UserEntity user : userList)
+                            @if(user.getUsername().equals(getUsername))
+                                @if(user.getProfile_picture_path() != null)
+                                    <img rel="icon" class="rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200"
+                                         src="/image/icon/${user.getProfile_picture_path()}.png">
+                                @else
+                                    <img rel="icon" class="rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200" src="/image/icon/user-icon.png">
+                                @endif
+                            @endif
+                        @endfor
                     </button>
 
                     <div id="userPanel" class="absolute w-40 -left-1 -top-36 text-left bg-gray-50 rounded-lg shadow-md border border-gray-300 hidden">
@@ -100,40 +109,40 @@
             <!-- Carousel Images -->
             <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-full"
                  style="background-image:url(https://image.tmdb.org/t/p/w1280${movieDetail.getBackdrop_path()});">
-                    <div class="relative flex bg-black/60">
-                        <img class="my-auto mx-10 rounded-lg h-5/6"
-                             src="https://image.tmdb.org/t/p/w500${movieDetail.getPoster_path()}" alt="${movieDetail.getTitle()}">
-                        <div class="transform space-y-4 p-4 h-5/6 my-auto">
-                            <h3 class="text-4xl text-white font-semibold ">${movieDetail.getTitle()}</h3>
-                            <div class="flex space-x-1 flex-warp">
-                                <p class="text-md text-zinc-300 py-1">${movieDetail.getAdultFormatted()}</p>
-                                <p class="text-md text-zinc-300 p-1">• ${movieDetail.getRelease_date()}</p>
-                                @for (MovieGenresDTO genre : movieDetail.getGenres())
-                                    <div class="p-1 rounded-full shadow-inner-lg border border-gray-200 bg-gray-100">
-                                        <p class="text-zinc-700">${genre.getName()}</p>
-                                    </div>
-                                @endfor
-                                <p class="text-md text-zinc-300 p-1">• ${movieDetail.getRuntimeFormatted()}</p>
-                            </div>
-                            <p class="text-sm text-zinc-300">${movieDetail.getOverview()}</p>
-                            <div class="flex items-center space-x-1">
-                                @for (int i = 1; i <= 5; i++)
-                                    @if (i <= movieDetail.getVote_average() / 2)
-                                        <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
-                                    @else
-                                        <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
-                                    @endif
-                                @endfor
-                            </div>
-                            <div class="flex space-x-2">
-                                <a id="bookNow" href="#scrollToBehaviour" class="book-button shadow-card p-3 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg transition duration-300 ">Book Now!</a>
-                                <div class="p-3 rounded-lg shadow-inner-lg border border-gray-200 bg-gray-100 flex">
-                                    <p class="text-zinc-700 font-semibold">Quota Left: 5</p>
-                                    <p class="text-zinc-700 font-medium">/50</p>
+                <div class="relative flex bg-black/60">
+                    <img class="my-auto mx-10 rounded-lg h-5/6"
+                         src="https://image.tmdb.org/t/p/w500${movieDetail.getPoster_path()}" alt="${movieDetail.getTitle()}">
+                    <div class="transform space-y-4 p-4 h-5/6 my-auto">
+                        <h3 class="text-4xl text-white font-semibold ">${movieDetail.getTitle()}</h3>
+                        <div class="flex space-x-1 flex-warp">
+                            <p class="text-md text-zinc-300 py-1">${movieDetail.getAdultFormatted()}</p>
+                            <p class="text-md text-zinc-300 p-1">• ${movieDetail.getRelease_date()}</p>
+                            @for (MovieGenresDTO genre : movieDetail.getGenres())
+                                <div class="p-1 rounded-full shadow-inner-lg border border-gray-200 bg-gray-100">
+                                    <p class="text-zinc-700">${genre.getName()}</p>
                                 </div>
+                            @endfor
+                            <p class="text-md text-zinc-300 p-1">• ${movieDetail.getRuntimeFormatted()}</p>
+                        </div>
+                        <p class="text-sm text-zinc-300">${movieDetail.getOverview()}</p>
+                        <div class="flex items-center space-x-1">
+                            @for (int i = 1; i <= 5; i++)
+                                @if (i <= movieDetail.getVote_average() / 2)
+                                    <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                @else
+                                    <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                @endif
+                            @endfor
+                        </div>
+                        <div class="flex space-x-2">
+                            <a id="bookNow" href="#scrollToBehaviour" class="book-button shadow-card p-3 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg transition duration-300 ">Book Now!</a>
+                            <div class="p-3 rounded-lg shadow-inner-lg border border-gray-200 bg-gray-100 flex">
+                                <p class="text-zinc-700 font-semibold">Quota Left: 5</p>
+                                <p class="text-zinc-700 font-medium">/50</p>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
         <div class="w-full flex space-x-5">
@@ -209,12 +218,15 @@
                             <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
                             @if(isLoggedIn)
                                 @for(UserEntity user : userList)
-                                    @if(user.getUsername().equals(getUsername) && user.getProfile_picture_path() != null)
-                                        <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
-                                             src="/image/icon/${user.getProfile_picture_path()}.png">
+                                    @if(user.getUsername().equals(getUsername))
+                                        @if(user.getProfile_picture_path() != null)
+                                            <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
+                                                 src="/image/icon/${user.getProfile_picture_path()}.png">
+                                        @else
+                                            <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                                        @endif
                                     @endif
                                 @endfor
-                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
                             @else
                                 <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
                             @endif
@@ -250,7 +262,7 @@
                             </form>
                         </div>
                         <div class="transition-transform duration-500 ease-in-out max-h-96 overflow-y-scroll
-                                p-5 space-y-12">
+                                px-5 space-y-12">
                             @if(movieFeedbacks != null)
                                 @for(FeedBackEntity feedbacks : movieFeedbacks)
                                     @if(feedbacks.getReviews().isEmpty())
@@ -258,7 +270,16 @@
                                         <div class="w-full space-y-2">
                                             <div class="flex">
                                                 <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
-                                                <img class="size-10 rounded-full bg-gray-500 mr-2">
+                                                @for(UserEntity user : userList)
+                                                    @if(user.getUsername().equals(getUsername))
+                                                        @if(user.getProfile_picture_path() != null)
+                                                            <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
+                                                                 src="/image/icon/${user.getProfile_picture_path()}.png">
+                                                        @else
+                                                            <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                                                        @endif
+                                                    @endif
+                                                @endfor
                                                 <h3 class="text-xl font-bold my-auto">${feedbacks.getUsername()}</h3>
                                             </div>
                                             <div class="flex items-center">
