@@ -236,19 +236,19 @@
                             <form class="w-full" action="/movie/${movieDetail.getId()}/feedback" method="post">
                                 @if(isLoggedIn)
                                     @if (matchingFeedback.isPresent())
+                                        <input type="hidden" name="_method" value="PUT">
                                         @if(matchingFeedback.get().getReviews().isEmpty())
-                                            <input type="hidden" name="_method" value="PUT">
                                             <textarea class="resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" id="reviews" name="reviews" placeholder="Add Review" required></textarea>
-                                            <div class="flex float-left mt-2">
-                                                @for (int i = 1; i <= 5; i++)
+                                            <div class="flex flex-row-reverse float-left mt-2">
+                                                @for (int i = 5; i >= 1; i--)
                                                     @if (i <= matchingFeedback.get().getRating() / 2)
-                                                        <input type="radio" id="star5" name="rating" value="${i * 2}" class="hidden peer">
-                                                        <label for="star5"
-                                                               class="cursor-pointer text-yellow-400 peer-checked:text-gray-400 hover:text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></label>${i * 2}
+                                                        <input type="radio" id="star${i}" name="rating" value="${i * 2}" class="hidden peer">
+                                                        <label for="star${i}"
+                                                               class="cursor-pointer text-yellow-400 peer-checked:text-orange-400 hover:text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></label>
                                                     @else
-                                                        <input type="radio" id="star5" name="rating" value="${2 * i}" class="hidden peer">
-                                                        <label for="star5"
-                                                               class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></label>${2 * i}
+                                                        <input type="radio" id="star${i}" name="rating" value="${2 * i}" class="hidden peer">
+                                                        <label for="star${i}"
+                                                               class="cursor-pointer text-gray-400 peer-checked:text-orange-400 hover:text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></label>
                                                     @endif
                                                 @endfor
                                             </div>
@@ -259,35 +259,32 @@
                                                 Comment
                                             </button>
                                         @else
-                                            <form action="/movie/${movieDetail.getId()}/feedback/update" method="post">
-                                                <input type="hidden" name="_method" value="PUT">
-                                                <textarea class="resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" id="reviews" name="reviews">${matchingFeedback.get().getReviews()}</textarea>
-                                                <div class="flex float-left mt-2">
-                                                    @for (int i = 1; i <= 5; i++)
-                                                        @if (i <= matchingFeedback.get().getRating() / 2)
-                                                            <input type="radio" id="star${i}" name="rating" value="${i * 2}" class="hidden peer">
-                                                            <label for="star${i}"
-                                                                   class="cursor-pointer text-yellow-400 peer-checked:text-yellow-400 hover:text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></label>${i * 2}
-                                                        @else
-                                                            <input type="radio" id="star${i}" name="rating" value="${2 * i}" class="hidden peer">
-                                                            <label for="star${i}"
-                                                                   class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></label>${2 * i}
-                                                        @endif
-                                                    @endfor
-                                                </div>
-                                                <a href="/movie/${movieDetail.getId()}/feedback/delete" class="self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
-                                                    Delete
-                                                </a>
-                                                <button type="submit" class="self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
-                                                    Update
-                                                </button>
-                                            </form>
+                                            <textarea class="resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" id="reviews" name="reviews">${matchingFeedback.get().getReviews()}</textarea>
+                                            <div class="flex flex-row-reverse float-left mt-2">
+                                                @for (int i = 5; i >= 1; i--)
+                                                    @if (i <= matchingFeedback.get().getRating() / 2)
+                                                        <input type="radio" id="star${i}" name="rating" value="${i * 2}" class="hidden peer">
+                                                        <label for="star${i}"
+                                                               class="cursor-pointer text-yellow-400 peer-checked:text-orange-400 hover:text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></label>
+                                                    @else
+                                                        <input type="radio" id="star${i}" name="rating" value="${2 * i}" class="hidden peer">
+                                                        <label for="star${i}"
+                                                               class="cursor-pointer text-gray-400 peer-checked:text-orange-400 hover:text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></label>
+                                                    @endif
+                                                @endfor
+                                            </div>
+                                            <a href="/movie/${movieDetail.getId()}/feedback/delete" class="self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
+                                                Delete
+                                            </a>
+                                            <button type="submit" class="self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
+                                                Update
+                                            </button>
                                         @endif
                                     @else
                                         @template.include.miscellaneous.rating-radio-input()
                                     @endif
                                 @else
-                                        @template.include.miscellaneous.rating-radio-input()
+                                    @template.include.miscellaneous.rating-radio-input()
                                 @endif
                             </form>
                         </div>

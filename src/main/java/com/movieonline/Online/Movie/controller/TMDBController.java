@@ -98,10 +98,12 @@ public class TMDBController {
         return "redirect:/movie/" + id;
     }
 
-    @PutMapping("/movie/{id}/feedback/update")
+    @PutMapping("/movie/{id}/feedback")
     public String updateFeedback(@PathVariable Long id,
                                  @RequestParam String reviews,
                                  @RequestParam Integer rating){
+        System.out.println(rating);
+
         tmdbService.updateFeedback(id, authenticationUtils.getUsername(), reviews, rating);
 
         return "redirect:/movie/" + id;
@@ -113,14 +115,4 @@ public class TMDBController {
 
         return "redirect:/movie/" + id;
     }
-
-    @PutMapping("/movie/{id}/feedback")
-    public String provideReviewOnly(@PathVariable Long id,
-                                    @RequestParam String reviews) {
-
-        tmdbService.provideReviewOnly(authenticationUtils.getUsername(), id, reviews);
-
-        return "redirect:/movie/" + id;
-    }
-
 }

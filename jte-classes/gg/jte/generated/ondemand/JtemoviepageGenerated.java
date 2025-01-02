@@ -10,7 +10,7 @@ import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
 import com.movieonline.Online.Movie.entity.model.UserEntity;
 public final class JtemoviepageGenerated {
 	public static final String JTE_NAME = "movie-page.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,2,3,4,5,6,7,8,10,10,10,32,32,32,32,35,38,41,47,49,51,59,67,67,70,70,71,75,75,76,76,77,77,79,79,79,79,80,80,82,82,83,83,84,84,96,96,97,104,104,108,110,112,112,112,112,115,115,115,115,115,115,115,115,115,115,115,115,115,117,117,117,119,119,119,120,120,120,121,121,123,123,123,125,125,126,126,126,128,128,128,130,130,131,131,133,133,135,135,136,136,151,153,153,153,155,155,156,156,161,161,167,171,175,179,184,189,193,194,194,197,197,197,197,198,198,198,198,198,198,198,198,198,201,201,201,202,202,202,205,205,212,212,213,213,218,218,220,220,221,221,222,222,223,223,225,225,225,225,226,226,228,228,229,229,230,230,231,231,233,233,234,235,235,235,235,236,236,237,237,238,238,242,242,243,243,244,244,244,244,244,244,244,244,244,246,246,246,247,247,248,248,248,248,248,248,248,248,248,250,250,250,251,251,252,252,254,254,254,254,260,260,261,261,261,261,263,263,263,265,265,266,266,267,267,267,267,267,267,267,267,267,267,267,267,267,268,268,268,268,269,269,269,270,270,271,271,271,271,271,271,271,271,271,271,271,271,271,272,272,272,272,273,273,273,274,274,275,275,277,277,277,277,284,284,285,285,286,286,287,287,288,288,289,289,290,290,295,295,296,296,297,297,298,299,299,300,300,304,304,305,305,306,306,308,308,308,308,309,309,311,311,312,312,313,313,314,314,314,317,317,318,318,320,320,322,322,323,323,327,327,327,331,331,332,332,333,333,334,334,335,335,339,339,341,341,341,341,342,342,344,344,345,345,345,348,348,349,349,351,351,353,353,354,354,358,358,358,362,362,366,370,371,371,372,372,372,372,374,374,374,374,375,375,375,375,375,375,375,375,375,378,378,378,380,380,381,381,383,383,385,385,386,386,390,390,394,405,405,405,409,409,409,413,413,413,417,417,417,423,423,425,425,425,427,427,436,437,437,438,439,439,440,447,447,447,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,25,25,25};
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,3,4,5,6,7,8,10,10,10,32,32,32,32,35,38,41,47,49,51,59,67,67,70,70,71,75,75,76,76,77,77,79,79,79,79,80,80,82,82,83,83,84,84,96,96,97,104,104,108,110,112,112,112,112,115,115,115,115,115,115,115,115,115,115,115,115,115,117,117,117,119,119,119,120,120,120,121,121,123,123,123,125,125,126,126,126,128,128,128,130,130,131,131,133,133,135,135,136,136,151,153,153,153,155,155,156,156,161,161,167,171,175,179,184,189,193,194,194,197,197,197,197,198,198,198,198,198,198,198,198,198,201,201,201,202,202,202,205,205,212,212,213,213,218,218,220,220,221,221,222,222,223,223,225,225,225,225,226,226,228,228,229,229,230,230,231,231,233,233,234,235,235,235,235,236,236,237,237,239,239,242,242,243,243,244,244,244,244,244,244,244,244,244,244,244,244,244,245,245,245,245,247,247,248,248,248,248,248,248,248,248,248,248,248,248,248,249,249,249,249,251,251,252,252,254,254,254,254,260,260,261,261,261,263,263,264,264,265,265,265,265,265,265,265,265,265,265,265,265,265,266,266,266,266,268,268,269,269,269,269,269,269,269,269,269,269,269,269,269,270,270,270,270,272,272,273,273,275,275,275,275,281,281,282,282,283,283,284,284,285,285,286,286,287,287,292,292,293,293,294,294,295,296,296,297,297,301,301,302,302,303,303,305,305,305,305,306,306,308,308,309,309,310,310,311,311,311,314,314,315,315,317,317,319,319,320,320,324,324,324,328,328,329,329,330,330,331,331,332,332,336,336,338,338,338,338,339,339,341,341,342,342,342,345,345,346,346,348,348,350,350,351,351,355,355,355,359,359,363,367,368,368,369,369,369,369,371,371,371,371,372,372,372,372,372,372,372,372,372,375,375,375,377,377,378,378,380,380,382,382,383,383,387,387,391,402,402,402,406,406,406,410,410,410,414,414,414,420,420,422,422,422,424,424,433,434,434,435,436,436,437,444,444,444,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,25,25,25};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, String getUsername, Boolean isLoggedIn, Optional<FeedBackEntity> matchingFeedback, MovieDTO movieDetail, MovieGenresDTO movieGenres, MovieAuthorDetailsReviewDTO movieAuthorDetailsReview, List<UserEntity> userList, List<FeedBackEntity> movieFeedbacks, List<MovieCastDTO> movieCast, List<MovieKeywordsDTO> movieKeywords, List<MovieReviewsDTO> movieReviews, List<MovieDTO> movieRecommendation, List<MovieDTO> popularMovies, List<MovieDTO> topRatedMovies, List<MovieDTO> upcomingMovies) {
 		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\" class=\"scroll-smooth\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
@@ -180,13 +180,17 @@ public final class JtemoviepageGenerated {
 		if (isLoggedIn) {
 			jteOutput.writeContent("\n                                    ");
 			if (matchingFeedback.isPresent()) {
-				jteOutput.writeContent("\n                                        ");
+				jteOutput.writeContent("\n                                        <input type=\"hidden\" name=\"_method\" value=\"PUT\">\n                                        ");
 				if (matchingFeedback.get().getReviews().isEmpty()) {
-					jteOutput.writeContent("\n                                            <input type=\"hidden\" name=\"_method\" value=\"PUT\">\n                                            <textarea class=\"resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none\" id=\"reviews\" name=\"reviews\" placeholder=\"Add Review\" required></textarea>\n                                            <div class=\"flex float-left mt-2\">\n                                                ");
-					for (int i = 1; i <= 5; i++) {
+					jteOutput.writeContent("\n                                            <textarea class=\"resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none\" id=\"reviews\" name=\"reviews\" placeholder=\"Add Review\" required></textarea>\n                                            <div class=\"flex flex-row-reverse float-left mt-2\">\n                                                ");
+					for (int i = 5; i >= 1; i--) {
 						jteOutput.writeContent("\n                                                    ");
 						if (i <= matchingFeedback.get().getRating() / 2) {
-							jteOutput.writeContent("\n                                                        <input type=\"radio\" id=\"star5\" name=\"rating\"");
+							jteOutput.writeContent("\n                                                        <input type=\"radio\" id=\"star");
+							jteOutput.setContext("input", "id");
+							jteOutput.writeUserContent(i);
+							jteOutput.setContext("input", null);
+							jteOutput.writeContent("\" name=\"rating\"");
 							var __jte_html_attribute_2 = i * 2;
 							if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_2)) {
 								jteOutput.writeContent(" value=\"");
@@ -195,12 +199,17 @@ public final class JtemoviepageGenerated {
 								jteOutput.setContext("input", null);
 								jteOutput.writeContent("\"");
 							}
-							jteOutput.writeContent(" class=\"hidden peer\">\n                                                        <label for=\"star5\"\n                                                               class=\"cursor-pointer text-yellow-400 peer-checked:text-gray-400 hover:text-gray-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></label>");
-							jteOutput.setContext("div", null);
-							jteOutput.writeUserContent(i * 2);
-							jteOutput.writeContent("\n                                                    ");
+							jteOutput.writeContent(" class=\"hidden peer\">\n                                                        <label for=\"star");
+							jteOutput.setContext("label", "for");
+							jteOutput.writeUserContent(i);
+							jteOutput.setContext("label", null);
+							jteOutput.writeContent("\"\n                                                               class=\"cursor-pointer text-yellow-400 peer-checked:text-orange-400 hover:text-gray-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></label>\n                                                    ");
 						} else {
-							jteOutput.writeContent("\n                                                        <input type=\"radio\" id=\"star5\" name=\"rating\"");
+							jteOutput.writeContent("\n                                                        <input type=\"radio\" id=\"star");
+							jteOutput.setContext("input", "id");
+							jteOutput.writeUserContent(i);
+							jteOutput.setContext("input", null);
+							jteOutput.writeContent("\" name=\"rating\"");
 							var __jte_html_attribute_3 = 2 * i;
 							if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_3)) {
 								jteOutput.writeContent(" value=\"");
@@ -209,10 +218,11 @@ public final class JtemoviepageGenerated {
 								jteOutput.setContext("input", null);
 								jteOutput.writeContent("\"");
 							}
-							jteOutput.writeContent(" class=\"hidden peer\">\n                                                        <label for=\"star5\"\n                                                               class=\"cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></label>");
-							jteOutput.setContext("div", null);
-							jteOutput.writeUserContent(2 * i);
-							jteOutput.writeContent("\n                                                    ");
+							jteOutput.writeContent(" class=\"hidden peer\">\n                                                        <label for=\"star");
+							jteOutput.setContext("label", "for");
+							jteOutput.writeUserContent(i);
+							jteOutput.setContext("label", null);
+							jteOutput.writeContent("\"\n                                                               class=\"cursor-pointer text-gray-400 peer-checked:text-orange-400 hover:text-yellow-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></label>\n                                                    ");
 						}
 						jteOutput.writeContent("\n                                                ");
 					}
@@ -222,18 +232,14 @@ public final class JtemoviepageGenerated {
 					jteOutput.setContext("a", null);
 					jteOutput.writeContent("/feedback/delete\" class=\"self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto\">\n                                                Delete\n                                            </a>\n                                            <button type=\"submit\" class=\"self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto\">\n                                                Comment\n                                            </button>\n                                        ");
 				} else {
-					jteOutput.writeContent("\n                                            <form action=\"/movie/");
-					jteOutput.setContext("form", "action");
-					jteOutput.writeUserContent(movieDetail.getId());
-					jteOutput.setContext("form", null);
-					jteOutput.writeContent("/feedback/update\" method=\"post\">\n                                                <input type=\"hidden\" name=\"_method\" value=\"PUT\">\n                                                <textarea class=\"resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none\" id=\"reviews\" name=\"reviews\">");
+					jteOutput.writeContent("\n                                            <textarea class=\"resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none\" id=\"reviews\" name=\"reviews\">");
 					jteOutput.setContext("textarea", null);
 					jteOutput.writeUserContent(matchingFeedback.get().getReviews());
-					jteOutput.writeContent("</textarea>\n                                                <div class=\"flex float-left mt-2\">\n                                                    ");
-					for (int i = 1; i <= 5; i++) {
-						jteOutput.writeContent("\n                                                        ");
+					jteOutput.writeContent("</textarea>\n                                            <div class=\"flex flex-row-reverse float-left mt-2\">\n                                                ");
+					for (int i = 5; i >= 1; i--) {
+						jteOutput.writeContent("\n                                                    ");
 						if (i <= matchingFeedback.get().getRating() / 2) {
-							jteOutput.writeContent("\n                                                            <input type=\"radio\" id=\"star");
+							jteOutput.writeContent("\n                                                        <input type=\"radio\" id=\"star");
 							jteOutput.setContext("input", "id");
 							jteOutput.writeUserContent(i);
 							jteOutput.setContext("input", null);
@@ -246,16 +252,13 @@ public final class JtemoviepageGenerated {
 								jteOutput.setContext("input", null);
 								jteOutput.writeContent("\"");
 							}
-							jteOutput.writeContent(" class=\"hidden peer\">\n                                                            <label for=\"star");
+							jteOutput.writeContent(" class=\"hidden peer\">\n                                                        <label for=\"star");
 							jteOutput.setContext("label", "for");
 							jteOutput.writeUserContent(i);
 							jteOutput.setContext("label", null);
-							jteOutput.writeContent("\"\n                                                                   class=\"cursor-pointer text-yellow-400 peer-checked:text-yellow-400 hover:text-gray-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></label>");
-							jteOutput.setContext("div", null);
-							jteOutput.writeUserContent(i * 2);
-							jteOutput.writeContent("\n                                                        ");
+							jteOutput.writeContent("\"\n                                                               class=\"cursor-pointer text-yellow-400 peer-checked:text-orange-400 hover:text-gray-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></label>\n                                                    ");
 						} else {
-							jteOutput.writeContent("\n                                                            <input type=\"radio\" id=\"star");
+							jteOutput.writeContent("\n                                                        <input type=\"radio\" id=\"star");
 							jteOutput.setContext("input", "id");
 							jteOutput.writeUserContent(i);
 							jteOutput.setContext("input", null);
@@ -268,22 +271,19 @@ public final class JtemoviepageGenerated {
 								jteOutput.setContext("input", null);
 								jteOutput.writeContent("\"");
 							}
-							jteOutput.writeContent(" class=\"hidden peer\">\n                                                            <label for=\"star");
+							jteOutput.writeContent(" class=\"hidden peer\">\n                                                        <label for=\"star");
 							jteOutput.setContext("label", "for");
 							jteOutput.writeUserContent(i);
 							jteOutput.setContext("label", null);
-							jteOutput.writeContent("\"\n                                                                   class=\"cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></label>");
-							jteOutput.setContext("div", null);
-							jteOutput.writeUserContent(2 * i);
-							jteOutput.writeContent("\n                                                        ");
+							jteOutput.writeContent("\"\n                                                               class=\"cursor-pointer text-gray-400 peer-checked:text-orange-400 hover:text-yellow-400 drop-shadow-md\"><i class=\"fas fa-star\"></i></label>\n                                                    ");
 						}
-						jteOutput.writeContent("\n                                                    ");
+						jteOutput.writeContent("\n                                                ");
 					}
-					jteOutput.writeContent("\n                                                </div>\n                                                <a href=\"/movie/");
+					jteOutput.writeContent("\n                                            </div>\n                                            <a href=\"/movie/");
 					jteOutput.setContext("a", "href");
 					jteOutput.writeUserContent(movieDetail.getId());
 					jteOutput.setContext("a", null);
-					jteOutput.writeContent("/feedback/delete\" class=\"self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto\">\n                                                    Delete\n                                                </a>\n                                                <button type=\"submit\" class=\"self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto\">\n                                                    Update\n                                                </button>\n                                            </form>\n                                        ");
+					jteOutput.writeContent("/feedback/delete\" class=\"self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto\">\n                                                Delete\n                                            </a>\n                                            <button type=\"submit\" class=\"self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto\">\n                                                Update\n                                            </button>\n                                        ");
 				}
 				jteOutput.writeContent("\n                                    ");
 			} else {
@@ -293,7 +293,7 @@ public final class JtemoviepageGenerated {
 			}
 			jteOutput.writeContent("\n                                ");
 		} else {
-			jteOutput.writeContent("\n                                        ");
+			jteOutput.writeContent("\n                                    ");
 			gg.jte.generated.ondemand.include.miscellaneous.JteratingradioinputGenerated.render(jteOutput, jteHtmlInterceptor);
 			jteOutput.writeContent("\n                                ");
 		}

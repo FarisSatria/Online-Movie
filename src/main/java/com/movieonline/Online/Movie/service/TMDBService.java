@@ -132,7 +132,6 @@ public class TMDBService {
         FeedBackEntity feedBack = feedBackRepository.findByUsernameAndMovieIdAndIsDeleted(username, movieId)
                 .orElseThrow(() -> new IllegalStateException("Feedback Username-" + username + " and " + movieId + " cannot be found"));
 
-        System.out.println(feedBack.getIsDeleted());
         feedBack.setReviews(reviews);
         feedBack.setRating(rating);
 
@@ -149,17 +148,4 @@ public class TMDBService {
 
         feedBackRepository.save(feedBack);
     }
-
-    @Transactional(rollbackOn = UserRegistrationConflictException.class)
-    public void provideReviewOnly(String username,
-                                Long movieId,
-                                String reviews) {
-        FeedBackEntity feedBack = feedBackRepository.findByUsernameAndMovieIdAndIsDeleted(username, movieId)
-                .orElseThrow(() -> new IllegalStateException("Feedback Username-" + username + " and " + movieId + " cannot be found"));
-
-        feedBack.setReviews(reviews);
-
-        feedBackRepository.save(feedBack);
-    }
-
 }
