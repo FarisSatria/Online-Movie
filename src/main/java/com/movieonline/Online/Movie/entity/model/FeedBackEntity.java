@@ -24,17 +24,19 @@ public class FeedBackEntity {
     private Long movieId;
     @Column(length = 1000)
     private String reviews;
-    private Double rating;
+    private Integer rating;
+    private Boolean isDeleted = false;
 
-    public FeedBackEntity(Long movieId, String username,String reviews, Double rating) {
+    public FeedBackEntity(Long movieId, String username,String reviews, Integer rating, Boolean isDeleted) {
         this.username = username;
         this.movieId = movieId;
         this.reviews = reviews;
         this.rating = rating;
+        this.isDeleted = isDeleted;
     }
     @Override
     public String toString() {
-        return String.format("FeedBackEntity(id=%d, username='%s', movieId='%d', reviews='%s', rating=%f)", id, username, movieId, reviews, rating);
+        return String.format("FeedBackEntity(id=%d, username='%s', movieId='%d', reviews='%s', rating=%d, isDeleted=%b)", id, username, movieId, reviews, rating, isDeleted);
     }
 
     @Override
@@ -46,11 +48,12 @@ public class FeedBackEntity {
                 Objects.equals(username, that.username) &&
                 Objects.equals(movieId, that.movieId) &&
                 Objects.equals(reviews, that.reviews) &&
-                Objects.equals(rating, that.rating);
+                Objects.equals(rating, that.rating)&&
+                Objects.equals(isDeleted, that.isDeleted);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, movieId, reviews, rating);
+        return Objects.hash(id, username, movieId, reviews, rating, isDeleted);
     }
 }

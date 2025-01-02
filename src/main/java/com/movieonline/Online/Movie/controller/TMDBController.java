@@ -3,13 +3,8 @@ package com.movieonline.Online.Movie.controller;
 import com.movieonline.Online.Movie.entity.dto.*;
 import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
 import com.movieonline.Online.Movie.entity.model.UserEntity;
-import com.movieonline.Online.Movie.repository.UserRepository;
+import com.movieonline.Online.Movie.security.util.AuthenticationUtils;
 import com.movieonline.Online.Movie.service.TMDBService;
-import lombok.AllArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +16,11 @@ import java.util.List;
 public class TMDBController {
 
     private final TMDBService tmdbService;
+    private final AuthenticationUtils authenticationUtils;
 
-    public TMDBController(TMDBService tmdbService) {
+    public TMDBController(TMDBService tmdbService, AuthenticationUtils authenticationUtils) {
         this.tmdbService = tmdbService;
+        this.authenticationUtils = authenticationUtils;
     }
 
     public Model pageDetails(Model model){
@@ -72,6 +69,11 @@ public class TMDBController {
         List<MovieDTO> nowPlayingMovies = tmdbService.getNowPlayingMovies();
         model.addAttribute("nowPlayingMovies", nowPlayingMovies);
 
+        return model;
+    }
+
+    public Model getMiscellaneous(Model model){
+        //User List
         List<UserEntity> userList = tmdbService.getUser();
         model.addAttribute("userList", userList);
 
@@ -88,23 +90,37 @@ public class TMDBController {
     @PostMapping("/movie/{id}/feedback")
     public String provideFeedback(@PathVariable Long id,
                                   @RequestParam(required = false) String reviews,
-                                  @RequestParam(required = false) Double rating,
+                                  @RequestParam Integer rating,
                                   FeedBackEntity feedBackEntity) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        Object principal = authentication.getPrincipal();
-        String username = null;
-
-        if (principal instanceof UserDetails) {
-            UserDetails userDetails = (UserDetails) principal;
-            username = userDetails.getUsername();
-        } else if (principal instanceof String) {
-            username = (String) principal;
-        }
-
-        tmdbService.provideFeedback(feedBackEntity, username, id, reviews, rating);
+        tmdbService.provideFeedback(feedBackEntity, authenticationUtils.getUsername(), id, reviews, rating);
 
         return "redirect:/movie/" + id;
     }
+
+    @PutMapping("/movie/{id}/feedback/update")
+    public String updateFeedback(@PathVariable Long id,
+                                 @RequestParam String reviews,
+                                 @RequestParam Integer rating){
+        tmdbService.updateFeedback(id, authenticationUtils.getUsername(), reviews, rating);
+
+        return "redirect:/movie/" + id;
+    }
+
+    @GetMapping("/movie/{id}/feedback/delete")
+    public String deleteFeedback(@PathVariable Long id){
+        tmdbService.deleteFeedback(id, authenticationUtils.getUsername());
+
+        return "redirect:/movie/" + id;
+    }
+
+    @PutMapping("/movie/{id}/feedback")
+    public String provideReviewOnly(@PathVariable Long id,
+                                    @RequestParam String reviews) {
+
+        tmdbService.provideReviewOnly(authenticationUtils.getUsername(), id, reviews);
+
+        return "redirect:/movie/" + id;
+    }
+
 }

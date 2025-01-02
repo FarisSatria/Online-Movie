@@ -1,4 +1,5 @@
 @import java.util.List
+@import java.util.Optional
 @import com.movieonline.Online.Movie.entity.dto.*
 @import com.movieonline.Online.Movie.entity.dto.MovieDTO
 @import com.movieonline.Online.Movie.entity.dto.MovieKeywordsDTO
@@ -10,6 +11,7 @@
 @param String WebName
 @param String getUsername
 @param Boolean isLoggedIn
+@param Optional<FeedBackEntity> matchingFeedback
 @param MovieDTO movieDetail
 @param MovieGenresDTO movieGenres
 @param MovieAuthorDetailsReviewDTO movieAuthorDetailsReview
@@ -230,73 +232,104 @@
                             @else
                                 <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
                             @endif
+                            <!-- User Feedback Form -->
                             <form class="w-full" action="/movie/${movieDetail.getId()}/feedback" method="post">
-                                <input class="bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" type="text" id="reviews" name="reviews" placeholder="Add Review">
-                                <div class="flex mt-2">
-                                    @if(isLoggedIn)
-                                        @for(UserEntity user : userList)
-                                            @if(getUsername.equals(user.getUsername()))
-                                                @if(user.getId().intValue() - 1 == movieFeedbacks.size())
-                                                    @template.include.miscellaneous.rating-radio-input()
-                                                @else
-                                                    @if(movieFeedbacks.get(user.getId().intValue() - 1).getMovieId() == movieDetail.getId() )
-                                                        @for (int i = 1; i <= 5; i++)
-                                                            @if (i <= movieFeedbacks.get(user.getId().intValue() - 1).getRating() / 2)
-                                                                <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
-                                                            @else
-                                                                <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
-                                                            @endif
-                                                        @endfor
+                                @if(isLoggedIn)
+                                    @if (matchingFeedback.isPresent())
+                                        @if(matchingFeedback.get().getReviews().isEmpty())
+                                            <input type="hidden" name="_method" value="PUT">
+                                            <textarea class="resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" id="reviews" name="reviews" placeholder="Add Review" required></textarea>
+                                            <div class="flex float-left mt-2">
+                                                @for (int i = 1; i <= 5; i++)
+                                                    @if (i <= matchingFeedback.get().getRating() / 2)
+                                                        <input type="radio" id="star5" name="rating" value="${i * 2}" class="hidden peer">
+                                                        <label for="star5"
+                                                               class="cursor-pointer text-yellow-400 peer-checked:text-gray-400 hover:text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></label>${i * 2}
+                                                    @else
+                                                        <input type="radio" id="star5" name="rating" value="${2 * i}" class="hidden peer">
+                                                        <label for="star5"
+                                                               class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></label>${2 * i}
                                                     @endif
-                                                @endif
-                                            @endif
-                                        @endfor
+                                                @endfor
+                                            </div>
+                                            <a href="/movie/${movieDetail.getId()}/feedback/delete" class="self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
+                                                Delete
+                                            </a>
+                                            <button type="submit" class="self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
+                                                Comment
+                                            </button>
+                                        @else
+                                            <form action="/movie/${movieDetail.getId()}/feedback/update" method="post">
+                                                <input type="hidden" name="_method" value="PUT">
+                                                <textarea class="resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" id="reviews" name="reviews">${matchingFeedback.get().getReviews()}</textarea>
+                                                <div class="flex float-left mt-2">
+                                                    @for (int i = 1; i <= 5; i++)
+                                                        @if (i <= matchingFeedback.get().getRating() / 2)
+                                                            <input type="radio" id="star${i}" name="rating" value="${i * 2}" class="hidden peer">
+                                                            <label for="star${i}"
+                                                                   class="cursor-pointer text-yellow-400 peer-checked:text-yellow-400 hover:text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></label>${i * 2}
+                                                        @else
+                                                            <input type="radio" id="star${i}" name="rating" value="${2 * i}" class="hidden peer">
+                                                            <label for="star${i}"
+                                                                   class="cursor-pointer text-gray-400 peer-checked:text-yellow-500 hover:text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></label>${2 * i}
+                                                        @endif
+                                                    @endfor
+                                                </div>
+                                                <a href="/movie/${movieDetail.getId()}/feedback/delete" class="self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
+                                                    Delete
+                                                </a>
+                                                <button type="submit" class="self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
+                                                    Update
+                                                </button>
+                                            </form>
+                                        @endif
                                     @else
                                         @template.include.miscellaneous.rating-radio-input()
                                     @endif
-                                    <button type="submit"
-                                            class="bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right ml-auto">
-                                        Comment
-                                    </button>
-                                </div>
+                                @else
+                                        @template.include.miscellaneous.rating-radio-input()
+                                @endif
                             </form>
                         </div>
                         <div class="transition-transform duration-500 ease-in-out max-h-96 overflow-y-scroll
-                                px-5 space-y-12">
+                                px-5 pb-4 space-y-12">
                             @if(movieFeedbacks != null)
                                 @for(FeedBackEntity feedbacks : movieFeedbacks)
-                                    @if(feedbacks.getReviews().isEmpty())
-                                    @elseif(feedbacks.getMovieId() == movieDetail.getId())
-                                        <div class="w-full space-y-2">
-                                            <div class="flex">
-                                                <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
-                                                @for(UserEntity user : userList)
-                                                    @if(user.getUsername().equals(getUsername))
-                                                        @if(user.getProfile_picture_path() != null)
-                                                            <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
-                                                                 src="/image/icon/${user.getProfile_picture_path()}.png">
-                                                        @else
-                                                            <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                                    @if(feedbacks.getMovieId() == movieDetail.getId())
+                                        @if(feedbacks.getReviews().isBlank() || feedbacks.getReviews().isEmpty() || getUsername.equals(feedbacks.getUsername()) || feedbacks.getIsDeleted() == true
+)
+                                        @else
+                                            <div class="w-full space-y-2">
+                                                <div class="flex">
+                                                    <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
+                                                    @for(UserEntity user : userList)
+                                                        @if(user.getUsername().equals(feedbacks.getUsername()))
+                                                            @if(user.getProfile_picture_path() != null)
+                                                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
+                                                                     src="/image/icon/${user.getProfile_picture_path()}.png">
+                                                            @else
+                                                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                                                            @endif
                                                         @endif
-                                                    @endif
-                                                @endfor
-                                                <h3 class="text-xl font-bold my-auto">${feedbacks.getUsername()}</h3>
-                                            </div>
-                                            <div class="flex items-center">
-                                                @for (int i = 1; i <= 5; i++)
-                                                    @if (i <= feedbacks.getRating() / 2)
-                                                        <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
-                                                    @else
-                                                        <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
-                                                    @endif
-                                                @endfor
-                                            </div>
-                                            <div class="overflow-y-auto max-h-full">
-                                                <p class="reviews text-md text-zinc-600" style="display: -webkit-box; -webkit-box-orient: vertical;
+                                                    @endfor
+                                                    <h3 class="text-xl font-bold my-auto">${feedbacks.getUsername()}</h3>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    @for (int i = 1; i <= 5; i++)
+                                                        @if (i <= feedbacks.getRating() / 2)
+                                                            <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                                        @else
+                                                            <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                                        @endif
+                                                    @endfor
+                                                </div>
+                                                <div class="overflow-y-auto max-h-full">
+                                                    <p class="reviews text-md text-zinc-600" style="display: -webkit-box; -webkit-box-orient: vertical;
                                         -webkit-line-clamp: 5; overflow: hidden;">${feedbacks.getReviews()}</p>
+                                                </div>
+                                                <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white ">Show More!</button>
                                             </div>
-                                            <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white ">Show More!</button>
-                                        </div>
+                                        @endif
                                     @endif
                                 @endfor
                             @endif
@@ -304,7 +337,12 @@
                                 <div class="w-full space-y-2">
                                     <div class="flex">
                                         <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
-                                        <img class="size-10 rounded-full bg-gray-500 mr-2" src="https://image.tmdb.org/t/p/w92${movie.getAuthor_details().getAvatar_path()}">
+                                        @if(movie.getAuthor_details().getAvatar_path() != null)
+                                            <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
+                                                 src="https://image.tmdb.org/t/p/w92${movie.getAuthor_details().getAvatar_path()}">
+                                        @else
+                                            <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                                        @endif
                                         <h3 class="text-xl font-bold my-auto">${movie.getAuthor()}</h3>
                                     </div>
                                     <div class="flex items-center">

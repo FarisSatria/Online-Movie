@@ -14,7 +14,7 @@
             <button id="cancelButton" class="text-zinc-700 text-center border border-black/20 hover:bg-white shadow-md hover:shadow-lg font-medium py-2 px-4 rounded-lg cursor-pointer w-full transition duration-300">
                 Cancel
             </button>
-            <a id="logoutButton" href="/logout" class="bg-red-500 hover:bg-red-600 text-center text-white shadow-md hover:shadow-lg font-medium py-2 px-4 rounded-lg cursor-pointer w-full transition duration-300">
+            <a id="logoutButton" href="/logout" class="bg-red-600 hover:bg-red-700 text-center text-white shadow-md hover:shadow-lg font-medium py-2 px-4 rounded-lg cursor-pointer w-full transition duration-300">
                 Log out
             </a>
         </div>

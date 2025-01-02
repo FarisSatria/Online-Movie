@@ -7,12 +7,14 @@ import com.movieonline.Online.Movie.entity.res.*;
 import com.movieonline.Online.Movie.exception.UserRegistrationConflictException;
 import com.movieonline.Online.Movie.repository.FeedBackRepository;
 import com.movieonline.Online.Movie.repository.UserRepository;
+import com.movieonline.Online.Movie.security.util.AuthenticationUtils;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TMDBService {
@@ -113,13 +115,51 @@ public class TMDBService {
                                 String username,
                                 Long movieId,
                                 String reviews,
-                                Double rating) {
+                                Integer rating) {
         feedBackEntity.setUsername(username);
         feedBackEntity.setMovieId(movieId);
         feedBackEntity.setReviews(reviews);
         feedBackEntity.setRating(rating);
 
         feedBackRepository.save(feedBackEntity);
+    }
+
+    @Transactional(rollbackOn = UserRegistrationConflictException.class)
+    public void updateFeedback(Long movieId,
+                               String username,
+                               String reviews,
+                               Integer rating) {
+        FeedBackEntity feedBack = feedBackRepository.findByUsernameAndMovieIdAndIsDeleted(username, movieId)
+                .orElseThrow(() -> new IllegalStateException("Feedback Username-" + username + " and " + movieId + " cannot be found"));
+
+        System.out.println(feedBack.getIsDeleted());
+        feedBack.setReviews(reviews);
+        feedBack.setRating(rating);
+
+        feedBackRepository.save(feedBack);
+    }
+
+    @Transactional(rollbackOn = UserRegistrationConflictException.class)
+    public void deleteFeedback(Long movieId, String username){
+        FeedBackEntity feedBack = feedBackRepository.findByUsernameAndMovieIdAndIsDeleted(username, movieId)
+                .orElseThrow(() -> new IllegalStateException("Feedback Username-" + username + " and " + movieId + " cannot be found"));
+
+        System.out.println(feedBack.getIsDeleted());
+        feedBack.setIsDeleted(true);
+
+        feedBackRepository.save(feedBack);
+    }
+
+    @Transactional(rollbackOn = UserRegistrationConflictException.class)
+    public void provideReviewOnly(String username,
+                                Long movieId,
+                                String reviews) {
+        FeedBackEntity feedBack = feedBackRepository.findByUsernameAndMovieIdAndIsDeleted(username, movieId)
+                .orElseThrow(() -> new IllegalStateException("Feedback Username-" + username + " and " + movieId + " cannot be found"));
+
+        feedBack.setReviews(reviews);
+
+        feedBackRepository.save(feedBack);
     }
 
 }
