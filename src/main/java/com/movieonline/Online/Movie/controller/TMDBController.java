@@ -2,23 +2,31 @@ package com.movieonline.Online.Movie.controller;
 
 import com.movieonline.Online.Movie.entity.dto.*;
 import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
+import com.movieonline.Online.Movie.entity.model.MovieBookingEntity;
 import com.movieonline.Online.Movie.entity.model.UserEntity;
+import com.movieonline.Online.Movie.repository.FeedBackRepository;
 import com.movieonline.Online.Movie.security.util.AuthenticationUtils;
 import com.movieonline.Online.Movie.service.TMDBService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 public class TMDBController {
 
+    private final FeedBackRepository feedBackRepository;
     private final TMDBService tmdbService;
     private final AuthenticationUtils authenticationUtils;
 
-    public TMDBController(TMDBService tmdbService, AuthenticationUtils authenticationUtils) {
+    public TMDBController(FeedBackRepository feedBackRepository, TMDBService tmdbService, AuthenticationUtils authenticationUtils, List<FeedBackEntity> movieFeedbacks) {
+        this.feedBackRepository = feedBackRepository;
         this.tmdbService = tmdbService;
         this.authenticationUtils = authenticationUtils;
     }
@@ -72,15 +80,7 @@ public class TMDBController {
         return model;
     }
 
-    public Model getMiscellaneous(Model model){
-        //User List
-        List<UserEntity> userList = tmdbService.getUser();
-        model.addAttribute("userList", userList);
-
-        return model;
-    }
-
-    @GetMapping("/api/search")
+    @GetMapping("/api/search/movies")
     @ResponseBody
     public List<MovieDTO> searchMovies(@RequestParam String name) {
         return tmdbService.searchMovies(name);
@@ -98,13 +98,53 @@ public class TMDBController {
         return "redirect:/movie/" + id;
     }
 
+    @PostMapping("/movie/{id}/booking")
+    public String submitBooking(
+            @PathVariable("id") Long movieId,
+            @RequestParam("custom-date") String date,
+            @RequestParam("custom-time") String time,
+            Model model) {
+
+        try {
+            Date bookingDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+            Time bookingTime = Time.valueOf(time + ":00");
+
+            MovieBookingEntity movieBookingEntity = new MovieBookingEntity();
+            movieBookingEntity.setMovieId(movieId);
+            if (movieBookingEntity.getUsername() == null) {
+                movieBookingEntity.setUsername(new ArrayList<>());
+            }
+            movieBookingEntity.getUsername().add(authenticationUtils.getUsername());
+            movieBookingEntity.setDate(bookingDate);
+            movieBookingEntity.setTime(bookingTime);
+
+            tmdbService.addBooking(movieBookingEntity, authenticationUtils.getUsername(), movieId);
+
+            // Pass success message to the model
+            model.addAttribute("successMessage", "Your booking was successful!");
+        } catch (ParseException e) {
+            model.addAttribute("errorMessage", "Invalid date or time format.");
+            e.printStackTrace();
+        } catch (RuntimeException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            e.printStackTrace();
+        }
+
+        return "redirect:/movie/" + movieId;
+    }
+
     @PutMapping("/movie/{id}/feedback")
     public String updateFeedback(@PathVariable Long id,
-                                 @RequestParam String reviews,
-                                 @RequestParam Integer rating){
-        System.out.println(rating);
+                                 @RequestParam(required = false) String reviews,
+                                 @RequestParam(required = false) Integer rating){
 
-        tmdbService.updateFeedback(id, authenticationUtils.getUsername(), reviews, rating);
+        String username = authenticationUtils.getUsername();
+
+        if(rating == null){
+            tmdbService.updateFeedback(id, username, reviews, feedBackRepository.findRatingByUsernameAndMovieIdAAndIsDeletedFalse(username, id).get());
+        }else{
+            tmdbService.updateFeedback(id, authenticationUtils.getUsername(), reviews, rating);
+        }
 
         return "redirect:/movie/" + id;
     }

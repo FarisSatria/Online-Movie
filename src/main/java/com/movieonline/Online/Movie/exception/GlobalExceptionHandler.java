@@ -27,6 +27,12 @@ public class GlobalExceptionHandler {
         templateController.pageDetails(model);
         return "login";
     }
+    @ExceptionHandler({FeedbackInvalidCredentials.class})
+    public ResponseEntity<Object> handleFeedbackInvalidCredentials(FeedbackInvalidCredentials exception){
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(exception.getMessage());
+    }
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<Map<String, String>> handleRuntimeException(MethodArgumentNotValidException exception) {
         Map<String, String> errors = new HashMap();

@@ -1,7 +1,7 @@
 package gg.jte.generated.ondemand;
 public final class JteloginGenerated {
 	public static final String JTE_NAME = "login.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,0,0,9,9,9,9,12,15,18,24,26,26,26,28,33,38,45,56,58,58,58,60,65,70,75,83,86,86,86,92,92,92,97,97,101,101,101,104,104,108,108,108,111,111,114,118,118,118,0,1,2,2,2,2};
+	public static final int[] JTE_LINE_INFO = {0,0,0,0,9,9,9,9,12,15,18,24,26,26,26,28,33,38,45,50,51,56,58,58,58,60,65,70,75,83,86,86,86,92,92,92,97,97,101,101,101,104,104,108,108,108,111,111,114,118,118,118,0,1,2,2,2,2};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, String userAlreadyExist, String invalidCredentials) {
 		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
@@ -17,7 +17,9 @@ public final class JteloginGenerated {
 		jteOutput.writeContent("\n            <div class=\"flex items-center border-b border-gray-400 py-2\">\n                <i class=\"fas fa-user text-gray-400 mr-3\"></i>\n                <input type=\"text\" name=\"username\" class=\"w-full bg-transparent placeholder-gray-400 text-gray-900 focus:outline-none\" placeholder=\"Username\" required>\n            </div>\n            ");
 		jteOutput.writeContent("\n            <div class=\"flex items-center border-b border-gray-400 py-2\">\n                <i class=\"fas fa-lock text-gray-400 mr-3\"></i>\n                <input type=\"password\" name=\"password\" class=\"w-full bg-transparent placeholder-gray-400 text-gray-900 focus:outline-none\" placeholder=\"Password\" required>\n            </div>\n            ");
 		jteOutput.writeContent("\n            <button class=\"w-full mt-6 py-3 bg-sky-500 shadow-card hover:bg-sky-400 text-white font-semibold rounded-lg flex items-center justify-center space-x-2 transition\">\n                <span>Log In Now</span>\n                <i class=\"fas fa-chevron-right\"></i>\n            </button>\n        </form>\n\n        ");
-		jteOutput.writeContent("\n        <div class=\"mt-8 text-center\">\n            <h3 class=\"text-sm text-gray-400 mb-4\">Or log in via</h3>\n            <div class=\"flex justify-center space-x-6\">\n                <a href=\"#\" class=\"text-gray-400 hover:text-pink-500 hover:rotate-12 hover:scale-125 hover:drop-shadow-md text-2xl transition\"><i class=\"fab fa-instagram\"></i></a>\n                <a href=\"#\" class=\"text-gray-400 hover:text-blue-600 hover:rotate-12 hover:scale-125 hover:drop-shadow-md text-2xl transition\"><i class=\"fab fa-facebook\"></i></a>\n                <a href=\"#\" class=\"text-gray-400 hover:text-blue-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-md text-2xl transition\"><i class=\"fab fa-twitter\"></i></a>\n            </div>\n        </div>\n    </div>\n\n    ");
+		jteOutput.writeContent("\n        <div class=\"mt-8 text-center\">\n            <h3 class=\"text-sm text-gray-400 mb-4\">Or enter as a Guest</h3>\n            <div class=\"flex justify-center space-x-6\">\n                <a href=\"/\" class=\"text-gray-400 hover:text-yellow-500 hover:rotate-12 hover:scale-125 hover:drop-shadow-md text-2xl transition\"><i class=\"fas fa-home\"></i></a>\n");
+		jteOutput.writeContent("\n");
+		jteOutput.writeContent("\n            </div>\n        </div>\n    </div>\n\n    ");
 		jteOutput.writeContent("\n    <div id=\"registerForm\" class=\"p-8 w-full md:w-1/2 hidden text-gray-900\">\n        <h2 class=\"text-4xl text-black font-bold text-center mb-6\">");
 		jteOutput.setContext("h2", null);
 		jteOutput.writeUserContent(WebName);

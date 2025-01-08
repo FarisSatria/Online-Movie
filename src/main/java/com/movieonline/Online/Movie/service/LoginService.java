@@ -14,12 +14,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
-@AllArgsConstructor
 @Service
 public class LoginService implements AuthenticationProvider {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public LoginService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -34,9 +38,15 @@ public class LoginService implements AuthenticationProvider {
             throw new BadCredentialsException("Invalid credentials!");
         }
 
-        return new UsernamePasswordAuthenticationToken(
-                username, password, Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
-        );
+        if(Boolean.TRUE.equals(user.getIsAdmin())){
+            return new UsernamePasswordAuthenticationToken(
+                    username, password, Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"))
+            );
+        }else{
+            return new UsernamePasswordAuthenticationToken(
+                    username, password, Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
+            );
+        }
     }
 
     @Override

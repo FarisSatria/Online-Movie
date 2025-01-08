@@ -1,8 +1,11 @@
 package com.movieonline.Online.Movie.controller;
 
 import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
+import com.movieonline.Online.Movie.entity.model.UserEntity;
+import com.movieonline.Online.Movie.repository.UserRepository;
 import com.movieonline.Online.Movie.security.util.AuthenticationUtils;
 import com.movieonline.Online.Movie.service.TMDBService;
+import com.movieonline.Online.Movie.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +20,13 @@ public class TemplateController {
     private final TMDBController tmdbController;
     private final AuthenticationUtils authenticationUtils;
     private final TMDBService tmdbService;
+    private final UserController userController;
 
-    public TemplateController(TMDBController tmdbController, AuthenticationUtils authenticationUtils, TMDBService tmdbService) {
+    public TemplateController(TMDBController tmdbController, AuthenticationUtils authenticationUtils, TMDBService tmdbService, UserController userController) {
         this.tmdbController = tmdbController;
         this.authenticationUtils = authenticationUtils;
         this.tmdbService = tmdbService;
+        this.userController = userController;
     }
 
     public Model pageDetails(Model model){
@@ -42,7 +47,7 @@ public class TemplateController {
     public String showHomePage(Principal principal, Model model) {
         tmdbController.getMoviesDetails(model);
         authenticationUtils.isLoggedIn(principal, model);
-        tmdbController.getMiscellaneous(model);
+        userController.getUserList(model);
         model.addAttribute("getUsername", authenticationUtils.getUsername());
         pageDetails(model);
         return "index";
@@ -52,11 +57,29 @@ public class TemplateController {
     public String moviePage(@PathVariable(required = true) Long id, Principal principal, Model model){
         tmdbController.getMovieDetails(id, model);
         tmdbController.getMoviesDetails(model);
-        tmdbController.getMiscellaneous(model);
+        userController.getUserList(model);
         authenticationUtils.isLoggedIn(principal, model);
         matchingFeedbacks(id, model);
         model.addAttribute("getUsername", authenticationUtils.getUsername());
         pageDetails(model);
         return "movie-page";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboardPage(Model model){
+        userController.getUserList(model);
+        userController.getUserAllUserTypes(model);
+        model.addAttribute("getUsername", authenticationUtils.getUsername());
+        pageDetails(model);
+        return "admin/dashboard";
+    }
+
+    @GetMapping("/dashboard/users")
+    public String usersManagementPage(Model model){
+        userController.getUserList(model);
+        userController.getUserAllUserTypes(model);
+        model.addAttribute("getUsername", authenticationUtils.getUsername());
+        pageDetails(model);
+        return "admin/user-management";
     }
 }

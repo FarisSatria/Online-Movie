@@ -3,6 +3,7 @@ package com.movieonline.Online.Movie.config;
 import com.movieonline.Online.Movie.security.util.AuthenticationUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,4 +24,10 @@ public class AppConfig {
     public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
         return new HiddenHttpMethodFilter();
     }
+
+    @Bean
+    public GrantedAuthorityDefaults grantedAuthorityDefaults() {
+        return new GrantedAuthorityDefaults("");
+    }
+
 }

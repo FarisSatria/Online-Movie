@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -19,25 +20,22 @@ public class MovieBookingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 11)
     private Long id;
-    private String username;
     private Long movieId;
+    private List<String> username;
     private Date date;
     private Time time;
-    private Integer available_quota;
-    private Integer remaining_quota;
+    private Integer available_quota = 50;
 
-    public MovieBookingEntity(Long movieId, String username, Date date, Time time, Integer available_quota, Integer remaining_quota){
+    public MovieBookingEntity(List<String> username, Long movieId, Date date, Time time){
         this.username = username;
         this.movieId = movieId;
         this.date = date;
         this.time = time;
-        this.available_quota = available_quota;
-        this.remaining_quota = remaining_quota;
     }
 
     @Override
     public String toString() {
-        return String.format("MovieBookingEntity(id=%d, username='%s', movieId='%d', date='%s', time=%f)", id, username, movieId, date, time);
+        return String.format("MovieBookingEntity(id=%d, movieId='%d', username='%s', date='%s', time=%tm)", id, movieId, username, date, time);
     }
 
     @Override
@@ -46,14 +44,14 @@ public class MovieBookingEntity {
         if (o == null || getClass() != o.getClass()) return false;
         MovieBookingEntity that = (MovieBookingEntity) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(username, that.username) &&
                 Objects.equals(movieId, that.movieId) &&
+                Objects.equals(username, that.username) &&
                 Objects.equals(date, that.date) &&
                 Objects.equals(time, that.time);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, movieId, date, time);
+        return Objects.hash(id, movieId, username, date, time);
     }
 }

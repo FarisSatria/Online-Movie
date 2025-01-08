@@ -1,7 +1,9 @@
 package com.movieonline.Online.Movie.security.config;
 
+import com.movieonline.Online.Movie.security.CustomAuthenticationSuccessHandler;
 import com.movieonline.Online.Movie.service.LoginService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig {
 
     private final LoginService loginService;
+    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -31,20 +34,22 @@ public class WebSecurityConfig {
                                         "/image/**",
                                         "/video/**",
                                         "/movies",
-                                        "/api/search",
+                                        "/api/search/**",
                                         "/guest-session",
                                         "/register",
                                         "/movies/popular",
                                         "/movie/{id}",
                                         "/movie/{id}/feedback"
                                 ).permitAll()
-                                .requestMatchers("/movie/{id}/book").authenticated()
+                                .requestMatchers("/dashboard").hasRole("ROLE_ADMIN")
+                                .requestMatchers("/movie/{movieId}/booking").authenticated()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .failureUrl("/login?error=true")
                         .defaultSuccessUrl("/", true)
+                        .successHandler(customAuthenticationSuccessHandler)
                         .permitAll()
                 )
                 .logout(logout -> logout
@@ -59,9 +64,10 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .authenticationProvider(loginService)
-                .build();
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.authenticationProvider(loginService);
+        return authenticationManagerBuilder.build();
     }
 }

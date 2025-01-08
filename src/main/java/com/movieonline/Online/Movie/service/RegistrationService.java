@@ -8,12 +8,17 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
 @Service
 public class RegistrationService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public RegistrationService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
 
     @Transactional(rollbackOn = UserRegistrationConflictException.class)
     public UserEntity registerUser(UserEntity userEntity, String name, String username, String password) {

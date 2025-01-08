@@ -8,7 +8,7 @@ function performSearch() {
 
     resultsContainer.innerHTML = '';
 
-    fetch(`/api/search?name=${encodeURIComponent(name)}`, {
+    fetch(`/api/search/movies?name=${encodeURIComponent(name)}`, {
         method: "GET"
     })
         .then(response => response.json())

@@ -30,7 +30,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${WebName} | Homepage</title>
+    <title>${WebName} | ${movieDetail.getTitle()}</title>
     <link rel="icon" href="/image/favicon/eudaemonia.png">
 
     <!-- Tailwind CSS -->
@@ -75,9 +75,9 @@
                     <button id="userButton" class="block size-8 drop-shadow-lg rounded-full focus:outline-none">
                         @for(UserEntity user : userList)
                             @if(user.getUsername().equals(getUsername))
-                                @if(user.getProfile_picture_path() != null)
+                                @if(user.getProfilePicturePath() != null)
                                     <img rel="icon" class="rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200"
-                                         src="/image/icon/${user.getProfile_picture_path()}.png">
+                                         src="/image/icon/${user.getProfilePicturePath()}.png">
                                 @else
                                     <img rel="icon" class="rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200" src="/image/icon/user-icon.png">
                                 @endif
@@ -86,7 +86,7 @@
                     </button>
 
                     <div id="userPanel" class="absolute w-40 -left-1 -top-36 text-left bg-gray-50 rounded-lg shadow-md border border-gray-300 hidden">
-                        <a href="" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 rounded-t-lg cursor-pointer transition duration-300">Settings</a>
+                        <a href="" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 rounded-t-lg cursor-pointer transition duration-300">Booking</a>
                         <a href="" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300">Account</a>
                         <div class="group">
                             <a id="openModal" class="block px-4 py-2 text-zinc-700 group-hover:bg-red-600 group-hover:text-white border-t border-t-gray-300 cursor-pointer rounded-b-lg transition duration-300">Logout</a>
@@ -164,27 +164,29 @@
                             <div class="border-sky-400 border-l-4 pl-2 h-6"></div>
                             <h2 class="text-xl font-bold text-zinc-700">Pick a Date and Time</h2>
                         </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <!-- Date Dropdown -->
-                            <div class="space-y-2">
-                                <label for="custom-date" class="block font-medium text-zinc-700">Date</label>
-                                <select id="custom-date" class="w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 shadow-inner-lg">
-                                    <!-- Dynamic options filled with JavaScript -->
-                                </select>
+                        <form action="/movie/${movieDetail.getId()}/booking" method="post">
+                            <div class="grid grid-cols-2 gap-4">
+                                <!-- Date Dropdown -->
+                                <div class="space-y-2">
+                                    <label for="custom-date" class="block font-medium text-zinc-700">Date</label>
+                                    <select id="custom-date" name="custom-date" class="w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 shadow-inner-lg">
+                                        <!-- Dynamic options filled with JavaScript -->
+                                    </select>
+                                </div>
+
+                                <!-- Time Dropdown -->
+                                <div class="space-y-2">
+                                    <label for="custom-time" class="block font-medium text-gray-700">Time</label>
+                                    <select id="custom-time" name="custom-time" class="w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 shadow-inner-lg">
+                                        <!-- Dynamic options filled with JavaScript -->
+                                    </select>
+                                </div>
                             </div>
 
-                            <!-- Time Dropdown -->
-                            <div class="space-y-2">
-                                <label for="custom-time" class="block font-medium text-gray-700">Time</label>
-                                <select id="custom-time" class="w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 shadow-inner-lg">
-                                    <!-- Dynamic options filled with JavaScript -->
-                                </select>
-                            </div>
-                        </div>
+                            <!-- Book Now Button -->
+                            <button type="submit" class="bg-green-500 hover:bg-green-400 mt-2 transition duration-300 rounded-full p-3 shadow-card text-white ml-[88%]">Book Now</button>
+                        </form>
 
-                        <!-- Book Now Button -->
-                        <br>
-                        <a href="/movie/{id}/booking" class="bg-green-500 hover:bg-green-400 transition duration-300 rounded-full p-3 shadow-card text-white ml-[88%]">Book Now</a>
                     </div>
                 </div>
                 <!-- Movie Cast Section (Horizontal Scroll) -->
@@ -221,9 +223,9 @@
                             @if(isLoggedIn)
                                 @for(UserEntity user : userList)
                                     @if(user.getUsername().equals(getUsername))
-                                        @if(user.getProfile_picture_path() != null)
+                                        @if(user.getProfilePicturePath() != null)
                                             <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
-                                                 src="/image/icon/${user.getProfile_picture_path()}.png">
+                                                 src="/image/icon/${user.getProfilePicturePath()}.png">
                                         @else
                                             <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
                                         @endif
@@ -293,17 +295,43 @@
                             @if(movieFeedbacks != null)
                                 @for(FeedBackEntity feedbacks : movieFeedbacks)
                                     @if(feedbacks.getMovieId() == movieDetail.getId())
-                                        @if(feedbacks.getReviews().isBlank() || feedbacks.getReviews().isEmpty() || getUsername.equals(feedbacks.getUsername()) || feedbacks.getIsDeleted() == true
-)
+                                        @if(getUsername.equals(feedbacks.getUsername()) || feedbacks.getIsDeleted() == true)
+
+                                        @elseif(feedbacks.getReviews().isBlank() || feedbacks.getReviews().isEmpty() || getUsername.equals(feedbacks.getUsername()) || feedbacks.getIsDeleted() == true)
+                                            <div class="w-full space-y-2">
+                                                <div class="flex">
+                                                    <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
+                                                    @for(UserEntity user : userList)
+                                                        @if(user.getUsername().equals(feedbacks.getUsername()))
+                                                            @if(user.getProfilePicturePath() != null)
+                                                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
+                                                                     src="/image/icon/${user.getProfilePicturePath()}.png">
+                                                            @else
+                                                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                                                            @endif
+                                                        @endif
+                                                    @endfor
+                                                    <h3 class="text-xl font-bold my-auto">${feedbacks.getUsername()}</h3>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    @for (int i = 1; i <= 5; i++)
+                                                        @if (i <= feedbacks.getRating() / 2)
+                                                            <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                                        @else
+                                                            <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                                        @endif
+                                                    @endfor
+                                                </div>
+                                            </div>
                                         @else
                                             <div class="w-full space-y-2">
                                                 <div class="flex">
                                                     <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
                                                     @for(UserEntity user : userList)
                                                         @if(user.getUsername().equals(feedbacks.getUsername()))
-                                                            @if(user.getProfile_picture_path() != null)
+                                                            @if(user.getProfilePicturePath() != null)
                                                                 <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
-                                                                     src="/image/icon/${user.getProfile_picture_path()}.png">
+                                                                     src="/image/icon/${user.getProfilePicturePath()}.png">
                                                             @else
                                                                 <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
                                                             @endif

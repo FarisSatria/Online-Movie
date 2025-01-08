@@ -1,6 +1,7 @@
 @import java.util.List
 @import com.movieonline.Online.Movie.entity.dto.MovieDTO
 @import com.movieonline.Online.Movie.entity.model.UserEntity
+@import com.movieonline.Online.Movie.repository.UserRepository
 
 @param String WebName
 @param String getUsername
@@ -11,6 +12,7 @@
 @param List<MovieDTO> popularMovies
 @param List<MovieDTO> topRatedMovies
 @param List<MovieDTO> upcomingMovies
+@param UserRepository userRepository
 
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -62,9 +64,9 @@
                     <button id="userButton" class="block size-8 drop-shadow-lg rounded-full focus:outline-none">
                         @for(UserEntity user : userList)
                             @if(user.getUsername().equals(getUsername))
-                                @if(user.getProfile_picture_path() != null)
+                                @if(user.getProfilePicturePath() != null)
                                     <img rel="icon" class="rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200"
-                                         src="/image/icon/${user.getProfile_picture_path()}.png">
+                                         src="/image/icon/${user.getProfilePicturePath()}.png">
                                 @else
                                     <img rel="icon" class="rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200" src="/image/icon/user-icon.png">
                                 @endif
@@ -73,7 +75,7 @@
                     </button>
 
                     <div id="userPanel" class="absolute w-40 -left-1 -top-36 text-left bg-gray-50 rounded-lg shadow-md border border-gray-300 hidden">
-                        <a href="" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 rounded-t-lg cursor-pointer transition duration-300">Settings</a>
+                        <a href="" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 rounded-t-lg cursor-pointer transition duration-300">Booking</a>
                         <a href="" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300">Account</a>
                         <div class="group">
                             <a id="openModal" class="block px-4 py-2 text-zinc-700 group-hover:bg-red-600 group-hover:text-white border-t border-t-gray-300 cursor-pointer rounded-b-lg transition duration-300">Logout</a>

@@ -2,10 +2,11 @@ package gg.jte.generated.ondemand;
 import java.util.List;
 import com.movieonline.Online.Movie.entity.dto.MovieDTO;
 import com.movieonline.Online.Movie.entity.model.UserEntity;
+import com.movieonline.Online.Movie.repository.UserRepository;
 public final class JteindexGenerated {
 	public static final String JTE_NAME = "index.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,19,19,19,19,22,25,28,34,36,38,46,54,54,57,57,58,62,62,63,63,64,64,66,66,66,66,67,67,69,69,70,70,71,71,83,83,84,91,91,95,97,99,99,101,101,101,101,104,104,104,104,104,104,104,104,104,104,104,104,104,107,107,107,108,108,108,110,110,111,111,113,113,115,115,116,116,119,119,119,119,128,128,131,133,138,145,149,150,150,151,151,151,151,153,153,153,153,154,154,154,154,154,154,154,154,154,157,157,157,159,159,160,160,162,162,164,164,165,165,169,169,172,176,177,177,178,178,178,178,180,180,180,180,181,181,181,181,181,181,181,181,181,184,184,184,186,186,187,187,189,189,191,191,192,192,196,196,207,207,208,208,208,208,211,211,211,211,212,212,212,212,212,212,212,212,212,214,214,214,215,215,215,218,218,225,226,226,227,228,228,229,236,236,236,4,5,6,7,8,9,10,11,12,12,12,12};
-	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, String getUsername, Boolean isLoggedIn, List<UserEntity> userList, List<MovieDTO> searchMovies, List<MovieDTO> nowPlayingMovies, List<MovieDTO> popularMovies, List<MovieDTO> topRatedMovies, List<MovieDTO> upcomingMovies) {
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,3,5,5,5,21,21,21,21,24,27,30,36,38,40,48,56,56,59,59,60,64,64,65,65,66,66,68,68,68,68,69,69,71,71,72,72,73,73,85,85,86,93,93,97,99,101,101,103,103,103,103,106,106,106,106,106,106,106,106,106,106,106,106,106,109,109,109,110,110,110,112,112,113,113,115,115,117,117,118,118,121,121,121,121,130,130,133,135,140,147,151,152,152,153,153,153,153,155,155,155,155,156,156,156,156,156,156,156,156,156,159,159,159,161,161,162,162,164,164,166,166,167,167,171,171,174,178,179,179,180,180,180,180,182,182,182,182,183,183,183,183,183,183,183,183,183,186,186,186,188,188,189,189,191,191,193,193,194,194,198,198,209,209,210,210,210,210,213,213,213,213,214,214,214,214,214,214,214,214,214,216,216,216,217,217,217,220,220,227,228,228,229,230,230,231,238,238,238,5,6,7,8,9,10,11,12,13,14,14,14,14};
+	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, String getUsername, Boolean isLoggedIn, List<UserEntity> userList, List<MovieDTO> searchMovies, List<MovieDTO> nowPlayingMovies, List<MovieDTO> popularMovies, List<MovieDTO> topRatedMovies, List<MovieDTO> upcomingMovies, UserRepository userRepository) {
 		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\" class=\"scroll-smooth\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
 		jteOutput.writeUserContent(WebName);
@@ -26,10 +27,10 @@ public final class JteindexGenerated {
 				jteOutput.writeContent("\n                            ");
 				if (user.getUsername().equals(getUsername)) {
 					jteOutput.writeContent("\n                                ");
-					if (user.getProfile_picture_path() != null) {
+					if (user.getProfilePicturePath() != null) {
 						jteOutput.writeContent("\n                                    <img rel=\"icon\" class=\"rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200\"\n                                         src=\"/image/icon/");
 						jteOutput.setContext("img", "src");
-						jteOutput.writeUserContent(user.getProfile_picture_path());
+						jteOutput.writeUserContent(user.getProfilePicturePath());
 						jteOutput.setContext("img", null);
 						jteOutput.writeContent(".png\">\n                                ");
 					} else {
@@ -39,7 +40,7 @@ public final class JteindexGenerated {
 				}
 				jteOutput.writeContent("\n                        ");
 			}
-			jteOutput.writeContent("\n                    </button>\n\n                    <div id=\"userPanel\" class=\"absolute w-40 -left-1 -top-36 text-left bg-gray-50 rounded-lg shadow-md border border-gray-300 hidden\">\n                        <a href=\"\" class=\"block px-4 py-2 text-zinc-700 hover:bg-gray-200 rounded-t-lg cursor-pointer transition duration-300\">Settings</a>\n                        <a href=\"\" class=\"block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300\">Account</a>\n                        <div class=\"group\">\n                            <a id=\"openModal\" class=\"block px-4 py-2 text-zinc-700 group-hover:bg-red-600 group-hover:text-white border-t border-t-gray-300 cursor-pointer rounded-b-lg transition duration-300\">Logout</a>\n                            <div class=\"absolute group-hover:border-t-red-600 left-2 -bottom-4 w-0 h-0 border-l-[13px] border-r-[13px] border-l-transparent border-r-transparent border-t-[16px] border-t-gray-50 drop-shadow-md transition duration-300\"></div>\n                        </div>\n                    </div>\n                </div>\n            ");
+			jteOutput.writeContent("\n                    </button>\n\n                    <div id=\"userPanel\" class=\"absolute w-40 -left-1 -top-36 text-left bg-gray-50 rounded-lg shadow-md border border-gray-300 hidden\">\n                        <a href=\"\" class=\"block px-4 py-2 text-zinc-700 hover:bg-gray-200 rounded-t-lg cursor-pointer transition duration-300\">Booking</a>\n                        <a href=\"\" class=\"block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300\">Account</a>\n                        <div class=\"group\">\n                            <a id=\"openModal\" class=\"block px-4 py-2 text-zinc-700 group-hover:bg-red-600 group-hover:text-white border-t border-t-gray-300 cursor-pointer rounded-b-lg transition duration-300\">Logout</a>\n                            <div class=\"absolute group-hover:border-t-red-600 left-2 -bottom-4 w-0 h-0 border-l-[13px] border-r-[13px] border-l-transparent border-r-transparent border-t-[16px] border-t-gray-50 drop-shadow-md transition duration-300\"></div>\n                        </div>\n                    </div>\n                </div>\n            ");
 		} else {
 			jteOutput.writeContent("\n                ");
 			jteOutput.writeContent("\n                <div class=\"text-center mt-auto\">\n                    <a href=\"/login\"\n                       class=\"block text-green-500  hover:text-green-400 hover:-rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-md transition duration-200\">\n                        <i class=\"fas fa-sign-in-alt text-2xl\"></i>\n                    </a>\n                </div>\n            ");
@@ -208,6 +209,7 @@ public final class JteindexGenerated {
 		List<MovieDTO> popularMovies = (List<MovieDTO>)params.get("popularMovies");
 		List<MovieDTO> topRatedMovies = (List<MovieDTO>)params.get("topRatedMovies");
 		List<MovieDTO> upcomingMovies = (List<MovieDTO>)params.get("upcomingMovies");
-		render(jteOutput, jteHtmlInterceptor, WebName, getUsername, isLoggedIn, userList, searchMovies, nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies);
+		UserRepository userRepository = (UserRepository)params.get("userRepository");
+		render(jteOutput, jteHtmlInterceptor, WebName, getUsername, isLoggedIn, userList, searchMovies, nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies, userRepository);
 	}
 }

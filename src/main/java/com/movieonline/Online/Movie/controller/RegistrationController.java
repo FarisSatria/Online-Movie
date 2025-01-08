@@ -10,12 +10,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@AllArgsConstructor
 public class RegistrationController {
 
     private final RegistrationService registrationService;
     private final TemplateController templateController;
     private final GlobalExceptionHandler globalExceptionHandler;
+
+    public RegistrationController(RegistrationService registrationService, TemplateController templateController, GlobalExceptionHandler globalExceptionHandler) {
+        this.registrationService = registrationService;
+        this.templateController = templateController;
+        this.globalExceptionHandler = globalExceptionHandler;
+    }
 
     @GetMapping("/register")
     public String registerPage(Model model) {
