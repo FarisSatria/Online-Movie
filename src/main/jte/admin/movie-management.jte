@@ -95,75 +95,7 @@
         </div>
     </div>
     <div class="flex-initial mt-8 space-y-5" style="width:88vw;">
-        <div class="flex mb-4">
-            <h1 class="text-3xl font-semibold"><i class="fas fa-users mr-2"></i>User Management</h1>
-            <div class="ml-auto flex">
-                <form action="/api/search/user" method="get">
-                    <input type="text" name="username" placeholder="Search here..."
-                           class="px-4 py-2 text-gray-800 shadow-inner-lg rounded-lg focus:outline-none bg-gray-50 focus:ring-2 focus:ring-blue-400"/>
-                    <button type="submit"
-                            class="bg-sky-500 hover:bg-sky-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white">
-                        Search
-                    </button>
-                </form>
-                <button type="submit"
-                        class="bg-green-500 hover:bg-green-400 transition duration-300 rounded-full p-2 px-3 ml-2 shadow-card text-white">
-                    Submit
-                </button>
-            </div>
-        </div>
-        <div>
-            <table class="min-w-full h-96 table-auto bg-gray-50 shadow-inner-lg rounded-lg overflow-hidden">
-                <thead>
-                <tr class="w-full bg-gradient-to-r from-sky-400 to-blue-500 shadow-md border-b border-gray-300">
-                    <th class="py-3 px-6 text-left text-gray-100 font-medium">ID</th>
-                    <th class="py-3 px-6 text-left text-gray-100 font-medium">Name</th>
-                    <th class="py-3 px-6 text-left text-gray-100 font-medium">Username</th>
-                    <th class="py-3 px-6 text-left text-gray-100 font-medium">Profile Picture Path</th>
-                    <th class="py-3 px-6 text-left text-gray-100 font-medium">User Role</th>
-                    <th class="py-3 text-left text-gray-100 font-medium">Action</th>
-                </tr>
-                </thead>
 
-                <tbody>
-                @if(searchedUser != null)
-                    <tr class="hover:bg-gray-100 border-b border-gray-100">
-                        <td class="py-4 px-6 text-gray-700">${searchedUser.get().getId()}</td>
-                        <td class="py-4 px-6 text-gray-700">${searchedUser.get().getName()}</td>
-                        <td class="py-4 px-6 text-gray-700">${searchedUser.get().getUsername()}</td>
-                        <td class="py-4 px-6 text-gray-700">${searchedUser.get().getProfilePicturePath()}</td>
-                        @if(searchedUser.get().getIsAdmin() == true)
-                            <td class="py-4 px-6 text-gray-700">Admin</td>
-                        @else
-                            <td class="py-4 px-6 text-gray-700">User</td>
-                        @endif
-                        <td class="py-4">
-                            <button class="bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-5 shadow-card text-white">Edit</button>
-                            <button class="bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white">Delete</button>
-                        </td>
-                    </tr>
-                @else
-                    @for(UserEntity users : userList)
-                        <tr class="hover:bg-gray-100 border-b border-gray-100">
-                            <td class="py-4 px-6 text-gray-700">${users.getId()}</td>
-                            <td class="py-4 px-6 text-gray-700">${users.getName()}</td>
-                            <td class="py-4 px-6 text-gray-700">${users.getUsername()}</td>
-                            <td class="py-4 px-6 text-gray-700">${users.getProfilePicturePath()}</td>
-                            @if(users.getIsAdmin() == true)
-                                <td class="py-4 px-6 text-gray-700">Admin</td>
-                            @else
-                                <td class="py-4 px-6 text-gray-700">User</td>
-                            @endif
-                            <td class="py-4">
-                                <button class="bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-5 shadow-card text-white">Edit</button>
-                                <button class="bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white">Delete</button>
-                            </td>
-                        </tr>
-                    @endfor
-                @endif
-                </tbody>
-            </table>
-        </div>
     </div>
 </div>
 

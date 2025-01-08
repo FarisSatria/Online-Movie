@@ -1,11 +1,8 @@
 package com.movieonline.Online.Movie.controller;
 
 import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
-import com.movieonline.Online.Movie.entity.model.UserEntity;
-import com.movieonline.Online.Movie.repository.UserRepository;
 import com.movieonline.Online.Movie.security.util.AuthenticationUtils;
 import com.movieonline.Online.Movie.service.TMDBService;
-import com.movieonline.Online.Movie.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,7 +66,6 @@ public class TemplateController {
     public String dashboardPage(Model model){
         userController.getUserList(model);
         userController.getUserAllUserTypes(model);
-        model.addAttribute("getUsername", authenticationUtils.getUsername());
         pageDetails(model);
         return "admin/dashboard";
     }
@@ -78,8 +74,13 @@ public class TemplateController {
     public String usersManagementPage(Model model){
         userController.getUserList(model);
         userController.getUserAllUserTypes(model);
-        model.addAttribute("getUsername", authenticationUtils.getUsername());
         pageDetails(model);
         return "admin/user-management";
+    }
+
+    @GetMapping("/dashboard/movies")
+    public String movieManagement(Model model){
+        pageDetails(model);
+        return "admin/movie-management";
     }
 }

@@ -3,7 +3,6 @@ package com.movieonline.Online.Movie.exception;
 import com.movieonline.Online.Movie.controller.TemplateController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.ui.Model;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

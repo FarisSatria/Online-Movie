@@ -3,7 +3,6 @@ package com.movieonline.Online.Movie.service;
 import com.movieonline.Online.Movie.entity.dto.*;
 import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
 import com.movieonline.Online.Movie.entity.model.MovieBookingEntity;
-import com.movieonline.Online.Movie.entity.model.UserEntity;
 import com.movieonline.Online.Movie.entity.res.*;
 import com.movieonline.Online.Movie.exception.FeedbackInvalidCredentials;
 import com.movieonline.Online.Movie.exception.UserRegistrationConflictException;
@@ -17,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TMDBService {
@@ -159,15 +157,15 @@ public class TMDBService {
         movieBookingEntity.getUsername().add(username);
         movieBookingEntity.setMovieId(movieId);
 
-//        if (movieBookingEntity.getDate() == null || movieBookingEntity.getTime() == null) {
-//            throw new IllegalArgumentException("Invalid date or time provided");
-//        }
+        if (movieBookingEntity.getDate() == null || movieBookingEntity.getTime() == null) {
+            throw new IllegalArgumentException("Invalid date or time provided");
+        }
 
         Integer availableQuota = movieBookingRepository.getAvailableQuota(movieBookingEntity.getMovieId(), movieBookingEntity.getDate(), movieBookingEntity.getTime());
 
-//        if (availableQuota == null || availableQuota <= 0) {
-//            throw new RuntimeException("No available slots for the selected date and time");
-//        }
+        if (availableQuota == null || availableQuota <= 0) {
+            throw new RuntimeException("No available slots for the selected date and time");
+        }
 
         movieBookingEntity.setAvailable_quota(availableQuota - 1);
 

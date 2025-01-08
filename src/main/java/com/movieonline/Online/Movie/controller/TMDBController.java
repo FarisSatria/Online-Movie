@@ -3,7 +3,6 @@ package com.movieonline.Online.Movie.controller;
 import com.movieonline.Online.Movie.entity.dto.*;
 import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
 import com.movieonline.Online.Movie.entity.model.MovieBookingEntity;
-import com.movieonline.Online.Movie.entity.model.UserEntity;
 import com.movieonline.Online.Movie.repository.FeedBackRepository;
 import com.movieonline.Online.Movie.security.util.AuthenticationUtils;
 import com.movieonline.Online.Movie.service.TMDBService;

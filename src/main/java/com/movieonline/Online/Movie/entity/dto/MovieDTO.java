@@ -1,9 +1,6 @@
 package com.movieonline.Online.Movie.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 import java.text.DecimalFormat;

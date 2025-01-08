@@ -48,8 +48,6 @@
             <h3 class="text-sm text-gray-400 mb-4">Or enter as a Guest</h3>
             <div class="flex justify-center space-x-6">
                 <a href="/" class="text-gray-400 hover:text-yellow-500 hover:rotate-12 hover:scale-125 hover:drop-shadow-md text-2xl transition"><i class="fas fa-home"></i></a>
-<%--                <a href="#" class="text-gray-400 hover:text-blue-600 hover:rotate-12 hover:scale-125 hover:drop-shadow-md text-2xl transition"><i class="fab fa-facebook"></i></a>--%>
-<%--                <a href="#" class="text-gray-400 hover:text-blue-400 hover:rotate-12 hover:scale-125 hover:drop-shadow-md text-2xl transition"><i class="fab fa-twitter"></i></a>--%>
             </div>
         </div>
     </div>

@@ -2,7 +2,6 @@ package com.movieonline.Online.Movie.service;
 
 import com.movieonline.Online.Movie.entity.model.UserEntity;
 import com.movieonline.Online.Movie.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

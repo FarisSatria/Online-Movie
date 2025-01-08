@@ -21,24 +21,19 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException {
 
-        // Manually retrieve the request from the context
         HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
-        // Default redirect
         String redirectUrl = "/";
 
-        // Get user's roles (authorities)
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
-        // Check if the user has the role 'ROLE_ADMIN'
         for (GrantedAuthority authority : authorities) {
             if ("ROLE_ADMIN".equals(authority.getAuthority())) {
-                redirectUrl = "/dashboard"; // Redirect to /dashboard for admins
+                redirectUrl = "/dashboard";
                 break;
             }
         }
 
-        // Redirect user
         response.sendRedirect(redirectUrl);
     }
 }
