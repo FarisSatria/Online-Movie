@@ -1,4 +1,5 @@
 const searchButton = document.getElementById('searchButton');
+const resetButton = document.getElementById('resetButton');
 const searchForm = document.getElementById('searchForm');
 const resultsContainer = document.getElementById('movieResults');
 
@@ -33,7 +34,9 @@ function performSearch() {
         .catch(error => {
             console.error('Error fetching movies:', error);
             resultsContainer.innerHTML = '<p class="relative bg-gray-50 rounded-xl flex shadow-card overflow-hidden max-w-sm w-full text-center text-2xl font-semibold p-4 flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">Error occurred while fetching results</p>';
-        });
+    });
+    searchButton.classList.add('hidden');
+    resetButton.classList.remove('hidden');
 }
 
 searchButton.addEventListener('click', performSearch);
@@ -44,3 +47,11 @@ searchForm.addEventListener('keydown', function(event) {
         performSearch();
     }
 });
+
+resetButton.addEventListener('click', function (event) {
+
+    searchButton.classList.remove('hidden');
+    resetButton.classList.add('hidden');
+    resultsContainer.innerHTML = '';
+});
+
