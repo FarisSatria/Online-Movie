@@ -23,8 +23,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({UserRegistrationConflictException.class})
     public String handleUserRegistrationConflictException(UserRegistrationConflictException exception, Model model) {
         model.addAttribute("userAlreadyExist", exception.getMessage());
-        templateController.pageDetails(model);
-        return "login";
+        return "register";
     }
     @ExceptionHandler({FeedbackInvalidCredentials.class})
     public ResponseEntity<Object> handleFeedbackInvalidCredentials(FeedbackInvalidCredentials exception){

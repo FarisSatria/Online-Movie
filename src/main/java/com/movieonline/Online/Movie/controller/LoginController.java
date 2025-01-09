@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class LoginController {
 
-    private final LoginService loginService;
     private final TemplateController templateController;
 
-    public LoginController(LoginService loginService, TemplateController templateController) {
-        this.loginService = loginService;
+    public LoginController(TemplateController templateController) {
         this.templateController = templateController;
     }
 
