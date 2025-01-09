@@ -94,7 +94,7 @@
             </div>
         </div>
     </div>
-    <div class="flex-initial mt-8 space-y-5" style="width:88vw;">
+    <div class="flex-initial mt-8" style="width:87.5vw;">
         <!-- Home Section -->
         <section id="home" class="mb-6">
             <h1 class="text-2xl font-semibold mb-4">Dashboard Overview</h1>

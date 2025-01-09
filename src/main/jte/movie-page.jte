@@ -65,7 +65,14 @@
                     </a>
                     <div class="w-full h-px bg-black opacity-20 mt-1"></div>
                 </li>
-                @template.include.header.sidebar-searchbar()
+                <!-- Icon 3 -->
+                <li class="relative">
+                    <a href="/movies/search" id="searchIcon"
+                       class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 transition duration-200 drop-shadow-md">
+                        <i id="searchIconSymbol" class="fas fa-search text-2xl"></i>
+                    </a>
+                    <div class="w-full h-px bg-black opacity-20 mt-1"></div>
+                </li>
             </ul>
 
             @if(isLoggedIn)

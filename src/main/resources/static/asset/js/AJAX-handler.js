@@ -19,11 +19,15 @@ function performSearch() {
             } else {
                 data.forEach(movie => {
                     const movieHTML = `
-                        <a href="/movie/${movie.id}" class="relative bg-gray-50 rounded-xl flex shadow-card overflow-hidden max-w-sm w-full h-40 flex-shrink-0 transition-transform transform hover:scale-105 hover:-rotate-2">
+                        <a href="/movie/${movie.id}" class="relative border-l-sky-400 border-l-4 pl-2 border-b border-b-zinc-600/10 flex overflow-hidden w-full w-full h-40 flex-shrink-0 transition-transform transform hover:scale-95 hover:rotate-1">
                             <img class="w-28 h-full object-cover" src="https://image.tmdb.org/t/p/w185${movie.poster_path}" alt="${movie.title}">
                             <div class="p-4 space-y-1" style="height:90%;">
                                 <h3 class="text-xl text-black font-semibold">${movie.title}</h3>
-                                <div class="text-sm text-zinc-400 relative overflow-hidden max-h-24 text-ellipsis">${movie.overview}</div>
+                                <div class="flex space-x-1 flex-warp">
+                                    <p class="text-md text-zinc-400 py-1">${movie.adultFormatted}</p>
+                                    <p class="text-md text-zinc-400 p-1">• ${movie.release_date}</p>
+                                </div>
+                                <div class="text-sm text-zinc-500 relative overflow-hidden max-h-24 text-ellipsis">${movie.overview}</div>
                             </div>
                         </a>
                     `;

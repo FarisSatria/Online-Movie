@@ -62,6 +62,15 @@ public class TemplateController {
         return "movie-page";
     }
 
+    @GetMapping("/movies/search")
+    public String searchPage(Principal principal, Model model){
+        userController.getUserList(model);
+        authenticationUtils.isLoggedIn(principal, model);
+        model.addAttribute("getUsername", authenticationUtils.getUsername());
+        pageDetails(model);
+        return "search-page";
+    }
+
     @GetMapping("/dashboard")
     public String dashboardPage(Model model){
         userController.getUserList(model);
