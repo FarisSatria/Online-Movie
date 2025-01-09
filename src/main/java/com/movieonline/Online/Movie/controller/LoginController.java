@@ -1,6 +1,5 @@
 package com.movieonline.Online.Movie.controller;
 
-import com.movieonline.Online.Movie.service.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

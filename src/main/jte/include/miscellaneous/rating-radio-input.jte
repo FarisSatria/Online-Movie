@@ -1,4 +1,4 @@
-<textarea class="resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" type="text" id="reviews" name="reviews" placeholder="Add Review"></textarea>
+<textarea id="autoResizeTextarea" class="resize-none min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" type="text" name="reviews" placeholder="Add Review"></textarea>
 <div class="flex flex-row-reverse float-left mt-2">
     <input type="radio" id="star5" name="rating" value="10" class="hidden peer" required>
     <label for="star5"

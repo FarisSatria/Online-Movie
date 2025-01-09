@@ -1,8 +1,7 @@
 package com.movieonline.Online.Movie.controller;
 
 import com.movieonline.Online.Movie.entity.model.UserEntity;
-import com.movieonline.Online.Movie.exception.FeedbackInvalidCredentials;
-import com.movieonline.Online.Movie.exception.GlobalExceptionHandler;
+import com.movieonline.Online.Movie.exception.UserRegistrationConflictException;
 import com.movieonline.Online.Movie.service.RegistrationService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -22,6 +21,7 @@ public class RegistrationController {
 
     @GetMapping("/register")
     public String registerPage(Model model) {
+        templateController.pageDetails(model);
         return "register";
     }
 
@@ -32,9 +32,11 @@ public class RegistrationController {
                                  @RequestParam String password,
                                  Model model) {
       try{
+          templateController.pageDetails(model);
           registrationService.registerUser(userEntity, userEntity.getName(), userEntity.getUsername(), userEntity.getPassword());
           return "redirect:/login";
-      } catch (FeedbackInvalidCredentials e) {
+      } catch (UserRegistrationConflictException e) {
+          templateController.pageDetails(model);
           model.addAttribute("userAlreadyExist", e.getMessage());
           return "register";
       }

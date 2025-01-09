@@ -218,118 +218,188 @@
                 <div class="space-y-5 mb-5">
                     <div class="space-y-5 overflow-hidden">
                         <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Movie Reviews</h3>
-                        <div class="p-5 relative flex rounded-lg">
-                            @if(isLoggedIn)
-                            @else
-                                <div class="absolute p-2 top-0 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/30 to-gray-400/70
-                              shadow-md rounded-lg z-10">
-                                    <p class="text-center font-bold text-white text-3xl mt-7"><a href="/login" class="text-green-600 hover:text-green-700 drop-shadow-md transition duration-300">Login</a> To Submit a Review!</p>
-                                </div>
-                            @endif
-                            <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
-                            @if(isLoggedIn)
-                                @for(UserEntity user : userList)
-                                    @if(user.getUsername().equals(getUsername))
-                                        @if(user.getProfilePicturePath() != null)
-                                            <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
-                                                 src="/image/icon/${user.getProfilePicturePath()}.png">
-                                        @else
-                                            <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                        @if(isLoggedIn)
+                            @if(matchingFeedback.isPresent())
+                                <div id="userFeedbackInput"  class="hidden p-5 relative flex rounded-lg">
+                                    @for(UserEntity user : userList)
+                                        @if(user.getUsername().equals(getUsername))
+                                            @if(user.getProfilePicturePath() != null)
+                                                <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
+                                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
+                                                     src="/image/icon/${user.getProfilePicturePath()}.png">
+                                            @else
+                                                <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
+                                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                                            @endif
                                         @endif
-                                    @endif
-                                @endfor
-                            @else
-                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
-                            @endif
-                            <!-- User Feedback Form -->
-                            <form class="w-full" action="/movie/${movieDetail.getId()}/feedback" method="post">
-                                @if(isLoggedIn)
-                                    @if (matchingFeedback.isPresent())
+                                    @endfor
+                                    <form class="w-full" action="/movie/${movieDetail.getId()}/feedback" method="post">
                                         <input type="hidden" name="_method" value="PUT">
                                         @if(matchingFeedback.get().getReviews().isEmpty())
-                                            <textarea class="resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" id="reviews" name="reviews" placeholder="Add Review" required></textarea>
-                                            <div class="flex flex-row-reverse float-left mt-2">
-                                                @for (int i = 5; i >= 1; i--)
-                                                    @if (i <= matchingFeedback.get().getRating() / 2)
-                                                        <input type="radio" id="star${i}" name="rating" value="${i * 2}" class="hidden peer">
-                                                        <label for="star${i}"
-                                                               class="cursor-pointer text-yellow-400 peer-checked:text-orange-400 hover:text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></label>
-                                                    @else
-                                                        <input type="radio" id="star${i}" name="rating" value="${2 * i}" class="hidden peer">
-                                                        <label for="star${i}"
-                                                               class="cursor-pointer text-gray-400 peer-checked:text-orange-400 hover:text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></label>
-                                                    @endif
-                                                @endfor
-                                            </div>
-                                            <a href="/movie/${movieDetail.getId()}/feedback/delete" class="self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
-                                                Delete
-                                            </a>
-                                            <button type="submit" class="self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
-                                                Comment
-                                            </button>
                                         @else
                                             <textarea class="resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" id="reviews" name="reviews">${matchingFeedback.get().getReviews()}</textarea>
-                                            <div class="flex flex-row-reverse float-left mt-2">
-                                                @for (int i = 5; i >= 1; i--)
-                                                    @if (i <= matchingFeedback.get().getRating() / 2)
-                                                        <input type="radio" id="star${i}" name="rating" value="${i * 2}" class="hidden peer">
-                                                        <label for="star${i}"
-                                                               class="cursor-pointer text-yellow-400 peer-checked:text-orange-400 hover:text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></label>
-                                                    @else
-                                                        <input type="radio" id="star${i}" name="rating" value="${2 * i}" class="hidden peer">
-                                                        <label for="star${i}"
-                                                               class="cursor-pointer text-gray-400 peer-checked:text-orange-400 hover:text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></label>
-                                                    @endif
-                                                @endfor
-                                            </div>
-                                            <a href="/movie/${movieDetail.getId()}/feedback/delete" class="self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
-                                                Delete
-                                            </a>
-                                            <button type="submit" class="self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
-                                                Update
-                                            </button>
                                         @endif
-                                    @else
+                                        <div class="flex flex-row-reverse float-left mt-2">
+                                            @for (int i = 5; i >= 1; i--)
+                                                @if (i <= matchingFeedback.get().getRating() / 2)
+                                                    <input type="radio" id="star${i}" name="rating" value="${i * 2}" class="hidden peer">
+                                                    <label for="star${i}"
+                                                           class="cursor-pointer text-yellow-400 peer-checked:text-orange-400 hover:text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></label>
+                                                @else
+                                                    <input type="radio" id="star${i}" name="rating" value="${2 * i}" class="hidden peer">
+                                                    <label for="star${i}"
+                                                           class="cursor-pointer text-gray-400 peer-checked:text-orange-400 hover:text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></label>
+                                                @endif
+                                            @endfor
+                                        </div>
+                                        <button type="button" id="cancelFeedbackButton" class="self-start bg-gray-500 hover:bg-gray-600 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
+                                            Cancel
+                                        </button>
+                                        <a href="/movie/${movieDetail.getId()}/feedback/delete" class="self-start mr-2 bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
+                                            Delete
+                                        </a>
+                                        <button type="submit" class="self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
+                                            Update
+                                        </button>
+                                    </form>
+                                </div>
+                            @else
+                                <div class="p-5 relative flex rounded-lg">
+                                    @for(UserEntity user : userList)
+                                        @if(user.getUsername().equals(getUsername))
+                                            @if(user.getProfilePicturePath() != null)
+                                                <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
+                                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
+                                                     src="/image/icon/${user.getProfilePicturePath()}.png">
+                                            @else
+                                                <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
+                                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                                            @endif
+                                        @endif
+                                    @endfor
+                                    <!-- User Feedback Form -->
+                                    <form class="w-full" action="/movie/${movieDetail.getId()}/feedback" method="post">
                                         @template.include.miscellaneous.rating-radio-input()
-                                    @endif
-                                @else
+                                    </form>
+                                </div>
+                            @endif
+                        @else
+                            <div class="p-5 relative flex rounded-lg">
+                                <div class="absolute p-2 top-0 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/30 to-gray-400/70
+                                      shadow-md rounded-lg z-10">
+                                    <p class="text-center font-bold text-white text-3xl mt-7"><a href="/login" class="text-green-600 hover:text-green-700 drop-shadow-md transition duration-300">Login</a> To Submit a Review!</p>
+                                </div>
+                                <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
+                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                                <form class="w-full" action="/movie/${movieDetail.getId()}/feedback" method="post">
                                     @template.include.miscellaneous.rating-radio-input()
-                                @endif
-                            </form>
-                        </div>
+                                </form>
+                            </div>
+                        @endif
+
+
+<%--                                    @if (matchingFeedback.isPresent())--%>
+<%--                                        <input type="hidden" name="_method" value="PUT">--%>
+<%--                                        @if(matchingFeedback.get().getReviews().isEmpty())--%>
+<%--                                            <textarea class="resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" id="reviews" name="reviews" placeholder="Add Review" required></textarea>--%>
+<%--                                            <div class="flex flex-row-reverse float-left mt-2">--%>
+<%--                                                @for (int i = 5; i >= 1; i--)--%>
+<%--                                                    @if (i <= matchingFeedback.get().getRating() / 2)--%>
+<%--                                                        <input type="radio" id="star${i}" name="rating" value="${i * 2}" class="hidden peer">--%>
+<%--                                                        <label for="star${i}"--%>
+<%--                                                               class="cursor-pointer text-yellow-400 peer-checked:text-orange-400 hover:text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></label>--%>
+<%--                                                    @else--%>
+<%--                                                        <input type="radio" id="star${i}" name="rating" value="${2 * i}" class="hidden peer">--%>
+<%--                                                        <label for="star${i}"--%>
+<%--                                                               class="cursor-pointer text-gray-400 peer-checked:text-orange-400 hover:text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></label>--%>
+<%--                                                    @endif--%>
+<%--                                                @endfor--%>
+<%--                                            </div>--%>
+<%--                                            <a href="/movie/${movieDetail.getId()}/feedback/delete" class="self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">--%>
+<%--                                                Delete--%>
+<%--                                            </a>--%>
+<%--                                            <button type="submit" class="self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">--%>
+<%--                                                Comment--%>
+<%--                                            </button>--%>
+<%--                                        @else--%>
+<%--                                            <textarea class="resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" id="reviews" name="reviews">${matchingFeedback.get().getReviews()}</textarea>--%>
+<%--                                            <div class="flex flex-row-reverse float-left mt-2">--%>
+<%--                                                @for (int i = 5; i >= 1; i--)--%>
+<%--                                                    @if (i <= matchingFeedback.get().getRating() / 2)--%>
+<%--                                                        <input type="radio" id="star${i}" name="rating" value="${i * 2}" class="hidden peer">--%>
+<%--                                                        <label for="star${i}"--%>
+<%--                                                               class="cursor-pointer text-yellow-400 peer-checked:text-orange-400 hover:text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></label>--%>
+<%--                                                    @else--%>
+<%--                                                        <input type="radio" id="star${i}" name="rating" value="${2 * i}" class="hidden peer">--%>
+<%--                                                        <label for="star${i}"--%>
+<%--                                                               class="cursor-pointer text-gray-400 peer-checked:text-orange-400 hover:text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></label>--%>
+<%--                                                    @endif--%>
+<%--                                                @endfor--%>
+<%--                                            </div>--%>
+<%--                                            <a href="/movie/${movieDetail.getId()}/feedback/delete" class="self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">--%>
+<%--                                                Delete--%>
+<%--                                            </a>--%>
+<%--                                            <button type="submit" class="self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">--%>
+<%--                                                Update--%>
+<%--                                            </button>--%>
+<%--                                        @endif--%>
+<%--                                    @else--%>
+<%--                                @template.include.miscellaneous.rating-radio-input()--%>
+<%--                                @endif--%>
+
+
                         <div class="transition-transform duration-500 ease-in-out max-h-96 overflow-y-scroll
                                 px-5 pb-4 space-y-12">
+                            <!-- User Feedback -->
+                            @if(matchingFeedback.isPresent())
+                                <div id="currentUserFeedback" class="w-full space-y-2">
+                                    <div class="flex">
+                                        <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
+                                        @for(UserEntity user : userList)
+                                            @if(user.getUsername().equals(matchingFeedback.get().getUsername()))
+                                                @if(user.getProfilePicturePath() != null)
+                                                    <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
+                                                         src="/image/icon/${user.getProfilePicturePath()}.png">
+                                                @else
+                                                    <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
+                                                @endif
+                                            @endif
+                                        @endfor
+                                        <h3 class="text-xl font-bold my-auto">${matchingFeedback.get().getUsername()}</h3>
+                                        <div class="flex ml-auto">
+                                            <button id="updateFeedbackButton" class="self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right">
+                                                Update
+                                            </button>
+                                            <a href="/movie/${movieDetail.getId()}/feedback/delete" class="self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right">
+                                                Delete
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        @for (int i = 1; i <= 5; i++)
+                                            @if (i <= matchingFeedback.get().getRating() / 2)
+                                                <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                            @else
+                                                <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
+                                            @endif
+                                        @endfor
+                                    </div>
+                                    @if(matchingFeedback.get().getReviews().isBlank() || matchingFeedback.get().getReviews().isEmpty())
+
+                                    @else
+                                        <div class="overflow-y-auto max-h-full">
+                                            <p class="reviews text-md text-zinc-600" style="display: -webkit-box; -webkit-box-orient: vertical;
+                                                                -webkit-line-clamp: 5; overflow: hidden;">${matchingFeedback.get().getReviews()}</p>
+                                        </div>
+                                        <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white ">Show More!</button>
+                                    @endif
+                                </div>
+                            @endif
                             @if(movieFeedbacks != null)
                                 @for(FeedBackEntity feedbacks : movieFeedbacks)
                                     @if(feedbacks.getMovieId() == movieDetail.getId())
-                                        @if(getUsername.equals(feedbacks.getUsername()) || feedbacks.getIsDeleted() == true)
+                                        @if(feedbacks.getIsDeleted() == true || matchingFeedback.isPresent())
 
-                                        @elseif(feedbacks.getReviews().isBlank() || feedbacks.getReviews().isEmpty() || getUsername.equals(feedbacks.getUsername()) || feedbacks.getIsDeleted() == true)
-                                            <div class="w-full space-y-2">
-                                                <div class="flex">
-                                                    <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
-                                                    @for(UserEntity user : userList)
-                                                        @if(user.getUsername().equals(feedbacks.getUsername()))
-                                                            @if(user.getProfilePicturePath() != null)
-                                                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
-                                                                     src="/image/icon/${user.getProfilePicturePath()}.png">
-                                                            @else
-                                                                <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
-                                                            @endif
-                                                        @endif
-                                                    @endfor
-                                                    <h3 class="text-xl font-bold my-auto">${feedbacks.getUsername()}</h3>
-                                                </div>
-                                                <div class="flex items-center">
-                                                    @for (int i = 1; i <= 5; i++)
-                                                        @if (i <= feedbacks.getRating() / 2)
-                                                            <span class="text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></span>
-                                                        @else
-                                                            <span class="text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></span>
-                                                        @endif
-                                                    @endfor
-                                                </div>
-                                            </div>
                                         @else
                                             <div class="w-full space-y-2">
                                                 <div class="flex">
@@ -355,11 +425,15 @@
                                                         @endif
                                                     @endfor
                                                 </div>
-                                                <div class="overflow-y-auto max-h-full">
-                                                    <p class="reviews text-md text-zinc-600" style="display: -webkit-box; -webkit-box-orient: vertical;
-                                        -webkit-line-clamp: 5; overflow: hidden;">${feedbacks.getReviews()}</p>
-                                                </div>
-                                                <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white ">Show More!</button>
+                                                @if(feedbacks.getReviews().isBlank() || feedbacks.getReviews().isEmpty())
+
+                                                @else
+                                                    <div class="overflow-y-auto max-h-full">
+                                                        <p class="reviews text-md text-zinc-600" style="display: -webkit-box; -webkit-box-orient: vertical;
+                                                            -webkit-line-clamp: 5; overflow: hidden;">${feedbacks.getReviews()}</p>
+                                                    </div>
+                                                    <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white ">Show More!</button>
+                                                @endif
                                             </div>
                                         @endif
                                     @endif
@@ -472,6 +546,7 @@
 @template.include.modal.logout-modal()
 <!-- Custom JavaScript -->
 <script src="/asset/js/AJAX-handler.js"></script>
+<script src="/asset/js/feedback.js"></script>
 <script src="/asset/js/navbar.js"></script>
 <script src="/asset/js/modal.js"></script>
 <script src="/asset/js/carousel.js"></script>

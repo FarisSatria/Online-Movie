@@ -1,3 +1,4 @@
+@param String WebName
 @param String userAlreadyExist
 
 <!DOCTYPE html>
@@ -5,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinema Eudamonia | Register</title>
+    <title>Cinema Eudaemonia | Register</title>
     <link rel="icon" href="/image/favicon/eudaemonia.png">
 
     <!-- Tailwind CSS -->
@@ -22,7 +23,7 @@
 <div class="w-10/12 h-96 max-w-4xl bg-gray-50 rounded-lg shadow-card flex flex-row">
     <!-- Register Form Section -->
     <div id="registerForm" class="p-8 w-full md:w-1/2 text-gray-900">
-        <h2 class="text-4xl text-black font-bold text-center mb-6">Cinema Eudamonia</h2>
+        <h2 class="text-4xl text-black font-bold text-center mb-6">${WebName}</h2>
         <form class="space-y-4" method="post" action="/register">
             <!-- Name Input -->
             <div class="flex items-center border-b border-gray-400 py-2">
@@ -50,7 +51,7 @@
     <!-- Prompt Section -->
     <div id="loginPrompt" class="p-8 w-full md:w-1/2 flex flex-col justify-center items-center text-gray-900 border-t md:border-t-0 md:border-l border-gray-400">
         <h2 class="text-2xl text-black font-semibold mb-4">Already have an account?</h2>
-        <p class="text-gray-400 mb-8 text-center">Log in to access your account and continue exploring Cinema Eudamonia!</p>
+        <p class="text-gray-400 mb-8 text-center">Log in to access your account and continue exploring Cinema Eudaemonia!</p>
         <a href="/login" class="px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white font-semibold rounded-lg transition shadow-card">Log In</a>
     </div>
 </div>
