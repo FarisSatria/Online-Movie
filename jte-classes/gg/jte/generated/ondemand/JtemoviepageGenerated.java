@@ -10,7 +10,7 @@ import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
 import com.movieonline.Online.Movie.entity.model.UserEntity;
 public final class JtemoviepageGenerated {
 	public static final String JTE_NAME = "movie-page.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,2,3,4,5,6,7,8,10,10,10,32,32,32,32,32,32,32,35,38,41,47,49,51,59,67,77,77,78,82,82,83,83,84,84,86,86,86,86,87,87,89,89,90,90,91,91,103,103,104,111,111,115,117,119,119,119,119,122,122,122,122,122,122,122,122,122,122,122,122,122,124,124,124,126,126,126,127,127,127,128,128,130,130,130,132,132,133,133,133,135,135,135,137,137,138,138,140,140,142,142,143,143,158,160,160,160,162,162,163,163,168,168,173,173,173,173,175,179,183,187,192,198,202,203,203,206,206,206,206,207,207,207,207,207,207,207,207,207,210,210,210,211,211,211,214,214,220,220,221,221,223,223,224,224,225,225,228,228,228,228,229,229,232,232,233,233,234,234,235,235,235,235,237,237,238,238,239,239,239,240,240,242,242,243,243,244,244,244,244,244,244,244,244,244,244,244,244,244,245,245,245,245,247,247,248,248,248,248,248,248,248,248,248,248,248,248,248,249,249,249,249,251,251,252,252,257,257,257,257,265,265,267,267,268,268,269,269,272,272,272,272,273,273,276,276,277,277,278,278,279,280,280,280,280,281,281,284,284,285,285,293,293,293,293,294,294,297,297,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,352,353,353,357,357,358,358,359,359,361,361,361,361,362,362,364,364,365,365,366,366,367,367,367,372,372,372,372,378,378,379,379,381,381,383,383,384,384,386,386,388,388,391,391,391,394,394,396,396,397,397,398,398,399,399,400,400,402,402,406,406,407,407,408,408,410,410,410,410,411,411,413,413,414,414,415,415,416,416,416,419,419,420,420,422,422,424,424,425,425,427,427,429,429,432,432,432,435,435,437,437,438,438,439,439,440,440,441,441,445,445,447,447,447,447,448,448,450,450,451,451,451,454,454,455,455,457,457,459,459,460,460,464,464,464,468,468,472,476,477,477,478,478,478,478,480,480,480,480,481,481,481,481,481,481,481,481,481,484,484,484,486,486,487,487,489,489,491,491,492,492,496,496,500,511,511,511,515,515,515,519,519,519,523,523,523,529,529,531,531,531,533,533,542,543,543,544,545,545,546,554,554,554,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,25,25,25};
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,3,4,5,6,7,8,10,10,10,32,32,32,32,32,32,32,35,38,41,47,49,51,59,67,77,77,78,82,82,83,83,84,84,86,86,86,86,87,87,89,89,90,90,91,91,103,103,104,111,111,115,117,119,119,119,119,122,122,122,122,122,122,122,122,122,122,122,122,122,124,124,124,126,126,126,127,127,127,128,128,130,130,130,132,132,133,133,133,135,135,135,137,137,138,138,140,140,142,142,143,143,158,160,160,160,162,162,163,163,171,171,176,176,176,176,178,182,186,190,195,201,205,206,206,209,209,209,209,210,210,210,210,210,210,210,210,210,213,213,213,214,214,214,217,217,223,223,224,224,226,226,227,227,228,228,231,231,231,231,232,232,235,235,236,236,237,237,238,238,238,238,240,240,240,242,242,243,243,244,244,244,244,244,244,244,244,244,244,244,244,244,245,245,245,245,247,247,248,248,248,248,248,248,248,248,248,248,248,248,248,249,249,249,249,251,251,252,252,262,262,264,264,265,265,266,266,269,269,269,269,270,270,273,273,274,274,275,275,276,277,277,277,277,278,278,281,281,282,282,293,293,293,293,294,294,297,297,301,302,302,306,306,307,307,308,308,310,310,310,310,311,311,313,313,314,314,315,315,316,316,316,321,321,321,321,327,327,328,328,330,330,332,332,333,333,335,335,337,337,340,340,340,343,343,345,345,346,346,347,347,348,348,349,349,351,351,355,355,356,356,357,357,359,359,359,359,360,360,362,362,363,363,364,364,365,365,365,368,368,369,369,371,371,373,373,374,374,376,376,378,378,381,381,381,384,384,386,386,387,387,388,388,389,389,390,390,394,394,396,396,396,396,397,397,399,399,400,400,400,403,403,404,404,406,406,408,408,409,409,413,413,413,417,417,421,425,426,426,427,427,427,427,429,429,429,429,430,430,430,430,430,430,430,430,430,433,433,433,435,435,436,436,438,438,440,440,441,441,445,445,449,460,460,460,464,464,464,468,468,468,472,472,472,478,478,480,480,480,482,482,491,492,492,493,494,494,495,503,503,503,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,25,25,25};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, String getUsername, Boolean isLoggedIn, Optional<FeedBackEntity> matchingFeedback, MovieDTO movieDetail, MovieGenresDTO movieGenres, MovieAuthorDetailsReviewDTO movieAuthorDetailsReview, List<UserEntity> userList, List<FeedBackEntity> movieFeedbacks, List<MovieCastDTO> movieCast, List<MovieKeywordsDTO> movieKeywords, List<MovieReviewsDTO> movieReviews, List<MovieDTO> movieRecommendation, List<MovieDTO> popularMovies, List<MovieDTO> topRatedMovies, List<MovieDTO> upcomingMovies) {
 		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\" class=\"scroll-smooth\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
@@ -111,7 +111,7 @@ public final class JtemoviepageGenerated {
 		if (isLoggedIn) {
 			jteOutput.writeContent("\n                        ");
 		} else {
-			jteOutput.writeContent("\n                            <div class=\"absolute p-2 top-4 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/30 to-gray-400/70\n                              shadow-md rounded-lg\">\n                                <p class=\"text-center font-bold text-white text-3xl mt-20\"><a href=\"/login\" class=\"text-green-600 hover:text-green-700 drop-shadow-md transition duration-300\">Login</a> To Book a Movie!</p>\n                            </div>\n                        ");
+			jteOutput.writeContent("\n                            <a href=\"/login\" class=\"absolute p-2 top-4 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/40 to-gray-400/60\n                                      shadow-md hover:shadow-xl rounded-lg z-10 justify-center items-center font-bold text-3xl flex space-x-2 transition duration-300\">\n                                <p class=\"text-green-600 hover:text-green-700 drop-shadow-md transition duration-300\">Login </p>\n                                <p class=\"text-white\"> To Submit a Review!</p>\n\n                                <p class=\"text-white drop-shadow-md text-base font-semibold bottom-1 right-2 absolute\">Click it to Login!</p>\n                            </a>\n                        ");
 		}
 		jteOutput.writeContent("\n                        <div class=\"flex\">\n                            <div class=\"border-sky-400 border-l-4 pl-2 h-6\"></div>\n                            <h2 class=\"text-xl font-bold text-zinc-700\">Pick a Date and Time</h2>\n                        </div>\n                        <form action=\"/movie/");
 		jteOutput.setContext("form", "action");
@@ -173,16 +173,10 @@ public final class JtemoviepageGenerated {
 				jteOutput.setContext("form", "action");
 				jteOutput.writeUserContent(movieDetail.getId());
 				jteOutput.setContext("form", null);
-				jteOutput.writeContent("/feedback\" method=\"post\">\n                                        <input type=\"hidden\" name=\"_method\" value=\"PUT\">\n                                        ");
-				if (matchingFeedback.get().getReviews().isEmpty()) {
-					jteOutput.writeContent("\n                                        ");
-				} else {
-					jteOutput.writeContent("\n                                            <textarea class=\"resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none\" id=\"reviews\" name=\"reviews\">");
-					jteOutput.setContext("textarea", null);
-					jteOutput.writeUserContent(matchingFeedback.get().getReviews());
-					jteOutput.writeContent("</textarea>\n                                        ");
-				}
-				jteOutput.writeContent("\n                                        <div class=\"flex flex-row-reverse float-left mt-2\">\n                                            ");
+				jteOutput.writeContent("/feedback\" method=\"post\">\n                                        <input type=\"hidden\" name=\"_method\" value=\"PUT\">\n                                        <textarea class=\"resize-none min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none\" id=\"reviews\" name=\"reviews\" placeholder=\"Add Review...\">");
+				jteOutput.setContext("textarea", null);
+				jteOutput.writeUserContent(matchingFeedback.get().getReviews());
+				jteOutput.writeContent("</textarea>\n                                        <div class=\"flex flex-row-reverse float-left mt-2\">\n                                            ");
 				for (int i = 5; i >= 1; i--) {
 					jteOutput.writeContent("\n                                                ");
 					if (i <= matchingFeedback.get().getRating() / 2) {
@@ -226,11 +220,7 @@ public final class JtemoviepageGenerated {
 					}
 					jteOutput.writeContent("\n                                            ");
 				}
-				jteOutput.writeContent("\n                                        </div>\n                                        <button type=\"button\" id=\"cancelFeedbackButton\" class=\"self-start bg-gray-500 hover:bg-gray-600 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto\">\n                                            Cancel\n                                        </button>\n                                        <a href=\"/movie/");
-				jteOutput.setContext("a", "href");
-				jteOutput.writeUserContent(movieDetail.getId());
-				jteOutput.setContext("a", null);
-				jteOutput.writeContent("/feedback/delete\" class=\"self-start mr-2 bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto\">\n                                            Delete\n                                        </a>\n                                        <button type=\"submit\" class=\"self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto\">\n                                            Update\n                                        </button>\n                                    </form>\n                                </div>\n                            ");
+				jteOutput.writeContent("\n                                        </div>\n                                        <button type=\"button\" id=\"cancelFeedbackButton\" class=\"self-start bg-gray-500 hover:bg-gray-600 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto\">\n                                            Cancel\n                                        </button>\n                                        <button type=\"submit\" class=\"self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto\">\n                                            Update\n                                        </button>\n                                    </form>\n                                </div>\n                            ");
 			} else {
 				jteOutput.writeContent("\n                                <div class=\"p-5 relative flex rounded-lg\">\n                                    ");
 				for (UserEntity user : userList) {
@@ -261,7 +251,7 @@ public final class JtemoviepageGenerated {
 			}
 			jteOutput.writeContent("\n                        ");
 		} else {
-			jteOutput.writeContent("\n                            <div class=\"p-5 relative flex rounded-lg\">\n                                <div class=\"absolute p-2 top-0 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/30 to-gray-400/70\n                                      shadow-md rounded-lg z-10\">\n                                    <p class=\"text-center font-bold text-white text-3xl mt-7\"><a href=\"/login\" class=\"text-green-600 hover:text-green-700 drop-shadow-md transition duration-300\">Login</a> To Submit a Review!</p>\n                                </div>\n                                <div class=\"border-sky-400 border-l-4 pl-2 h-10\"></div>\n                                <img rel=\"icon\" class=\"block size-10 rounded-full mr-2 bg-gray-500\" src=\"/image/icon/user-icon.png\">\n                                <form class=\"w-full\" action=\"/movie/");
+			jteOutput.writeContent("\n                            <div class=\"p-5 relative flex rounded-lg\">\n                                <a href=\"/login\" class=\"absolute p-2 top-0 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/30 to-gray-400/70\n                                      shadow-md hover:shadow-xl rounded-lg z-10 justify-center items-center font-bold text-3xl flex space-x-2 transition duration-300\">\n                                    <p class=\"text-green-600 hover:text-green-700 drop-shadow-md transition duration-300\">Login </p>\n                                    <p class=\"text-white\"> To Submit a Review!</p>\n\n                                    <p class=\"text-white drop-shadow-md text-base font-semibold bottom-1 right-2 absolute\">Click it to Login!</p>\n                                </a>\n                                <div class=\"border-sky-400 border-l-4 pl-2 h-10\"></div>\n                                <img rel=\"icon\" class=\"block size-10 rounded-full mr-2 bg-gray-500\" src=\"/image/icon/user-icon.png\">\n                                <form class=\"w-full\" action=\"/movie/");
 			jteOutput.setContext("form", "action");
 			jteOutput.writeUserContent(movieDetail.getId());
 			jteOutput.setContext("form", null);
@@ -269,55 +259,7 @@ public final class JtemoviepageGenerated {
 			gg.jte.generated.ondemand.include.miscellaneous.JteratingradioinputGenerated.render(jteOutput, jteHtmlInterceptor);
 			jteOutput.writeContent("\n                                </form>\n                            </div>\n                        ");
 		}
-		jteOutput.writeContent("\n\n\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n");
-		jteOutput.writeContent("\n\n\n                        <div class=\"transition-transform duration-500 ease-in-out max-h-96 overflow-y-scroll\n                                px-5 pb-4 space-y-12\">\n                            ");
+		jteOutput.writeContent("\n\n                        <div class=\"transition-transform duration-500 ease-in-out max-h-96 overflow-y-scroll\n                                px-5 pb-4 space-y-12\">\n                            ");
 		jteOutput.writeContent("\n                            ");
 		if (matchingFeedback.isPresent()) {
 			jteOutput.writeContent("\n                                <div id=\"currentUserFeedback\" class=\"w-full space-y-2\">\n                                    <div class=\"flex\">\n                                        <div class=\"border-sky-400 border-l-4 pl-2 h-10\"></div>\n                                        ");

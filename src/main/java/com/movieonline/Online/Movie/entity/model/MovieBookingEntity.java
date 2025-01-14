@@ -24,7 +24,7 @@ public class MovieBookingEntity {
     private List<String> username;
     private Date date;
     private Time time;
-    private Integer available_quota = 50;
+    private Integer availableQuota = 50;
 
     public MovieBookingEntity(List<String> username, Long movieId, Date date, Time time){
         this.username = username;

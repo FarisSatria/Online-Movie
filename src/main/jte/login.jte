@@ -44,9 +44,9 @@
 
         <!-- Social Login Section -->
         <div class="mt-8 text-center">
-            <h3 class="text-sm text-gray-400 mb-4">Or enter as a Guest</h3>
+            <h3 class="text-sm text-gray-500 mb-4">Or enter as a Guest</h3>
             <div class="flex justify-center space-x-6">
-                <a href="/" class="text-gray-400 hover:text-yellow-500 hover:rotate-12 hover:scale-125 hover:drop-shadow-md text-2xl transition"><i class="fas fa-home"></i></a>
+                <a href="/" class="text-gray-500 hover:text-yellow-500 hover:rotate-12 hover:scale-125 hover:drop-shadow-md text-2xl transition"><i class="fas fa-home"></i></a>
             </div>
         </div>
     </div>
@@ -69,6 +69,6 @@
 @endif
 
 <!-- Custom JavaScript -->
-<script src="/asset/js/login.js"></script>
+<script src="/asset/js/error-message.js"></script>
 </body>
 </html>

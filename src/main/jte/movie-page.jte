@@ -162,10 +162,13 @@
                     <div class="w-full relative p-5 space-y-4">
                         @if(isLoggedIn)
                         @else
-                            <div class="absolute p-2 top-4 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/30 to-gray-400/70
-                              shadow-md rounded-lg">
-                                <p class="text-center font-bold text-white text-3xl mt-20"><a href="/login" class="text-green-600 hover:text-green-700 drop-shadow-md transition duration-300">Login</a> To Book a Movie!</p>
-                            </div>
+                            <a href="/login" class="absolute p-2 top-4 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/40 to-gray-400/60
+                                      shadow-md hover:shadow-xl rounded-lg z-10 justify-center items-center font-bold text-3xl flex space-x-2 transition duration-300">
+                                <p class="text-green-600 hover:text-green-700 drop-shadow-md transition duration-300">Login </p>
+                                <p class="text-white"> To Submit a Review!</p>
+
+                                <p class="text-white drop-shadow-md text-base font-semibold bottom-1 right-2 absolute">Click it to Login!</p>
+                            </a>
                         @endif
                         <div class="flex">
                             <div class="border-sky-400 border-l-4 pl-2 h-6"></div>
@@ -235,10 +238,7 @@
                                     @endfor
                                     <form class="w-full" action="/movie/${movieDetail.getId()}/feedback" method="post">
                                         <input type="hidden" name="_method" value="PUT">
-                                        @if(matchingFeedback.get().getReviews().isEmpty())
-                                        @else
-                                            <textarea class="resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" id="reviews" name="reviews">${matchingFeedback.get().getReviews()}</textarea>
-                                        @endif
+                                        <textarea class="resize-none min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" id="reviews" name="reviews" placeholder="Add Review...">${matchingFeedback.get().getReviews()}</textarea>
                                         <div class="flex flex-row-reverse float-left mt-2">
                                             @for (int i = 5; i >= 1; i--)
                                                 @if (i <= matchingFeedback.get().getRating() / 2)
@@ -255,9 +255,6 @@
                                         <button type="button" id="cancelFeedbackButton" class="self-start bg-gray-500 hover:bg-gray-600 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
                                             Cancel
                                         </button>
-                                        <a href="/movie/${movieDetail.getId()}/feedback/delete" class="self-start mr-2 bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
-                                            Delete
-                                        </a>
                                         <button type="submit" class="self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">
                                             Update
                                         </button>
@@ -285,10 +282,13 @@
                             @endif
                         @else
                             <div class="p-5 relative flex rounded-lg">
-                                <div class="absolute p-2 top-0 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/30 to-gray-400/70
-                                      shadow-md rounded-lg z-10">
-                                    <p class="text-center font-bold text-white text-3xl mt-7"><a href="/login" class="text-green-600 hover:text-green-700 drop-shadow-md transition duration-300">Login</a> To Submit a Review!</p>
-                                </div>
+                                <a href="/login" class="absolute p-2 top-0 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/30 to-gray-400/70
+                                      shadow-md hover:shadow-xl rounded-lg z-10 justify-center items-center font-bold text-3xl flex space-x-2 transition duration-300">
+                                    <p class="text-green-600 hover:text-green-700 drop-shadow-md transition duration-300">Login </p>
+                                    <p class="text-white"> To Submit a Review!</p>
+
+                                    <p class="text-white drop-shadow-md text-base font-semibold bottom-1 right-2 absolute">Click it to Login!</p>
+                                </a>
                                 <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
                                 <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
                                 <form class="w-full" action="/movie/${movieDetail.getId()}/feedback" method="post">
@@ -296,57 +296,6 @@
                                 </form>
                             </div>
                         @endif
-
-
-<%--                                    @if (matchingFeedback.isPresent())--%>
-<%--                                        <input type="hidden" name="_method" value="PUT">--%>
-<%--                                        @if(matchingFeedback.get().getReviews().isEmpty())--%>
-<%--                                            <textarea class="resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" id="reviews" name="reviews" placeholder="Add Review" required></textarea>--%>
-<%--                                            <div class="flex flex-row-reverse float-left mt-2">--%>
-<%--                                                @for (int i = 5; i >= 1; i--)--%>
-<%--                                                    @if (i <= matchingFeedback.get().getRating() / 2)--%>
-<%--                                                        <input type="radio" id="star${i}" name="rating" value="${i * 2}" class="hidden peer">--%>
-<%--                                                        <label for="star${i}"--%>
-<%--                                                               class="cursor-pointer text-yellow-400 peer-checked:text-orange-400 hover:text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></label>--%>
-<%--                                                    @else--%>
-<%--                                                        <input type="radio" id="star${i}" name="rating" value="${2 * i}" class="hidden peer">--%>
-<%--                                                        <label for="star${i}"--%>
-<%--                                                               class="cursor-pointer text-gray-400 peer-checked:text-orange-400 hover:text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></label>--%>
-<%--                                                    @endif--%>
-<%--                                                @endfor--%>
-<%--                                            </div>--%>
-<%--                                            <a href="/movie/${movieDetail.getId()}/feedback/delete" class="self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">--%>
-<%--                                                Delete--%>
-<%--                                            </a>--%>
-<%--                                            <button type="submit" class="self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">--%>
-<%--                                                Comment--%>
-<%--                                            </button>--%>
-<%--                                        @else--%>
-<%--                                            <textarea class="resize-y min-h-8 h-8 max-h-28 bg-transparent border-b border-zinc-600/50 text-zinc-600 w-full focus:outline-none" id="reviews" name="reviews">${matchingFeedback.get().getReviews()}</textarea>--%>
-<%--                                            <div class="flex flex-row-reverse float-left mt-2">--%>
-<%--                                                @for (int i = 5; i >= 1; i--)--%>
-<%--                                                    @if (i <= matchingFeedback.get().getRating() / 2)--%>
-<%--                                                        <input type="radio" id="star${i}" name="rating" value="${i * 2}" class="hidden peer">--%>
-<%--                                                        <label for="star${i}"--%>
-<%--                                                               class="cursor-pointer text-yellow-400 peer-checked:text-orange-400 hover:text-gray-400 drop-shadow-md"><i class="fas fa-star"></i></label>--%>
-<%--                                                    @else--%>
-<%--                                                        <input type="radio" id="star${i}" name="rating" value="${2 * i}" class="hidden peer">--%>
-<%--                                                        <label for="star${i}"--%>
-<%--                                                               class="cursor-pointer text-gray-400 peer-checked:text-orange-400 hover:text-yellow-400 drop-shadow-md"><i class="fas fa-star"></i></label>--%>
-<%--                                                    @endif--%>
-<%--                                                @endfor--%>
-<%--                                            </div>--%>
-<%--                                            <a href="/movie/${movieDetail.getId()}/feedback/delete" class="self-start bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">--%>
-<%--                                                Delete--%>
-<%--                                            </a>--%>
-<%--                                            <button type="submit" class="self-start mr-2 bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-3 shadow-card text-white float-right mt-2 ml-auto">--%>
-<%--                                                Update--%>
-<%--                                            </button>--%>
-<%--                                        @endif--%>
-<%--                                    @else--%>
-<%--                                @template.include.miscellaneous.rating-radio-input()--%>
-<%--                                @endif--%>
-
 
                         <div class="transition-transform duration-500 ease-in-out max-h-96 overflow-y-scroll
                                 px-5 pb-4 space-y-12">

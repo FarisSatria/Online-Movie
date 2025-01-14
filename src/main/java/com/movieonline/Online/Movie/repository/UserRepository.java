@@ -12,6 +12,9 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> findByUsername(String username);
 
+    @Query("SELECT u.username FROM UserEntity u WHERE u.id = ?1")
+    String findUsernameById(Long id);
+
     @Query("SELECT COUNT(u) FROM UserEntity u WHERE u.isAdmin = true")
     long countAdminUsers();
 

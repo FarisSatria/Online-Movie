@@ -3,6 +3,7 @@
 @import java.util.Optional
 
 @param String WebName
+@param String deleteUserConflict
 @param Long adminCount
 @param Long userCount
 @param String getUsername
@@ -108,12 +109,12 @@
                 </form>
                 <button type="submit"
                         class="bg-green-500 hover:bg-green-400 transition duration-300 rounded-full p-2 px-3 ml-2 shadow-card text-white">
-                    Submit
+                    Add User
                 </button>
             </div>
         </div>
         <div>
-            <table class="min-w-full h-96 table-auto bg-gray-50 shadow-inner-lg rounded-lg overflow-hidden">
+            <table class="min-w-full table-auto bg-gray-50 shadow-inner-lg rounded-lg overflow-hidden">
                 <thead>
                 <tr class="w-full bg-gradient-to-r from-sky-400 to-blue-500 shadow-md border-b border-gray-300">
                     <th class="py-3 px-6 text-left text-gray-100 font-medium">ID</th>
@@ -156,7 +157,7 @@
                             @endif
                             <td class="py-4">
                                 <button class="bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-5 shadow-card text-white">Edit</button>
-                                <button class="bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white">Delete</button>
+                                <a href="/api/user/${users.getId()}/delete" class="bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white">Delete</a>
                             </td>
                         </tr>
                     @endfor
@@ -167,11 +168,21 @@
     </div>
 </div>
 
+@if(deleteUserConflict != null)
+    <div id="error-message" class="drop-shadow-md absolute top-5 left-[40vw]">
+        <div class="bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center">Warning!</div>
+        <div class="bg-white p-5 rounded-br-lg rounded-bl-lg">
+            <p>${deleteUserConflict}</p>
+        </div>
+    </div>
+@endif
+
 <!-- Footer -->
 @template.include.footer.footer()
 <!-- Modal -->
 @template.include.modal.logout-modal()
 <!-- Custom JavaScript -->
+<script src="/asset/js/error-message.js"></script>
 <script src="/asset/js/navbar.js"></script>
 <script src="/asset/js/modal.js"></script>
 </body>

@@ -167,7 +167,7 @@ public class TMDBService {
             throw new RuntimeException("No available slots for the selected date and time");
         }
 
-        movieBookingEntity.setAvailable_quota(availableQuota - 1);
+        movieBookingEntity.setAvailableQuota(availableQuota - 1);
 
         movieBookingRepository.save(movieBookingEntity);
     }

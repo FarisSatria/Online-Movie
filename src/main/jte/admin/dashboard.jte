@@ -189,7 +189,7 @@
                                 @endif
                                 <td class="py-4">
                                     <button class="bg-orange-500 hover:bg-orange-400 transition duration-300 rounded-full p-2 px-5 shadow-card text-white">Edit</button>
-                                    <button class="bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white">Delete</button>
+                                    <a href="/api/user/${users.getId()}/delete" class="bg-red-600 hover:bg-red-700 transition duration-300 rounded-full p-2 px-3 shadow-card text-white">Delete</a>
                                 </td>
                             </tr>
                         @endfor

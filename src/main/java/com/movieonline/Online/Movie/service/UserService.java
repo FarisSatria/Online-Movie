@@ -32,4 +32,8 @@ public class UserService {
         System.out.println("Ini di service" + userRepository.findByUsername(username));
         return userRepository.findByUsername(username);
     }
+
+    public void deleteUser(Long id){
+        userRepository.deleteById(id);
+    }
 }

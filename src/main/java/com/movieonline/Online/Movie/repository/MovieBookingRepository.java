@@ -12,7 +12,7 @@ import java.util.Date;
 @Repository
 public interface MovieBookingRepository extends JpaRepository<MovieBookingEntity, Long> {
 
-    @Query("SELECT available_quota FROM MovieBookingEntity WHERE movieId = :movieId AND date = :date AND time = :time")
+    @Query("SELECT availableQuota FROM MovieBookingEntity WHERE movieId = :movieId AND date = :date AND time = :time")
     Integer getAvailableQuota(@Param("movieId") Long movieId, @Param("date") Date date, @Param("time") Time time);
 }
 
