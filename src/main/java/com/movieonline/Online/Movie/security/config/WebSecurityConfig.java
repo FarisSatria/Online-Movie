@@ -37,11 +37,15 @@ public class WebSecurityConfig {
                                         "/guest-session",
                                         "/register",
                                         "/movies/popular",
+                                        "/movie/play/{id}",
                                         "/movie/{id}",
-                                        "/movie/{id}/feedback"
+                                        "/movie/{id}/feedback",
+                                        "/movie/{id}/booking/enable",
+                                        "/movie/{id}/booking/disable",
+                                        "/movie/{id}/booking/cancel"
                                 ).permitAll()
                                 .requestMatchers("/dashboard").hasRole("ROLE_ADMIN")
-                                .requestMatchers("/movie/{movieId}/booking").authenticated()
+                                .requestMatchers("/movie/{id}/booking", "/account", "/booking").authenticated()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

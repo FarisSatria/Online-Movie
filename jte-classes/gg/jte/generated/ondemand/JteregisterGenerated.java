@@ -11,19 +11,19 @@ public final class JteregisterGenerated {
 		jteOutput.setContext("h2", null);
 		jteOutput.writeUserContent(WebName);
 		jteOutput.writeContent("</h2>\n        <form class=\"space-y-4\" method=\"post\" action=\"/register\">\n            ");
-		jteOutput.writeContent("\n            <div class=\"flex items-center border-b border-gray-400 py-2\">\n                <i class=\"fas fa-envelope text-gray-400 mr-3\"></i>\n                <input type=\"text\" name=\"name\" class=\"w-full bg-transparent placeholder-gray-400 text-gray-900 focus:outline-none\" placeholder=\"Name\" required>\n            </div>\n            ");
+		jteOutput.writeContent("\n            <div class=\"flex items-center border-b border-gray-400 py-2\">\n                <i class=\"fas fa-user text-gray-400 mr-3\"></i>\n                <input type=\"text\" name=\"name\" class=\"w-full bg-transparent placeholder-gray-400 text-gray-900 focus:outline-none\" placeholder=\"Name\" required>\n            </div>\n            ");
 		jteOutput.writeContent("\n            <div class=\"flex items-center border-b border-gray-400 py-2\">\n                <i class=\"fas fa-user text-gray-400 mr-3\"></i>\n                <input type=\"text\" name=\"username\" class=\"w-full bg-transparent placeholder-gray-400 text-gray-900 focus:outline-none\" placeholder=\"Username\" required>\n            </div>\n            ");
 		jteOutput.writeContent("\n            <div class=\"flex items-center border-b border-gray-400 py-2\">\n                <i class=\"fas fa-lock text-gray-400 mr-3\"></i>\n                <input type=\"password\" name=\"password\" class=\"w-full bg-transparent placeholder-gray-400 text-gray-900 focus:outline-none\" placeholder=\"Password\" required>\n            </div>\n            ");
-		jteOutput.writeContent("\n            <button class=\"w-full mt-6 py-3 bg-green-600 shadow-card hover:bg-green-500 text-white font-semibold rounded-lg flex items-center justify-center space-x-2 transition\">\n                <span>Register Now</span>\n                <i class=\"fas fa-user-plus\"></i>\n            </button>\n        </form>\n    </div>\n\n    ");
+		jteOutput.writeContent("\n            <button class=\"w-full mt-6 py-3 bg-green-500 shadow-card hover:bg-green-600 text-white font-semibold rounded-lg flex items-center justify-center space-x-2 transition\">\n                <span>Register Now</span>\n                <i class=\"fas fa-user-plus\"></i>\n            </button>\n        </form>\n    </div>\n\n    ");
 		jteOutput.writeContent("\n    <div id=\"loginPrompt\" class=\"p-8 w-full md:w-1/2 flex flex-col justify-center items-center text-gray-900 border-t md:border-t-0 md:border-l border-gray-400\">\n        <h2 class=\"text-2xl text-black font-semibold mb-4\">Already have an account?</h2>\n        <p class=\"text-gray-400 mb-8 text-center\">Log in to access your account and continue exploring Cinema Eudaemonia!</p>\n        <a href=\"/login\" class=\"px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white font-semibold rounded-lg transition shadow-card\">Log In</a>\n    </div>\n</div>\n\n");
 		if (userAlreadyExist != null) {
-			jteOutput.writeContent("\n    <div id=\"error-message\" class=\"drop-shadow-md absolute top-5\">\n        <div class=\"bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center\">Warning!</div>\n        <div class=\"bg-white p-5 rounded-br-lg rounded-bl-lg\">\n            <p>");
+			jteOutput.writeContent("\n    <div id=\"error-message\" class=\"drop-shadow-md fixed top-5\">\n        <div class=\"bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center\">Warning!</div>\n        <div class=\"bg-white p-5 rounded-br-lg rounded-bl-lg\">\n            <p>");
 			jteOutput.setContext("p", null);
 			jteOutput.writeUserContent(userAlreadyExist);
 			jteOutput.writeContent("</p>\n        </div>\n    </div>\n");
 		}
 		jteOutput.writeContent("\n\n");
-		jteOutput.writeContent("\n<script src=\"/asset/js/login.js\"></script>\n</body>\n</html>\n");
+		jteOutput.writeContent("\n<script src=\"/asset/js/error-message.js\"></script>\n</body>\n</html>\n");
 	}
 	public static void renderMap(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, java.util.Map<String, Object> params) {
 		String WebName = (String)params.get("WebName");

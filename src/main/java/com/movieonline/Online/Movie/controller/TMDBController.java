@@ -3,36 +3,59 @@ package com.movieonline.Online.Movie.controller;
 import com.movieonline.Online.Movie.entity.dto.*;
 import com.movieonline.Online.Movie.entity.model.FeedBackEntity;
 import com.movieonline.Online.Movie.entity.model.MovieBookingEntity;
+import com.movieonline.Online.Movie.entity.model.UserBookingEntity;
+import com.movieonline.Online.Movie.exception.MovieBookingConflictException;
 import com.movieonline.Online.Movie.repository.FeedBackRepository;
+import com.movieonline.Online.Movie.repository.UserRepository;
 import com.movieonline.Online.Movie.security.util.AuthenticationUtils;
 import com.movieonline.Online.Movie.service.TMDBService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class TMDBController {
 
     private final FeedBackRepository feedBackRepository;
+    private final UserRepository userRepository;
     private final TMDBService tmdbService;
     private final AuthenticationUtils authenticationUtils;
+    private final UserController userController;
 
-    public TMDBController(FeedBackRepository feedBackRepository, TMDBService tmdbService, AuthenticationUtils authenticationUtils, List<FeedBackEntity> movieFeedbacks) {
+    public TMDBController(FeedBackRepository feedBackRepository, TMDBService tmdbService, AuthenticationUtils authenticationUtils, UserRepository userRepository, UserController userController) {
         this.feedBackRepository = feedBackRepository;
         this.tmdbService = tmdbService;
         this.authenticationUtils = authenticationUtils;
+        this.userRepository = userRepository;
+        this.userController = userController;
     }
 
     public Model pageDetails(Model model){
         model.addAttribute("WebName", "Cinema Eudamonia");
         return model;
+    }
+
+    public Model getAllMovies(Model model){
+        List<MovieDTO> getAllMovies = tmdbService.getAllMovies(1);
+        model.addAttribute("getAllMovies", getAllMovies);
+
+        return model;
+    }
+
+    @GetMapping("/dashboard/booking/{pageNumber}")
+    public String changeNumberPages(@PathVariable Integer pageNumber, RedirectAttributes redirectAttributes){
+        List<MovieDTO> getMoviesPage = tmdbService.getAllMovies(pageNumber);
+        redirectAttributes.addFlashAttribute("getMoviesPage", getMoviesPage);
+        redirectAttributes.addFlashAttribute("getPreviousNumberPages", pageNumber);
+
+        return "redirect:/dashboard/booking";
     }
 
     public Model getMovieDetails(@PathVariable Long id, Model model){
@@ -80,9 +103,22 @@ public class TMDBController {
     }
 
     @GetMapping("/api/search/movies")
-    @ResponseBody
-    public List<MovieDTO> searchMovies(@RequestParam String name) {
-        return tmdbService.searchMovies(name);
+    public String searchMovies(@RequestParam String name, Principal principal,
+                               RedirectAttributes redirectAttributes) {
+
+        List<MovieDTO> searchMovies = tmdbService.searchMovies(name);
+        redirectAttributes.addFlashAttribute("searchMovies", searchMovies);
+        redirectAttributes.addFlashAttribute("searchMoviesPlaceholder", name);
+
+        if(principal == null){
+            return "redirect:/movies/search";
+        }else{
+            if (!userRepository.findIsAdminTrueByUsername(authenticationUtils.getUsername())){
+                return "redirect:/movies/search";
+            }else{
+                return "redirect:/dashboard/booking";
+            }
+        }
     }
 
 
@@ -95,41 +131,6 @@ public class TMDBController {
         tmdbService.provideFeedback(feedBackEntity, authenticationUtils.getUsername(), id, reviews, rating);
 
         return "redirect:/movie/" + id;
-    }
-
-    @PostMapping("/movie/{id}/booking")
-    public String submitBooking(
-            @PathVariable("id") Long movieId,
-            @RequestParam("custom-date") String date,
-            @RequestParam("custom-time") String time,
-            Model model) {
-
-        try {
-            Date bookingDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-            Time bookingTime = Time.valueOf(time + ":00");
-
-            MovieBookingEntity movieBookingEntity = new MovieBookingEntity();
-            movieBookingEntity.setMovieId(movieId);
-            if (movieBookingEntity.getUsername() == null) {
-                movieBookingEntity.setUsername(new ArrayList<>());
-            }
-            movieBookingEntity.getUsername().add(authenticationUtils.getUsername());
-            movieBookingEntity.setDate(bookingDate);
-            movieBookingEntity.setTime(bookingTime);
-
-            tmdbService.addBooking(movieBookingEntity, authenticationUtils.getUsername(), movieId);
-
-            // Pass success message to the model
-            model.addAttribute("successMessage", "Your booking was successful!");
-        } catch (ParseException e) {
-            model.addAttribute("errorMessage", "Invalid date or time format.");
-            e.printStackTrace();
-        } catch (RuntimeException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            e.printStackTrace();
-        }
-
-        return "redirect:/movie/" + movieId;
     }
 
     @PutMapping("/movie/{id}/feedback")
@@ -154,4 +155,54 @@ public class TMDBController {
 
         return "redirect:/movie/" + id;
     }
+
+
+    @PostMapping("/movie/{id}/booking")
+    public String submitBooking(@PathVariable Long id,
+                                 @RequestParam("custom-date") LocalDate bookedDate,
+                                 @RequestParam("custom-time") LocalTime bookedTime,
+                                RedirectAttributes redirectAttributes){
+        try{
+            tmdbService.submitBooking(id, authenticationUtils.getUsername(), bookedDate, bookedTime);
+            redirectAttributes.addFlashAttribute("movieHasBeenBooked", "Movie has been booked successfully!");
+        } catch (MovieBookingConflictException e) {
+            redirectAttributes.addFlashAttribute("movieBookingConflict", e.getMessage());
+        }
+
+        return "redirect:/movie/" + id;
+    }
+
+    @GetMapping("/movie/{id}/booking/cancel")
+    public String cancelBooking(@PathVariable Long id, RedirectAttributes redirectAttributes){
+        tmdbService.cancelBooking(id, authenticationUtils.getUsername());
+        redirectAttributes.addFlashAttribute("bookingHasBeenCanceled", "Booking has been canceled successfully!");
+
+        return "redirect:/booking";
+    }
+
+    @GetMapping("/movie/{id}/check-quota")
+    @ResponseBody
+    public Map<String, Integer> checkQuota(@PathVariable Long id, @RequestParam LocalDate date, @RequestParam LocalTime time) {
+        int availableQuota = tmdbService.getAvailableQuota(id, date, time);
+        return Map.of("availableQuota", availableQuota);
+    }
+
+
+    @GetMapping("/movie/{id}/booking/enable")
+    public String enableMovieBooking(@PathVariable Long id,
+                                     RedirectAttributes redirectAttributes){
+        tmdbService.enableMovieBooking(id);
+        redirectAttributes.addFlashAttribute("movieHasBeenEnabled","Movie has been enabled successfully!");
+
+        return "redirect:/dashboard/booking";
+    }
+
+    @GetMapping("/movie/{id}/booking/disable")
+    public String disableMovieBooking(@PathVariable Long id, RedirectAttributes redirectAttributes){
+        tmdbService.disableMovieBooking(id);
+        redirectAttributes.addFlashAttribute("movieHasBeenDisabled", "Movie has been disabled successfully!");
+
+        return "redirect:/dashboard/booking";
+    }
+
 }

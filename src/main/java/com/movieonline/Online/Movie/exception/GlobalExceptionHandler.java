@@ -3,11 +3,11 @@ package com.movieonline.Online.Movie.exception;
 import com.movieonline.Online.Movie.controller.TemplateController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,17 +19,16 @@ public class GlobalExceptionHandler {
     public GlobalExceptionHandler(TemplateController templateController) {
         this.templateController = templateController;
     }
-
-    @ExceptionHandler({UserRegistrationConflictException.class})
-    public String handleUserRegistrationConflictException(UserRegistrationConflictException exception, Model model) {
-        model.addAttribute("userAlreadyExist", exception.getMessage());
-        return "register";
-    }
     @ExceptionHandler({FeedbackInvalidCredentials.class})
     public ResponseEntity<Object> handleFeedbackInvalidCredentials(FeedbackInvalidCredentials exception){
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(exception.getMessage());
+    }
+    @ExceptionHandler({MovieBookingToggle.class})
+    public String handleMovieEnableConflict(MovieBookingToggle exception, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("movieBookingToggle", exception.getMessage());
+        return "redirect:/dashboard/booking";
     }
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<Map<String, String>> handleRuntimeException(MethodArgumentNotValidException exception) {

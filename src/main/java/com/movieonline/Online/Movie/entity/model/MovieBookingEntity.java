@@ -1,12 +1,11 @@
 package com.movieonline.Online.Movie.entity.model;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.sql.Time;
-import java.util.Date;
+import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,24 +17,28 @@ public class MovieBookingEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(length = 11)
     private Long id;
-    private Long movieId;
-    private List<String> username;
-    private Date date;
-    private Time time;
-    private Integer availableQuota = 50;
 
-    public MovieBookingEntity(List<String> username, Long movieId, Date date, Time time){
-        this.username = username;
-        this.movieId = movieId;
+    private LocalDate date;
+    private LocalTime timeSlot;
+    private int availableQuota = 50;
+    private Long movieId;
+
+    private List<String> username;
+
+    public MovieBookingEntity(LocalDate date, LocalTime timeSlot, int availableQuota, Long movieId) {
         this.date = date;
-        this.time = time;
+        this.timeSlot = timeSlot;
+        this.availableQuota = availableQuota;
+        this.movieId = movieId;
     }
 
     @Override
     public String toString() {
-        return String.format("MovieBookingEntity(id=%d, movieId='%d', username='%s', date='%s', time=%tm)", id, movieId, username, date, time);
+        return String.format(
+                "MovieBookingEntity(id=%d, date=%s, timeSlot=%s, availableQuota=%d, movieId=%d, username=%s)",
+                id, date, timeSlot, availableQuota, movieId, username
+        );
     }
 
     @Override
@@ -43,15 +46,16 @@ public class MovieBookingEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MovieBookingEntity that = (MovieBookingEntity) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(movieId, that.movieId) &&
-                Objects.equals(username, that.username) &&
+        return availableQuota == that.availableQuota &&
+                Objects.equals(id, that.id) &&
                 Objects.equals(date, that.date) &&
-                Objects.equals(time, that.time);
+                Objects.equals(timeSlot, that.timeSlot) &&
+                Objects.equals(movieId, that.movieId) &&
+                Objects.equals(username, that.username);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, movieId, username, date, time);
+        return Objects.hash(id, date, timeSlot, availableQuota, movieId, username);
     }
 }

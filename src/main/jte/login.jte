@@ -1,5 +1,7 @@
 @param String WebName
 @param String invalidCredentials
+@param String registrationSuccess
+@param String deleteAccountSuccess
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +44,7 @@
             </button>
         </form>
 
-        <!-- Social Login Section -->
+        <!-- Guest Section -->
         <div class="mt-8 text-center">
             <h3 class="text-sm text-gray-500 mb-4">Or enter as a Guest</h3>
             <div class="flex justify-center space-x-6">
@@ -55,15 +57,33 @@
     <div id="registerPrompt" class="p-8 w-full md:w-1/2 flex flex-col justify-center items-center text-gray-900 border-t md:border-t-0 md:border-l border-gray-400">
         <h2 class="text-2xl text-black font-semibold mb-4">Don’t have an account?</h2>
         <p class="text-gray-400 mb-8 text-center">Register now to join ${WebName} and enjoy exclusive content!</p>
-        <a href="/register" class="px-6 py-3 bg-green-500 hover:bg-green-400 text-white font-semibold rounded-lg transition shadow-card">Register Now</a>
+        <a href="/register" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition shadow-card">Register Now</a>
     </div>
 </div>
 
 @if(invalidCredentials != null)
-    <div id="error-message" class="drop-shadow-md absolute top-5">
+    <div id="error-message" class="drop-shadow-md fixed top-5">
         <div class="bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center">Warning!</div>
         <div class="bg-white p-5 rounded-br-lg rounded-bl-lg">
             <p>${invalidCredentials}</p>
+        </div>
+    </div>
+@endif
+
+@if(deleteAccountSuccess != null)
+    <div id="success-message-registration-valid" class="drop-shadow-md absolute top-5 left-[45vw]">
+        <div class="bg-green-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center">Success!</div>
+        <div class="bg-white p-5 rounded-br-lg rounded-bl-lg">
+            <p>${registrationSuccess}</p>
+        </div>
+    </div>
+@endif
+
+@if(registrationSuccess != null)
+    <div id="success-message-registration-valid" class="drop-shadow-md absolute top-5 left-[42.5vw]">
+        <div class="bg-green-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center">Success!</div>
+        <div class="bg-white p-5 rounded-br-lg rounded-bl-lg">
+            <p>${registrationSuccess}</p>
         </div>
     </div>
 @endif

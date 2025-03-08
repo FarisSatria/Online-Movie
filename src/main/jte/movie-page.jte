@@ -1,3 +1,5 @@
+@import java.time.LocalDate
+@import java.time.LocalTime
 @import java.util.List
 @import java.util.Optional
 @import com.movieonline.Online.Movie.entity.dto.*
@@ -6,15 +8,21 @@
 @import com.movieonline.Online.Movie.entity.dto.MovieReviewsDTO
 @import com.movieonline.Online.Movie.entity.dto.MovieGenresDTO
 @import com.movieonline.Online.Movie.entity.model.FeedBackEntity
+@import com.movieonline.Online.Movie.entity.model.MovieBookingEntity
 @import com.movieonline.Online.Movie.entity.model.UserEntity
 
 @param String WebName
 @param String getUsername
+@param String movieHasBeenBooked
+@param String movieBookingConflict
 @param Boolean isLoggedIn
+@param UserEntity getCurrentUser
 @param Optional<FeedBackEntity> matchingFeedback
 @param MovieDTO movieDetail
 @param MovieGenresDTO movieGenres
 @param MovieAuthorDetailsReviewDTO movieAuthorDetailsReview
+@param MovieBookingEntity getPlayButton
+@param List<MovieBookingEntity> getMovieBooking
 @param List<UserEntity> userList
 @param List<FeedBackEntity> movieFeedbacks
 @param List<MovieCastDTO> movieCast
@@ -78,23 +86,29 @@
             @if(isLoggedIn)
                 <!-- User Icon -->
                 <div class="text-center w-full mt-auto relative">
+                    @if(getCurrentUser != null || getCurrentUser.getIsAdmin() == true)
+                        <a href="/dashboard"
+                           class="block text-black hover:text-sky-400 hover:rotate-12 hover:scale-125 drop-shadow-md hover:drop-shadow-lg transition duration-200 ">
+                            <i class="fas fa-desktop text-2xl"></i>
+                        </a>
+                    @endif
                     <div class="w-full h-px bg-black opacity-20 mb-1"></div>
                     <button id="userButton" class="block size-8 drop-shadow-lg rounded-full focus:outline-none">
                         @for(UserEntity user : userList)
                             @if(user.getUsername().equals(getUsername))
                                 @if(user.getProfilePicturePath() != null)
-                                    <img rel="icon" class="rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200"
-                                         src="/image/icon/${user.getProfilePicturePath()}.png">
+                                    <img rel="icon" class="rounded-full mr-2 size-8 bg-gray-500 hover:drop-shadow-xl hover:scale-110 transition duration-200"
+                                         src="/image/${user.getId()}">
                                 @else
-                                    <img rel="icon" class="rounded-full mr-2 bg-gray-500 hover:drop-shadow-xl transition duration-200" src="/image/icon/user-icon.png">
+                                    <img rel="icon" class="rounded-full mr-2 size-8 bg-gray-500 hover:drop-shadow-xl transition hover:scale-110 duration-200" src="/image/icon/user-icon.png">
                                 @endif
                             @endif
                         @endfor
                     </button>
 
-                    <div id="userPanel" class="absolute w-40 -left-1 -top-36 text-left bg-gray-50 rounded-lg shadow-md border border-gray-300 hidden">
-                        <a href="" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 rounded-t-lg cursor-pointer transition duration-300">Booking</a>
-                        <a href="" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300">Account</a>
+                    <div id="userPanel" class="absolute w-40 -left-1 -top-28 text-left bg-gray-50 rounded-lg shadow-md border border-gray-300 hidden">
+                        <a href="/booking" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 rounded-t-lg cursor-pointer transition duration-300">Booking</a>
+                        <a href="/account" class="block px-4 py-2 text-zinc-700 hover:bg-gray-200 cursor-pointer transition duration-300">Account</a>
                         <div class="group">
                             <a id="openModal" class="block px-4 py-2 text-zinc-700 group-hover:bg-red-600 group-hover:text-white border-t border-t-gray-300 cursor-pointer rounded-b-lg transition duration-300">Logout</a>
                             <div class="absolute group-hover:border-t-red-600 left-2 -bottom-4 w-0 h-0 border-l-[13px] border-r-[13px] border-l-transparent border-r-transparent border-t-[16px] border-t-gray-50 drop-shadow-md transition duration-300"></div>
@@ -114,7 +128,7 @@
     </div>
     <div class="flex-initial mt-8" style="width:87.5vw;">
         <!-- Floating, Rounded, Shadow Carousel -->
-        <div class="relative h-1/4 w-full mb-5 rounded-xl overflow-hidden shadow-card" style="height:70vh;">
+        <div class="relative w-full mb-5 rounded-xl overflow-hidden shadow-card" style="height:70vh;">
             <!-- Carousel Images -->
             <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-full"
                  style="background-image:url(https://image.tmdb.org/t/p/w1280${movieDetail.getBackdrop_path()});">
@@ -144,11 +158,16 @@
                             @endfor
                         </div>
                         <div class="flex space-x-2">
+                            @if(getPlayButton != null && getPlayButton.getDate().equals(LocalDate.now()) &&
+                                        LocalTime.now().isAfter(getPlayButton.getTimeSlot().minusSeconds(1)) &&
+                                        LocalTime.now().isBefore(getPlayButton.getTimeSlot().plusMinutes(20)))
+                                <a href="/movie/play/${movieDetail.getId()}" class="shadow-card p-3 bg-sky-500 hover:bg-sky-400 text-white rounded-lg transition duration-300">Play Now!</a>
+                            @endif
                             <a id="bookNow" href="#scrollToBehaviour" class="book-button shadow-card p-3 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg transition duration-300 ">Book Now!</a>
-                            <div class="p-3 rounded-lg shadow-inner-lg border border-gray-200 bg-gray-100 flex">
-                                <p class="text-zinc-700 font-semibold">Quota Left: 5</p>
-                                <p class="text-zinc-700 font-medium">/50</p>
-                            </div>
+<%--                            <div class="p-3 rounded-lg shadow-inner-lg border border-gray-200 bg-gray-100 flex">--%>
+<%--                                <p class="text-zinc-700 font-semibold">Quota Left: 5</p>--%>
+<%--                                <p class="text-zinc-700 font-medium">/50</p>--%>
+<%--                            </div>--%>
                         </div>
                     </div>
                 </div>
@@ -161,20 +180,35 @@
                     <h3 class="text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold">Booking ${movieDetail.getTitle()}!</h3>
                     <div class="w-full relative p-5 space-y-4">
                         @if(isLoggedIn)
+                            @if(getMovieBooking.isEmpty())
+                                <a class="absolute p-2 top-4 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/40 to-gray-400/60
+                                      shadow-md rounded-lg z-10 justify-center items-center font-bold text-3xl flex space-x-2">
+                                    <p class="text-white">This movie </p>
+                                    <p class="text-red-600 drop-shadow-md transition"> cannot </p>
+                                    <p class="text-white">be booked!</p>
+                                </a>
+                            @elseif(getPlayButton != null)
+                                <a class="absolute p-2 top-4 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/40 to-gray-400/60
+                                      shadow-md rounded-lg z-10 justify-center items-center font-bold text-3xl flex space-x-2">
+                                    <p class="text-white">You have  </p>
+                                    <p class="text-green-600 drop-shadow-md"> booked </p>
+                                    <p class="text-white">this movie!</p>
+                                </a>
+                            @endif
                         @else
                             <a href="/login" class="absolute p-2 top-4 right-0 bottom-0 left-0 bg-gradient-to-b from-gray-400/40 to-gray-400/60
                                       shadow-md hover:shadow-xl rounded-lg z-10 justify-center items-center font-bold text-3xl flex space-x-2 transition duration-300">
                                 <p class="text-green-600 hover:text-green-700 drop-shadow-md transition duration-300">Login </p>
-                                <p class="text-white"> To Submit a Review!</p>
+                                <p class="text-white"> To Book This Movie!</p>
 
-                                <p class="text-white drop-shadow-md text-base font-semibold bottom-1 right-2 absolute">Click it to Login!</p>
+                                <p class="text-white flex drop-shadow-md text-base font-semibold bottom-1 right-2 absolute">Click it to Login!</p>
                             </a>
                         @endif
                         <div class="flex">
                             <div class="border-sky-400 border-l-4 pl-2 h-6"></div>
                             <h2 class="text-xl font-bold text-zinc-700">Pick a Date and Time</h2>
                         </div>
-                        <form action="/movie/${movieDetail.getId()}/booking" method="post">
+                        <form id="booking-form" action="/movie/${movieDetail.getId()}/booking" method="post" data-movie-id="${movieDetail.getId()}">
                             <div class="grid grid-cols-2 gap-4">
                                 <!-- Date Dropdown -->
                                 <div class="space-y-2">
@@ -193,9 +227,19 @@
                                 </div>
                             </div>
 
-                            <!-- Book Now Button -->
-                            <button type="submit" class="bg-green-500 hover:bg-green-400 mt-2 transition duration-300 rounded-full p-3 shadow-card text-white ml-[88%]">Book Now</button>
+                            <div class="flex mt-2">
+                                <div class="py-3 px-4 shadow-inner-lg rounded-full border border-gray-200 bg-gray-100 flex">
+                                    <p id="quota-display" class="text-zinc-700 text-center">0</p>
+                                    <p class="text-zinc-700 text-center font-semibold">/50 Quota Left</p>
+                                </div>
+
+                                <!-- Book Now Button -->
+                                <button type="submit" class="bg-green-500 ml-auto hover:bg-green-600 transition duration-300 rounded-full p-3 shadow-card text-white">
+                                    Book Now
+                                </button>
+                            </div>
                         </form>
+
 
                     </div>
                 </div>
@@ -229,7 +273,7 @@
                                             @if(user.getProfilePicturePath() != null)
                                                 <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
                                                 <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
-                                                     src="/image/icon/${user.getProfilePicturePath()}.png">
+                                                     src="/image/${user.getId()}">
                                             @else
                                                 <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
                                                 <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
@@ -267,7 +311,7 @@
                                             @if(user.getProfilePicturePath() != null)
                                                 <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
                                                 <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
-                                                     src="/image/icon/${user.getProfilePicturePath()}.png">
+                                                     src="/image/${user.getId()}">
                                             @else
                                                 <div class="border-sky-400 border-l-4 pl-2 h-10"></div>
                                                 <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
@@ -308,7 +352,7 @@
                                             @if(user.getUsername().equals(matchingFeedback.get().getUsername()))
                                                 @if(user.getProfilePicturePath() != null)
                                                     <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
-                                                         src="/image/icon/${user.getProfilePicturePath()}.png">
+                                                         src="/image/${user.getId()}">
                                                 @else
                                                     <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
                                                 @endif
@@ -340,7 +384,7 @@
                                             <p class="reviews text-md text-zinc-600" style="display: -webkit-box; -webkit-box-orient: vertical;
                                                                 -webkit-line-clamp: 5; overflow: hidden;">${matchingFeedback.get().getReviews()}</p>
                                         </div>
-                                        <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white ">Show More!</button>
+                                        <button class="show-more bg-sky-400 hover:bg-sky-500 transition duration-300 rounded-full p-2 px-3 shadow-card text-white">Show More!</button>
                                     @endif
                                 </div>
                             @endif
@@ -357,7 +401,7 @@
                                                         @if(user.getUsername().equals(feedbacks.getUsername()))
                                                             @if(user.getProfilePicturePath() != null)
                                                                 <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500"
-                                                                     src="/image/icon/${user.getProfilePicturePath()}.png">
+                                                                     src="/image/${user.getId()}">
                                                             @else
                                                                 <img rel="icon" class="block size-10 rounded-full mr-2 bg-gray-500" src="/image/icon/user-icon.png">
                                                             @endif
@@ -448,7 +492,7 @@
                 </div>
             </div>
             <!-- Extra Detail Sections-->
-            <div class="flex-initial" style="width:39%;">
+            <div class="flex-initial space-y-5" style="width:39%;">
                 <div class="w-full">
                     <h3 class="text-xl sm:text-2xl lg:text-3xl text-black border-yellow-400 border-l-4 pl-2 font-semibold mb-4">
                         Extra Details
@@ -489,13 +533,32 @@
         </div>
     </div>
 </div>
+
+@if(movieHasBeenBooked != null)
+    <div id="success-message-booking-valid" class="drop-shadow-md absolute top-5 left-[39vw]">
+        <div class="bg-green-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center">Success!</div>
+        <div class="bg-white p-5 rounded-br-lg rounded-bl-lg">
+            <p>${movieHasBeenBooked}</p>
+        </div>
+    </div>
+@endif
+
+@if(movieBookingConflict != null)
+    <div id="error-message" class="drop-shadow-md fixed top-5 left-[39vw]">
+        <div class="bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center">Warning!</div>
+        <div class="bg-white p-5 rounded-br-lg rounded-bl-lg">
+            <p>${movieBookingConflict}</p>
+        </div>
+    </div>
+@endif
+
 <!-- Footer -->
 @template.include.footer.footer()
 <!-- Modal -->
 @template.include.modal.logout-modal()
 <!-- Custom JavaScript -->
-<script src="/asset/js/AJAX-handler.js"></script>
 <script src="/asset/js/feedback.js"></script>
+<script src="/asset/js/error-message.js"></script>
 <script src="/asset/js/navbar.js"></script>
 <script src="/asset/js/modal.js"></script>
 <script src="/asset/js/carousel.js"></script>

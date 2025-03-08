@@ -2,6 +2,7 @@ package com.movieonline.Online.Movie.service;
 
 import com.movieonline.Online.Movie.entity.model.UserEntity;
 import com.movieonline.Online.Movie.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,12 +26,13 @@ public class LoginService implements AuthenticationProvider {
     }
 
     @Override
+    @Transactional
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
 
         UserEntity user = userRepository.findByUsername(username).orElseThrow(
-                () -> new BadCredentialsException("InvalidCredentials")
+                () -> new BadCredentialsException("Invalid credentials!")
         );
 
         if (!bCryptPasswordEncoder.matches(password, user.getPassword())) {

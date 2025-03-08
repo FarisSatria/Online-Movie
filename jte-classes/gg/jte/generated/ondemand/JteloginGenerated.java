@@ -1,8 +1,8 @@
 package gg.jte.generated.ondemand;
 public final class JteloginGenerated {
 	public static final String JTE_NAME = "login.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,0,0,8,8,8,8,11,14,17,23,25,25,25,27,32,37,44,53,56,56,56,61,61,65,65,65,68,68,70,74,74,74,0,1,1,1,1};
-	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, String invalidCredentials) {
+	public static final int[] JTE_LINE_INFO = {0,0,0,0,10,10,10,10,13,16,19,25,27,27,27,29,34,39,46,55,58,58,58,63,63,67,67,67,70,70,72,72,76,76,76,79,79,81,81,85,85,85,88,88,90,97,99,103,103,103,0,1,2,3,3,3,3};
+	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String WebName, String invalidCredentials, String registrationSuccess, String deleteAccountSuccess) {
 		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
 		jteOutput.writeUserContent(WebName);
@@ -21,19 +21,37 @@ public final class JteloginGenerated {
 		jteOutput.writeContent("\n    <div id=\"registerPrompt\" class=\"p-8 w-full md:w-1/2 flex flex-col justify-center items-center text-gray-900 border-t md:border-t-0 md:border-l border-gray-400\">\n        <h2 class=\"text-2xl text-black font-semibold mb-4\">Don’t have an account?</h2>\n        <p class=\"text-gray-400 mb-8 text-center\">Register now to join ");
 		jteOutput.setContext("p", null);
 		jteOutput.writeUserContent(WebName);
-		jteOutput.writeContent(" and enjoy exclusive content!</p>\n        <a href=\"/register\" class=\"px-6 py-3 bg-green-500 hover:bg-green-400 text-white font-semibold rounded-lg transition shadow-card\">Register Now</a>\n    </div>\n</div>\n\n");
+		jteOutput.writeContent(" and enjoy exclusive content!</p>\n        <a href=\"/register\" class=\"px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition shadow-card\">Register Now</a>\n    </div>\n</div>\n\n");
 		if (invalidCredentials != null) {
-			jteOutput.writeContent("\n    <div id=\"error-message\" class=\"drop-shadow-md absolute top-5\">\n        <div class=\"bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center\">Warning!</div>\n        <div class=\"bg-white p-5 rounded-br-lg rounded-bl-lg\">\n            <p>");
+			jteOutput.writeContent("\n    <div id=\"error-message\" class=\"drop-shadow-md fixed top-5\">\n        <div class=\"bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center\">Warning!</div>\n        <div class=\"bg-white p-5 rounded-br-lg rounded-bl-lg\">\n            <p>");
 			jteOutput.setContext("p", null);
 			jteOutput.writeUserContent(invalidCredentials);
 			jteOutput.writeContent("</p>\n        </div>\n    </div>\n");
 		}
+		jteOutput.writeContent("\n\n");
+		if (deleteAccountSuccess != null) {
+			jteOutput.writeContent("\n    <div id=\"success-message-registration-valid\" class=\"drop-shadow-md absolute top-5 left-[45vw]\">\n        <div class=\"bg-green-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center\">Success!</div>\n        <div class=\"bg-white p-5 rounded-br-lg rounded-bl-lg\">\n            <p>");
+			jteOutput.setContext("p", null);
+			jteOutput.writeUserContent(registrationSuccess);
+			jteOutput.writeContent("</p>\n        </div>\n    </div>\n");
+		}
+		jteOutput.writeContent("\n\n");
+		if (registrationSuccess != null) {
+			jteOutput.writeContent("\n    <div id=\"success-message-registration-valid\" class=\"drop-shadow-md absolute top-5 left-[42.5vw]\">\n        <div class=\"bg-green-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center\">Success!</div>\n        <div class=\"bg-white p-5 rounded-br-lg rounded-bl-lg\">\n            <p>");
+			jteOutput.setContext("p", null);
+			jteOutput.writeUserContent(registrationSuccess);
+			jteOutput.writeContent("</p>\n        </div>\n    </div>\n");
+		}
+		jteOutput.writeContent("\n\n");
+		jteOutput.writeContent("\n<div id=\"success-message-update-valid\" class=\"drop-shadow-md absolute top-5 left-[39vw]\">\n    <div class=\"bg-green-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center\">Success!</div>\n    <div class=\"bg-white p-5 rounded-br-lg rounded-bl-lg\">\n        <p>Account has been successfully deleted!</p>\n    </div>\n</div>\n");
 		jteOutput.writeContent("\n\n");
 		jteOutput.writeContent("\n<script src=\"/asset/js/error-message.js\"></script>\n</body>\n</html>\n");
 	}
 	public static void renderMap(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, java.util.Map<String, Object> params) {
 		String WebName = (String)params.get("WebName");
 		String invalidCredentials = (String)params.get("invalidCredentials");
-		render(jteOutput, jteHtmlInterceptor, WebName, invalidCredentials);
+		String registrationSuccess = (String)params.get("registrationSuccess");
+		String deleteAccountSuccess = (String)params.get("deleteAccountSuccess");
+		render(jteOutput, jteHtmlInterceptor, WebName, invalidCredentials, registrationSuccess, deleteAccountSuccess);
 	}
 }

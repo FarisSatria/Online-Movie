@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -32,6 +31,7 @@ public class FeedBackEntity {
         this.rating = rating;
         this.isDeleted = isDeleted;
     }
+
     @Override
     public String toString() {
         return String.format("FeedBackEntity(id=%d, username='%s', movieId='%d', reviews='%s', rating=%d, isDeleted=%b)", id, username, movieId, reviews, rating, isDeleted);

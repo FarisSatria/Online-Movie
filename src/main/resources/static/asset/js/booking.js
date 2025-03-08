@@ -5,13 +5,12 @@ document.getElementById('bookNow').addEventListener('click', function (event) {
 
 });
 
-
 const customDateSelect = document.getElementById('custom-date');
 const customTimeSelect = document.getElementById('custom-time');
 
 function formatDate(date) {
     const options = { weekday: 'long', day: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
+    return date.toLocaleDateString('en-ID', options);
 }
 
 const today = new Date();
@@ -46,7 +45,7 @@ function populateTimeDropdown() {
 
         const option = document.createElement('option');
         const timeString = time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-        option.value = time.toISOString().split('T')[1].substring(0, 5);
+        option.value = time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false});
         option.textContent = timeString;
         customTimeSelect.appendChild(option);
     }
@@ -55,3 +54,33 @@ function populateTimeDropdown() {
 populateTimeDropdown();
 
 customDateSelect.addEventListener('change', populateTimeDropdown);
+
+document.addEventListener('DOMContentLoaded', function () {
+    const dateSelect = document.getElementById('custom-date');
+    const timeSelect = document.getElementById('custom-time');
+    const quotaDisplay = document.getElementById('quota-display');
+    const movieId = document.getElementById('booking-form').getAttribute('data-movie-id');
+
+    function checkQuota() {
+        const selectedDate = dateSelect.value;
+        const selectedTime = timeSelect.value;
+
+        if (!selectedDate || !selectedTime) {
+            quotaDisplay.textContent = "0";
+            return;
+        }
+
+        fetch(`/movie/${movieId}/check-quota?date=${selectedDate}&time=${selectedTime}`)
+            .then(response => response.json())
+            .then(data => {
+                quotaDisplay.textContent = data.availableQuota;
+            })
+            .catch(error => console.error('Error fetching quota:', error));
+    }
+
+    dateSelect.addEventListener('change', checkQuota);
+    timeSelect.addEventListener('change', checkQuota);
+
+    checkQuota();
+});
+

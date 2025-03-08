@@ -27,7 +27,7 @@
         <form class="space-y-4" method="post" action="/register">
             <!-- Name Input -->
             <div class="flex items-center border-b border-gray-400 py-2">
-                <i class="fas fa-envelope text-gray-400 mr-3"></i>
+                <i class="fas fa-user text-gray-400 mr-3"></i>
                 <input type="text" name="name" class="w-full bg-transparent placeholder-gray-400 text-gray-900 focus:outline-none" placeholder="Name" required>
             </div>
             <!-- Username Input -->
@@ -41,7 +41,7 @@
                 <input type="password" name="password" class="w-full bg-transparent placeholder-gray-400 text-gray-900 focus:outline-none" placeholder="Password" required>
             </div>
             <!-- Register Button -->
-            <button class="w-full mt-6 py-3 bg-green-600 shadow-card hover:bg-green-500 text-white font-semibold rounded-lg flex items-center justify-center space-x-2 transition">
+            <button class="w-full mt-6 py-3 bg-green-500 shadow-card hover:bg-green-600 text-white font-semibold rounded-lg flex items-center justify-center space-x-2 transition">
                 <span>Register Now</span>
                 <i class="fas fa-user-plus"></i>
             </button>
@@ -57,7 +57,7 @@
 </div>
 
 @if(userAlreadyExist != null)
-    <div id="error-message" class="drop-shadow-md absolute top-5">
+    <div id="error-message" class="drop-shadow-md fixed top-5">
         <div class="bg-red-500 p-2 rounded-tl-lg rounded-tr-lg text-white font-bold text-center">Warning!</div>
         <div class="bg-white p-5 rounded-br-lg rounded-bl-lg">
             <p>${userAlreadyExist}</p>
@@ -66,6 +66,6 @@
 @endif
 
 <!-- Custom JavaScript -->
-<script src="/asset/js/login.js"></script>
+<script src="/asset/js/error-message.js"></script>
 </body>
 </html>
